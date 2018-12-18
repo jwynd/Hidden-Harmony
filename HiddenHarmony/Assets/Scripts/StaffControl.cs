@@ -98,7 +98,7 @@ public class StaffControl : MonoBehaviour
                 if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && !isInCol[i]){
                     Notes[i] = GameObject.CreatePrimitive(PrimitiveType.Cube); // add a note to the array 
                     Notes[i].transform.parent = this.transform;
-                    Notes[i].transform.localPosition = new Vector3(colEdge[i] + noteOffset[i], player.transform.localPosition.y, player.transform.localPosition.z);
+                    Notes[i].transform.localPosition = new Vector3((colEdge[i] + noteOffset[i])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
                     Notes[i].transform.localScale = new Vector3(noteScale, noteScale, noteScale); // adjust x position for angle of view
                     isInCol[i] = true;
                     Notes[i].transform.Rotate(Vector3.up * 180.0f); // rotate the cube upside down
@@ -106,7 +106,7 @@ public class StaffControl : MonoBehaviour
     //                numNotes++;// increase record of notes placed
                 }
                 else if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && isInCol[i]){
-                    Notes[i].transform.localPosition = new Vector3(colEdge[i] + noteOffset[i], player.transform.localPosition.y, player.transform.localPosition.z);
+                    Notes[i].transform.localPosition = new Vector3((colEdge[i] + noteOffset[i])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
                 }
             }
             
@@ -114,7 +114,7 @@ public class StaffControl : MonoBehaviour
             if(player.transform.localPosition.x*xscale < colEdge[0] && !isInCol[0]){
                 Notes[0] = GameObject.CreatePrimitive(PrimitiveType.Cube); // add a note to the array 
                 Notes[0].transform.parent = this.transform;
-                Notes[0].transform.localPosition = new Vector3(colEdge[0] + noteOffset[0], player.transform.localPosition.y, player.transform.localPosition.z); // adjust x position for angle of view
+                Notes[0].transform.localPosition = new Vector3((colEdge[0] + noteOffset[0])/xscale, player.transform.localPosition.y, player.transform.localPosition.z); // adjust x position for angle of view
                 Notes[0].transform.localScale = new Vector3(noteScale,noteScale,noteScale); // adjust x position for angle of view
                 isInCol[0] = true;
                 Notes[0].transform.Rotate(Vector3.up * 180.0f); // rotate the cube upside down
@@ -122,7 +122,7 @@ public class StaffControl : MonoBehaviour
 //                numNotes++;// increase record of notes placed
             }
             else if(player.transform.localPosition.x*xscale < colEdge[0] && isInCol[0]){
-                Notes[0].transform.localPosition = new Vector3(colEdge[0] + noteOffset[0], player.transform.localPosition.y, player.transform.localPosition.z); // adjust x position for angle of view
+                Notes[0].transform.localPosition = new Vector3((colEdge[0] + noteOffset[0])/xscale, player.transform.localPosition.y, player.transform.localPosition.z); // adjust x position for angle of view
             }
 
         }
