@@ -39,8 +39,6 @@ public class StaffControl : MonoBehaviour
     private float[] colEdge = new float[] {-13.5f, -9.0f, -4.5f, 0.0f, 4.5f, 9.0f, 13.5f, 18.0f}; // location where notes can be placed
     private float[] noteOffset = new float[] {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};// these offset the position of the notes to account for paralax
     private float xscale; // holds the scale on the x axis so that it will remain in proportion regarless of how it is stretched
-    //private float yscale; // holds the scale on the y axis, (not sure if we ever need to use this but uncomment relavent sections if you need it)
-    private float zscale; // Allows staff to stretch in the z direction
 
     // Start is called before the first frame update
     void Start()
@@ -51,8 +49,6 @@ public class StaffControl : MonoBehaviour
         aS = gameObject.GetComponents<AudioSource>();
 
         xscale = this.transform.localScale.x;
-        //yscale = this.transform.localScale.y;
-        zscale = this.transform.localScale.z;
 
         for(int i = 0; i < colEdge.Length; i++){
             // move position to the notes if spaces are used
@@ -79,21 +75,21 @@ public class StaffControl : MonoBehaviour
         }
         // This allows the player to move up
         if(Input.GetKeyDown(KeyCode.UpArrow)){
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z + vertMove*zscale);
+            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z + vertMove);
         }
         // this allow the palyer to move down
         if(Input.GetKeyDown(KeyCode.DownArrow)){
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z - vertMove*zscale);
+            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z - vertMove);
         }
 
         // this section is the world wrap from top to bottom
         if(player.transform.localPosition.z > vertMove){
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, -vertMove*zscale);
+            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, -vertMove);
         }
 
         // this section is the world wrap from bottom to top
         if(player.transform.localPosition.z < -vertMove){
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, vertMove*zscale);
+            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, vertMove);
         }
         // This should create a not on the screen, I hope
         if(Input.GetKeyDown(KeyCode.Space)){
