@@ -14,7 +14,7 @@ public class StaffControl : MonoBehaviour
     public AudioClip[] sounds = new AudioClip[6]; // array to hold the audio clips that will be used
 
     //  Cursor variables
-    public float playerPositionZ;
+//    public float playerPositionZ;
     public GameObject cursor1;
     public GameObject cursor2;
     public GameObject cursor3;
@@ -39,7 +39,8 @@ public class StaffControl : MonoBehaviour
     private float[] colEdge = new float[] {-13.5f, -9.0f, -4.5f, 0.0f, 4.5f, 9.0f, 13.5f, 18.0f}; // location where notes can be placed
     private float[] noteOffset = new float[] {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};// these offset the position of the notes to account for paralax
     private float xscale; // holds the scale on the x axis so that it will remain in proportion regarless of how it is stretched
-
+    //private float yscale; // holds the scale on the y axis, (not sure if we ever need to use this but uncomment relavent sections if you need it)
+    private float zscale; // Allows staff to stretch in the z direction
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +49,11 @@ public class StaffControl : MonoBehaviour
         if(player == null) NullChild("Player");
 
         aS = gameObject.GetComponents<AudioSource>();
+
         xscale = this.transform.localScale.x;
+        //yscale = this.transform.localScale.y;
+        zscale = this.transform.localScale.z;
+
         for(int i = 0; i < colEdge.Length; i++){
             // move position to the notes if spaces are used
             if(useSpaces){
@@ -60,8 +65,6 @@ public class StaffControl : MonoBehaviour
         }
         // adjust the speed by the local scale
         speed = speed * xscale;
-
-        playerPositionZ = player.transform.position.z;
     }
 
     // Update is called once per frame
@@ -76,21 +79,21 @@ public class StaffControl : MonoBehaviour
         }
         // This allows the player to move up
         if(Input.GetKeyDown(KeyCode.UpArrow)){
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z + vertMove);
+            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z + vertMove*zscale);
         }
         // this allow the palyer to move down
         if(Input.GetKeyDown(KeyCode.DownArrow)){
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z - vertMove);
+            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z - vertMove*zscale);
         }
 
         // this section is the world wrap from top to bottom
         if(player.transform.localPosition.z > vertMove){
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, -vertMove);
+            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, -vertMove*zscale);
         }
 
         // this section is the world wrap from bottom to top
         if(player.transform.localPosition.z < -vertMove){
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, vertMove);
+            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, vertMove*zscale);
         }
         // This should create a not on the screen, I hope
         if(Input.GetKeyDown(KeyCode.Space)){
@@ -98,7 +101,8 @@ public class StaffControl : MonoBehaviour
             for(int i = 1; i < 8; i++){
                 if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && !isInCol[i]){
                     Notes[i] = GameObject.CreatePrimitive(PrimitiveType.Cube); // add a note to the array 
-                    Notes[i].transform.position = new Vector3(colEdge[i] + noteOffset[i]+this.transform.position.x, player.transform.position.y, player.transform.position.z);
+                    Notes[i].transform.parent = this.transform;
+                    Notes[i].transform.localPosition = new Vector3(colEdge[i] + noteOffset[i], player.transform.localPosition.y, player.transform.localPosition.z);
                     Notes[i].transform.localScale = new Vector3(noteScale, noteScale, noteScale); // adjust x position for angle of view
                     isInCol[i] = true;
                     Notes[i].transform.Rotate(Vector3.up * 180.0f); // rotate the cube upside down
@@ -106,14 +110,15 @@ public class StaffControl : MonoBehaviour
     //                numNotes++;// increase record of notes placed
                 }
                 else if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && isInCol[i]){
-                    Notes[i].transform.position = new Vector3(colEdge[i] + noteOffset[i]+this.transform.position.x, player.transform.position.y, player.transform.position.z);
+                    Notes[i].transform.localPosition = new Vector3(colEdge[i] + noteOffset[i], player.transform.localPosition.y, player.transform.localPosition.z);
                 }
             }
             
             // calculate the position to place the note and place one if necessary 1st collumn
             if(player.transform.localPosition.x*xscale < colEdge[0] && !isInCol[0]){
                 Notes[0] = GameObject.CreatePrimitive(PrimitiveType.Cube); // add a note to the array 
-                Notes[0].transform.position = new Vector3(colEdge[0] + noteOffset[0]+this.transform.position.x, player.transform.position.y, player.transform.position.z); // adjust x position for angle of view
+                Notes[0].transform.parent = this.transform;
+                Notes[0].transform.localPosition = new Vector3(colEdge[0] + noteOffset[0], player.transform.localPosition.y, player.transform.localPosition.z); // adjust x position for angle of view
                 Notes[0].transform.localScale = new Vector3(noteScale,noteScale,noteScale); // adjust x position for angle of view
                 isInCol[0] = true;
                 Notes[0].transform.Rotate(Vector3.up * 180.0f); // rotate the cube upside down
@@ -121,7 +126,7 @@ public class StaffControl : MonoBehaviour
 //                numNotes++;// increase record of notes placed
             }
             else if(player.transform.localPosition.x*xscale < colEdge[0] && isInCol[0]){
-                Notes[0].transform.position = new Vector3(colEdge[0] + noteOffset[0]+this.transform.position.x, player.transform.position.y, player.transform.position.z); // adjust x position for angle of view
+                Notes[0].transform.localPosition = new Vector3(colEdge[0] + noteOffset[0], player.transform.localPosition.y, player.transform.localPosition.z); // adjust x position for angle of view
             }
 
         }
@@ -142,12 +147,12 @@ public class StaffControl : MonoBehaviour
 
         // Debug.Log(player.transform.position.z);
         // changes cursor to the appropriate sprite
-        if(player.transform.position.z > playerPositionZ) {
+        if(player.transform.localPosition.z > 0) {
             cursor1.GetComponent<Renderer>().enabled = true;
             cursor2.GetComponent<Renderer>().enabled = false;
             cursor3.GetComponent<Renderer>().enabled = false;
         }
-        else if (player.transform.position.z < playerPositionZ) {
+        else if (player.transform.localPosition.z < 0) {
             cursor1.GetComponent<Renderer>().enabled = false;
             cursor2.GetComponent<Renderer>().enabled = false;
             cursor3.GetComponent<Renderer>().enabled = true;
