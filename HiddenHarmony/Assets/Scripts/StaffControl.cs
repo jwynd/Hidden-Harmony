@@ -22,8 +22,9 @@ public class StaffControl : MonoBehaviour
     // private variables, accessible only in script
     private GameObject player; // references the object controlled by the player
     private GameObject[] Notes = new GameObject[8]; // these will keep references to the note objects
+    private int currentAnimal = 0; // holds the index of the currently playing animal
     private bool[] isInCol = new bool[] {false, false, false, false, false, false, false, false}; // this keeps track of the collumns which already have notes
-    private float[] prevNotePosition = new float[8]; // this will hold the x positions of previous notes so that they can be replayed later
+    private float[,] prevNotePosition = new float[2, 8]; // this will hold the x positions of previous notes so that they can be replayed later
     private bool[] wasUsed = new bool[] {false, false, false, false, false, false, false, false};
     private bool isComplete = false; // this will become true when the player is placing new sounds for the second pass
     private AudioSource[] aS;        // Audio Source reference, used to play, pause, and manage the audio
@@ -96,33 +97,32 @@ public class StaffControl : MonoBehaviour
             // calculate the Position and place note if necessary in collumns 2 through 8
             for(int i = 1; i < 8; i++){
                 if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && !isInCol[i]){
-                    Notes[i] = GameObject.CreatePrimitive(PrimitiveType.Cube); // add a note to the array 
-                    Notes[i].transform.parent = this.transform;
-                    Notes[i].transform.localPosition = new Vector3((colEdge[i] + noteOffset[i])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
-                    Notes[i].transform.localScale = new Vector3(noteScale, noteScale, noteScale); // adjust x position for angle of view
-                    isInCol[i] = true;
-                    Notes[i].transform.Rotate(Vector3.up * 180.0f); // rotate the cube upside down
-                    Notes[i].GetComponent<Renderer>().material = noteMaterial; // apply the material
-    //                numNotes++;// increase record of notes placed
+                    createNote(i);
                 }
                 else if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && isInCol[i]){
-                    Notes[i].transform.localPosition = new Vector3((colEdge[i] + noteOffset[i])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
+                    if(player.transform.localPosition.z != Notes[i].transform.localPosition.z){
+                        Notes[i].transform.localPosition = new Vector3((colEdge[i] + noteOffset[i])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
+                    }
+                    else{
+                        Destroy(Notes[i]);
+                        isInCol[i] = false;
+                    }
+
                 }
             }
             
             // calculate the position to place the note and place one if necessary 1st collumn
             if(player.transform.localPosition.x*xscale < colEdge[0] && !isInCol[0]){
-                Notes[0] = GameObject.CreatePrimitive(PrimitiveType.Cube); // add a note to the array 
-                Notes[0].transform.parent = this.transform;
-                Notes[0].transform.localPosition = new Vector3((colEdge[0] + noteOffset[0])/xscale, player.transform.localPosition.y, player.transform.localPosition.z); // adjust x position for angle of view
-                Notes[0].transform.localScale = new Vector3(noteScale,noteScale,noteScale); // adjust x position for angle of view
-                isInCol[0] = true;
-                Notes[0].transform.Rotate(Vector3.up * 180.0f); // rotate the cube upside down
-                Notes[0].GetComponent<Renderer>().material = noteMaterial; // apply the material
-//                numNotes++;// increase record of notes placed
+                createNote(0);
             }
             else if(player.transform.localPosition.x*xscale < colEdge[0] && isInCol[0]){
-                Notes[0].transform.localPosition = new Vector3((colEdge[0] + noteOffset[0])/xscale, player.transform.localPosition.y, player.transform.localPosition.z); // adjust x position for angle of view
+                if(player.transform.localPosition.z != Notes[0].transform.localPosition.z){
+                    Notes[0].transform.localPosition = new Vector3((colEdge[0] + noteOffset[0])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
+                }
+                else{
+                    Destroy(Notes[0]);
+                    isInCol[0] = false;
+                }
             }
 
         }
@@ -159,19 +159,8 @@ public class StaffControl : MonoBehaviour
             cursor3.GetComponent<Renderer>().enabled = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && !isComplete){
-            for(int i = 0; i < Notes.Length; i++){
-                if(isInCol[i]){
-                    prevNotePosition[i] = Notes[i].transform.localPosition.z;
-                }
-                wasUsed[i] = isInCol[i];
-                isInCol[i] = false;
-                Destroy(Notes[i]);
-            }
-            top += 3;
-            middle += 3;
-            bottom += 3;
-            isComplete = true;
+        if (Input.GetKeyDown(KeyCode.RightArrow) && !isComplete){
+            nextAnimal();
         }
 
         if(isComplete){
@@ -179,13 +168,46 @@ public class StaffControl : MonoBehaviour
         }
     }
 
+    // helper function to create notes.
+    // takes argument index (i)
+    private void createNote(int i){
+        Notes[i] = GameObject.CreatePrimitive(PrimitiveType.Cube); // add a note to the array 
+        Notes[i].transform.parent = this.transform;
+        Notes[i].transform.localPosition = new Vector3((colEdge[i] + noteOffset[i])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
+        Notes[i].transform.localScale = new Vector3(noteScale, noteScale, noteScale); // adjust x position for angle of view
+        isInCol[i] = true;
+        Notes[i].transform.Rotate(Vector3.up * 180.0f); // rotate the cube upside down
+        Notes[i].GetComponent<Renderer>().material = noteMaterial; // apply the material
+    }
+
+    private void nextAnimal(){
+        // stuff in above if
+        for(int i = 0; i < Notes.Length; i++){
+            if(isInCol[i]){
+                prevNotePosition[currentAnimal, i] = Notes[i].transform.localPosition.z;
+            }
+            wasUsed[i] = isInCol[i];
+            isInCol[i] = false;
+            Destroy(Notes[i]);
+        }
+        top += 3;
+        middle += 3;
+        bottom += 3;
+        isComplete = true;
+    }
+/*
+    private void prevAnimal(){
+        // inverse of above function
+    }*/
+
     public void playBackground(){
+
         for(int i = 0; i < 8; i++){
             if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f && wasUsed[i]){
-                if(prevNotePosition[i] > 1.0f){
+                if(prevNotePosition[Abs(currentAnimal-1), i] > 1.0f){
                     addAndPlay(sounds[0], 1);
                 }
-                else if(prevNotePosition[i] < -1.0f){
+                else if(prevNotePosition[Abs(currentAnimal-1), i] < -1.0f){
                     addAndPlay(sounds[2], 1);
                 }
                 else{
@@ -207,5 +229,11 @@ public class StaffControl : MonoBehaviour
 
     void NullChild(string str){
         throw new System.ArgumentException("Child not found", str);
+    }
+
+    // returns the absolute value of the integer x
+    private int Abs(int x){
+        if(x < 0) return x*-1;
+        else return x;
     }
 }
