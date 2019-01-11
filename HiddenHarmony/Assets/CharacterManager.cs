@@ -21,6 +21,10 @@ public class CharacterManager : MonoBehaviour {
 	}
 	
     public void NextCharacter(){
+        if (currentCharacter >= characterSprites.Length) //resets currentCharacter to the first character if the Length of the array is reached
+        {
+        	currentCharacter = -1;
+        }
         if(currentCharacter >= 0){
             characterSprites[currentCharacter].localScale = Vector3.one * performScale;
             characterSprites[currentCharacter].position = performPositions[currentCharacter].position;
@@ -33,9 +37,31 @@ public class CharacterManager : MonoBehaviour {
         }
     }
 
+    public void PrevCharacter(){
+        if (currentCharacter < -1) //resets currentCharacter to the first character if the Length of the array is reached
+        {
+        	currentCharacter = characterSprites.Length;
+        }
+        if(currentCharacter <= characterSprites.Length){
+            characterSprites[currentCharacter].localScale = Vector3.one * performScale;
+            characterSprites[currentCharacter].position = performPositions[currentCharacter].position;
+        }
+        --currentCharacter;
+        if (currentCharacter < characterSprites.Length){
+            characterSprites[currentCharacter].gameObject.SetActive(true);
+            characterSprites[currentCharacter].localScale = Vector3.one * stageScale;
+            characterSprites[currentCharacter].position = stagePosition.position;
+        }
+    }
+
     private void Update(){
-        if(Input.GetButtonDown("Submit") && currentCharacter < totalCharacters){
+    	//Old Code if(Input.GetButtonDown("Submit") && currentCharacter < totalCharacters){
+    	if (Input.GetKeyDown(KeyCode.RightArrow)){
             NextCharacter();
         }
+        else if(Input.GetKeyDown(KeyCode.LeftArrow)){
+        	PrevCharacter();
+        }
+
     }
 }
