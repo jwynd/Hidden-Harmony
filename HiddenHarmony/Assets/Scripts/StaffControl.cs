@@ -23,11 +23,11 @@ public class StaffControl : MonoBehaviour
     private GameObject player; // references the object controlled by the player
     private GameObject[] Notes = new GameObject[8]; // these will keep references to the note objects
     private int currentAnimal = 0; // holds the index of the currently playing animal
-    private bool[] isInCol = new bool[] {false, false, false, false, false, false, false, false}; // this keeps track of the collumns which already have notes
+    private bool[,] isInCol = new bool[2,8]; // this keeps track of the collumns which already have notes
     private float[,] prevNotePosition = new float[2, 8]; // this will hold the x positions of previous notes so that they can be replayed later
-    private bool[] wasUsed = new bool[] {false, false, false, false, false, false, false, false};
     private bool isComplete = false; // this will become true when the player is placing new sounds for the second pass
     private AudioSource[] aS;        // Audio Source reference, used to play, pause, and manage the audio
+    private bool animalChanged = false; // becomes true once animal has changed so it does not happen twice in one round
 
     // these hold the indeces of sounnds with locations of current top middle and bottom
     private int top = 0;
@@ -46,7 +46,7 @@ public class StaffControl : MonoBehaviour
     {
         player = this.transform.Find("Player").gameObject;
         if(player == null) NullChild("Player");
-
+        for(int i = 0; i < 2; i++)for(int j = 0; j < 8; j++) isInCol[i,j] = false;
         aS = gameObject.GetComponents<AudioSource>();
 
         xscale = this.transform.localScale.x;
@@ -67,6 +67,7 @@ public class StaffControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animalChanged = false;
       // constant motion is handled below, notice it is multiplies by speed
        player.transform.localPosition += Vector3.right * speed * Time.deltaTime;
         
@@ -96,39 +97,39 @@ public class StaffControl : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space)){
             // calculate the Position and place note if necessary in collumns 2 through 8
             for(int i = 1; i < 8; i++){
-                if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && !isInCol[i]){
+                if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && !isInCol[currentAnimal, i]){
                     createNote(i);
                 }
-                else if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && isInCol[i]){
+                else if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && isInCol[currentAnimal, i]){
                     if(player.transform.localPosition.z != Notes[i].transform.localPosition.z){
                         Notes[i].transform.localPosition = new Vector3((colEdge[i] + noteOffset[i])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
                     }
                     else{
                         Destroy(Notes[i]);
-                        isInCol[i] = false;
+                        isInCol[currentAnimal, i] = false;
                     }
 
                 }
             }
             
             // calculate the position to place the note and place one if necessary 1st collumn
-            if(player.transform.localPosition.x*xscale < colEdge[0] && !isInCol[0]){
+            if(player.transform.localPosition.x*xscale < colEdge[0] && !isInCol[currentAnimal, 0]){
                 createNote(0);
             }
-            else if(player.transform.localPosition.x*xscale < colEdge[0] && isInCol[0]){
+            else if(player.transform.localPosition.x*xscale < colEdge[0] && isInCol[currentAnimal, 0]){
                 if(player.transform.localPosition.z != Notes[0].transform.localPosition.z){
                     Notes[0].transform.localPosition = new Vector3((colEdge[0] + noteOffset[0])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
                 }
                 else{
                     Destroy(Notes[0]);
-                    isInCol[0] = false;
+                    isInCol[currentAnimal, 0] = false;
                 }
             }
 
         }
         // place audio clip play sounds
         for(int i = 0; i < 8; i++){
-            if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f && isInCol[i]){
+            if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f && isInCol[currentAnimal, i]){
                 if(Notes[i].transform.localPosition.z > 1.0f){
                     addAndPlay(sounds[top], 0);
                 }
@@ -159,59 +160,95 @@ public class StaffControl : MonoBehaviour
             cursor3.GetComponent<Renderer>().enabled = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) && !isComplete){
+        if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && !isComplete && !animalChanged){
             nextAnimal();
+            animalChanged = true;
         }
 
-        if(isComplete){
-            playBackground();
+        if((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) && isComplete && !animalChanged){
+            prevAnimal();
+            animalChanged = true;
         }
+
+        
+        playBackground();
     }
 
     // helper function to create notes.
-    // takes argument index (i)
+    // takes argument index (i), and the desired local position on the z axis
     private void createNote(int i){
         Notes[i] = GameObject.CreatePrimitive(PrimitiveType.Cube); // add a note to the array 
         Notes[i].transform.parent = this.transform;
         Notes[i].transform.localPosition = new Vector3((colEdge[i] + noteOffset[i])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
         Notes[i].transform.localScale = new Vector3(noteScale, noteScale, noteScale); // adjust x position for angle of view
-        isInCol[i] = true;
+        isInCol[currentAnimal, i] = true;
         Notes[i].transform.Rotate(Vector3.up * 180.0f); // rotate the cube upside down
         Notes[i].GetComponent<Renderer>().material = noteMaterial; // apply the material
     }
-
+    // function overload to work reproduce old notes
+    private void createNote(int i, float positionZ){
+        Notes[i] = GameObject.CreatePrimitive(PrimitiveType.Cube); // add a note to the array 
+        Notes[i].transform.parent = this.transform;
+        Notes[i].transform.localPosition = new Vector3((colEdge[i] + noteOffset[i])/xscale, player.transform.localPosition.y, positionZ);
+        Notes[i].transform.localScale = new Vector3(noteScale, noteScale, noteScale); // adjust x position for angle of view
+        isInCol[Abs(currentAnimal-1), i] = true;
+        Notes[i].transform.Rotate(Vector3.up * 180.0f); // rotate the cube upside down
+        Notes[i].GetComponent<Renderer>().material = noteMaterial; // apply the material
+    }
     private void nextAnimal(){
+        print("nextAnimal");
+        changeAnimal(true);
+        if(currentAnimal == 1) currentAnimal = 0;
+        else currentAnimal = 1;
+    }
+
+    private void prevAnimal(){
+        print("prevAnimal");
+        changeAnimal(false);
+        if(currentAnimal == 1) currentAnimal = 0;
+        else currentAnimal = 1;
+    }
+
+    private void changeAnimal(bool next){
         // stuff in above if
-        for(int i = 0; i < Notes.Length; i++){
-            if(isInCol[i]){
+        for(int i = 0; i < 8; i++){
+            // destroy note from current animal and create one from !current animal
+            if(isInCol[currentAnimal, i]){
                 prevNotePosition[currentAnimal, i] = Notes[i].transform.localPosition.z;
             }
-            wasUsed[i] = isInCol[i];
-            isInCol[i] = false;
             Destroy(Notes[i]);
+            
+            if(isInCol[Abs(currentAnimal-1), i]){
+                createNote(i, prevNotePosition[Abs(currentAnimal-1), i]);
+            }
         }
-        top += 3;
-        middle += 3;
-        bottom += 3;
-        isComplete = true;
+        if(next){
+            top += 3;
+            middle += 3;
+            bottom += 3;
+            isComplete = true;
+        }
+        else{
+            top -= 3;
+            middle -= 3;
+            bottom -= 3;
+            isComplete = false;
+        }
     }
-/*
-    private void prevAnimal(){
-        // inverse of above function
-    }*/
+
 
     public void playBackground(){
 
         for(int i = 0; i < 8; i++){
-            if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f && wasUsed[i]){
+            if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f && isInCol[Abs(currentAnimal-1), i]){
                 if(prevNotePosition[Abs(currentAnimal-1), i] > 1.0f){
-                    addAndPlay(sounds[0], 1);
+                    addAndPlay(sounds[(Abs(currentAnimal-1)*3) + 0], 1);
                 }
                 else if(prevNotePosition[Abs(currentAnimal-1), i] < -1.0f){
-                    addAndPlay(sounds[2], 1);
+                    addAndPlay(sounds[(Abs(currentAnimal-1)*3) + 2], 1);
                 }
                 else{
-                    addAndPlay(sounds[1], 1);
+                    addAndPlay(sounds[(Abs(currentAnimal-1)*3) + 1], 1);
                 }
             }
         }
