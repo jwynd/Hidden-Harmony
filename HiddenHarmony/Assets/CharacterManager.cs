@@ -18,17 +18,17 @@ public class CharacterManager : MonoBehaviour {
             character.gameObject.SetActive(true);
         }
         characterSprites[currentCharacter].localScale = Vector3.one * performScale;
-        characterSprites[currentCharacter].position = performPosition.position;
+        characterSprites[currentCharacter].position = performPositions[currentCharacter].position;
 	}
 	
     public void NextCharacter(){
-        characterSprites[currentCharacter].localScale = Vector3 * stageScale;
-        characterSprites[currentCharacter].position = Vector3 * stagePosition.position;
+        characterSprites[currentCharacter].localScale = Vector3.one * stageScale;
+        characterSprites[currentCharacter].position = stagePosition.position;
 
         currentCharacter = Abs(currentCharacter -1);
 
-        characterSprites[currentCharacter].localScale = Vector3 * performScale;
-        characterSprites[currentCharacter].position = Vector3 * performPosition.position;
+        characterSprites[currentCharacter].localScale = Vector3.one * performScale;
+        characterSprites[currentCharacter].position = performPositions[currentCharacter].position;
         /*
         if (currentCharacter >= characterSprites.Length){ //resets currentCharacter to the first character if the Length of the array is reached
             currentCharacter = -1;
@@ -62,7 +62,7 @@ public class CharacterManager : MonoBehaviour {
         }
     }*/
 
-    private void Abs(int x){
+    private int Abs(int x){
         if(x < 0) return x*-1;
         else return x;
     }
