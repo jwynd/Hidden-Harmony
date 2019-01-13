@@ -19,6 +19,7 @@ public class CharacterManager : MonoBehaviour {
         }
         characterSprites[currentCharacter].localScale = Vector3.one * performScale;
         characterSprites[currentCharacter].position = performPositions[currentCharacter].position;
+        NextCharacter();
 	}
 	
     public void NextCharacter(){

@@ -1902,7 +1902,7 @@ GameObject:
   - component: {fileID: 938052794}
   - component: {fileID: 938052793}
   m_Layer: 5
-  m_Name: EnterText
+  m_Name: ArrowText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1960,7 +1960,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter
+  m_Text: Right | Left
 --- !u!222 &938052794
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2133,7 +2133,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c68c13f0ee0950f4e803dbc0c060da05, type: 3}
   - {fileID: 8300000, guid: 746f60808874b064a85edea17ebf24e8, type: 3}
   - {fileID: 8300000, guid: d52b3b10720bac24885a16defc13fe48, type: 3}
-  playerPositionZ: 0
   cursor1: {fileID: 861894783}
   cursor2: {fileID: 1554886103}
   cursor3: {fileID: 1955858008}
@@ -2557,7 +2556,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Next Measure
+  m_Text: Move Creature
 --- !u!222 &1320041053
 CanvasRenderer:
   m_ObjectHideFlags: 0
