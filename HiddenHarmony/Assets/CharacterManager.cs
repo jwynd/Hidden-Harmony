@@ -11,19 +11,27 @@ public class CharacterManager : MonoBehaviour {
     public int performScale = 1;
 
     private int totalCharacters = 2;
-    private int currentCharacter = -1;
+    private int currentCharacter = 0;
 
 	void Start () {
         foreach(Transform character in characterSprites){
-            character.gameObject.SetActive(false);
+            character.gameObject.SetActive(true);
         }
-        NextCharacter();
+        characterSprites[currentCharacter].localScale = Vector3.one * performScale;
+        characterSprites[currentCharacter].position = performPosition.position;
 	}
 	
     public void NextCharacter(){
-        if (currentCharacter >= characterSprites.Length) //resets currentCharacter to the first character if the Length of the array is reached
-        {
-        	currentCharacter = -1;
+        characterSprites[currentCharacter].localScale = Vector3 * stageScale;
+        characterSprites[currentCharacter].position = Vector3 * stagePosition.position;
+
+        currentCharacter = Abs(currentCharacter -1);
+
+        characterSprites[currentCharacter].localScale = Vector3 * performScale;
+        characterSprites[currentCharacter].position = Vector3 * performPosition.position;
+        /*
+        if (currentCharacter >= characterSprites.Length){ //resets currentCharacter to the first character if the Length of the array is reached
+            currentCharacter = -1;
         }
         if(currentCharacter >= 0){
             characterSprites[currentCharacter].localScale = Vector3.one * performScale;
@@ -34,13 +42,13 @@ public class CharacterManager : MonoBehaviour {
             characterSprites[currentCharacter].gameObject.SetActive(true);
             characterSprites[currentCharacter].localScale = Vector3.one * stageScale;
             characterSprites[currentCharacter].position = stagePosition.position;
-        }
+        }*/
     }
-
+/*
     public void PrevCharacter(){
         if (currentCharacter < -1) //resets currentCharacter to the first character if the Length of the array is reached
         {
-        	currentCharacter = characterSprites.Length;
+            currentCharacter = characterSprites.Length;
         }
         if(currentCharacter <= characterSprites.Length){
             characterSprites[currentCharacter].localScale = Vector3.one * performScale;
@@ -52,16 +60,21 @@ public class CharacterManager : MonoBehaviour {
             characterSprites[currentCharacter].localScale = Vector3.one * stageScale;
             characterSprites[currentCharacter].position = stagePosition.position;
         }
+    }*/
+
+    private void Abs(int x){
+        if(x < 0) return x*-1;
+        else return x;
     }
 
     private void Update(){
     	//Old Code if(Input.GetButtonDown("Submit") && currentCharacter < totalCharacters){
-    	if (Input.GetKeyDown(KeyCode.RightArrow)){
+    	if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)){
             NextCharacter();
-        }
+        }/*
         else if(Input.GetKeyDown(KeyCode.LeftArrow)){
-        	PrevCharacter();
-        }
+            PrevCharacter();
+        }*/
 
     }
 }
