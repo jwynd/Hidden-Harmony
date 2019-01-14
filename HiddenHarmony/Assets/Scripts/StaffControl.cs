@@ -28,6 +28,7 @@ public class StaffControl : MonoBehaviour
     private bool isComplete = false; // this will become true when the player is placing new sounds for the second pass
     private AudioSource[] aS;        // Audio Source reference, used to play, pause, and manage the audio
     private bool animalChanged = false; // becomes true once animal has changed so it does not happen twice in one round
+    private bool staffActive = true; // staff will run when true and pause when false
 
     // these hold the indeces of sounnds with locations of current top middle and bottom
     private int top = 0;
@@ -67,111 +68,122 @@ public class StaffControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animalChanged = false;
-      // constant motion is handled below, notice it is multiplies by speed
-       player.transform.localPosition += Vector3.right * speed * Time.deltaTime;
-        
-        // this is the right-left world wrap
-        if(player.transform.localPosition.x > staffEdge) {
-            player.transform.localPosition = new Vector3(-staffEdge, player.transform.localPosition.y, player.transform.localPosition.z);
+        if(Input.GetKeyDown(KeyCode.A)){
+            if(staffActive){
+                this.transform.position += Vector3.up * 1000;
+            }
+            else{
+                this.transform.position += Vector3.down * 1000;
+            }
+            staffActive = !staffActive; //toggle staff active
         }
-        // This allows the player to move up
-        if(Input.GetKeyDown(KeyCode.UpArrow)){
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z + vertMove);
-        }
-        // this allow the palyer to move down
-        if(Input.GetKeyDown(KeyCode.DownArrow)){
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z - vertMove);
-        }
+        if(staffActive){
+            animalChanged = false;// ensures that animal used can only be changed once per frame
+          // constant motion is handled below, notice it is multiplies by speed
+           player.transform.localPosition += Vector3.right * speed * Time.deltaTime;
+            
+            // this is the right-left world wrap
+            if(player.transform.localPosition.x > staffEdge) {
+                player.transform.localPosition = new Vector3(-staffEdge, player.transform.localPosition.y, player.transform.localPosition.z);
+            }
+            // This allows the player to move up
+            if(Input.GetKeyDown(KeyCode.UpArrow)){
+                player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z + vertMove);
+            }
+            // this allow the palyer to move down
+            if(Input.GetKeyDown(KeyCode.DownArrow)){
+                player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z - vertMove);
+            }
 
-        // this section is the world wrap from top to bottom
-        if(player.transform.localPosition.z > vertMove){
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, -vertMove);
-        }
+            // this section is the world wrap from top to bottom
+            if(player.transform.localPosition.z > vertMove){
+                player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, -vertMove);
+            }
 
-        // this section is the world wrap from bottom to top
-        if(player.transform.localPosition.z < -vertMove){
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, vertMove);
-        }
-        // This should create a not on the screen, I hope
-        if(Input.GetKeyDown(KeyCode.Space)){
-            // calculate the Position and place note if necessary in collumns 2 through 8
-            for(int i = 1; i < 8; i++){
-                if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && !isInCol[currentAnimal, i]){
-                    createNote(i);
+            // this section is the world wrap from bottom to top
+            if(player.transform.localPosition.z < -vertMove){
+                player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, vertMove);
+            }
+            // This should create a not on the screen, I hope
+            if(Input.GetKeyDown(KeyCode.Space)){
+                // calculate the Position and place note if necessary in collumns 2 through 8
+                for(int i = 1; i < 8; i++){
+                    if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && !isInCol[currentAnimal, i]){
+                        createNote(i);
+                    }
+                    else if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && isInCol[currentAnimal, i]){
+                        if(player.transform.localPosition.z != Notes[i].transform.localPosition.z){
+                            Notes[i].transform.localPosition = new Vector3((colEdge[i] + noteOffset[i])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
+                        }
+                        else{
+                            Destroy(Notes[i]);
+                            isInCol[currentAnimal, i] = false;
+                        }
+
+                    }
                 }
-                else if(player.transform.localPosition.x*xscale < colEdge[i] && player.transform.localPosition.x*xscale > colEdge[i-1] && isInCol[currentAnimal, i]){
-                    if(player.transform.localPosition.z != Notes[i].transform.localPosition.z){
-                        Notes[i].transform.localPosition = new Vector3((colEdge[i] + noteOffset[i])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
+                
+                // calculate the position to place the note and place one if necessary 1st collumn
+                if(player.transform.localPosition.x*xscale < colEdge[0] && !isInCol[currentAnimal, 0]){
+                    createNote(0);
+                }
+                else if(player.transform.localPosition.x*xscale < colEdge[0] && isInCol[currentAnimal, 0]){
+                    if(player.transform.localPosition.z != Notes[0].transform.localPosition.z){
+                        Notes[0].transform.localPosition = new Vector3((colEdge[0] + noteOffset[0])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
                     }
                     else{
-                        Destroy(Notes[i]);
-                        isInCol[currentAnimal, i] = false;
+                        Destroy(Notes[0]);
+                        isInCol[currentAnimal, 0] = false;
                     }
+                }
 
+            }
+            // place audio clip play sounds
+            for(int i = 0; i < 8; i++){
+                if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f && isInCol[currentAnimal, i]){
+                    if(Notes[i].transform.localPosition.z > 1.0f){
+                        addAndPlay(sounds[top], 0);
+                    }
+                    else if(Notes[i].transform.localPosition.z < -1.0f){
+                        addAndPlay(sounds[bottom], 0);
+                    }
+                    else{
+                        addAndPlay(sounds[middle], 0);
+                    }
                 }
             }
+
+            // Debug.Log(player.transform.position.z);
+            // changes cursor to the appropriate sprite
+            if(player.transform.localPosition.z > 0) {
+                cursor1.GetComponent<Renderer>().enabled = true;
+                cursor2.GetComponent<Renderer>().enabled = false;
+                cursor3.GetComponent<Renderer>().enabled = false;
+            }
+            else if (player.transform.localPosition.z < 0) {
+                cursor1.GetComponent<Renderer>().enabled = false;
+                cursor2.GetComponent<Renderer>().enabled = false;
+                cursor3.GetComponent<Renderer>().enabled = true;
+            }
+            else {
+                cursor1.GetComponent<Renderer>().enabled = false;
+                cursor2.GetComponent<Renderer>().enabled = true;
+                cursor3.GetComponent<Renderer>().enabled = false;
+            }
+
+            if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && !isComplete && !animalChanged){
+                nextAnimal();
+                animalChanged = true;
+            }
+
+            if((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) && isComplete && !animalChanged){
+                prevAnimal();
+                animalChanged = true;
+            }
+
             
-            // calculate the position to place the note and place one if necessary 1st collumn
-            if(player.transform.localPosition.x*xscale < colEdge[0] && !isInCol[currentAnimal, 0]){
-                createNote(0);
-            }
-            else if(player.transform.localPosition.x*xscale < colEdge[0] && isInCol[currentAnimal, 0]){
-                if(player.transform.localPosition.z != Notes[0].transform.localPosition.z){
-                    Notes[0].transform.localPosition = new Vector3((colEdge[0] + noteOffset[0])/xscale, player.transform.localPosition.y, player.transform.localPosition.z);
-                }
-                else{
-                    Destroy(Notes[0]);
-                    isInCol[currentAnimal, 0] = false;
-                }
-            }
-
+            playBackground();
         }
-        // place audio clip play sounds
-        for(int i = 0; i < 8; i++){
-            if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f && isInCol[currentAnimal, i]){
-                if(Notes[i].transform.localPosition.z > 1.0f){
-                    addAndPlay(sounds[top], 0);
-                }
-                else if(Notes[i].transform.localPosition.z < -1.0f){
-                    addAndPlay(sounds[bottom], 0);
-                }
-                else{
-                    addAndPlay(sounds[middle], 0);
-                }
-            }
-        }
-
-        // Debug.Log(player.transform.position.z);
-        // changes cursor to the appropriate sprite
-        if(player.transform.localPosition.z > 0) {
-            cursor1.GetComponent<Renderer>().enabled = true;
-            cursor2.GetComponent<Renderer>().enabled = false;
-            cursor3.GetComponent<Renderer>().enabled = false;
-        }
-        else if (player.transform.localPosition.z < 0) {
-            cursor1.GetComponent<Renderer>().enabled = false;
-            cursor2.GetComponent<Renderer>().enabled = false;
-            cursor3.GetComponent<Renderer>().enabled = true;
-        }
-        else {
-            cursor1.GetComponent<Renderer>().enabled = false;
-            cursor2.GetComponent<Renderer>().enabled = true;
-            cursor3.GetComponent<Renderer>().enabled = false;
-        }
-
-        if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && !isComplete && !animalChanged){
-            nextAnimal();
-            animalChanged = true;
-        }
-
-        if((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) && isComplete && !animalChanged){
-            prevAnimal();
-            animalChanged = true;
-        }
-
-        
-        playBackground();
     }
 
     // helper function to create notes.

@@ -12,6 +12,7 @@ public class CharacterManager : MonoBehaviour {
 
     private int totalCharacters = 2;
     private int currentCharacter = 0;
+    private bool staffActive = true;
 
 	void Start () {
         foreach(Transform character in characterSprites){
@@ -70,7 +71,8 @@ public class CharacterManager : MonoBehaviour {
 
     private void Update(){
     	//Old Code if(Input.GetButtonDown("Submit") && currentCharacter < totalCharacters){
-    	if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)){
+        if(Input.GetKeyDown(KeyCode.A)) staffActive = !staffActive;
+    	if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && staffActive){
             NextCharacter();
         }/*
         else if(Input.GetKeyDown(KeyCode.LeftArrow)){
