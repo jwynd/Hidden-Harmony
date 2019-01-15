@@ -10,6 +10,8 @@ public class FirstPersonControl : MonoBehaviour {
         MouseY = 2
     }
 
+    private bool isActive = true;
+
     public RotationAxis axes = RotationAxis.MouseX;
 
     public float minVertical = -45.0f; //Minimum angle of vertical movement
@@ -22,9 +24,13 @@ public class FirstPersonControl : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (axes == RotationAxis.MouseX) {
+        if(Input.GetKeyDown(KeyCode.Return)) {
+            isActive = !isActive;
+        }
+
+        if (axes == RotationAxis.MouseX && isActive) {
             transform.Rotate (0, Input.GetAxis ("Mouse X") * sensHorizontal, 0);
-        } else if (axes == RotationAxis.MouseY) {
+        } else if (axes == RotationAxis.MouseY && isActive) {
             rotationX -= Input.GetAxis ("Mouse Y") * sensVertical;
             rotationX = Mathf.Clamp (rotationX, minVertical, maxVertical); //Clamps the vertical angle within the min and max limits (45 degrees)
 
