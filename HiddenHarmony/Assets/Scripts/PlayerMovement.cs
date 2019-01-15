@@ -15,6 +15,10 @@ public class PlayerMovement : MonoBehaviour {
     
     // Update is called once per frame
     void Update () {
+        if(Input.GetKeyDown(KeyCode.Return)) {
+            character.enabled = !character.enabled;
+        }
+
         float moveX = Input.GetAxis ("Horizontal") * speed; //
         float moveZ = Input.GetAxis ("Vertical") * speed;
         Vector3 movement = new Vector3 (moveX, 0, moveZ);
