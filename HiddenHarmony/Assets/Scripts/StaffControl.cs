@@ -28,7 +28,7 @@ public class StaffControl : MonoBehaviour
     private bool isComplete = false; // this will become true when the player is placing new sounds for the second pass
     private AudioSource[] aS;        // Audio Source reference, used to play, pause, and manage the audio
     private bool animalChanged = false; // becomes true once animal has changed so it does not happen twice in one round
-    private bool staffActive = true; // staff will run when true and pause when false
+    private bool staffActive = false; // staff will run when true and pause when false
 
     // these hold the indeces of sounnds with locations of current top middle and bottom
     private int top = 0;
@@ -63,12 +63,13 @@ public class StaffControl : MonoBehaviour
         }
         // adjust the speed by the local scale
         speed = speed * xscale;
+        this.transform.position += Vector3.up * 1000;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A)){
+        if(Input.GetKeyDown(KeyCode.Return)){
             if(staffActive){
                 this.transform.position += Vector3.up * 1000;
             }
