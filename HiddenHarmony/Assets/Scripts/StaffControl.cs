@@ -270,7 +270,7 @@ public class StaffControl : MonoBehaviour
                         addAndPlay(sounds[(Abs(currentAnimal-1)*3) + 1], 1);
                     }
                 }
-                else if(isInCol[currentAnimal, i]){
+                if(isInCol[currentAnimal, i]){
                     if(Notes[i].transform.localPosition.z > 1.0f){
                         addAndPlay(sounds[top], 0);
                     }
