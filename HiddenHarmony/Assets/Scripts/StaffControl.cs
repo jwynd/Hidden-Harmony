@@ -12,6 +12,7 @@ public class StaffControl : MonoBehaviour
     public float noteScale = 2.5f; // controls the size of the notes when being placed
     public bool useSpaces = false; // if true, notes are placed in the middle of the spaces, not on the lines
     public AudioClip[] sounds = new AudioClip[6]; // array to hold the audio clips that will be used
+    public float interactDistance = 10.0f;
 
     //  Cursor variables
 //    public float playerPositionZ;
@@ -20,6 +21,7 @@ public class StaffControl : MonoBehaviour
     public GameObject cursor3;
 
     // private variables, accessible only in script
+    private Transform parent; // this holds the parent of the staff, which is the first person player
     private GameObject player; // references the object controlled by the player
     private GameObject[] Notes = new GameObject[8]; // these will keep references to the note objects
     private int currentAnimal = 0; // holds the index of the currently playing animal
@@ -29,6 +31,8 @@ public class StaffControl : MonoBehaviour
     private AudioSource[] aS;        // Audio Source reference, used to play, pause, and manage the audio
     private bool animalChanged = false; // becomes true once animal has changed so it does not happen twice in one round
     private bool staffActive = false; // staff will run when true and pause when false
+
+
 
     // these hold the indeces of sounnds with locations of current top middle and bottom
     private int top = 0;
@@ -45,6 +49,7 @@ public class StaffControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        parent = this.transform.parent;
         player = this.transform.Find("Cursor").gameObject;
         if(player == null) NullChild("Cursor");
         for(int i = 0; i < 2; i++)for(int j = 0; j < 8; j++) isInCol[i,j] = false;
@@ -75,14 +80,45 @@ public class StaffControl : MonoBehaviour
         }
         playBackground();
 
+
+
+
+        ///////////////////////
+        // RAYCAST OPERATION //
+        ///////////////////////
+        RaycastHit hit;
+        Ray staffRay = new Ray(parent.position, parent.forward);
+
         if(Input.GetKeyDown(KeyCode.Return)){
-            if(staffActive){
+            print("hit return");
+            if(!staffActive){
+                print("staff not active");
+                if(Physics.Raycast(staffRay, out hit, interactDistance)){
+                    print("raycast hit");
+                    if(hit.collider.tag == "SubWoofer"){
+                        print("collider subwoofer");
+                        if(currentAnimal != 1){
+                            nextAnimal();
+                        }
+                        this.transform.position += Vector3.down * 300;
+                        staffActive = !staffActive; //toggle staff active
+                    }
+                    else if (hit.collider.tag == "WindyHead"){
+                        print("collider windyhead");
+                        if(currentAnimal != 0){
+                            nextAnimal();
+                        }
+                        this.transform.position += Vector3.down * 300;
+                        staffActive = !staffActive; //toggle staff active
+                    }
+                }
+            }
+            else if(staffActive){
+                print("staff not active");
                 this.transform.position += Vector3.up * 300;
+                staffActive = !staffActive; //toggle staff active
             }
-            else{
-                this.transform.position += Vector3.down * 300;
-            }
-            staffActive = !staffActive; //toggle staff active
+            
         }
         if(staffActive){
             animalChanged = false;// ensures that animal used can only be changed once per frame
@@ -143,22 +179,7 @@ public class StaffControl : MonoBehaviour
                 }
 
             }
-            /*
-            // place audio clip play sounds
-            for(int i = 0; i < 8; i++){
-                if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f*xscale && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f*xscale && isInCol[currentAnimal, i]){
-                    if(Notes[i].transform.localPosition.z > 1.0f){
-                        addAndPlay(sounds[top], 0);
-                    }
-                    else if(Notes[i].transform.localPosition.z < -1.0f){
-                        addAndPlay(sounds[bottom], 0);
-                    }
-                    else{
-                        addAndPlay(sounds[middle], 0);
-                    }
-                }
-            }*/
-
+            
             // Debug.Log(player.transform.position.z);
             // changes cursor to the appropriate sprite
             if(player.transform.localPosition.z > 0) {
@@ -176,7 +197,7 @@ public class StaffControl : MonoBehaviour
                 cursor2.GetComponent<Renderer>().enabled = true;
                 cursor3.GetComponent<Renderer>().enabled = false;
             }
-
+/*
             if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && !isComplete && !animalChanged){
                 nextAnimal();
                 animalChanged = true;
@@ -186,7 +207,7 @@ public class StaffControl : MonoBehaviour
                 prevAnimal();
                 animalChanged = true;
             }
-
+*/
             
         }
     }
@@ -219,14 +240,14 @@ public class StaffControl : MonoBehaviour
         if(currentAnimal == 1) currentAnimal = 0;
         else currentAnimal = 1;
     }
-
+/*
     private void prevAnimal(){
         print("prevAnimal");
         changeAnimal(false);
         if(currentAnimal == 1) currentAnimal = 0;
         else currentAnimal = 1;
     }
-
+*/
     private void changeAnimal(bool next){
         // stuff in above if
         for(int i = 0; i < 8; i++){
@@ -297,7 +318,7 @@ public class StaffControl : MonoBehaviour
     }
 
     void NullChild(string str){
-        throw new System.ArgumentException("Child not found", str);
+        throw new System.ArgumentException("Child not found ", str);
     }
 
     // returns the absolute value of the integer x
