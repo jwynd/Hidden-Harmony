@@ -63,30 +63,34 @@ public class StaffControl : MonoBehaviour
         }
         // adjust the speed by the local scale
 //        speed = speed * xscale;
-        this.transform.position += Vector3.up * 1000;
+        this.transform.position += Vector3.up * 300;
     }
 
     // Update is called once per frame
     void Update()
     {
+        player.transform.localPosition += Vector3.right * speed * Time.deltaTime;
+        if(player.transform.localPosition.x > staffEdge) {
+            player.transform.localPosition = new Vector3(-staffEdge, player.transform.localPosition.y, player.transform.localPosition.z);
+        }
+        playBackground();
+
         if(Input.GetKeyDown(KeyCode.Return)){
             if(staffActive){
-                this.transform.position += Vector3.up * 1000;
+                this.transform.position += Vector3.up * 300;
             }
             else{
-                this.transform.position += Vector3.down * 1000;
+                this.transform.position += Vector3.down * 300;
             }
             staffActive = !staffActive; //toggle staff active
         }
         if(staffActive){
             animalChanged = false;// ensures that animal used can only be changed once per frame
           // constant motion is handled below, notice it is multiplies by speed
-           player.transform.localPosition += Vector3.right * speed * Time.deltaTime;
+           
             
             // this is the right-left world wrap
-            if(player.transform.localPosition.x > staffEdge) {
-                player.transform.localPosition = new Vector3(-staffEdge, player.transform.localPosition.y, player.transform.localPosition.z);
-            }
+
             // This allows the player to move up
             if(Input.GetKeyDown(KeyCode.UpArrow)){
                 player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z + vertMove);
@@ -139,6 +143,7 @@ public class StaffControl : MonoBehaviour
                 }
 
             }
+            /*
             // place audio clip play sounds
             for(int i = 0; i < 8; i++){
                 if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f*xscale && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f*xscale && isInCol[currentAnimal, i]){
@@ -152,7 +157,7 @@ public class StaffControl : MonoBehaviour
                         addAndPlay(sounds[middle], 0);
                     }
                 }
-            }
+            }*/
 
             // Debug.Log(player.transform.position.z);
             // changes cursor to the appropriate sprite
@@ -183,7 +188,6 @@ public class StaffControl : MonoBehaviour
             }
 
             
-            playBackground();
         }
     }
 
@@ -208,6 +212,7 @@ public class StaffControl : MonoBehaviour
         Notes[i].transform.Rotate(Vector3.up * 180.0f); // rotate the cube upside down
         Notes[i].GetComponent<Renderer>().material = noteMaterial; // apply the material
     }
+
     private void nextAnimal(){
         print("nextAnimal");
         changeAnimal(true);
@@ -251,20 +256,34 @@ public class StaffControl : MonoBehaviour
 
 
     public void playBackground(){
-
         for(int i = 0; i < 8; i++){
-            if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f && isInCol[Abs(currentAnimal-1), i]){
-                if(prevNotePosition[Abs(currentAnimal-1), i] > 1.0f){
-                    addAndPlay(sounds[(Abs(currentAnimal-1)*3) + 0], 1);
+
+            if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f*xscale && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f*xscale){
+                if(isInCol[Abs(currentAnimal-1), i]){
+                    if(prevNotePosition[Abs(currentAnimal-1), i] > 1.0f){
+                        addAndPlay(sounds[(Abs(currentAnimal-1)*3) + 0], 1);
+                    }
+                    else if(prevNotePosition[Abs(currentAnimal-1), i] < -1.0f){
+                        addAndPlay(sounds[(Abs(currentAnimal-1)*3) + 2], 1);
+                    }
+                    else{
+                        addAndPlay(sounds[(Abs(currentAnimal-1)*3) + 1], 1);
+                    }
                 }
-                else if(prevNotePosition[Abs(currentAnimal-1), i] < -1.0f){
-                    addAndPlay(sounds[(Abs(currentAnimal-1)*3) + 2], 1);
-                }
-                else{
-                    addAndPlay(sounds[(Abs(currentAnimal-1)*3) + 1], 1);
+                else if(isInCol[currentAnimal, i]){
+                    if(Notes[i].transform.localPosition.z > 1.0f){
+                        addAndPlay(sounds[top], 0);
+                    }
+                    else if(Notes[i].transform.localPosition.z < -1.0f){
+                        addAndPlay(sounds[bottom], 0);
+                    }
+                    else{
+                        addAndPlay(sounds[middle], 0);
+                    }
                 }
             }
         }
+
     }
 
     public void addAndPlay(AudioClip inputClip, int index){
