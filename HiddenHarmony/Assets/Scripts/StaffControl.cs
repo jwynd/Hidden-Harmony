@@ -45,8 +45,8 @@ public class StaffControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = this.transform.Find("Player").gameObject;
-        if(player == null) NullChild("Player");
+        player = this.transform.Find("Cursor").gameObject;
+        if(player == null) NullChild("Cursor");
         for(int i = 0; i < 2; i++)for(int j = 0; j < 8; j++) isInCol[i,j] = false;
         aS = gameObject.GetComponents<AudioSource>();
 
@@ -62,7 +62,7 @@ public class StaffControl : MonoBehaviour
             // print(colEdge[i]);
         }
         // adjust the speed by the local scale
-        speed = speed * xscale;
+//        speed = speed * xscale;
         this.transform.position += Vector3.up * 1000;
     }
 
@@ -141,7 +141,7 @@ public class StaffControl : MonoBehaviour
             }
             // place audio clip play sounds
             for(int i = 0; i < 8; i++){
-                if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f && isInCol[currentAnimal, i]){
+                if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f*xscale && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f*xscale && isInCol[currentAnimal, i]){
                     if(Notes[i].transform.localPosition.z > 1.0f){
                         addAndPlay(sounds[top], 0);
                     }
