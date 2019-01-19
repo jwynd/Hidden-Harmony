@@ -29,7 +29,6 @@ public class StaffControl : MonoBehaviour
     private float[,] prevNotePosition = new float[2, 8]; // this will hold the x positions of previous notes so that they can be replayed later
     private bool isComplete = false; // this will become true when the player is placing new sounds for the second pass
     private AudioSource[] aS;        // Audio Source reference, used to play, pause, and manage the audio
-    private bool animalChanged = false; // becomes true once animal has changed so it does not happen twice in one round
     private bool staffActive = false; // staff will run when true and pause when false
 
 
@@ -98,7 +97,8 @@ public class StaffControl : MonoBehaviour
                     if(hit.collider.tag == "SubWoofer"){
                         print("collider subwoofer");
                         if(currentAnimal != 1){
-                            nextAnimal();
+                            if(isComplete) prevAnimal();
+                            else nextAnimal();
                         }
                         this.transform.position += Vector3.down * 300;
                         staffActive = !staffActive; //toggle staff active
@@ -106,7 +106,8 @@ public class StaffControl : MonoBehaviour
                     else if (hit.collider.tag == "WindyHead"){
                         print("collider windyhead");
                         if(currentAnimal != 0){
-                            nextAnimal();
+                            if(isComplete) prevAnimal();
+                            else nextAnimal();
                         }
                         this.transform.position += Vector3.down * 300;
                         staffActive = !staffActive; //toggle staff active
@@ -121,11 +122,6 @@ public class StaffControl : MonoBehaviour
             
         }
         if(staffActive){
-            animalChanged = false;// ensures that animal used can only be changed once per frame
-          // constant motion is handled below, notice it is multiplies by speed
-           
-            
-            // this is the right-left world wrap
 
             // This allows the player to move up
             if(Input.GetKeyDown(KeyCode.UpArrow)){
@@ -240,14 +236,14 @@ public class StaffControl : MonoBehaviour
         if(currentAnimal == 1) currentAnimal = 0;
         else currentAnimal = 1;
     }
-/*
+
     private void prevAnimal(){
         print("prevAnimal");
         changeAnimal(false);
         if(currentAnimal == 1) currentAnimal = 0;
         else currentAnimal = 1;
     }
-*/
+
     private void changeAnimal(bool next){
         // stuff in above if
         for(int i = 0; i < 8; i++){
@@ -304,7 +300,6 @@ public class StaffControl : MonoBehaviour
                 }
             }
         }
-
     }
 
     public void addAndPlay(AudioClip inputClip, int index){
