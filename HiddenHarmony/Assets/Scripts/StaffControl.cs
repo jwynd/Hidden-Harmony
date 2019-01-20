@@ -30,8 +30,10 @@ public class StaffControl : MonoBehaviour
     private bool isComplete = false; // this will become true when the player is placing new sounds for the second pass
     private AudioSource[] aS;        // Audio Source reference, used to play, pause, and manage the audio
     private bool staffActive = false; // staff will run when true and pause when false
-
-
+    private CharacterController character; //creates a game object for storage
+    private FirstPersonControl playerCameraScript; //will hold the script for the FirstPersonControl from the Player object
+    private FirstPersonControl mainCameraScript; //will hold the script for the FirstPersonConntrol from the Main Camera object
+    private GameObject mainCamera; //will hold Main Camera in the script
 
     // these hold the indeces of sounnds with locations of current top middle and bottom
     private int top = 0;
@@ -50,6 +52,10 @@ public class StaffControl : MonoBehaviour
     {
         parent = this.transform.parent;
         player = this.transform.Find("Cursor").gameObject;
+        character = parent.GetComponent<CharacterController> (); //gets the character controller from the GameObject
+        playerCameraScript = parent.GetComponent<FirstPersonControl>();
+        mainCamera = parent.transform.Find("Main Camera").gameObject;
+        mainCameraScript = mainCamera.GetComponent<FirstPersonControl>();
         if(player == null) NullChild("Cursor");
         for(int i = 0; i < 2; i++)for(int j = 0; j < 8; j++) isInCol[i,j] = false;
         aS = gameObject.GetComponents<AudioSource>();
@@ -102,6 +108,9 @@ public class StaffControl : MonoBehaviour
                         }
                         this.transform.position += Vector3.down * 300;
                         staffActive = !staffActive; //toggle staff active
+                        character.enabled = !character.enabled; //toggle player movement
+                        playerCameraScript.isActive = !playerCameraScript.isActive; //toggle camera X movement
+                        mainCameraScript.isActive = !mainCameraScript.isActive; //toggle camera Y movement
                     }
                     else if (hit.collider.tag == "WindyHead"){
                         print("collider windyhead");
@@ -111,6 +120,9 @@ public class StaffControl : MonoBehaviour
                         }
                         this.transform.position += Vector3.down * 300;
                         staffActive = !staffActive; //toggle staff active
+                        character.enabled = !character.enabled; //toggle player movement
+                        playerCameraScript.isActive = !playerCameraScript.isActive; //toggle camera X movement
+                        mainCameraScript.isActive = !mainCameraScript.isActive; //toggle camera Y movement
                     }
                 }
             }
@@ -118,6 +130,9 @@ public class StaffControl : MonoBehaviour
                 print("staff not active");
                 this.transform.position += Vector3.up * 300;
                 staffActive = !staffActive; //toggle staff active
+                character.enabled = !character.enabled; //toggle player movement
+                playerCameraScript.isActive = !playerCameraScript.isActive; //toggle camera X movement
+                mainCameraScript.isActive = !mainCameraScript.isActive; //toggle camera Y movement
             }
             
         }
@@ -127,7 +142,7 @@ public class StaffControl : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.UpArrow)){
                 player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z + vertMove);
             }
-            // this allow the palyer to move down
+            // this allow the player to move down
             if(Input.GetKeyDown(KeyCode.DownArrow)){
                 player.transform.localPosition = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z - vertMove);
             }

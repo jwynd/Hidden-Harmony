@@ -10,7 +10,7 @@ public class FirstPersonControl : MonoBehaviour {
         MouseY = 2
     }
 
-    private bool isActive = true;
+    public bool isActive = true;
 
     public RotationAxis axes = RotationAxis.MouseX;
 
@@ -24,9 +24,11 @@ public class FirstPersonControl : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        /*
         if(Input.GetKeyDown(KeyCode.Return)) {
             isActive = !isActive;
         }
+        */
 
         if (axes == RotationAxis.MouseX && isActive) {
             transform.Rotate (0, Input.GetAxis ("Mouse X") * sensHorizontal, 0);
