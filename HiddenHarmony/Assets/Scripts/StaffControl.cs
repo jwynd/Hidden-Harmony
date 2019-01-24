@@ -288,8 +288,8 @@ public class StaffControl : MonoBehaviour
 
 
     public void playBackground(){
+        // each animal should have a fixed aS that does not change its index in the same as the animal index
         for(int i = 0; i < 8; i++){
-
             if(player.transform.localPosition.x*xscale > colEdge[i]+noteOffset[i]-0.02f*xscale && player.transform.localPosition.x*xscale < colEdge[i]+noteOffset[i]+0.02f*xscale){
                 if(isInCol[Abs(currentAnimal-1), i]){
                     if(prevNotePosition[Abs(currentAnimal-1), i] > 1.0f){
