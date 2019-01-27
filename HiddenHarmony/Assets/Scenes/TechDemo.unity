@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 1183694899}
   m_Layer: 0
   m_Name: Mun
-  m_TagString: Untagged
+  m_TagString: SoundObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -280,7 +280,7 @@ Transform:
   m_GameObject: {fileID: 1183694898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.94, y: 0.635, z: -7.95}
-  m_LocalScale: {x: 0.5, y: 0.3, z: 0.5}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -540,5 +540,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8911344109608160509, guid: 07f4b224c0b8a324baf4dd513a35efa6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911344109464398874, guid: 07f4b224c0b8a324baf4dd513a35efa6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07f4b224c0b8a324baf4dd513a35efa6, type: 3}
+--- !u!1 &1720010567 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8911344109608160496, guid: 07f4b224c0b8a324baf4dd513a35efa6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1720010566}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1720010568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720010567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcee34a1263dd1a479cdf2e1afe38827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
