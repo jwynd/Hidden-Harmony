@@ -7,10 +7,12 @@ public class PlayerMovement : MonoBehaviour {
     public float speed = 6f; //sets speed multiplier
 
     private CharacterController character; //creates a game object for storage
+    private Rigidbody rigidbody;
 
     // Use this for initialization
     void Start () {
         character = GetComponent<CharacterController> (); //gets the character controller from the GameObject
+        rigidbody = GetComponent<Rigidbody> ();
     }
     
     // Update is called once per frame
@@ -20,6 +22,10 @@ public class PlayerMovement : MonoBehaviour {
             character.enabled = !character.enabled;
         }
         */
+
+        if(Input.GetKeyDown(KeyCode.Space)) {
+             rigidbody.AddForce(new Vector3(0, 1, 0), ForceMode.Impulse);
+        }
 
         float moveX = Input.GetAxis ("Horizontal") * speed; //
         float moveZ = Input.GetAxis ("Vertical") * speed;
