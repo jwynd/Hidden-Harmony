@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
     // Based on code from Stephen Barr
     public float speed = 6f; //sets speed multiplier
+    public float jump = 65f;
 
     private CharacterController character; //creates a game object for storage
     private Rigidbody rigidbody;
@@ -24,7 +25,13 @@ public class PlayerMovement : MonoBehaviour {
         */
 
         if(Input.GetKeyDown(KeyCode.Space)) {
-             rigidbody.AddForce(new Vector3(0, 1, 0), ForceMode.Impulse);
+            //rigidbody.AddForce(new Vector3(0, jump, 0), ForceMode.Impulse);
+            Vector3 jumpMovement = new Vector3 (0, jump, 0);
+            
+            //jumpMovement = Vector3.ClampMagnitude (jumpMovement, speed); //Limits the max speed of the player
+            jumpMovement *= Time.deltaTime; //Ensures the speed the player moves does not change based on frame rate
+            jumpMovement = transform.TransformDirection(jumpMovement);
+            character.Move (jumpMovement);
         }
 
         float moveX = Input.GetAxis ("Horizontal") * speed; //
