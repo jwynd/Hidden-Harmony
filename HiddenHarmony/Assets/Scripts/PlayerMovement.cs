@@ -37,11 +37,11 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         // Manual gravity script because we needed something working.
-        if(this.transform.position.y > 0.0f){
+        if(this.transform.position.y < 0.0f){
             this.transform.position = new Vector3(this.transform.position.x, 0.0f, this.transform.position.z);
         }
         else{
-            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 1.0f*Time.deltaTime, this.transform.position.z);
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 5.0f*Time.deltaTime, this.transform.position.z);
         }
 
         float moveX = Input.GetAxis ("Horizontal") * speed; //
