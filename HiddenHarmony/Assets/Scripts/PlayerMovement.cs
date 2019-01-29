@@ -23,7 +23,9 @@ public class PlayerMovement : MonoBehaviour {
             character.enabled = !character.enabled;
         }
         */
-
+        /*if(this.transform.position.y < -10.0f){
+            this.transform.position = new Vector3(this.transform.position.x, 10.0f, this.transform.position.z);
+        }*/
         if(Input.GetKeyDown(KeyCode.Space)) {
             //rigidbody.AddForce(new Vector3(0, jump, 0), ForceMode.Impulse);
             Vector3 jumpMovement = new Vector3 (0, jump, 0);
@@ -32,6 +34,14 @@ public class PlayerMovement : MonoBehaviour {
             jumpMovement *= Time.deltaTime; //Ensures the speed the player moves does not change based on frame rate
             jumpMovement = transform.TransformDirection(jumpMovement);
             character.Move (jumpMovement);
+        }
+
+        // Manual gravity script because we needed something working.
+        if(this.transform.position.y > 0.0f){
+            this.transform.position = new Vector3(this.transform.position.x, 0.0f, this.transform.position.z);
+        }
+        else{
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 1.0f*Time.deltaTime, this.transform.position.z);
         }
 
         float moveX = Input.GetAxis ("Horizontal") * speed; //
