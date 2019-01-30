@@ -4,22 +4,51 @@ using UnityEngine;
 
 public class SoundObject : MonoBehaviour
 {
-    private GameObject player;
     private AudioSource aS;
-    private float dist;
+    private float interactDist = 1.0f;
+    private float resetTimer = 0.0f;
+    private const float rTime = 6.0f;
+    private bool onStage = false;
+    private float stageOffset = 0.0f;
+
+    void OnDrawGizmos(){
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(this.transform.position, Vector3.down*interactDist);
+    }
     // Start is called before the first frame update
     void Start(){
-        player = GameObject.Find("/Player");
         aS = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
-    void Update(){
-        dist = Vector3.Distance(player.transform.position, this.transform.position);
-        // if dist < 3 && Input.getKeyDown(keycode.E) then the object is maintained at a short distance in front of the player
-        // possibly use raycast instead so that you can differentiate between several objects
-        // constant raycast down to make see when over stump
-        // play sound in correct manner when over stump.
+    void FixedUpdate(){
+        // print(resetTimer);
+        resetTimer += Time.fixedDeltaTime;
+        if(resetTimer > rTime){
+            resetTimer = 0.0f;
+        }
 
+        RaycastHit hit;
+        Ray stageRay = new Ray(this.transform.position, Vector3.down);
+        if(Physics.Raycast(stageRay, out hit, interactDist)){
+            if(hit.collider.tag == "StageObj0"){
+                print("On Stage 0");
+                onStage = true;
+                stageOffset = 0.0f;
+            }
+            if(hit.collider.tag == "StageObj3"){
+                print("On Stage 3");
+                onStage = true;
+                stageOffset = 3.0f;
+            }
+        }
+
+        if(onStage && resetTimer > stageOffset-0.5f && resetTimer < stageOffset+0.5f){
+            print("Playing sound");
+            aS.Play();
+        }
+
+
+        onStage = false;
     }
 }

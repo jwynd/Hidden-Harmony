@@ -30,7 +30,7 @@ public class Pickup : MonoBehaviour
         if(!held && Input.GetKeyDown(KeyCode.E)){
             if(Physics.Raycast(pickRay, out hit, interactDistance)){
                 if(hit.collider.tag == "SoundObj"){
-                    print("Raycast hit SoundObj");
+                    //print("Raycast hit SoundObj");
                     currentObject = hit.collider.gameObject;
                     rigi = currentObject.GetComponent<Rigidbody>();
                     rigi.useGravity = false;
@@ -40,12 +40,12 @@ public class Pickup : MonoBehaviour
                     held = true;
                 }
             }
-            print("!held && key press on E");
+            //print("!held && key press on E");
 
         }
 
         else if(held && Input.GetKeyDown(KeyCode.E)){
-            print("hend and keycode e");
+            //print("hend and keycode e");
             if(currentObject == null) nullObject("currentObject");
             rigi.useGravity = true;
             currentObject.transform.parent = null;
