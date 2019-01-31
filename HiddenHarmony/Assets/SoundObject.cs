@@ -32,19 +32,19 @@ public class SoundObject : MonoBehaviour
         Ray stageRay = new Ray(this.transform.position, Vector3.down);
         if(Physics.Raycast(stageRay, out hit, interactDist)){
             if(hit.collider.tag == "StageObj0"){
-                print("On Stage 0");
+                //print("On Stage 0");
                 onStage = true;
                 stageOffset = 0.0f;
             }
             if(hit.collider.tag == "StageObj3"){
-                print("On Stage 3");
+                //print("On Stage 3");
                 onStage = true;
                 stageOffset = 3.0f;
             }
         }
 
         if(onStage && resetTimer > stageOffset-0.5f && resetTimer < stageOffset+0.5f){
-            print("Playing sound");
+            //print("Playing sound");
             aS.Play();
         }
 
