@@ -20,7 +20,7 @@ public class Pickup : MonoBehaviour
     void Start(){
         player = GameObject.Find("Player").transform;
         camera = GameObject.Find("Player/MainCamera").transform;
-        holdPosition = GameObject.Find("Player/MainCamera/HoldPosition").transform;
+        holdPosition = GameObject.Find("Player/HoldPosition").transform;
     }
 
     // Update is called once per frame
@@ -36,7 +36,7 @@ public class Pickup : MonoBehaviour
                     rigi.useGravity = false;
                     currentObject.transform.position = holdPosition.position;
                     // print(currentObject.transform.position);
-                    currentObject.transform.parent = camera;
+                    currentObject.transform.parent = player;
                     held = true;
                 }
             }
@@ -52,6 +52,9 @@ public class Pickup : MonoBehaviour
             held = false;
         }
 
+        if(held && currentObject != null){
+            currentObject.transform.localPosition = holdPosition.localPosition;
+        }
         //maintain the hold position above the ground
         /*Ray posRay = new Ray(holdPosition.position, Vector3.down);
         if(Physics.Raycast(posRay, out hit, 1.5f)){
@@ -59,11 +62,11 @@ public class Pickup : MonoBehaviour
                 holdPosition.localPosition = new Vector3(0.0f, 1.5f, 0.0f);
             }
         }*/
-
+        /*
         if(currentObject != null && held){
             // print(currentObject.transform.localPosition);
             rigi.velocity = ;
-        }
+        }*/
     }
 
     void nullObject(string msg){
