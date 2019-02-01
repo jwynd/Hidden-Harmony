@@ -11,7 +11,7 @@ public class SoundObject : MonoBehaviour
     private AudioSource aS;
     private float interactDist = 1.0f;
     private float resetTimer = 0.0f;
-    private const float rTime = 6.0f;
+    public  float measureTime = 6.0f;
     private bool onStage = false;
     private float stageOffset = 0.0f;
     private string pattern = "StageObj";
@@ -30,7 +30,7 @@ public class SoundObject : MonoBehaviour
     void FixedUpdate(){
         // print(resetTimer);
         resetTimer += Time.fixedDeltaTime;
-        if(resetTimer > rTime){
+        if(resetTimer > measureTime){
             resetTimer = 0.0f;
         }
 
@@ -42,7 +42,7 @@ public class SoundObject : MonoBehaviour
             if(match.Success){
                 suffix = hit.collider.tag.Substring(8);
                 if(Single.TryParse(suffix, out stageOffset)){
-                    if(stageOffset < rTime){
+                    if(stageOffset < measureTime){
                         onStage = true;
                     } 
                     else{
@@ -52,7 +52,7 @@ public class SoundObject : MonoBehaviour
             }
         }
 
-        if(onStage && resetTimer > stageOffset-0.2f && resetTimer < stageOffset+0.2f){
+        if(onStage && resetTimer > stageOffset-0.05f && resetTimer < stageOffset+0.05f){
             print("Playing sound at time "+resetTimer);
             aS.Play();
         }
