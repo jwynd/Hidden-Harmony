@@ -8,10 +8,12 @@ using UnityEngine;
 
 public class SoundObject : MonoBehaviour
 {
+    public float measureTime = 6.0f;
+    public float offsetRange = 0.05f;
+
     private AudioSource aS;
     private float interactDist = 1.0f;
     private float resetTimer = 0.0f;
-    public  float measureTime = 6.0f;
     private bool onStage = false;
     private float stageOffset = 0.0f;
     private string pattern = "StageObj";
@@ -52,7 +54,7 @@ public class SoundObject : MonoBehaviour
             }
         }
 
-        if(onStage && resetTimer > stageOffset-0.05f && resetTimer < stageOffset+0.05f){
+        if(onStage && resetTimer > stageOffset-offsetRange && resetTimer < stageOffset+offsetRange){
             // print("Playing sound at time "+resetTimer);
             aS.Play();
         }
