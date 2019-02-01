@@ -26,6 +26,8 @@ public class SoundObject : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         aS = gameObject.GetComponent<AudioSource>();
+        if(offsetRange <= 0.0f) throw new System.ArgumentException("Offset Range must be greater than 0");
+        if(measureTime <= 0.0f) throw new System.ArgumentException("Measure Time must be greater than 0");
     }
 
     // Update is called once per frame
