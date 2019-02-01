@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 867296411}
   m_Layer: 0
   m_Name: Stage1
-  m_TagString: StageObj1
+  m_TagString: StageObj1.5
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -663,6 +663,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297de8b145955ae47a803adcb0c62b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  measureTime: 6
+  offsetRange: 0.05
 --- !u!1 &1279419796
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +699,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297de8b145955ae47a803adcb0c62b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  measureTime: 6
+  offsetRange: 0.05
 --- !u!54 &1279419798
 Rigidbody:
   m_ObjectHideFlags: 0
