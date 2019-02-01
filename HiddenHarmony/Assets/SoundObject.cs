@@ -1,6 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
 
 public class SoundObject : MonoBehaviour
 {
@@ -10,6 +14,8 @@ public class SoundObject : MonoBehaviour
     private const float rTime = 6.0f;
     private bool onStage = false;
     private float stageOffset = 0.0f;
+    private string pattern = "StageObj";
+    private string suffix;
 
     void OnDrawGizmos(){
         Gizmos.color = Color.blue;
@@ -28,23 +34,26 @@ public class SoundObject : MonoBehaviour
             resetTimer = 0.0f;
         }
 
+        // determine stage by checking a ray cast, then use expression matching to determine the offset by the tag.
         RaycastHit hit;
         Ray stageRay = new Ray(this.transform.position, Vector3.down);
         if(Physics.Raycast(stageRay, out hit, interactDist)){
-            if(hit.collider.tag == "StageObj0"){
-                //print("On Stage 0");
-                onStage = true;
-                stageOffset = 0.0f;
-            }
-            if(hit.collider.tag == "StageObj3"){
-                //print("On Stage 3");
-                onStage = true;
-                stageOffset = 3.0f;
+            Match match = Regex.Match(hit.collider.tag, pattern);
+            if(match.Success){
+                suffix = hit.collider.tag.Substring(8);
+                if(Single.TryParse(suffix, out stageOffset)){
+                    if(stageOffset < rTime){
+                        onStage = true;
+                    } 
+                    else{
+                        stageOffset = 0.0f;
+                    }
+                }
             }
         }
 
-        if(onStage && resetTimer > stageOffset-0.5f && resetTimer < stageOffset+0.5f){
-            //print("Playing sound");
+        if(onStage && resetTimer > stageOffset-0.2f && resetTimer < stageOffset+0.2f){
+            print("Playing sound at time "+resetTimer);
             aS.Play();
         }
 
