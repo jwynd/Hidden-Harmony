@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         // Manual gravity script because we needed something working.
-        if(this.transform.position.y > 0.0f){
+        if(this.transform.position.y > -100.0f){
             character.Move(new Vector3(0.0f, -0.05f, 0.0f));
         }
         /*if(this.transform.position.y < 0.0f){
