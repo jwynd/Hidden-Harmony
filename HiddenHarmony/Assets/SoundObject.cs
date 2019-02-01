@@ -53,7 +53,7 @@ public class SoundObject : MonoBehaviour
         }
 
         if(onStage && resetTimer > stageOffset-0.05f && resetTimer < stageOffset+0.05f){
-            print("Playing sound at time "+resetTimer);
+            // print("Playing sound at time "+resetTimer);
             aS.Play();
         }
 
