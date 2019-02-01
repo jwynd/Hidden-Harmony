@@ -17,8 +17,8 @@ public class FirstPersonControl : MonoBehaviour {
     public float minVertical = -45.0f; //Minimum angle of vertical movement
     public float maxVertical = 45.0f; //Maximum angle of vertical movement
 
-    public float sensHorizontal = 10.0f;
-    public float sensVertical = 10.0f;
+    public float sensHorizontal = 10.0f; //Horizontal camera sensitivity
+    public float sensVertical = 10.0f; //Vertical camera sensitivity
 
     public float rotationX = 0;
 

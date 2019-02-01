@@ -62,7 +62,7 @@ public class Pickup : MonoBehaviour
 
         if(currentObject != null && held){
             // print(currentObject.transform.localPosition);
-            rigi.velocity = ;
+            //rigi.velocity = ;
         }
     }
 

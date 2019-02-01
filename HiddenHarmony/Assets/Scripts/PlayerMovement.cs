@@ -5,15 +5,16 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
     // Based on code from Stephen Barr
     public float speed = 6f; //sets speed multiplier
-    public float jump = 65f;
+    public float jump = 120f;
+    public float gravity = -9.8f;
 
     private CharacterController character; //creates a game object for storage
-    private Rigidbody rigidbody;
+    //private Rigidbody rigidbody;
 
     // Use this for initialization
     void Start () {
         character = GetComponent<CharacterController> (); //gets the character controller from the GameObject
-        rigidbody = GetComponent<Rigidbody> ();
+        //rigidbody = GetComponent<Rigidbody> ();
     }
     
     // Update is called once per frame
@@ -27,19 +28,15 @@ public class PlayerMovement : MonoBehaviour {
             this.transform.position = new Vector3(this.transform.position.x, 10.0f, this.transform.position.z);
         }*/
         if(Input.GetKeyDown(KeyCode.Space)) {
-            //rigidbody.AddForce(new Vector3(0, jump, 0), ForceMode.Impulse);
-            Vector3 jumpMovement = new Vector3 (0, jump, 0);
-            
-            //jumpMovement = Vector3.ClampMagnitude (jumpMovement, speed); //Limits the max speed of the player
-            jumpMovement *= Time.deltaTime; //Ensures the speed the player moves does not change based on frame rate
-            jumpMovement = transform.TransformDirection(jumpMovement);
-            character.Move (jumpMovement);
+            Vector3 jumpDirection = new Vector3 (0, jump, 0);
+            character.Move(jumpDirection * Time.deltaTime);
+
         }
 
         // Manual gravity script because we needed something working.
-        if(this.transform.position.y > 0.0f){
+        /*if(this.transform.position.y > 0.0f){
             character.Move(new Vector3(0.0f, -0.05f, 0.0f));
-        }
+        }*/
         /*if(this.transform.position.y < 0.0f){
             this.transform.position = new Vector3(this.transform.position.x, 0.0f, this.transform.position.z);
         }
@@ -50,7 +47,8 @@ public class PlayerMovement : MonoBehaviour {
         float moveX = Input.GetAxis ("Horizontal") * speed; //
         float moveZ = Input.GetAxis ("Vertical") * speed;
         Vector3 movement = new Vector3 (moveX, 0, moveZ);
-        
+
+        movement.y = gravity;
         movement = Vector3.ClampMagnitude (movement, speed); //Limits the max speed of the player
         movement *= Time.deltaTime; //Ensures the speed the player moves does not change based on frame rate
         movement = transform.TransformDirection(movement);

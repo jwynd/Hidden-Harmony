@@ -342,7 +342,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 328569969, guid: 6fc664ca874555642ae3c33ab5f50b63, type: 3}
+      propertyPath: jump
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 328569969, guid: 6fc664ca874555642ae3c33ab5f50b63, type: 3}
+      propertyPath: gravity
+      value: -9.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 328569967, guid: 6fc664ca874555642ae3c33ab5f50b63, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328569966, guid: 6fc664ca874555642ae3c33ab5f50b63, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 767895478, guid: 6fc664ca874555642ae3c33ab5f50b63, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 328569967, guid: 6fc664ca874555642ae3c33ab5f50b63, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6fc664ca874555642ae3c33ab5f50b63, type: 3}
 --- !u!1 &336366461
 GameObject:
