@@ -1,5 +1,5 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System; // Used for Single.TryParse
+using System.Text.RegularExpressions; // used for Regex Matching
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,7 +42,7 @@ public class SoundObject : MonoBehaviour
             if(match.Success){
                 suffix = hit.collider.tag.Substring(8);
                 if(Single.TryParse(suffix, out stageOffset)){
-                    if(stageOffset < measureTime){
+                    if(stageOffset <= measureTime && stageOffset >= 0.0f){
                         onStage = true;
                     } 
                     else{
