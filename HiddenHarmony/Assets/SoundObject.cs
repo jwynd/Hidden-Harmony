@@ -18,6 +18,7 @@ public class SoundObject : MonoBehaviour
     private float stageOffset = 0.0f;
     private string pattern = "StageObj";
     private string suffix;
+    private Light light;
 
     void OnDrawGizmos(){
         Gizmos.color = Color.blue;
@@ -26,6 +27,7 @@ public class SoundObject : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         aS = gameObject.GetComponent<AudioSource>();
+        light = gameObject.GetComponent<Light>();
         if(offsetRange <= 0.0f) throw new System.ArgumentException("Offset Range must be greater than 0");
         if(measureTime <= 0.0f) throw new System.ArgumentException("Measure Time must be greater than 0");
     }
@@ -59,6 +61,15 @@ public class SoundObject : MonoBehaviour
         if(onStage && resetTimer > stageOffset-offsetRange && resetTimer < stageOffset+offsetRange){
             // print("Playing sound at time "+resetTimer);
             aS.Play();
+        }
+
+        if(aS.isPlaying){
+            // print("light on");
+            light.enabled = true;
+        }
+
+        else{
+            light.enabled = false;
         }
 
 
