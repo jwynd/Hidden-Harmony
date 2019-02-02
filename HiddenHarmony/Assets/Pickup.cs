@@ -12,6 +12,7 @@ public class Pickup : MonoBehaviour
     private Transform holdPosition;
     private bool held = false;
     private Rigidbody rigi;
+    private float dist;
     /*void OnDrawGizmos(){
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(camera.position, camera.forward*interactDistance);
@@ -20,11 +21,14 @@ public class Pickup : MonoBehaviour
     void Start(){
         player = GameObject.Find("Player").transform;
         camera = GameObject.Find("Player/MainCamera").transform;
-        holdPosition = GameObject.Find("Player/HoldPosition").transform;
+        holdPosition = GameObject.Find("Player/MainCamera/HoldPosition").transform;
     }
 
     // Update is called once per frame
     void Update(){
+
+        if(currentObject != null) dist = Vector3.Distance(holdPosition.position, currentObject.transform.position);
+
         RaycastHit hit;
         Ray pickRay = new Ray(camera.position, camera.forward);
         if(!held && Input.GetKeyDown(KeyCode.E)){
@@ -34,9 +38,10 @@ public class Pickup : MonoBehaviour
                     currentObject = hit.collider.gameObject;
                     rigi = currentObject.GetComponent<Rigidbody>();
                     rigi.useGravity = false;
-                    currentObject.transform.position = holdPosition.position;
+                    // rigi.isKinematic = true;
+                    // currentObject.transform.position = holdPosition.position;
                     // print(currentObject.transform.position);
-                    currentObject.transform.parent = player;
+                    // currentObject.transform.parent = camera;
                     held = true;
                 }
             }
@@ -48,13 +53,21 @@ public class Pickup : MonoBehaviour
             //print("hend and keycode e");
             if(currentObject == null) nullObject("currentObject");
             rigi.useGravity = true;
-            currentObject.transform.parent = null;
+            // rigi.isKinematic = false;
+            // currentObject.transform.parent = null;
             held = false;
+            rigi = null;
         }
 
-        if(held && currentObject != null){
-            currentObject.transform.localPosition = holdPosition.localPosition;
+        else if(held){
+            if(currentObject == null) nullObject("currentObject");
+            float step = dist*7.0f * Time.deltaTime;
+            currentObject.transform.position = Vector3.MoveTowards(currentObject.transform.position, holdPosition.position, step);
         }
+
+        /*if(held && currentObject != null){
+            currentObject.transform.localPosition = holdPosition.localPosition;
+        }*/
         //maintain the hold position above the ground
         /*Ray posRay = new Ray(holdPosition.position, Vector3.down);
         if(Physics.Raycast(posRay, out hit, 1.5f)){
