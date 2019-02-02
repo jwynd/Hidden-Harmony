@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.29697776, g: 0.24607444, b: 0.23221657, a: 1}
+  m_IndirectSpecularColor: {r: 0.29687285, g: 0.24607295, b: 0.23193651, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 225109203}
   m_Layer: 0
   m_Name: Stage3
-  m_TagString: StageObj3
+  m_TagString: StageObj18
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -192,6 +192,10 @@ PrefabInstance:
     - target: {fileID: 400002, guid: 8cacbac2edd944040a23a1b987cf1602, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 8cacbac2edd944040a23a1b987cf1602, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.12
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 8cacbac2edd944040a23a1b987cf1602, type: 3}
       propertyPath: m_LocalPosition.x
@@ -437,7 +441,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a43e1df9bb6d04603a96d59b4ea4bbda, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f47a112c9942846dfa64c05a1d734d5f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -535,6 +539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297de8b145955ae47a803adcb0c62b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  measureTime: 24
+  offsetRange: 0.05
 --- !u!54 &325099556
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -661,7 +667,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a43e1df9bb6d04603a96d59b4ea4bbda, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ba03f8f8eb707450989cb8194d015318, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -759,6 +765,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297de8b145955ae47a803adcb0c62b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  measureTime: 24
+  offsetRange: 0.05
 --- !u!54 &392146935
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -959,9 +967,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 76164b29bb6e94c869d5841e495be89d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: eee9e0af3914f48ecbc442a5664bc111, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1071,7 +1079,7 @@ GameObject:
   - component: {fileID: 1058341702}
   m_Layer: 0
   m_Name: Stage0
-  m_TagString: StageObj0
+  m_TagString: StageObj12
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1204,7 +1212,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e8afc628c836e40ea8e293bd2c2170f7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 28df8ed15f710415c8cf8ec50ffca140, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1302,6 +1310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297de8b145955ae47a803adcb0c62b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  measureTime: 24
+  offsetRange: 0.05
 --- !u!54 &1587119532
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1402,7 +1412,7 @@ GameObject:
   - component: {fileID: 1615617917}
   m_Layer: 0
   m_Name: Stage0
-  m_TagString: StageObj0
+  m_TagString: StageObj6
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1618,7 +1628,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a43e1df9bb6d04603a96d59b4ea4bbda, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d91f1fa9bdb8e484ab4ca6085cbf0bd8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1716,6 +1726,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297de8b145955ae47a803adcb0c62b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  measureTime: 24
+  offsetRange: 0.05
 --- !u!54 &1757602586
 Rigidbody:
   m_ObjectHideFlags: 0
