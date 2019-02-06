@@ -26,7 +26,6 @@ public class Pickup : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-
         if(currentObject != null) dist = Vector3.Distance(holdPosition.position, currentObject.transform.position);
 
         RaycastHit hit;
