@@ -12,7 +12,6 @@ public class MusicChange : MonoBehaviour
 
     private bool fading = false;
     private AudioSource[] backgroundMusic;
-    private GameObject[] soundObjects;
     private AudioSource oldBG;
     private AudioSource newBG;
     private int current = 0;
@@ -20,7 +19,6 @@ public class MusicChange : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         backgroundMusic = GameObject.Find("BackgroundMusic").GetComponents<AudioSource>();
-        soundObjects = GameObject.FindGameObjectsWithTag("SoundObj");
         for(int i = 1; i < backgroundMusic.Length; i++){
             backgroundMusic[i].volume = 0.0f;
         }
