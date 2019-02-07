@@ -6,7 +6,8 @@ using UnityEngine;
 public class MusicChange : MonoBehaviour
 {
     public float fadeTime = 1.0f;
-    public bool useLinear = false;
+    [HideInInspector]
+    public bool useLinear = true;
 
     private float offThreshhold = 0.05f; // threshhold at which the sound stops playing
 
@@ -15,6 +16,7 @@ public class MusicChange : MonoBehaviour
     private AudioSource oldBG;
     private AudioSource newBG;
     private int current = 0;
+    private float debug = 0.0f;
     // private float fadeTimer = fadeTime + 10.0f;// let fadeTimer start off
     // Start is called before the first frame update
     void Start(){
@@ -28,13 +30,17 @@ public class MusicChange : MonoBehaviour
         // cross fade here
         if(fading && oldBG != null && newBG != null){
             // use linear cross fading, stretch goal uses sqrt(x)
-            
+
             oldBG.volume -= Time.deltaTime/fadeTime;
             newBG.volume += Time.deltaTime/fadeTime;
             
             if(!useLinear){
-                oldBG.volume = (float)Math.Sqrt(oldBG.volume);
-                newBG.volume = (float)Math.Sqrt(newBG.volume);
+                debug += Time.deltaTime;
+                print("debug = "+debug);
+                newBG.volume = ((float)Math.Sqrt(newBG.volume))*(fadeTime + 0.1f);
+                print("newBG = "+newBG.volume);
+                oldBG.volume = 1.0f - newBG.volume;
+                print("oldBG = "+oldBG.volume);
             }
             if(oldBG.volume < offThreshhold){
                 newBG.volume = 1.0f;
