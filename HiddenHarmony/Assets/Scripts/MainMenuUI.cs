@@ -6,9 +6,12 @@ using UnityEngine.SceneManagement;
 public class MainMenuUI : MonoBehaviour
 {
 
-    public void Play()
-    {
-        SceneManager.LoadScene("MainScene");
+    public void Play(){
+        SceneManager.LoadScene("Demo");
+    }
+
+    public void Quit(){
+        Application.Quit();
     }
 
 }
