@@ -5,20 +5,25 @@ using UnityEngine.UI;
 
 public class StartMenu : MonoBehaviour
 {
+    public float fadeTime = 2.0f;
+    private GameObject player;
     private GameObject startMenuUI;
     private GameObject menuCamera;
     private GameObject mainCamera;
     private GameObject fade;
-    private float fadeTime = 2.0f;
     private float timer = 0.0f;
     private bool fading = false;
 
     // Start is called before the first frame update
     void Start() {
+        player = GameObject.Find("Player");
         startMenuUI = GameObject.Find("Canvas/StartMenuMain");
         menuCamera = GameObject.Find("MenuCamera");
         mainCamera = GameObject.Find("Player/MainCamera");
         fade = GameObject.Find("MenuCamera/Fade");
+
+        player.SetActive(false);
+        
     }
 
     void Update() {
@@ -37,6 +42,7 @@ public class StartMenu : MonoBehaviour
                 mainCamera.GetComponent<AudioListener>().enabled = true;
                 Destroy(fade);
                 Destroy(menuCamera);
+                player.SetActive(true);
                 fading = false;
             }
         }
@@ -45,7 +51,6 @@ public class StartMenu : MonoBehaviour
     }
 
     public void StartButton(){
-        print("start button pressed");
         startMenuUI.SetActive(false);
         fading = true;
     }

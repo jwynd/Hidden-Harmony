@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
     private GameObject camera;
     private bool isPaused;
 
-    void Start(){
+    void Awake(){
         player = GameObject.Find("Player");
         camera = GameObject.Find("Player/MainCamera");
         pauseMenuUI = GameObject.Find("Canvas/PauseMenuMain");
