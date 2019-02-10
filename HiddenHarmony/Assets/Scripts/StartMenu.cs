@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class StartMenu : MonoBehaviour
 {
     public float fadeTime = 2.0f;
+    public float movementSpeed = 10.0f;
+
     private GameObject player;
     private GameObject startMenuUI;
     private GameObject menuCamera;
@@ -34,6 +36,8 @@ public class StartMenu : MonoBehaviour
                 Color.Lerp(fade.GetComponent<MeshRenderer>().material.color,
                            Color.black, fadeTime * Time.deltaTime);
             timer += Time.deltaTime;
+            menuCamera.transform.position = 
+                Vector3.MoveTowards(menuCamera.transform.position, fade.transform.position, movementSpeed*Time.deltaTime);
 
             if(timer > fadeTime){
                 // do this after everything has fade
