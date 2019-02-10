@@ -53,7 +53,7 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
-    public void Restart(){
+    public void MainMenu(){
         SceneManager.LoadScene("Demo");
     }
 
