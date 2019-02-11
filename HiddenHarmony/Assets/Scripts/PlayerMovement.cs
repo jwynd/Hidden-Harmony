@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
     // Based on code from Stephen Barr
 
-    public float yVelocity = 0f; //the counter to determine at which point in the jumpTime the player is at.
-    public bool jumping = false; //checks if the player is jumping
+    private float yVelocity = 0f; //the counter to determine at which point in the jumpTime the player is at.
+    private bool jumping = false; //checks if the player is jumping
     private CharacterController character; //creates a game object for storage
     
     public float speed = 6f; //sets speed multiplier
@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour {
     //jumpTime suggested value 17f;
     public float jumpSpeed = 0.5f; //how fast the jumpTime accelerates per frame
     //jumpSpeed suggested value 0.5f
-    public float canJump = 0.55f; //the distance between the player and the ground at which the player can jumpTime
+    public float canJump = 1.25f; //the distance between the player and the ground at which the player can jumpTime
     //canJump suggested value 1.25f. Assumes player is of height 2 and takes half, which is 1. The 0.25 is added for wiggle room.
 
     // Use this for initialization
