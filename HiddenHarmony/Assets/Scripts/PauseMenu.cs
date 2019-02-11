@@ -10,27 +10,30 @@ public class PauseMenu : MonoBehaviour
     private GameObject player;
     private GameObject camera;
     private bool isPaused;
+    private GameObject menuCamera; // use this to determine if while loop should be running
 
     void Awake(){
         player = GameObject.Find("Player");
         camera = GameObject.Find("Player/MainCamera");
         pauseMenuUI = GameObject.Find("Canvas/PauseMenuMain");
+        menuCamera = GameObject.Find("MenuCamera");
         if(pauseMenuUI == null) throw new System.ArgumentException("PauseMenuMain not found");
         DeactivateMenu();
         isPaused = false;
     }
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            isPaused = !isPaused;
-            
-        }
+        if(menuCamera == null){
+            if(Input.GetKeyDown(KeyCode.Escape)){
+                isPaused = !isPaused;
+            }
 
-        if(isPaused){
-            ActivateMenu();
-        }
-        else{
-            DeactivateMenu();
+            if(isPaused){
+                ActivateMenu();
+            }
+            else{
+                DeactivateMenu();
+            }
         }
     }
 
@@ -40,16 +43,19 @@ public class PauseMenu : MonoBehaviour
         player.GetComponent<FirstPersonControl>().enabled = false;
         player.GetComponent<Pickup>().enabled = false;
         camera.GetComponent<FirstPersonControl>().enabled = false;
+        Cursor.visible = true;
         pauseMenuUI.SetActive(true);
     }
 
     public void DeactivateMenu(){
+        // print("DeactivateMenu");
         player.GetComponent<CharacterController>().enabled = true;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<FirstPersonControl>().enabled = true;
         player.GetComponent<Pickup>().enabled = true;
         camera.GetComponent<FirstPersonControl>().enabled = true;
         pauseMenuUI.SetActive(false);
+        Cursor.visible = false;
         isPaused = false;
     }
 

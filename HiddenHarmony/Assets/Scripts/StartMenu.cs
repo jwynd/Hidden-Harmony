@@ -23,7 +23,7 @@ public class StartMenu : MonoBehaviour
         menuCamera = GameObject.Find("MenuCamera");
         mainCamera = GameObject.Find("Player/MainCamera");
         fade = GameObject.Find("MenuCamera/Fade");
-
+        Cursor.visible = true;
         player.SetActive(false);
         
     }
@@ -56,6 +56,7 @@ public class StartMenu : MonoBehaviour
 
     public void StartButton(){
         startMenuUI.SetActive(false);
+        Cursor.visible = false;
         fading = true;
     }
 
