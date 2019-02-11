@@ -5,11 +5,10 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
     // Based on code from Stephen Barr
 
-    private float yVelocity = 0f; //the counter to determine at which point in the jumpTime the player is at.
-    private bool jumping = false; //checks if the player is jumping
+    public float yVelocity = 0f; //the counter to determine at which point in the jumpTime the player is at.
+    public bool jumping = false; //checks if the player is jumping
     private CharacterController character; //creates a game object for storage
-    //private Rigidbody rigidbody;
-
+    
     public float speed = 6f; //sets speed multiplier
     //speed suggested value 6f
     public float gravity = 7f; //the value subtracted from the y axis to calculate gravity
@@ -24,12 +23,29 @@ public class PlayerMovement : MonoBehaviour {
     // Use this for initialization
     void Start () {
         character = GetComponent<CharacterController> (); //gets the character controller from the GameObject
-        //rigidbody = GetComponent<Rigidbody> ();
+        
+        //Tutorial p1 and p2 calculation
+        /*
+        float sphereDistance = character.height/2 - character.radius;
+        p1 = character.center + Vector3.up * sphereDistance; //calculates the center of the top sphere of the capsule
+        p2 = character.center - Vector3.up * sphereDistance;
+        */
     }    
 
     // Update is called once per frame
     void Update () {
-        if(Input.GetKeyDown(KeyCode.Space) && Physics.Raycast (transform.position, Vector3.down, canJump)) { // add && Physics.Raycast (transform.position, Vector3.down, canJump) for ground check?
+        /*
+        //Unity p1 and p2 calculation
+        Vector3 p1 = transform.position + character.center + Vector3.up * -character.height * 0.5F;
+        Vector3 p2 = p1 + Vector3.up * character.height;
+        //Tutorial p1 and p2 calculation
+        */
+        /*
+        float sphereDistance = character.height/2 - character.radius;
+        Vector3 p1 = character.center + Vector3.up * sphereDistance; //calculates the center of the top sphere of the capsule
+        Vector3 p2 = character.center - Vector3.up * sphereDistance;
+        */
+        if(Input.GetKeyDown(KeyCode.Space) && /*Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump)*/ Physics.Raycast (transform.position, Vector3.down, canJump)) { //capsule cast checks if capsule is touching the ground
             if (!jumping){
                 jumping = true;            
                 yVelocity = jumpTime;
