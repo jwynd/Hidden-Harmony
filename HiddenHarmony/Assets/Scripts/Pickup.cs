@@ -6,6 +6,7 @@ public class Pickup : MonoBehaviour
 {
     public float interactDistance = 5.0f;
 
+    private GameObject intMsg;
     private GameObject currentObject;
     private Transform camera;
     private Transform player;
@@ -19,6 +20,7 @@ public class Pickup : MonoBehaviour
     }*/
 
     void Start(){
+        intMsg = GameObject.Find("InteractMessageController");
         player = GameObject.Find("Player").transform;
         camera = GameObject.Find("Player/MainCamera").transform;
         holdPosition = GameObject.Find("Player/MainCamera/HoldPosition").transform;
@@ -45,7 +47,14 @@ public class Pickup : MonoBehaviour
                 }
             }
             //print("!held && key press on E");
-
+        }
+        else if(!held){
+            intMsg.GetComponent<InteractMessage>().HideInteractMessage();
+            if(Physics.Raycast(pickRay, out hit, interactDistance)){
+                if(hit.collider.tag == "SoundObj"){
+                    intMsg.GetComponent<InteractMessage>().ShowInteractMessage("Press 'E' to pick up");
+                }
+            }
         }
 
         else if(held && Input.GetKeyDown(KeyCode.E)){
@@ -62,6 +71,7 @@ public class Pickup : MonoBehaviour
             if(currentObject == null) nullObject("currentObject");
             float step = dist*7.0f * Time.deltaTime;
             currentObject.transform.position = Vector3.MoveTowards(currentObject.transform.position, holdPosition.position, step);
+            intMsg.GetComponent<InteractMessage>().HideInteractMessage();
         }
 
         /*if(held && currentObject != null){
