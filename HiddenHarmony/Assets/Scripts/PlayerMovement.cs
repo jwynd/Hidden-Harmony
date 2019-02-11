@@ -17,35 +17,24 @@ public class PlayerMovement : MonoBehaviour {
     //jumpTime suggested value 17f;
     public float jumpSpeed = 0.5f; //how fast the jumpTime accelerates per frame
     //jumpSpeed suggested value 0.5f
-    public float canJump = 1.25f; //the distance between the player and the ground at which the player can jumpTime
-    //canJump suggested value 1.25f. Assumes player is of height 2 and takes half, which is 1. The 0.25 is added for wiggle room.
+    public float canJump = 0.15f; //the distance between the player and the ground at which the player can jumpTime
+    //canJump suggested value for capsulecast 0.15. I don't know why this works, but it does.
+    //canJump suggested value for raycast 1.25f. Assumes player is of height 2 and takes half, which is 1. The 0.25 is added for wiggle room.
 
     // Use this for initialization
     void Start () {
         character = GetComponent<CharacterController> (); //gets the character controller from the GameObject
-        
-        //Tutorial p1 and p2 calculation
-        /*
-        float sphereDistance = character.height/2 - character.radius;
-        p1 = character.center + Vector3.up * sphereDistance; //calculates the center of the top sphere of the capsule
-        p2 = character.center - Vector3.up * sphereDistance;
-        */
     }    
 
     // Update is called once per frame
     void Update () {
-        /*
         //Unity p1 and p2 calculation
-        Vector3 p1 = transform.position + character.center + Vector3.up * -character.height * 0.5F;
+        Vector3 p1 = transform.position + new Vector3(character.center.x, character.center.y + 0.5f, character.center.z) + Vector3.up * -character.height * 0.5f;
         Vector3 p2 = p1 + Vector3.up * character.height;
-        //Tutorial p1 and p2 calculation
-        */
-        /*
-        float sphereDistance = character.height/2 - character.radius;
-        Vector3 p1 = character.center + Vector3.up * sphereDistance; //calculates the center of the top sphere of the capsule
-        Vector3 p2 = character.center - Vector3.up * sphereDistance;
-        */
-        if(Input.GetKeyDown(KeyCode.Space) && /*Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump)*/ Physics.Raycast (transform.position, Vector3.down, canJump)) { //capsule cast checks if capsule is touching the ground
+
+        //Jump check
+        //Raycast alternative Physics.Raycast (transform.position, Vector3.down, canJump)
+        if(Input.GetKeyDown(KeyCode.Space) && Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump)) { //capsule cast checks if capsule is touching the ground
             if (!jumping){
                 jumping = true;            
                 yVelocity = jumpTime;
