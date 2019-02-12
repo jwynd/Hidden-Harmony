@@ -10,12 +10,11 @@ public class SoundObject : MonoBehaviour
 {
     public float measureTime = 6.0f;
     public float offsetRange = 0.05f;
-    [HideInInspector]
-    public float resetTimer = 0.0f;
+    [HideInInspector] public bool onStage = false;
 
+    private float resetTimer = 0.0f;
     private AudioSource aS;
     private float interactDist = 1.0f;
-    private bool onStage = false;
     private float stageOffset = 0.0f;
     private string pattern = "StageObj";
     private string suffix;
@@ -35,6 +34,7 @@ public class SoundObject : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate(){
+
         // print(resetTimer);
         resetTimer += Time.fixedDeltaTime;
         // print(resetTimer);
@@ -54,10 +54,19 @@ public class SoundObject : MonoBehaviour
                         onStage = true;
                     } 
                     else{
-                        stageOffset = 0.0f;
+                        onStage = false;
                     }
                 }
+                else{
+                    onStage = false;
+                }
             }
+            else{
+                onStage = false;
+            }
+        }
+        else{
+            onStage = false;
         }
 
         if(onStage && resetTimer > stageOffset-offsetRange && resetTimer < stageOffset+offsetRange){
@@ -75,6 +84,5 @@ public class SoundObject : MonoBehaviour
         }
 
 
-        onStage = false;
     }
 }
