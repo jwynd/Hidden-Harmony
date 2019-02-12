@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     // below is tutorial suggestion, replace if wrong
+    [SerializeField] private string mainMenuScene = "MainScene";
     private GameObject pauseMenuUI;
     private GameObject player;
     private GameObject camera;
@@ -60,7 +61,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void MainMenu(){
-        SceneManager.LoadScene("Demo");
+        SceneManager.LoadScene(mainMenuScene);
     }
 
     public void Quit(){
