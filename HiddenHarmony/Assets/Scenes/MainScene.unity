@@ -1266,7 +1266,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeTime: 1
-  useLinear: 1
 --- !u!65 &198917794
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13976,6 +13975,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Quit
       objectReference: {fileID: 0}
+    - target: {fileID: 9142219446449390165, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_Text
+      value: Press 'E' to pick up
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c92fba7e57bf4cbaafc59b560ce30ae, type: 3}
 --- !u!1 &858817069
@@ -17858,7 +17862,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeTime: 2
-  useLinear: 1
 --- !u!1001 &936644501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33506,7 +33509,7 @@ GameObject:
   - component: {fileID: 1665387488}
   - component: {fileID: 1665387487}
   m_Layer: 0
-  m_Name: InteractMenuController
+  m_Name: InteractMessageController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
