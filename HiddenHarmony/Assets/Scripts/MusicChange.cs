@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class MusicChange : MonoBehaviour
 {
-    public float fadeTime = 1.0f;
-    [HideInInspector]
-    public bool useLinear = true;
+    [SerializeField] private float fadeTime = 1.0f;
 
     private float offThreshhold = 0.05f; // threshhold at which the sound stops playing
 
@@ -27,21 +25,12 @@ public class MusicChange : MonoBehaviour
     }
 
     void Update(){
-        // cross fade here
         if(fading && oldBG != null && newBG != null){
             // use linear cross fading, stretch goal uses sqrt(x)
 
             oldBG.volume -= Time.deltaTime/fadeTime;
             newBG.volume += Time.deltaTime/fadeTime;
-            
-            if(!useLinear){
-                debug += Time.deltaTime;
-                print("debug = "+debug);
-                newBG.volume = ((float)Math.Sqrt(newBG.volume))*(fadeTime + 0.1f);
-                print("newBG = "+newBG.volume);
-                oldBG.volume = 1.0f - newBG.volume;
-                print("oldBG = "+oldBG.volume);
-            }
+
             if(oldBG.volume < offThreshhold){
                 newBG.volume = 1.0f;
                 oldBG.volume = 0.0f;
@@ -54,13 +43,22 @@ public class MusicChange : MonoBehaviour
 
     // Update is called once per frame
     private void OnTriggerEnter(Collider other){
+        for(int i = 0; i < backgroundMusic.Length; i++){
+            if(backgroundMusic[i].volume > 0.0f){
+                current = i;
+                break;
+            }
+        }
+        print("Entered "+this.name+"\nCurrent == "+current);
         if(other.gameObject.name != "Player") return;
         if(this.name == "SubWooferTrigger" && current != 1){
+            print("Fading from Hub to subwoofer");
             newBG = backgroundMusic[1];
             oldBG = backgroundMusic[0];
             fading = true;
             current = 1;
         } else if(this.name == "HubTrigger" && current !=0){
+            print("Fading from subwoofer to hub");
             newBG = backgroundMusic[0];
             oldBG = backgroundMusic[1];
             fading = true;
