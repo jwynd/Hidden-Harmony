@@ -44,7 +44,7 @@ public class MusicChange : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter(Collider other){
         for(int i = 0; i < backgroundMusic.Length; i++){
-            if(backgroundMusic[i].volume > 0.0f){
+            if(backgroundMusic[i].volume == 1.0f){
                 current = i;
                 break;
             }
