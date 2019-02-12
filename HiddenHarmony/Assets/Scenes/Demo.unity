@@ -1301,6 +1301,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160571001}
   m_CullTransparentMesh: 0
+--- !u!1 &174247400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 7493b48f2ea9246feb6d33a50e831435,
+    type: 3}
+  m_PrefabInstance: {fileID: 2074585900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &176056816
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16338,6 +16344,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 17.992, y: 105.758, z: -1.4260001}
+--- !u!1 &814442712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 814442714}
+  - component: {fileID: 814442713}
+  m_Layer: 0
+  m_Name: SubwooferController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &814442713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814442712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37dd5ae1233b3954dbe990ba960b4b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subWooferObjects:
+  - {fileID: 174247400}
+  - {fileID: 1254039793}
+  - {fileID: 748961968}
+  - {fileID: 367859787}
+  - {fileID: 25531784}
+  hubSoundObjects:
+  - {fileID: 1587119529}
+  - {fileID: 1757602583}
+  - {fileID: 325099553}
+  - {fileID: 392146932}
+--- !u!4 &814442714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814442712}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 40.099842, y: -0.22444515, z: -47.10142}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 34
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &892346229
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24079,7 +24139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1424585116
 Transform:
   m_ObjectHideFlags: 0
