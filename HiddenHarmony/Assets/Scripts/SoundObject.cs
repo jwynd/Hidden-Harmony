@@ -60,10 +60,10 @@ public class SoundObject : MonoBehaviour
                 if(Single.TryParse(suffix, out stageOffset)){
                     stageOffset = (stageOffset-1)*beat;
                     if(stageOffset <= measureTime && stageOffset >= 0.0f){
-                        print(stageOffset);
-                        print(beat);
-                        print(measureTime);
-                        print(resetTimer);
+                        print("Stage offset = "+stageOffset);
+                        print("beat = "+beat);
+                        print("MeasureTime = "+ measureTime);
+                        //print(resetTimer);
                         onStage = true;
                     } 
                     else{
