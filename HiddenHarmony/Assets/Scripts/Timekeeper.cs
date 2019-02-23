@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Timekeeper : MonoBehaviour
 {
-    [SerializeField] private int BPM = 100;
+    [SerializeField] private int beatsPerMinute = 100;
 
     public int BPM(){
-        return BPM;
+        return beatsPerMinute;
     }
 
-    public flaot GetBeat(){
-        return (60.0f / BPM);
+    public float GetBeat(){
+        return (60.0f / beatsPerMinute);
     }
 
     public int SetBPM(int b){
-        BPM = b;
-        return BPM;
+        beatsPerMinute = b;
+        return beatsPerMinute;
     }
     /*
     Given BPM
