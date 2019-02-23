@@ -33,6 +33,7 @@ public class SoundObject : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         timekeeper = GameObject.Find("Timekeeper").GetComponent<Timekeeper>();
+        if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
         aS = gameObject.GetComponent<AudioSource>();
         light = gameObject.GetComponent<Light>();
         if(offsetRange <= 0.0f) throw new System.ArgumentException("Offset Range must be greater than 0");
@@ -41,6 +42,7 @@ public class SoundObject : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate(){
+        if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
         beat = timekeeper.GetBeat();
         measureTime = beat*loopLength;
         resetTimer += Time.fixedDeltaTime;
