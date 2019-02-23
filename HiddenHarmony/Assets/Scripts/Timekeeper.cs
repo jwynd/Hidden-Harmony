@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Timekeeper : MonoBehaviour
 {
-    [SerializeField] private int beatsPerMinute = 100;
+    private int beatsPerMinute = 100;
 
     public int BPM(){
         return beatsPerMinute;
