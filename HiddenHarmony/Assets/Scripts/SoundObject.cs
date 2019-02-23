@@ -33,7 +33,6 @@ public class SoundObject : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start(){
-        bgs = GameObject.Find("BackgroundMusic").GetComponents<AudioSource>();
         timekeeper = GameObject.Find("Timekeeper").GetComponent<Timekeeper>();
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
         aS = gameObject.GetComponent<AudioSource>();
@@ -50,10 +49,6 @@ public class SoundObject : MonoBehaviour
         resetTimer += Time.fixedDeltaTime;
         if(resetTimer > measureTime){
             resetTimer = 0.0f;
-            foreach(AudioSource bg in bgs){
-                bg.Play();
-            }
-
         }
 
         // determine stage by checking a ray cast, then use expression matching to determine the offset by the tag.

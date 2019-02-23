@@ -13,6 +13,9 @@ public class Timekeeper : MonoBehaviour
     public float GetBeat(){
         return (60.0f / beatsPerMinute);
     }
+    public float GetBeat(int b){
+        return (60.0f / b);
+    }
 
     public int SetBPM(int b){
         beatsPerMinute = b;
