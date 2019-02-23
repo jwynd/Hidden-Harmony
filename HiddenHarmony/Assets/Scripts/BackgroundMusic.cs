@@ -23,7 +23,7 @@ public class BackgroundMusic : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate(){
         foreach(float timer in resetTimers){
-            timer += time.deltaTime;
+            timer += time.fixedDeltaTime;
         }
         for(int i = 0; i < loopLengths.Length; ++i){
             if(resetTimers[i] > measureTimes[i]){
