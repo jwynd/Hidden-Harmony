@@ -7355,7 +7355,7 @@ GameObject:
   - component: {fileID: 146816144}
   m_Layer: 0
   m_Name: HubStageObject (2)
-  m_TagString: StageObj4.8
+  m_TagString: StageObj3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21807,13 +21807,13 @@ PrefabInstance:
     - target: {fileID: 7939041500233886792, guid: a6b11ec208752474085fa9d6c3a88d8b,
         type: 3}
       propertyPath: offsetRange
-      value: 0.01
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 7939041500233886794, guid: a6b11ec208752474085fa9d6c3a88d8b,
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: b78cddd5c1625467c836f0174cd56d85, type: 3}
+      objectReference: {fileID: 8300000, guid: 192e7315bf8574656905da67efb23e17, type: 3}
     - target: {fileID: 7939041500233886794, guid: a6b11ec208752474085fa9d6c3a88d8b,
         type: 3}
       propertyPath: OutputAudioMixerGroup
@@ -26078,13 +26078,13 @@ PrefabInstance:
     - target: {fileID: 7939041500233886792, guid: a6b11ec208752474085fa9d6c3a88d8b,
         type: 3}
       propertyPath: offsetRange
-      value: 0.01
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 7939041500233886794, guid: a6b11ec208752474085fa9d6c3a88d8b,
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: e03f7e4417a0043f18468cd586de18ec, type: 3}
+      objectReference: {fileID: 8300000, guid: 192e7315bf8574656905da67efb23e17, type: 3}
     - target: {fileID: 7939041500233886794, guid: a6b11ec208752474085fa9d6c3a88d8b,
         type: 3}
       propertyPath: OutputAudioMixerGroup
@@ -33820,7 +33820,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243267873024509520, guid: a3ffde1f8abc64f5b8b4dcf3f58e50ed,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: b568d5754d18e48358dec7b690f21b60, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6907b3471e9cf40d0a7233925acedcbc, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -50678,13 +50678,13 @@ PrefabInstance:
     - target: {fileID: 7939041500233886792, guid: a6b11ec208752474085fa9d6c3a88d8b,
         type: 3}
       propertyPath: offsetRange
-      value: 0.01
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 7939041500233886794, guid: a6b11ec208752474085fa9d6c3a88d8b,
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 41e615c216215409c9c57ffc4edb4642, type: 3}
+      objectReference: {fileID: 8300000, guid: 192e7315bf8574656905da67efb23e17, type: 3}
     - target: {fileID: 7939041500233886794, guid: a6b11ec208752474085fa9d6c3a88d8b,
         type: 3}
       propertyPath: OutputAudioMixerGroup
@@ -51571,6 +51571,50 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a007ab6c1ca0b0f4ca3b45c7c4a9d314, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b78e279f5ff74c29a4aea3a89aa4057, type: 3}
+--- !u!1 &1300695552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1300695554}
+  - component: {fileID: 1300695553}
+  m_Layer: 0
+  m_Name: Timekeeper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1300695553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300695552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150a8488c91e96f4087daf829bbcc232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beatsPerMinute: 100
+--- !u!4 &1300695554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300695552}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 75.80353, y: 6.6430736, z: -36.624504}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1300860207 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 0b78e279f5ff74c29a4aea3a89aa4057,
@@ -54761,7 +54805,7 @@ GameObject:
   - component: {fileID: 1389452051}
   m_Layer: 0
   m_Name: HubStageObject (3)
-  m_TagString: StageObj7.2
+  m_TagString: StageObj4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65872,7 +65916,7 @@ GameObject:
   - component: {fileID: 1730987657}
   m_Layer: 0
   m_Name: HubStageObject (1)
-  m_TagString: StageObj2.4
+  m_TagString: StageObj2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69381,7 +69425,7 @@ GameObject:
   - component: {fileID: 1875319297}
   m_Layer: 0
   m_Name: HubStageObject
-  m_TagString: StageObj0
+  m_TagString: StageObj1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71576,13 +71620,13 @@ PrefabInstance:
     - target: {fileID: 7939041500233886792, guid: a6b11ec208752474085fa9d6c3a88d8b,
         type: 3}
       propertyPath: offsetRange
-      value: 0.01
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 7939041500233886794, guid: a6b11ec208752474085fa9d6c3a88d8b,
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: bfd8f50c78ee04e19b65750a05c7693a, type: 3}
+      objectReference: {fileID: 8300000, guid: 192e7315bf8574656905da67efb23e17, type: 3}
     - target: {fileID: 7939041500233886794, guid: a6b11ec208752474085fa9d6c3a88d8b,
         type: 3}
       propertyPath: OutputAudioMixerGroup
