@@ -129,7 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174d57a14b6e6e240a7810f483b88083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumping: 0
   speed: 6
   gravity: 7
   jumpTime: 17
@@ -151,8 +150,8 @@ MonoBehaviour:
   axes: 1
   minVertical: -45
   maxVertical: 45
-  sensHorizontal: 10
-  sensVertical: 10
+  sensHorizontal: 3
+  sensVertical: 3
   rotationX: 0
 --- !u!114 &328569966
 MonoBehaviour:
@@ -166,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51610546bcba119448f96546460a4632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  held: 0
   interactDistance: 5
 --- !u!114 &7286081261364781401
 MonoBehaviour:
@@ -287,8 +287,8 @@ MonoBehaviour:
   axes: 2
   minVertical: -45
   maxVertical: 45
-  sensHorizontal: 10
-  sensVertical: 10
+  sensHorizontal: 3
+  sensVertical: 3
   rotationX: 0
 --- !u!81 &1341699122
 AudioListener:

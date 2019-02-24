@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+    [HideInInspector] public bool held = false;
     public float interactDistance = 5.0f;
 
     private GameObject intMsg;
@@ -11,7 +12,6 @@ public class Pickup : MonoBehaviour
     private Transform camera;
     private Transform player;
     private Transform holdPosition;
-    private bool held = false;
     private Rigidbody rigi;
     private float dist;
     /*void OnDrawGizmos(){
