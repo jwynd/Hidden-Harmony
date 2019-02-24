@@ -12,6 +12,7 @@ public class SoundObject : MonoBehaviour
     [SerializeField] private float duration = 1.0f;
     [SerializeField] private float offsetRange = 0.05f;
     [HideInInspector] public bool onStage = false;
+    [HideInInspector] public Vector3 origin;
 
     private float beat;
     private float measureTime;
@@ -39,6 +40,7 @@ public class SoundObject : MonoBehaviour
         light = gameObject.GetComponent<Light>();
         if(offsetRange <= 0.0f) throw new System.ArgumentException("Offset Range must be greater than 0");
         if(loopLength <= 1) throw new System.ArgumentException("Loop Length must be at least 1");
+        origin = transform.position;
     }
 
     // Update is called once per frame
