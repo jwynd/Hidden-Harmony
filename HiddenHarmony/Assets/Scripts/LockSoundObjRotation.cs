@@ -9,7 +9,8 @@ public class LockSoundObjRotation : MonoBehaviour
     void Start(){
         soundObjs = GameObject.FindGameObjectsWithTag("SoundObj");
         foreach(GameObject soundObj in soundObjs){
-            soundObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            soundObj.GetComponent<Rigidbody>().constraints = 
+               RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX;
         }
     }
 }
