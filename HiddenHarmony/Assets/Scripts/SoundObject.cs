@@ -61,9 +61,9 @@ public class SoundObject : MonoBehaviour
                 if(Single.TryParse(suffix, out stageOffset)){
                     stageOffset = (stageOffset-1)*beat;
                     if(stageOffset <= measureTime && stageOffset >= 0.0f){
-                        print("Stage offset = "+stageOffset);
+                        /*print("Stage offset = "+stageOffset);
                         print("beat = "+beat);
-                        print("MeasureTime = "+ measureTime);
+                        print("MeasureTime = "+ measureTime);*/
                         //print(resetTimer);
                         onStage = true;
                     } 
@@ -90,7 +90,7 @@ public class SoundObject : MonoBehaviour
         }
 
         if(vfxTimerActive){
-            print("light on");
+            // print("light on");
             light.enabled = true;
         }
         else{

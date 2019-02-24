@@ -22,7 +22,7 @@ public class SoundTrigger : MonoBehaviour
             if(!eq) break;
         }
         if(eq){
-            print("Creating subWooferObjects");
+            // print("Creating subWooferObjects");
             foreach(GameObject obj in hiddenObjects){
                 obj.SetActive(true);
             }
