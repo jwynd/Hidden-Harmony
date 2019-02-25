@@ -93,13 +93,14 @@ public class SoundObject : MonoBehaviour
 
         if(vfxTimerActive){
             // print("light on");
+            vfxTimer += Time.fixedDeltaTime;
             light.enabled = true;
         }
         else{
+            // print("light off");
             light.enabled = false;
         }
 
-        vfxTimer += Time.fixedDeltaTime;
         if(vfxTimer > duration*beat){
             vfxTimer = 0.0f;
             vfxTimerActive = false;
