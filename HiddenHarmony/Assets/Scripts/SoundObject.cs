@@ -14,6 +14,9 @@ public class SoundObject : MonoBehaviour
     [HideInInspector] public bool onStage = false;
     [HideInInspector] public Vector3 origin;
 
+    private GameObject stage; // used to snap sound object to the center of the stage
+    private GameObject snapPoint;
+    private bool reActivateSnapPoint = false;
     private float beat;
     private float measureTime;
     private float vfxTimer;
@@ -63,10 +66,7 @@ public class SoundObject : MonoBehaviour
                 if(Single.TryParse(suffix, out stageOffset)){
                     stageOffset = (stageOffset-1)*beat;
                     if(stageOffset <= measureTime && stageOffset >= 0.0f){
-                        /*print("Stage offset = "+stageOffset);
-                        print("beat = "+beat);
-                        print("MeasureTime = "+ measureTime);*/
-                        //print(resetTimer);
+
                         onStage = true;
                     } 
                     else{
@@ -83,6 +83,21 @@ public class SoundObject : MonoBehaviour
         }
         else{
             onStage = false;
+        }
+
+        if(onStage){
+            stage = hit.transform.gameObject;
+            if(stage.transform.childCount > 0 && !GameObject.Find("Player").GetComponent<Pickup>().IsHeld(this.transform.gameObject)){
+                snapPoint = stage.transform.GetChild(0).gameObject;
+                this.transform.position = snapPoint.transform.position;
+                snapPoint.transform.SetParent(null);
+                reActivateSnapPoint = true;
+            }
+        }
+
+        if(reActivateSnapPoint && !onStage){
+            snapPoint.transform.SetParent(stage.transform);
+            reActivateSnapPoint = false;
         }
 
         if(onStage && resetTimer > stageOffset-offsetRange && resetTimer < stageOffset+offsetRange){

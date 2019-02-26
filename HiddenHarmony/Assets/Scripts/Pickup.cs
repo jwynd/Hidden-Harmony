@@ -19,6 +19,13 @@ public class Pickup : MonoBehaviour
         Gizmos.DrawRay(camera.position, camera.forward*interactDistance);
     }*/
 
+    public bool IsHeld(){
+        return held;
+    }
+    public bool IsHeld(GameObject g){
+        return held && (g == currentObject);
+    }
+
     void Start(){
         intMsg = GameObject.Find("InteractMessageController");
         player = GameObject.Find("Player").transform;
