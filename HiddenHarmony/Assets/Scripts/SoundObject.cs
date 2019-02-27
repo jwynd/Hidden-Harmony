@@ -87,7 +87,9 @@ public class SoundObject : MonoBehaviour
 
         if(onStage){
             stage = hit.transform.gameObject;
-            if(stage.transform.childCount > 0 && !GameObject.Find("Player").GetComponent<Pickup>().IsHeld(this.transform.gameObject)){
+            if(stage.transform.childCount > 0 && 
+                !GameObject.Find("Player").GetComponent<Pickup>().IsHeld(this.transform.gameObject) &&
+                !reActivateSnapPoint && !stage.GetComponent<Stage>().IsOccupied()){
                 snapPoint = stage.transform.GetChild(0).gameObject;
                 this.transform.position = snapPoint.transform.position;
                 snapPoint.transform.SetParent(null);
@@ -97,6 +99,7 @@ public class SoundObject : MonoBehaviour
 
         if(reActivateSnapPoint && !onStage){
             snapPoint.transform.SetParent(stage.transform);
+            snapPoint.transform.SetAsFirstSibling();
             reActivateSnapPoint = false;
         }
 
