@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class Stage : MonoBehaviour
 {
+
+
+
+////////////////////////////////////////////////////
+//KEEP CODE BELLOW IN CASE IT BECOMES NEEDED AGIAN//
+////////////////////////////////////////////////////
+
     // Start is called before the first frame update
-    [SerializeField] private float raycastRadius = 0.5f;
+    /*[SerializeField] private float raycastRadius = 0.5f;
     [SerializeField] private float raycastDistance = 1.0f;
     private bool occupied;
     private bool hitDetect;
@@ -38,7 +45,7 @@ public class Stage : MonoBehaviour
             else{
                 occupied = false;
             }
-        }
+        }*/
         /*if(Physics.Raycast(stageRay, out hit, 1.0f)){
 
         /*if(Physics.SphereCast(this.transform.position, 5.0f, Vector3.up, out hit, 3.0f)){
@@ -52,5 +59,5 @@ public class Stage : MonoBehaviour
         else{
             occupied = false;
         }*/
-    }
+    
 }
