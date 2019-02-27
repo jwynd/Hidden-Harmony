@@ -12,12 +12,13 @@ public class SoundObject : MonoBehaviour
     [SerializeField] private float duration = 1.0f;
     [SerializeField] private float offsetRange = 0.05f;
     [SerializeField] private Material passive;
-    [SerializeField] private Matirial active;
+    [SerializeField] private Material active;
     [HideInInspector] public bool onStage = false;
     [HideInInspector] public Vector3 origin;
 
     private GameObject stage; // used to snap sound object to the center of the stage
     private GameObject snapPoint;
+    private GameObject rendered;
     private bool reActivateSnapPoint = false;
     private float beat;
     private float measureTime;
@@ -38,6 +39,7 @@ public class SoundObject : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start(){
+        rendered = this.transform.GetChild(0).GetChild(0).gameObject;
         timekeeper = GameObject.Find("Timekeeper").GetComponent<Timekeeper>();
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
         aS = gameObject.GetComponent<AudioSource>();
@@ -116,11 +118,11 @@ public class SoundObject : MonoBehaviour
         if(vfxTimerActive){
             // print("light on");
             vfxTimer += Time.fixedDeltaTime;
-            renderer.material = active;
+            rendered.GetComponent<MeshRenderer>().material = active;
         }
         else{
             // print("light off");
-            renderer.material = passive;
+            rendered.GetComponent<MeshRenderer>().material = passive;
         }
 
         if(vfxTimer > duration*beat){
