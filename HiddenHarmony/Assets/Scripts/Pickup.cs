@@ -66,12 +66,7 @@ public class Pickup : MonoBehaviour
 
         else if(held && Input.GetKeyDown(KeyCode.E)){
             //print("hend and keycode e");
-            if(currentObject == null) nullObject("currentObject");
-            rigi.useGravity = true;
-            // rigi.isKinematic = false;
-            // currentObject.transform.parent = null;
-            held = false;
-            rigi = null;
+            Drop();
         }
 
         else if(held){
@@ -96,6 +91,15 @@ public class Pickup : MonoBehaviour
             // print(currentObject.transform.localPosition);
             rigi.velocity = ;
         }*/
+    }
+
+    public void Drop(){
+        if(currentObject == null) nullObject("currentObject");
+        rigi.useGravity = true;
+        // rigi.isKinematic = false;
+        // currentObject.transform.parent = null;
+        held = false;
+        rigi = null;
     }
 
     void nullObject(string msg){
