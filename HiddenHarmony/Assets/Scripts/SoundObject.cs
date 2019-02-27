@@ -11,6 +11,8 @@ public class SoundObject : MonoBehaviour
     [SerializeField] private int loopLength = 4;
     [SerializeField] private float duration = 1.0f;
     [SerializeField] private float offsetRange = 0.05f;
+    [SerializeField] private Material passive;
+    [SerializeField] private Matirial active;
     [HideInInspector] public bool onStage = false;
     [HideInInspector] public Vector3 origin;
 
@@ -27,7 +29,6 @@ public class SoundObject : MonoBehaviour
     private float stageOffset = 0.0f;
     private string pattern = "StageObj";
     private string suffix;
-    private Light light;
     private Timekeeper timekeeper;
     private AudioSource[] bgs;
 
@@ -40,10 +41,13 @@ public class SoundObject : MonoBehaviour
         timekeeper = GameObject.Find("Timekeeper").GetComponent<Timekeeper>();
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
         aS = gameObject.GetComponent<AudioSource>();
-        light = gameObject.GetComponent<Light>();
+//        light = gameObject.GetComponent<Light>();
         if(offsetRange <= 0.0f) throw new System.ArgumentException("Offset Range must be greater than 0");
         if(loopLength <= 1) throw new System.ArgumentException("Loop Length must be at least 1");
         origin = transform.position;
+        if(passive == null || active == null){
+            throw new System.ArgumentException("Place materials in SoundObject script");
+        }
     }
 
     // Update is called once per frame
@@ -112,11 +116,11 @@ public class SoundObject : MonoBehaviour
         if(vfxTimerActive){
             // print("light on");
             vfxTimer += Time.fixedDeltaTime;
-            light.enabled = true;
+            renderer.material = active;
         }
         else{
             // print("light off");
-            light.enabled = false;
+            renderer.material = passive;
         }
 
         if(vfxTimer > duration*beat){
