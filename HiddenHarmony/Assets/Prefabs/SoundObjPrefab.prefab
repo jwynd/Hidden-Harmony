@@ -4685,7 +4685,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e52fe816056e8c4449cf87d01f379eda, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4791,9 +4791,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297de8b145955ae47a803adcb0c62b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  measureTime: 6
+  loopLength: 4
+  duration: 1
   offsetRange: 0.05
-  resetTimer: 0
+  passive: {fileID: 0}
+  active: {fileID: 2100000, guid: 2d328bb6ecc10724c9d97153e01d7803, type: 2}
+  onStage: 0
+  origin: {x: 0, y: 0, z: 0}
 --- !u!135 &7939041500233886795
 SphereCollider:
   m_ObjectHideFlags: 0
