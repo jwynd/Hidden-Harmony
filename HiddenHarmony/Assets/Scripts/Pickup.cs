@@ -46,7 +46,7 @@ public class Pickup : MonoBehaviour
                     currentObject = hit.collider.gameObject;
                     rigi = currentObject.GetComponent<Rigidbody>();
                     rigi.useGravity = false;
-                    // rigi.isKinematic = true;
+                    rigi.isKinematic = true;
                     // currentObject.transform.position = holdPosition.position;
                     // print(currentObject.transform.position);
                     // currentObject.transform.parent = camera;
@@ -96,8 +96,12 @@ public class Pickup : MonoBehaviour
     public void Drop(){
         if(currentObject == null) nullObject("currentObject");
         rigi.useGravity = true;
-        // rigi.isKinematic = false;
-        // currentObject.transform.parent = null;
+        rigi.isKinematic = false;
+        RaycastHit hit;
+        Ray dropRay = new Ray(camera.position, camera.forward);
+        if(Physics.Raycast(dropRay, out hit, 3.0f)){
+            currentObject.transform.position = Vector3.MoveTowards(currentObject.transform.position, hit.point, 10.0f);
+        }
         held = false;
         rigi = null;
     }
