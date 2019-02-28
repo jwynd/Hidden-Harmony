@@ -12,9 +12,12 @@ public class SoundObjectParticles : MonoBehaviour {
 
     public float dropDist = 0.55f;
     // Start is called before the first frame update
+    void Awake() {
+        pickup = GameObject.Find("Player").GetComponent<Pickup>();
+    }
+
     void Start() {
         particle = GetComponent<ParticleSystem>();
-        pickup = GameObject.Find("Player").GetComponent<Pickup>();
     }
 
     // Update is called once per frame

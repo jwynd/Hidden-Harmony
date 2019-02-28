@@ -104,6 +104,7 @@ public class Pickup : MonoBehaviour
         }
         held = false;
         rigi = null;
+        currentObject = null;
     }
 
     void nullObject(string msg){

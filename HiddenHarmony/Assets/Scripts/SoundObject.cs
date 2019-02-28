@@ -19,6 +19,7 @@ public class SoundObject : MonoBehaviour
     private GameObject stage; // used to snap sound object to the center of the stage
     private GameObject snapPoint;
     private GameObject rendered;
+    private GameObject player;
     private bool reActivateSnapPoint = false;
     private float beat;
     private float measureTime;
@@ -32,10 +33,14 @@ public class SoundObject : MonoBehaviour
     private string suffix;
     private Timekeeper timekeeper;
     private AudioSource[] bgs;
+    private bool thisIsHeld = false;
 
     void OnDrawGizmos(){
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(this.transform.position, Vector3.down*interactDist);
+    }
+    void Awake(){
+        player = GameObject.Find("Player");
     }
     // Start is called before the first frame update
     void Start(){
@@ -50,10 +55,13 @@ public class SoundObject : MonoBehaviour
         if(passive == null || active == null){
             throw new System.ArgumentException("Place materials in SoundObject script");
         }
+        if(player == null)print("Null player!!");
     }
 
     // Update is called once per frame
     void FixedUpdate(){
+        thisIsHeld = player.GetComponent<Pickup>().IsHeld(this.transform.gameObject);
+
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
         beat = timekeeper.GetBeat();
         measureTime = beat*loopLength;
@@ -61,11 +69,10 @@ public class SoundObject : MonoBehaviour
         if(resetTimer > measureTime){
             resetTimer = 0.0f;
         }
-
         // determine stage by checking a ray cast, then use expression matching to determine the offset by the tag.
         RaycastHit hit;
         Ray stageRay = new Ray(this.transform.position, Vector3.down);
-        if(Physics.Raycast(stageRay, out hit, interactDist)){
+        if(Physics.Raycast(stageRay, out hit, interactDist) && !thisIsHeld){
             Match match = Regex.Match(hit.collider.tag, pattern);
             if(match.Success){
                 suffix = hit.collider.tag.Substring(8);
@@ -93,9 +100,7 @@ public class SoundObject : MonoBehaviour
 
         if(onStage){
             stage = hit.transform.gameObject;
-            if(stage.transform.childCount > 0 && 
-               !GameObject.Find("Player").GetComponent<Pickup>().IsHeld(this.transform.gameObject) &&
-               !reActivateSnapPoint){
+            if(stage.transform.childCount > 0 && !thisIsHeld && !reActivateSnapPoint){
                     snapPoint = stage.transform.GetChild(0).gameObject;
                     this.transform.position = snapPoint.transform.position;
                     snapPoint.transform.SetParent(null);
