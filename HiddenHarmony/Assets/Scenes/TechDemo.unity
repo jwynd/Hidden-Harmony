@@ -5041,27 +5041,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &282996393 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 328569965, guid: 6fc664ca874555642ae3c33ab5f50b63,
-    type: 3}
-  m_PrefabInstance: {fileID: 841940791}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &282996394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 282996393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93948f22b5539524bae61b2a9103ba5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  composeCameraPosition: {fileID: 2025036277}
-  cameraTarget: {fileID: 1529685439}
-  transitionSpeed: 20
 --- !u!1 &283518019
 GameObject:
   m_ObjectHideFlags: 0
@@ -6158,6 +6137,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 328569974, guid: 6fc664ca874555642ae3c33ab5f50b63, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 328569967, guid: 6fc664ca874555642ae3c33ab5f50b63, type: 3}
+      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -11879,6 +11862,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1529685439}
   - component: {fileID: 1529685438}
+  - component: {fileID: 1529685440}
   m_Layer: 0
   m_Name: CameraTarget
   m_TagString: Untagged
@@ -11914,6 +11898,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1529685440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529685437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93948f22b5539524bae61b2a9103ba5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  composeCameraPosition: {fileID: 2025036277}
+  cameraTarget: {fileID: 1529685439}
+  transitionSpeed: 20
 --- !u!1 &1679574283
 GameObject:
   m_ObjectHideFlags: 0
