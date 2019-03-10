@@ -6,31 +6,32 @@ using UnityEngine;
 
 
 
-public class SoundObject : MonoBehaviour
+public class Backup_SoundObject : MonoBehaviour
 {
+    [SerializeField] private int loopLength = 4;
+    [SerializeField] private float duration = 1.0f;
     [SerializeField] private float offsetRange = 0.05f;
-    [SerializeField] private float vfxDuration = 1.0f;
     [SerializeField] private Material passive;
     [SerializeField] private Material active;
-    [SerializeField] private Timekeeper timekeeper;
     [HideInInspector] public bool onStage = false;
     [HideInInspector] public Vector3 origin;
 
-    private int beatIndex = 0;
-    private Stage stg;
     private GameObject stage; // used to snap sound object to the center of the stage
     private GameObject snapPoint;
     private GameObject rendered;
     private GameObject player;
     private bool reActivateSnapPoint = false;
     private float beat;
+    private float measureTime;
     private float vfxTimer;
     private bool vfxTimerActive = false;
-    private float beatTimer = 0.0f;// use to determine when one beat has passed
-    private float nextTimer = 0.0f;// use to determine when to play next beat
-    private AudioSource[] audioSources;
+    private float resetTimer = 0.0f;
+    private AudioSource aS;
     private float interactDist = 1.0f;
+    private float stageOffset = 0.0f;
+    private string pattern = "StageObj";
     private string suffix;
+    private Timekeeper timekeeper;
     private AudioSource[] bgs;
     private bool thisIsHeld = false;
 
@@ -44,15 +45,17 @@ public class SoundObject : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         rendered = this.transform.GetChild(0).GetChild(0).gameObject;
+        timekeeper = GameObject.Find("Timekeeper").GetComponent<Timekeeper>();
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
-        audioSources = this.GetComponents<AudioSource>();
-        foreach(AudioSource aS in audioSources)print(aS);
+        aS = gameObject.GetComponent<AudioSource>();
 //        light = gameObject.GetComponent<Light>();
+        if(offsetRange <= 0.0f) throw new System.ArgumentException("Offset Range must be greater than 0");
+        if(loopLength <= 1) throw new System.ArgumentException("Loop Length must be at least 1");
         origin = transform.position;
         if(passive == null || active == null){
             throw new System.ArgumentException("Place materials in SoundObject script");
         }
-        if(player == null)print("Null player!!!");
+        if(player == null)print("Null player!!");
     }
 
     // Update is called once per frame
@@ -61,33 +64,31 @@ public class SoundObject : MonoBehaviour
 
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
         beat = timekeeper.GetBeat();
-        // print(beat);
-        nextTimer += Time.fixedDeltaTime;
-        beatTimer += Time.fixedDeltaTime;
-        if(beatTimer > beat){
-            beatIndex++;
-            if(stg != null && beatIndex > stg.beats.Length - 1){
-                beatIndex = 0;
-            }
-            beatTimer = 0.0f;
+        measureTime = beat*loopLength;
+        resetTimer += Time.fixedDeltaTime;
+        if(resetTimer > measureTime){
+            resetTimer = 0.0f;
         }
-        /*print("beatTimer");
-        print(beatTimer);
-        print("nextTimer");
-        print(nextTimer);
-        print("beatIndex");
-        print(beatIndex);
-        print("stg");
-        print(stg);*/
-        //print(beatIndex);
-        if(stg != null && nextTimer > stg.beats[beatIndex]) nextTimer = 0.0f;
         // determine stage by checking a ray cast, then use expression matching to determine the offset by the tag.
         RaycastHit hit;
         Ray stageRay = new Ray(this.transform.position, Vector3.down);
         if(Physics.Raycast(stageRay, out hit, interactDist) && !thisIsHeld){
-            if(hit.transform.tag == "StageObj"){
-                stg = hit.transform.gameObject.GetComponent<Stage>();
-                onStage = true;
+            Match match = Regex.Match(hit.collider.tag, pattern);
+            if(match.Success){
+                suffix = hit.collider.tag.Substring(8);
+                if(Single.TryParse(suffix, out stageOffset)){
+                    stageOffset = (stageOffset-1)*beat;
+                    if(stageOffset <= measureTime && stageOffset >= 0.0f){
+
+                        onStage = true;
+                    } 
+                    else{
+                        onStage = false;
+                    }
+                }
+                else{
+                    onStage = false;
+                }
             }
             else{
                 onStage = false;
@@ -113,10 +114,9 @@ public class SoundObject : MonoBehaviour
             reActivateSnapPoint = false;
         }
 
-        if(onStage && nextTimer == 0.0f){
-            // print("Playing sound at time "+nextTimer);
-            print("stg.pitches[beatIndex] = "+stg.pitches[beatIndex]);
-            audioSources[stg.pitches[beatIndex]].Play();
+        if(onStage && resetTimer > stageOffset-offsetRange && resetTimer < stageOffset+offsetRange){
+            // print("Playing sound at time "+resetTimer);
+            aS.Play();
             vfxTimerActive = true;
         }
 
@@ -130,7 +130,7 @@ public class SoundObject : MonoBehaviour
             rendered.GetComponent<MeshRenderer>().material = passive;
         }
 
-        if(vfxTimer > vfxDuration*beat){
+        if(vfxTimer > duration*beat){
             vfxTimer = 0.0f;
             vfxTimerActive = false;
         }
