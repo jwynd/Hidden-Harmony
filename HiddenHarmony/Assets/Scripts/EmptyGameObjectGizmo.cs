@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EmptyGameObjectGizmo : MonoBehaviour
 {
     [SerializeField] private float gizmoRadius = 0.1f;
