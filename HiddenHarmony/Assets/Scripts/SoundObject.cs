@@ -12,7 +12,7 @@ public class SoundObject : MonoBehaviour
     [SerializeField] private float vfxDuration = 1.0f;
     [SerializeField] private Material passive;
     [SerializeField] private Material active;
-    /*[SerializeField]*/ private Timekeeper timekeeper;
+    [SerializeField] private Timekeeper timekeeper;
     [HideInInspector] public bool onStage = false;
     [HideInInspector] public Vector3 origin;
 
@@ -49,7 +49,7 @@ public class SoundObject : MonoBehaviour
         foreach(AudioSource aS in audioSources)print(aS);
 //        light = gameObject.GetComponent<Light>();
         origin = transform.position;
-        timekeeper = GameObject.Find("Timekeeper").GetComponent<Timekeeper>();
+        //timekeeper = GameObject.Find("Timekeeper").GetComponent<Timekeeper>();
         if(passive == null || active == null){
             throw new System.ArgumentException("Place materials in SoundObject script");
         }
