@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class StartMenu : MonoBehaviour
 {
-    public float fadeTime = 2.0f;
-    public float movementSpeed = 10.0f;
+    [SerializeField] private float fadeTime = 2.0f;
+    [SerializeField] private float movementSpeed = 10.0f;
 
     private GameObject player;
     private GameObject startMenuUI;
@@ -47,6 +47,7 @@ public class StartMenu : MonoBehaviour
                 Destroy(fade);
                 Destroy(menuCamera);
                 player.SetActive(true);
+                GameObject.Find("PauseMenuController").GetComponent<PauseMenu>().DeactivateMenu();
                 fading = false;
             }
         }

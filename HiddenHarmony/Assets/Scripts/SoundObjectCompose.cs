@@ -28,12 +28,12 @@ public class SoundObjectCompose : MonoBehaviour{
                 //Debug.Log("match success");
                 if (Input.GetMouseButtonDown(0) && itemDrop != null) {
                     Transform hit1ObjectTransform = hit1.collider.gameObject.transform;
-			        Ray stageRay = new Ray(hit1ObjectTransform.position, Vector3.up);
-			        RaycastHit hit2;
-                	match = Regex.Match(hit1.collider.tag, soundPattern);
-                	if(Physics.Raycast(stageRay, out hit2, soundDistance)) {
-                		Destroy(hit2.collider.gameObject);
-                	}
+                    Ray stageRay = new Ray(hit1ObjectTransform.position, Vector3.up);
+                    RaycastHit hit2;
+                    match = Regex.Match(hit1.collider.tag, soundPattern);
+                    if(Physics.Raycast(stageRay, out hit2, soundDistance)) {
+                        Destroy(hit2.collider.gameObject);
+                    }
 
                     GameObject placedObject;
                     placedObject = Instantiate(itemDrop, new Vector3(hit1ObjectTransform.position.x, hit1ObjectTransform.position.y + 2, hit1ObjectTransform.position.z), hit1ObjectTransform.rotation);

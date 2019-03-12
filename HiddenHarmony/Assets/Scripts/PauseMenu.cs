@@ -12,14 +12,17 @@ public class PauseMenu : MonoBehaviour
     private GameObject camera;
     private bool isPaused;
     private GameObject menuCamera; // use this to determine if while loop should be running
+    private GameObject inventory;
 
     void Awake(){
         player = GameObject.Find("Player");
         camera = GameObject.Find("Player/MainCamera");
         pauseMenuUI = GameObject.Find("Canvas/PauseMenuMain");
         menuCamera = GameObject.Find("MenuCamera");
+        inventory = GameObject.Find("ItemsHeld");
         if(pauseMenuUI == null) throw new System.ArgumentException("PauseMenuMain not found");
         DeactivateMenu();
+        inventory.SetActive(false);
         isPaused = false;
     }
 
@@ -27,13 +30,12 @@ public class PauseMenu : MonoBehaviour
         if(menuCamera == null){
             if(Input.GetKeyDown(KeyCode.Escape)){
                 isPaused = !isPaused;
-            }
-
-            if(isPaused){
-                ActivateMenu();
-            }
-            else{
-                DeactivateMenu();
+                if(isPaused){
+                    ActivateMenu();
+                }
+                else{
+                    DeactivateMenu();
+                }
             }
         }
     }
@@ -46,6 +48,7 @@ public class PauseMenu : MonoBehaviour
         camera.GetComponent<FirstPersonControl>().enabled = false;
         Cursor.visible = true;
         pauseMenuUI.SetActive(true);
+        inventory.SetActive(false);
     }
 
     public void DeactivateMenu(){
@@ -56,6 +59,7 @@ public class PauseMenu : MonoBehaviour
         player.GetComponent<Pickup>().enabled = true;
         camera.GetComponent<FirstPersonControl>().enabled = true;
         pauseMenuUI.SetActive(false);
+        inventory.SetActive(true);
         Cursor.visible = false;
         isPaused = false;
     }
