@@ -869,6 +869,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 39.659
       objectReference: {fileID: 0}
+    - target: {fileID: 1855451380741160317, guid: 7f34f6d30ef3a41458b82f6fcb72f770,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1855451381117362545, guid: 7f34f6d30ef3a41458b82f6fcb72f770,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 2372150602718687188}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f34f6d30ef3a41458b82f6fcb72f770, type: 3}
 --- !u!1 &1382701437
@@ -1370,6 +1380,61 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[0]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[1]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[2]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[3]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[4]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[5]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[6]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[7]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[4]
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33cf8f316ed9c8429c9c1d2cda79c25, type: 3}
 --- !u!4 &504182328544684263 stripped
@@ -1505,6 +1570,61 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: StageObj4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[5]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[6]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[7]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[4]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[6]
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33cf8f316ed9c8429c9c1d2cda79c25, type: 3}
@@ -10817,7 +10937,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: c09c970c7eb0149afa820cfb34581b13, type: 3}
+      objectReference: {fileID: 8300000, guid: d19a48f7e7c5dce49817b2feb887949e, type: 3}
     - target: {fileID: 7939041500233886794, guid: a6b11ec208752474085fa9d6c3a88d8b,
         type: 3}
       propertyPath: OutputAudioMixerGroup
@@ -10829,6 +10949,36 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6905687563815180575, guid: a6b11ec208752474085fa9d6c3a88d8b,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e627e119b24c853418ba9deeb960580c, type: 3}
+    - target: {fileID: 312337755839761411, guid: a6b11ec208752474085fa9d6c3a88d8b,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0226e940090f5ee4597245663c02a504, type: 3}
+    - target: {fileID: 553871621222468397, guid: a6b11ec208752474085fa9d6c3a88d8b,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c2c90ab6ff7186d4cba3a98717a38a49, type: 3}
+    - target: {fileID: 2520642623777716212, guid: a6b11ec208752474085fa9d6c3a88d8b,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c84ece6cb3033fd4e918c3b70934896d, type: 3}
+    - target: {fileID: 7482315985175418979, guid: a6b11ec208752474085fa9d6c3a88d8b,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6e907c0741791f44e9733860fec71375, type: 3}
+    - target: {fileID: 6501176789517057210, guid: a6b11ec208752474085fa9d6c3a88d8b,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 81a85a13d9a5fab4da86a28114fa4b67, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6b11ec208752474085fa9d6c3a88d8b, type: 3}
 --- !u!4 &2372150602718687186 stripped
@@ -10840,6 +10990,12 @@ Transform:
 --- !u!4 &2372150602718687187 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4715483265901870437, guid: a6b11ec208752474085fa9d6c3a88d8b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2372150602718687185}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2372150602718687188 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7939041500233886807, guid: a6b11ec208752474085fa9d6c3a88d8b,
     type: 3}
   m_PrefabInstance: {fileID: 2372150602718687185}
   m_PrefabAsset: {fileID: 0}
@@ -35075,6 +35231,46 @@ PrefabInstance:
       propertyPath: m_TagString
       value: StageObj8
       objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[3]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[5]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[6]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[7]
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33cf8f316ed9c8429c9c1d2cda79c25, type: 3}
 --- !u!4 &4245764957982463221 stripped
@@ -35190,6 +35386,76 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: StageObj7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[3]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[5]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[6]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[7]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[5]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[6]
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33cf8f316ed9c8429c9c1d2cda79c25, type: 3}
@@ -35633,6 +35899,46 @@ PrefabInstance:
       propertyPath: m_TagString
       value: StageObj3
       objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[5]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[6]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[7]
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33cf8f316ed9c8429c9c1d2cda79c25, type: 3}
 --- !u!4 &5253865868925668119 stripped
@@ -35921,6 +36227,56 @@ PrefabInstance:
       propertyPath: m_TagString
       value: StageObj5
       objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[3]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[5]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[6]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[7]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[5]
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33cf8f316ed9c8429c9c1d2cda79c25, type: 3}
 --- !u!4 &7837985967863856476 stripped
@@ -36057,6 +36413,56 @@ PrefabInstance:
       propertyPath: m_TagString
       value: StageObj2
       objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[3]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[5]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[6]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[7]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[4]
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33cf8f316ed9c8429c9c1d2cda79c25, type: 3}
 --- !u!4 &8301488720859149776 stripped
@@ -36186,6 +36592,66 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: StageObj6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[3]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[5]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[6]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: beats.Array.data[7]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439728486156907483, guid: c33cf8f316ed9c8429c9c1d2cda79c25,
+        type: 3}
+      propertyPath: pitches.Array.data[3]
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33cf8f316ed9c8429c9c1d2cda79c25, type: 3}
