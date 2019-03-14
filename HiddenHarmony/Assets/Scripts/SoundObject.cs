@@ -80,8 +80,8 @@ public class SoundObject : MonoBehaviour
         print(beatIndex);
         print("stg");
         print(stg);*/
-        //print(beatIndex);
-        if(stg != null && nextTimer > stg.beats[beatIndex]) nextTimer = 0.0f;
+        if(stg != null) print("current beatIndex ="+beatIndex);
+        if(stg != null && nextTimer/beat > stg.beats[beatIndex]) nextTimer = 0.0f;
         // determine stage by checking a ray cast, then use expression matching to determine the offset by the tag.
         RaycastHit hit;
         Ray stageRay = new Ray(this.transform.position, Vector3.down);
