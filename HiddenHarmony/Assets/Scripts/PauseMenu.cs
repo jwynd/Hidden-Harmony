@@ -64,6 +64,10 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
+    public void Resume(){
+        DeactivateMenu();
+    }
+
     public void MainMenu(){
         SceneManager.LoadScene(mainMenuScene);
     }
