@@ -49,7 +49,7 @@ public class ComposeModeTransition : MonoBehaviour
                 player.GetComponent<CharacterController>().enabled = false;
                 player.GetComponent<PlayerMovement>().enabled = false;
                 player.GetComponent<FirstPersonControl>().enabled = false;
-                player.GetComponent<Pickup>().enabled = false;
+                player.GetComponent<InventoryAdd>().enabled = false;
                 playerCamera.GetComponent<FirstPersonControl>().enabled = false;
                 playerCamera.transform.SetParent(null);
                 cameraOrigin = cameraReturn.position;
@@ -67,7 +67,7 @@ public class ComposeModeTransition : MonoBehaviour
                 player.GetComponent<CharacterController>().enabled = true;
                 player.GetComponent<PlayerMovement>().enabled = true;
                 player.GetComponent<FirstPersonControl>().enabled = true;
-                player.GetComponent<Pickup>().enabled = true;
+                player.GetComponent<InventoryAdd>().enabled = true;
                 playerCamera.GetComponent<FirstPersonControl>().enabled = true;
                 composeCamera.transform.SetAsLastSibling();
                 
