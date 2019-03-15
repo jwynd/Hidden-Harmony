@@ -57,13 +57,13 @@ public class SoundObject : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update(){
+    void FixedUpdate(){
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
         timekeeper.SetBPM(100);
         beat = timekeeper.GetBeat();
         // print(beat);
-        nextTimer += Time.deltaTime;
-        beatTimer += Time.deltaTime;
+        nextTimer += Time.fixedDeltaTime;
+        beatTimer += Time.fixedDeltaTime;
         if(beatTimer > beat){
             beatIndex++;
             if(stg != null && beatIndex > stg.beats.Length - 1){
@@ -82,7 +82,7 @@ public class SoundObject : MonoBehaviour
         print(stg);*/
         //if(stg != null) print("current beatIndex ="+beatIndex);
         if(stg != null && nextTimer/beat > stg.beats[beatIndex]) resetNext = true;
-        else if(stg !=null && nextTimer/beat > stg.beats[beatIndex] - offsetRange) audioSources[stg.pitches[beatIndex]].volume -= Time.deltaTime/offsetRange;
+        else if(stg !=null && nextTimer/beat > stg.beats[beatIndex] - offsetRange) audioSources[stg.pitches[beatIndex]].volume -= Time.fixedDeltaTime/offsetRange;
         // determine stage by checking a ray cast, then use expression matching to determine the offset by the tag.
         RaycastHit hit;
         Ray stageRay = new Ray(this.transform.position, Vector3.down);
@@ -125,7 +125,7 @@ public class SoundObject : MonoBehaviour
 
         if(vfxTimerActive){
             // print("light on");
-            vfxTimer += Time.deltaTime;
+            vfxTimer += Time.fixedDeltaTime;
             rendered.GetComponent<MeshRenderer>().material = active;
         }
         else{
