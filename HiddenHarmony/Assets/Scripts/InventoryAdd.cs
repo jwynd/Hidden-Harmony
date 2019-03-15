@@ -14,6 +14,7 @@ public class InventoryAdd : MonoBehaviour
     private Transform holdPosition;
     private GameObject itemPanel;
     private float dist;
+    [SerializeField] private GameObject itemButton;
 
     void Start(){
         intMsg = GameObject.Find("InteractMessageController");
@@ -25,14 +26,13 @@ public class InventoryAdd : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        if(currentObject != null) dist = Vector3.Distance(holdPosition.position, currentObject.transform.position);
+        //if(currentObject != null) dist = Vector3.Distance(holdPosition.position, currentObject.transform.position);
 
         RaycastHit hit;
         Ray pickRay = new Ray(camera.position, camera.forward);
         if(Input.GetKeyDown(KeyCode.E)){
             if(Physics.Raycast(pickRay, out hit, interactDistance)){
                 if(hit.collider.tag == "SoundObj"){
-                    GameObject itemButton = GameObject.Find("Canvas/ItemsHeld/ItemFrame");
                     GameObject newButton;
                     newButton = Instantiate(itemButton, itemPanel.transform);
                     
