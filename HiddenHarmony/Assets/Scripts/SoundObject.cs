@@ -58,8 +58,8 @@ public class SoundObject : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
+        timekeeper.SetBPM(100);
         beat = timekeeper.GetBeat();
         // print(beat);
         nextTimer += Time.deltaTime;
