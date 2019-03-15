@@ -44,7 +44,7 @@ public class PauseMenu : MonoBehaviour
         player.GetComponent<CharacterController>().enabled = false;
         player.GetComponent<PlayerMovement>().enabled = false;
         player.GetComponent<FirstPersonControl>().enabled = false;
-        player.GetComponent<Pickup>().enabled = false;
+        player.GetComponent<InventoryAdd>().enabled = false;
         camera.GetComponent<FirstPersonControl>().enabled = false;
         Cursor.visible = true;
         pauseMenuUI.SetActive(true);
@@ -56,7 +56,7 @@ public class PauseMenu : MonoBehaviour
         player.GetComponent<CharacterController>().enabled = true;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<FirstPersonControl>().enabled = true;
-        player.GetComponent<Pickup>().enabled = true;
+        player.GetComponent<InventoryAdd>().enabled = true;
         camera.GetComponent<FirstPersonControl>().enabled = true;
         pauseMenuUI.SetActive(false);
         inventory.SetActive(true);
