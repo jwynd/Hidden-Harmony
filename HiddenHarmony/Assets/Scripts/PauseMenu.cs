@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     // below is tutorial suggestion, replace if wrong
-    [SerializeField] private string mainMenuScene = "MainScene";
+    private string mainMenuScene;
     private GameObject pauseMenuUI;
     private GameObject player;
     private GameObject camera;
@@ -20,6 +20,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI = GameObject.Find("Canvas/PauseMenuMain");
         menuCamera = GameObject.Find("MenuCamera");
         inventory = GameObject.Find("ItemsHeld");
+        mainMenuScene = SceneManager.GetActiveScene().name;
         if(pauseMenuUI == null) throw new System.ArgumentException("PauseMenuMain not found");
         DeactivateMenu();
         inventory.SetActive(false);
