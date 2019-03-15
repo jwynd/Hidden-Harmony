@@ -5,16 +5,12 @@ using System.Text.RegularExpressions; // used for Regex Matching
 
 public class SoundObjectParticles : MonoBehaviour {
     private ParticleSystem particle;
-    private Pickup pickup;
 
     private bool onGround;
     private string pattern = "StageObj";
 
     public float dropDist = 0.55f;
-    // Start is called before the first frame update
-    void Awake() {
-        pickup = GameObject.Find("Player").GetComponent<Pickup>();
-    }
+
 
     void Start() {
         particle = GetComponent<ParticleSystem>();
@@ -24,8 +20,7 @@ public class SoundObjectParticles : MonoBehaviour {
     void Update() {
         RaycastHit hit;
         Ray stageRay = new Ray(transform.position, Vector3.down);
-        bool held = pickup.held;
-        if(Physics.Raycast(stageRay, out hit, dropDist) && !onGround && !held){
+        if(Physics.Raycast(stageRay, out hit, dropDist) && !onGround){
             Match match = Regex.Match(hit.collider.tag, pattern);
             if(match.Success) {
                 particle.Play();

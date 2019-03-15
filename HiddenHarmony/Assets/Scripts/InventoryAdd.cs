@@ -37,12 +37,14 @@ public class InventoryAdd : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E)){
             if(Physics.Raycast(pickRay, out hit, interactDistance)){
                 if(hit.collider.tag == "SoundObj"){
-        			itemPanel = GameObject.Find("Canvas/ItemsHeld");
+                    itemPanel = GameObject.Find("Canvas/ItemsHeld");
                     newButton = Instantiate(itemButton, itemPanel.transform);
                     newButton.GetComponent<Button>().onClick.AddListener(() => itemPanel.GetComponent<SoundObjectCompose>().setSoundObject(hit.collider.gameObject));
                     itemSprite = newButton.transform.Find("ItemSprite").gameObject;
-                    itemSprite.GetComponent<Image>().sprite =  Resources.Load<Sprite>(hit.collider.gameObject.name);
-                	hit.collider.gameObject.SetActive(false);
+                    print("\n\n\n!!!hit.collider.gameObject.name = "+hit.collider.gameObject.name+"\n\n\n");
+                    itemSprite.GetComponent<Image>().sprite = Resources.Load<Sprite>(hit.collider.gameObject.name);
+                    print("itemSprite"+itemSprite);
+                    hit.collider.gameObject.SetActive(false);
                 }
             }
         }

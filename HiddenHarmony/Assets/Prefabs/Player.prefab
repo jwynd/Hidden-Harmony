@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 328569970}
   - component: {fileID: 328569969}
   - component: {fileID: 328569968}
-  - component: {fileID: 328569966}
+  - component: {fileID: 7010431191524726844}
   - component: {fileID: 7286081261364781401}
   - component: {fileID: 328569967}
   m_Layer: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   sensHorizontal: 3
   sensVertical: 3
   rotationX: 0
---- !u!114 &328569966
+--- !u!114 &7010431191524726844
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,11 +163,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 328569965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51610546bcba119448f96546460a4632, type: 3}
+  m_Script: {fileID: 11500000, guid: 1778b6fa4b98e424a9c870881d215ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   held: 0
   interactDistance: 5
+  itemButton: {fileID: 0}
 --- !u!114 &7286081261364781401
 MonoBehaviour:
   m_ObjectHideFlags: 0

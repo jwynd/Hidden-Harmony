@@ -58,7 +58,6 @@ public class SoundObject : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        thisIsHeld = player.GetComponent<Pickup>().IsHeld(this.transform.gameObject);
 
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
         beat = timekeeper.GetBeat();
@@ -85,7 +84,7 @@ public class SoundObject : MonoBehaviour
         // determine stage by checking a ray cast, then use expression matching to determine the offset by the tag.
         RaycastHit hit;
         Ray stageRay = new Ray(this.transform.position, Vector3.down);
-        if(Physics.Raycast(stageRay, out hit, interactDist) && !thisIsHeld){
+        if(Physics.Raycast(stageRay, out hit, interactDist)){
             if(hit.transform.tag == "StageObj"){
                 stg = hit.transform.gameObject.GetComponent<Stage>();
                 onStage = true;
@@ -100,7 +99,7 @@ public class SoundObject : MonoBehaviour
 
         if(onStage){
             stage = hit.transform.gameObject;
-            if(stage.transform.childCount > 0 && !thisIsHeld && !reActivateSnapPoint){
+            if(stage.transform.childCount > 0 && !reActivateSnapPoint){
                     snapPoint = stage.transform.GetChild(0).gameObject;
                     this.transform.position = snapPoint.transform.position;
                     snapPoint.transform.SetParent(null);
