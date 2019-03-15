@@ -70,6 +70,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void MainMenu(){
+        player.GetComponent<InventoryAdd>().enabled = true;
         SceneManager.LoadScene(mainMenuScene);
     }
 
