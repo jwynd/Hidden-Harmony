@@ -65,7 +65,7 @@ public class SoundObject : MonoBehaviour
         nextTimer += Time.fixedDeltaTime;
         beatTimer += Time.fixedDeltaTime;
         if(beatTimer > beat){
-            beatIndex++;
+            if(stg != null) beatIndex++;
             if(stg != null && beatIndex > stg.beats.Length - 1){
                 beatIndex = 0;
             }
