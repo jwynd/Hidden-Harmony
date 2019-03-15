@@ -10,6 +10,7 @@ public class SoundObjectCompose : MonoBehaviour{
     private string soundPattern = "SoundObj";
     private float stageDistance = 1000;
     private float soundDistance = 5;
+    private bool deleteMode = false;
 
     // Start is called before the first frame update
     void Start(){
@@ -35,15 +36,23 @@ public class SoundObjectCompose : MonoBehaviour{
                         Destroy(hit2.collider.gameObject);
                     }
 
-                    GameObject placedObject;
-                    placedObject = Instantiate(itemDrop, new Vector3(hit1ObjectTransform.position.x, hit1ObjectTransform.position.y + 2, hit1ObjectTransform.position.z), hit1ObjectTransform.rotation);
+                    if(!deleteMode){
+                        GameObject placedObject;
+                        placedObject = Instantiate(itemDrop, new Vector3(hit1ObjectTransform.position.x, hit1ObjectTransform.position.y + 2, hit1ObjectTransform.position.z), hit1ObjectTransform.rotation);
+                        placedObject.SetActive(true);
+                    }
 
                 }
             }
         }
     }
 
+    public void activateDeleteMode() {
+        this.deleteMode = true;
+    }
+
     public void setSoundObject(GameObject soundObject){
+        this.deleteMode = false;
         this.itemDrop = soundObject;
     }
 

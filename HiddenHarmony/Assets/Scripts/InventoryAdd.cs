@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryAdd : MonoBehaviour
 {
@@ -13,29 +14,34 @@ public class InventoryAdd : MonoBehaviour
     private Transform player;
     private Transform holdPosition;
     private GameObject itemPanel;
-    private float dist;
+    private GameObject newButton;
+    private GameObject itemSprite;
     [SerializeField] private GameObject itemButton;
+
+    void Awake(){
+        itemPanel = GameObject.Find("Canvas/ItemsHeld");
+
+    }
 
     void Start(){
         intMsg = GameObject.Find("InteractMessageController");
         player = GameObject.Find("Player").transform;
         camera = GameObject.Find("Player/MainCamera").transform;
         holdPosition = GameObject.Find("Player/MainCamera/HoldPosition").transform;
-        itemPanel = GameObject.Find("Canvas/ItemsHeld");
     }
 
     // Update is called once per frame
     void Update(){
-        //if(currentObject != null) dist = Vector3.Distance(holdPosition.position, currentObject.transform.position);
-
         RaycastHit hit;
         Ray pickRay = new Ray(camera.position, camera.forward);
         if(Input.GetKeyDown(KeyCode.E)){
             if(Physics.Raycast(pickRay, out hit, interactDistance)){
                 if(hit.collider.tag == "SoundObj"){
-                    GameObject newButton;
                     newButton = Instantiate(itemButton, itemPanel.transform);
-                    
+                    newButton.GetComponent<Button>().onClick.AddListener(() => itemPanel.GetComponent<SoundObjectCompose>().setSoundObject(hit.collider.gameObject));
+                    itemSprite = newButton.transform.Find("ItemSprite").gameObject;
+                    itemSprite.GetComponent<Image>().sprite =  Resources.Load<Sprite>(hit.collider.gameObject.name);
+                	hit.collider.gameObject.SetActive(false);
                 }
             }
         }
