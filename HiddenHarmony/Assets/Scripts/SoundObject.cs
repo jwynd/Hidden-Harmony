@@ -82,7 +82,7 @@ public class SoundObject : MonoBehaviour
         print(stg);*/
         //if(stg != null) print("current beatIndex ="+beatIndex);
         if(stg != null && nextTimer > stg.beats[beatIndex]*beat) resetNext = true;
-        else if(stg !=null && nextTimer > (stg.beats[beatIndex]*beat) - offsetRange) audioSources[stg.pitches[beatIndex]].volume -= Time.fixedDeltaTime/offsetRange;
+//        else if(stg !=null && nextTimer > (stg.beats[beatIndex]*beat) - offsetRange) audioSources[stg.pitches[beatIndex]].volume -= Time.fixedDeltaTime/offsetRange;
         // determine stage by checking a ray cast, then use expression matching to determine the offset by the tag.
         RaycastHit hit;
         Ray stageRay = new Ray(this.transform.position, Vector3.down);
@@ -125,7 +125,7 @@ public class SoundObject : MonoBehaviour
 
         if(vfxTimerActive){
             // print("light on");
-            vfxTimer += Time.fixedDeltaTime;
+//            vfxTimer += Time.fixedDeltaTime;
             rendered.GetComponent<MeshRenderer>().material = active;
         }
         else{
