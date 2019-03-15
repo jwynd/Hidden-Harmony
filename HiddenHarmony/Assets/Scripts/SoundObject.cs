@@ -32,7 +32,7 @@ public class SoundObject : MonoBehaviour
     private float interactDist = 1.0f;
     private string suffix;
     private AudioSource[] bgs;
-    private bool thisIsHeld = false;
+    private bool resetNext = false;
 
     void OnDrawGizmos(){
         Gizmos.color = Color.blue;
@@ -69,6 +69,7 @@ public class SoundObject : MonoBehaviour
             if(stg != null && beatIndex > stg.beats.Length - 1){
                 beatIndex = 0;
             }
+            if(resetNext) nextTimer = 0.0f;
             beatTimer = 0.0f;
         }
         /*print("beatTimer");
@@ -80,7 +81,7 @@ public class SoundObject : MonoBehaviour
         print("stg");
         print(stg);*/
         //if(stg != null) print("current beatIndex ="+beatIndex);
-        if(stg != null && nextTimer/beat > stg.beats[beatIndex]) nextTimer = 0.0f;
+        if(stg != null && nextTimer/beat > stg.beats[beatIndex]) resetNext = true;
         else if(stg !=null && nextTimer/beat > stg.beats[beatIndex] - offsetRange) audioSources[stg.pitches[beatIndex]].volume -= Time.deltaTime/offsetRange;
         // determine stage by checking a ray cast, then use expression matching to determine the offset by the tag.
         RaycastHit hit;
