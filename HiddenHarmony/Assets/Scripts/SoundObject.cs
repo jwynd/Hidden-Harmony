@@ -57,14 +57,14 @@ public class SoundObject : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate(){
+    void Update(){
         thisIsHeld = player.GetComponent<Pickup>().IsHeld(this.transform.gameObject);
 
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
         beat = timekeeper.GetBeat();
         // print(beat);
-        nextTimer += Time.fixedDeltaTime;
-        beatTimer += Time.fixedDeltaTime;
+        nextTimer += Time.deltaTime;
+        beatTimer += Time.deltaTime;
         if(beatTimer > beat){
             beatIndex++;
             if(stg != null && beatIndex > stg.beats.Length - 1){
@@ -123,7 +123,7 @@ public class SoundObject : MonoBehaviour
 
         if(vfxTimerActive){
             // print("light on");
-            vfxTimer += Time.fixedDeltaTime;
+            vfxTimer += Time.deltaTime;
             rendered.GetComponent<MeshRenderer>().material = active;
         }
         else{
