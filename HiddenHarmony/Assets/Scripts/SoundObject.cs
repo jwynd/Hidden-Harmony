@@ -70,6 +70,7 @@ public class SoundObject : MonoBehaviour
                 beatIndex = 0;
             }
             if(resetNext) nextTimer = 0.0f;
+            if(resetNext) resetNext = false;
             beatTimer = 0.0f;
         }
         /*print("beatTimer");
