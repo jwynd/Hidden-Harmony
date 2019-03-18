@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Stage : MonoBehaviour
 {
-    public int[] beats;
+    public int[] halfBeats;
     public int[] pitches;
 
     void Start(){
@@ -13,7 +13,7 @@ public class Stage : MonoBehaviour
             if (beat <= 0) throw new System.ArgumentException("All beats must be greater than zero");
         }
         foreach(int pitch in pitches){
-            if(pitch > 8 || pitch < 0) throw new System.ArgumentException("All pitches must be between 0 and 8 inclusive");
+            if(pitch > 7 || pitch < 0) throw new System.ArgumentException("All pitches must be between 0 and 7 inclusive");
         }
     }
 }
