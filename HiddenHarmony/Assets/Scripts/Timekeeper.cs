@@ -27,7 +27,7 @@ public class Timekeeper : MonoBehaviour
     }
 
     public void ResetBeat(){
-        currentBeat = 0;
+        currentHalfBeat = 0;
         timer = 0.0f;
     }
 

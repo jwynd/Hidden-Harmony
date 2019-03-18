@@ -64,11 +64,11 @@ public class SoundObject : MonoBehaviour
     // Update is called once per frame
     void Update(){
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
-        cbeat = timekeeper.CurrentBeat();
+        cbeat = timekeeper.CurrentHalfBeat();
         if(stg != null && played){
-            playOnBeat = cbeat + stg.beats[beatIndex];
+            playOnBeat = cbeat + stg.halfBeats[beatIndex];
             beatIndex++;
-            if(beatIndex >= stg.beats.Length) beatIndex = 0;
+            if(beatIndex >= stg.halfBeats.Length) beatIndex = 0;
             played = false;
         }
 //        timekeeper.SetBPM(100);
@@ -78,7 +78,7 @@ public class SoundObject : MonoBehaviour
         beatTimer += Time.deltaTime;
         if(beatTimer > beat){
             beatIndex++;
-            if(stg != null && beatIndex > stg.beats.Length - 1){
+            if(stg != null && beatIndex > stg.halfBeats.Length - 1){
                 beatIndex = 0;
             }
             if(resetNext) nextTimer = 0.0f;
@@ -94,8 +94,8 @@ public class SoundObject : MonoBehaviour
         print("stg");
         print(stg);*/
         //if(stg != null) print("current beatIndex ="+beatIndex);
-//        if(stg != null && nextTimer/beat > stg.beats[beatIndex]) resetNext = true;
-//        else if(stg !=null && nextTimer/beat > stg.beats[beatIndex] - offsetRange) audioSources[stg.pitches[beatIndex]].volume -= Time.deltaTime/offsetRange;
+//        if(stg != null && nextTimer/beat > stg.halfBeats[beatIndex]) resetNext = true;
+//        else if(stg !=null && nextTimer/beat > stg.halfBeats[beatIndex] - offsetRange) audioSources[stg.pitches[beatIndex]].volume -= Time.deltaTime/offsetRange;
         // determine stage by checking a ray cast, then use expression matching to determine the offset by the tag.
         RaycastHit hit;
         Ray stageRay = new Ray(this.transform.position, Vector3.down);
