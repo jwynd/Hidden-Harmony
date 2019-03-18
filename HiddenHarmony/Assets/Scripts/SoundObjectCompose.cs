@@ -11,6 +11,7 @@ public class SoundObjectCompose : MonoBehaviour{
     private float stageDistance = 1000;
     private float soundDistance = 5;
     private bool deleteMode = false;
+    private float spawnHeight = 2;
 
     // Start is called before the first frame update
     void Start(){
@@ -19,27 +20,40 @@ public class SoundObjectCompose : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        RaycastHit hit1;
+        RaycastHit hit;
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //Debug.Log("general test");
-        if(Physics.Raycast(mouseRay, out hit1, stageDistance)){
-            //Debug.Log("hit1");
-            Match match = Regex.Match(hit1.collider.tag, stagePattern);
-            if(match.Success) {
-                //Debug.Log("match success");
+        if(Physics.Raycast(mouseRay, out hit, stageDistance)){
+            Match matchStage = Regex.Match(hit.collider.tag, stagePattern);
+            Match matchSound = Regex.Match(hit.collider.tag, soundPattern);
+            if(matchStage.Success) {
                 if (Input.GetMouseButtonDown(0) && itemDrop != null) {
-                    Transform hit1ObjectTransform = hit1.collider.gameObject.transform;
-                    Ray stageRay = new Ray(hit1ObjectTransform.position, Vector3.up);
-                    RaycastHit hit2;
-                    match = Regex.Match(hit1.collider.tag, soundPattern);
-                    if(Physics.Raycast(stageRay, out hit2, soundDistance)) {
-                        Destroy(hit2.collider.gameObject);
+                    Transform stageObjectTransform = hit.collider.gameObject.transform;
+                    Ray stageRay = new Ray(stageObjectTransform.position, Vector3.up);
+                    if(Physics.Raycast(stageRay, out hit, soundDistance)) {
+                        matchSound = Regex.Match(hit.collider.tag, soundPattern);
+                        if (matchSound.Success) Destroy(hit.collider.gameObject);
                     }
 
                     if(!deleteMode){
-                        GameObject placedObject;
-                        placedObject = Instantiate(itemDrop, new Vector3(hit1ObjectTransform.position.x, hit1ObjectTransform.position.y + 2, hit1ObjectTransform.position.z), hit1ObjectTransform.rotation);
+                        GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
                         placedObject.SetActive(true);
+                    }
+
+                }
+            }
+            else if(matchSound.Success)
+            {
+                if (Input.GetMouseButtonDown(0) && itemDrop != null) {
+                    GameObject hitSoundObject = hit.collider.gameObject;
+                    Ray stageRay = new Ray(hitSoundObject.transform.position, Vector3.down);
+                    if(Physics.Raycast(stageRay, out hit, soundDistance)) {
+                        matchSound = Regex.Match(hit.collider.tag, stagePattern);
+                        if (matchSound.Success) Destroy(hitSoundObject);
+                        Transform stageObjectTransform = hit.collider.gameObject.transform;
+                        if(!deleteMode){
+                            GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
+                            placedObject.SetActive(true);
+                        }
                     }
 
                 }
