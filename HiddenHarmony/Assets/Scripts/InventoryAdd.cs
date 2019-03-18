@@ -10,6 +10,7 @@ public class InventoryAdd : MonoBehaviour
 
     private GameObject intMsg;
     private GameObject currentObject;
+    private AudioSource soundSFX;
     private Transform camera;
     private Transform player;
     private Transform holdPosition;
@@ -24,6 +25,7 @@ public class InventoryAdd : MonoBehaviour
     }
 
     void Start(){
+        soundSFX = GameObject.Find("SoundObjSFX/PickupSound").GetComponent<AudioSource>();
         intMsg = GameObject.Find("InteractMessageController");
         player = GameObject.Find("Player").transform;
         camera = GameObject.Find("Player/MainCamera").transform;
@@ -45,6 +47,7 @@ public class InventoryAdd : MonoBehaviour
                     itemSprite.GetComponent<Image>().sprite = Resources.Load<Sprite>(hit.collider.gameObject.name);
                     print("itemSprite"+itemSprite);
                     hit.collider.gameObject.SetActive(false);
+                    soundSFX.Play();
                 }
             }
         }
