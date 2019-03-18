@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Stage : MonoBehaviour
 {
-    public float[] beats;
+    public int[] beats;
     public int[] pitches;
 
     void Start(){

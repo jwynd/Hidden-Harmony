@@ -34,6 +34,10 @@ public class SoundObject : MonoBehaviour
     private AudioSource[] bgs;
     private bool resetNext = false;
 
+    private int cbeat;
+    private int playOnBeat;
+    private bool played = true;
+
     void OnDrawGizmos(){
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(this.transform.position, Vector3.down*interactDist);
@@ -54,15 +58,23 @@ public class SoundObject : MonoBehaviour
             throw new System.ArgumentException("Place materials in SoundObject script");
         }
         if(player == null)print("Null player!!!");
+        beatIndex = 0;
     }
 
     // Update is called once per frame
     void Update(){
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
-        timekeeper.SetBPM(100);
-        beat = timekeeper.GetBeat();
+        cbeat = timekeeper.CurrentBeat();
+        if(stg != null && played){
+            playOnBeat = cbeat + stg.beats[beatIndex];
+            beatIndex++;
+            if(beatIndex >= stg.beats.Length) beatIndex = 0;
+            played = false;
+        }
+//        timekeeper.SetBPM(100);
+//        beat = timekeeper.GetBeat();
         // print(beat);
-        nextTimer += Time.deltaTime;
+        /*nextTimer += Time.deltaTime;
         beatTimer += Time.deltaTime;
         if(beatTimer > beat){
             beatIndex++;
@@ -73,7 +85,7 @@ public class SoundObject : MonoBehaviour
             if(resetNext) resetNext = false;
             beatTimer = 0.0f;
         }
-        /*print("beatTimer");
+        print("beatTimer");
         print(beatTimer);
         print("nextTimer");
         print(nextTimer);
@@ -82,8 +94,8 @@ public class SoundObject : MonoBehaviour
         print("stg");
         print(stg);*/
         //if(stg != null) print("current beatIndex ="+beatIndex);
-        if(stg != null && nextTimer/beat > stg.beats[beatIndex]) resetNext = true;
-        else if(stg !=null && nextTimer/beat > stg.beats[beatIndex] - offsetRange) audioSources[stg.pitches[beatIndex]].volume -= Time.deltaTime/offsetRange;
+//        if(stg != null && nextTimer/beat > stg.beats[beatIndex]) resetNext = true;
+//        else if(stg !=null && nextTimer/beat > stg.beats[beatIndex] - offsetRange) audioSources[stg.pitches[beatIndex]].volume -= Time.deltaTime/offsetRange;
         // determine stage by checking a ray cast, then use expression matching to determine the offset by the tag.
         RaycastHit hit;
         Ray stageRay = new Ray(this.transform.position, Vector3.down);
@@ -116,11 +128,12 @@ public class SoundObject : MonoBehaviour
             reActivateSnapPoint = false;
         }
 
-        if(onStage && nextTimer == 0.0f){
+        if(onStage && cbeat == playOnBeat && !played){
             // print("Playing sound at time "+nextTimer);
             // print("stg.pitches[beatIndex] = "+stg.pitches[beatIndex]);
             audioSources[stg.pitches[beatIndex]].volume = 1.0f;
             audioSources[stg.pitches[beatIndex]].Play();
+            played = true;
             vfxTimerActive = true;
         }
 

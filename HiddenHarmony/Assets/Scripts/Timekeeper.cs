@@ -5,6 +5,31 @@ using UnityEngine;
 public class Timekeeper : MonoBehaviour
 {
     private int beatsPerMinute = 100;
+    private int currentBeat;
+    private float timer;
+    private float beat;
+    void Start(){
+        currentBeat = 0;
+        timer = 0.0f;
+    }
+    // update currentBeat
+    void Update(){
+        beat = GetBeat();
+        timer += Time.deltaTime;
+        if(timer > beat){
+            timer = 0.0f;
+            currentBeat++;
+        }
+    }
+
+    public int CurrentBeat(){
+        return currentBeat;
+    }
+
+    public void ResetBeat(){
+        currentBeat = 0;
+        timer = 0.0f;
+    }
 
     public int BPM(){
         return beatsPerMinute;
