@@ -7,15 +7,13 @@ public class TriggerOnce : MonoBehaviour
     [SerializeField] private GameObject[] hiddenObjects;
 //    [SerializeField] private GameObject[] soundObjects;
     private bool eq = false;
-    private bool activated = false;
     // Start is called before the first frame update
     void Start(){
-        if(!activated){
-            foreach(GameObject obj in hiddenObjects){
-                obj.SetActive(false);
-            }
-        }
-        activated = true;
+
+        /*foreach(GameObject obj in hiddenObjects){
+            obj.SetActive(false);
+        }*/
+
     }
 
     // Update is called once per frame
