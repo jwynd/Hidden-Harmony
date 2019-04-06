@@ -38,6 +38,10 @@ public class SoundObject : MonoBehaviour
     private int playOnBeat;
     private bool played = true;
 
+    public bool OnStage(){
+        return onStage;
+    }
+
     void OnDrawGizmos(){
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(this.transform.position, Vector3.down*interactDist);
