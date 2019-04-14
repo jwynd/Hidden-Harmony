@@ -20,6 +20,19 @@ public class SoundObjectCompose : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
+        checkStage();
+    }
+
+    public void activateDeleteMode() {
+        this.deleteMode = true;
+    }
+
+    public void setSoundObject(GameObject soundObject){
+        this.deleteMode = false;
+        this.itemDrop = soundObject;
+    }
+
+    public void checkStage(){
         RaycastHit hit;
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(mouseRay, out hit, stageDistance)){
@@ -59,15 +72,6 @@ public class SoundObjectCompose : MonoBehaviour{
                 }
             }
         }
-    }
-
-    public void activateDeleteMode() {
-        this.deleteMode = true;
-    }
-
-    public void setSoundObject(GameObject soundObject){
-        this.deleteMode = false;
-        this.itemDrop = soundObject;
     }
 
 }
