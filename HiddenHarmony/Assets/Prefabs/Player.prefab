@@ -130,9 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174d57a14b6e6e240a7810f483b88083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yVelocity: 0
   speed: 6
-  gravity: 7
-  jumpTime: 17
+  gravity: 9
+  glideGravity: 1
+  jump: 20
   jumpSpeed: 0.5
   canJump: 0.15
 --- !u!114 &328569968
