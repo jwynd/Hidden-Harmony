@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour {
 
         movement = Vector3.ClampMagnitude (movement, speed); //Limits the max speed of the player
         if(canGlide){
-           movement.y = movement.y - Glide();
+           movement.y = movement.y + Glide();
         }
         else {
            movement.y = movement.y - gravity + yVelocity;
@@ -70,10 +70,10 @@ public class PlayerMovement : MonoBehaviour {
 
     public float Glide(){
         if(Input.GetKey(KeyCode.G) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))){
-            return glideGravity;
+            return -glideGravity;
         }
         else{
-            return gravity + yVelocity;
+            return -gravity + yVelocity;
         }
     }
 }
