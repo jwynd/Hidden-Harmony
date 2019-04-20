@@ -227,7 +227,12 @@ ModelImporter:
     4300084: Icosphere_025
     7400000: Default Take
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: darkGreen
+    second: {fileID: 2100000, guid: 3971a99652950f242bb04e64b3508485, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
