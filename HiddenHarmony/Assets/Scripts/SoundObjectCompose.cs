@@ -39,7 +39,7 @@ public class SoundObjectCompose : MonoBehaviour{
             Match matchStage = Regex.Match(hit.collider.tag, stagePattern);
             Match matchSound = Regex.Match(hit.collider.tag, soundPattern);
             if(matchStage.Success) {
-                if (Input.GetMouseButtonDown(0) && itemDrop != null) {
+                if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0)) && itemDrop != null) {
                     Transform stageObjectTransform = hit.collider.gameObject.transform;
                     Ray stageRay = new Ray(stageObjectTransform.position, Vector3.up);
                     if(Physics.Raycast(stageRay, out hit, soundDistance)) {
@@ -56,7 +56,7 @@ public class SoundObjectCompose : MonoBehaviour{
             }
             else if(matchSound.Success)
             {
-                if (Input.GetMouseButtonDown(0) && itemDrop != null) {
+                if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0)) && itemDrop != null) {
                     GameObject hitSoundObject = hit.collider.gameObject;
                     Ray stageRay = new Ray(hitSoundObject.transform.position, Vector3.down);
                     if(Physics.Raycast(stageRay, out hit, soundDistance)) {
