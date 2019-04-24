@@ -16,7 +16,7 @@ public class ComposeModeTransition : MonoBehaviour
     private bool transitioning = false;
     private bool compose = false;
     private GameObject playerCamera;
-    private GameObject composeCamera;
+//    private GameObject composeCamera;
     private GameObject player;
     private Transform cameraReturn;
 
@@ -30,12 +30,13 @@ public class ComposeModeTransition : MonoBehaviour
     void Awake(){
         player = GameObject.Find("Player");
         playerCamera = GameObject.Find("Player/MainCamera");
-        composeCamera = new GameObject("composeCamera");
+//        composeCamera = new GameObject("composeCamera");
         cameraReturn = GameObject.Find("Player/CameraReturn").transform;
-        composeCamera.tag = "MainCamera";
+/*      composeCamera.tag = "MainCamera";
         composeCamera.transform.SetAsLastSibling();
         composeCamera.AddComponent<Camera>();
         composeCamera.SetActive(false);
+*/
     }
 
     // Update is called once per frame
@@ -53,15 +54,15 @@ public class ComposeModeTransition : MonoBehaviour
                 playerCamera.GetComponent<FirstPersonControl>().enabled = false;
                 playerCamera.transform.SetParent(null);
                 cameraOrigin = cameraReturn.position;
-                composeCamera.transform.position = cameraOrigin;
+                //composeCamera.transform.position = cameraOrigin;
                 compose = true;
                 transitioning = true;
                 startTime = Time.time;
                 journeyLength = Vector3.Distance(cameraOrigin, composeCameraPosition.position);
                 Cursor.visible = true;
-                composeCamera.transform.SetAsFirstSibling();
-                playerCamera.SetActive(false);
-                composeCamera.SetActive(true);
+                //composeCamera.transform.SetAsFirstSibling();
+                //playerCamera.SetActive(false);
+                //composeCamera.SetActive(true);
             } else if (compose && !transitioning){
                 //print("Transitioning to First person");
                 player.GetComponent<CharacterController>().enabled = true;
@@ -69,7 +70,7 @@ public class ComposeModeTransition : MonoBehaviour
                 player.GetComponent<FirstPersonControl>().enabled = true;
                 player.GetComponent<InventoryAdd>().enabled = true;
                 playerCamera.GetComponent<FirstPersonControl>().enabled = true;
-                composeCamera.transform.SetAsLastSibling();
+                //composeCamera.transform.SetAsLastSibling();
                 
                 compose = false;
                 transitioning = true;
@@ -78,29 +79,29 @@ public class ComposeModeTransition : MonoBehaviour
             }
         }
         if(compose && transitioning){
-            composeCamera.transform.LookAt(cameraTarget);
+            playerCamera.transform.LookAt(cameraTarget);
 
             distCovered = (Time.time - startTime) * transitionSpeed;
 
             fracJourney = distCovered / journeyLength;
 
-            composeCamera.transform.position = Vector3.Lerp(cameraOrigin, composeCameraPosition.position, fracJourney);
-            if(Vector3.Distance(composeCamera.transform.position, composeCameraPosition.position) < 0.01f){
-                composeCamera.transform.position = composeCameraPosition.position;
-                composeCamera.transform.LookAt(cameraTarget);
+            playerCamera.transform.position = Vector3.Lerp(cameraOrigin, composeCameraPosition.position, fracJourney);
+            if(Vector3.Distance(playerCamera.transform.position, composeCameraPosition.position) < 0.01f){
+                playerCamera.transform.position = composeCameraPosition.position;
+                playerCamera.transform.LookAt(cameraTarget);
                 transitioning = false;
             }
         } else if (!compose && transitioning){
-            composeCamera.transform.LookAt(cameraTarget);
+            playerCamera.transform.LookAt(cameraTarget);
 
             distCovered = (Time.time - startTime) * transitionSpeed;
 
             fracJourney = distCovered / journeyLength;
 
-            composeCamera.transform.position = Vector3.Lerp(composeCameraPosition.position, cameraReturn.position, fracJourney);
-            if(Vector3.Distance(composeCamera.transform.position, cameraReturn.position) < 0.01f){
-                composeCamera.SetActive(false);
-                playerCamera.SetActive(true);
+            playerCamera.transform.position = Vector3.Lerp(composeCameraPosition.position, cameraReturn.position, fracJourney);
+            if(Vector3.Distance(playerCamera.transform.position, cameraReturn.position) < 0.01f){
+//                composeCamera.SetActive(false);
+//                playerCamera.SetActive(true);
                 playerCamera.transform.position = cameraReturn.position;
                 playerCamera.transform.LookAt(cameraTarget);
                 Vector3 playerLook = cameraTarget.position;

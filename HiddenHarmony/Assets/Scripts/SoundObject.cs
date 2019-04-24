@@ -33,6 +33,7 @@ public class SoundObject : MonoBehaviour
     private string suffix;
     private AudioSource[] bgs;
     private bool resetNext = false;
+    private GameObject[] crystals;
 
     private int cbeat;
     private int playOnBeat;
@@ -106,6 +107,7 @@ public class SoundObject : MonoBehaviour
         if(Physics.Raycast(stageRay, out hit, interactDist)){
             if(hit.transform.tag == "StageObj"){
                 stg = hit.transform.gameObject.GetComponent<Stage>();
+                // fill out crystals array here
                 onStage = true;
             }
             else{
@@ -140,6 +142,16 @@ public class SoundObject : MonoBehaviour
             played = true;
             vfxTimerActive = true;
         }
+
+        // Below, light up crystal for current beat. Assume it has the same index as beatIndex
+        for(int i = 0; i < crystals.Length; ++i){
+            if(i == beatIndex){
+                crystals[i].GetComponent<Renderer>().material.SetFloat("_UseEmision", 1.0f);
+            } else {
+                crystals[i].GetComponent<Renderer>().material.SetFloat("_UseEmision", 0.0f);
+            }
+        }
+
 
         if(vfxTimerActive){
             // print("light on");
