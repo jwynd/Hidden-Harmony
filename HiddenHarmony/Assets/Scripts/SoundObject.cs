@@ -13,6 +13,8 @@ public class SoundObject : MonoBehaviour
     [SerializeField] private Material passive;
     [SerializeField] private Material active;
     [SerializeField] private Timekeeper timekeeper;
+    [SerializeField] private Color crystalColor;
+    [SerializeField] private Color emissionColor;
     [HideInInspector] public bool onStage = false;
     [HideInInspector] public Vector3 origin;
 
@@ -34,6 +36,7 @@ public class SoundObject : MonoBehaviour
     private AudioSource[] bgs;
     private bool resetNext = false;
     private GameObject[] crystals;
+    private Shader shader;
 
     private int cbeat;
     private int playOnBeat;
@@ -52,6 +55,7 @@ public class SoundObject : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start(){
+        shader = Shader.Find("Custom/ToonOutlineEmission");
         rendered = this.transform.GetChild(0).GetChild(0).gameObject;
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
         audioSources = this.GetComponents<AudioSource>();
@@ -107,7 +111,10 @@ public class SoundObject : MonoBehaviour
         if(Physics.Raycast(stageRay, out hit, interactDist)){
             if(hit.transform.tag == "StageObj"){
                 stg = hit.transform.gameObject.GetComponent<Stage>();
-                // fill out crystals array here
+                crystals = new GameObject[stg.halfBeats.Length];
+                for(int i = 0; i < crystals.Length; ++i){
+                    crystals[i] = stg.transform.parent.GetChild(0).GetChild(0).GetChild(i).gameObject;
+                }
                 onStage = true;
             }
             else{
@@ -144,11 +151,16 @@ public class SoundObject : MonoBehaviour
         }
 
         // Below, light up crystal for current beat. Assume it has the same index as beatIndex
-        for(int i = 0; i < crystals.Length; ++i){
+        for(int i = 0; onStage && i < crystals.Length; ++i){
+            Material m = new Material(shader);
+            crystals[i].GetComponent<Renderer>().material = m;
+            crystals[i].GetComponent<Renderer>().material.shader = shader;
+            crystals[i].GetComponent<Renderer>().material.SetColor("_Color", crystalColor);
             if(i == beatIndex){
-                crystals[i].GetComponent<Renderer>().material.SetFloat("_UseEmision", 1.0f);
+                crystals[i].GetComponent<Renderer>().material.SetFloat("_UseEmission", 1.0f);
+                crystals[i].GetComponent<Renderer>().material.SetColor("_EmissionColor", emissionColor);
             } else {
-                crystals[i].GetComponent<Renderer>().material.SetFloat("_UseEmision", 0.0f);
+                crystals[i].GetComponent<Renderer>().material.SetFloat("_UseEmission", 0.0f);
             }
         }
 
