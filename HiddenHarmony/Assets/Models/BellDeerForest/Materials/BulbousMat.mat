@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BulbousMat
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 33359e5382d1933469d609277de88d1f, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -55,6 +55,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RampTex:
+        m_Texture: {fileID: 2800000, guid: c3a816e4e5b9d3a44b4e03a19ef8b2b4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BlendOp: 0
     - _BumpScale: 1
@@ -89,6 +93,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 0.74230003}
+    - _Color: {r: 0.8207547, g: 0.680808, b: 0.13550194, a: 0.74230003}
     - _EmissionColor: {r: 0.8962264, g: 0.58416486, b: 0.080322154, a: 0}
+    - _ShadowTint: {r: 0.16037738, g: 0.117429845, b: 0.018912425, a: 0}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
