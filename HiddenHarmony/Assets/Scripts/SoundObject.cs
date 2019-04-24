@@ -9,10 +9,10 @@ using UnityEngine;
 public class SoundObject : MonoBehaviour
 {
     [SerializeField] private float offsetRange = 0.05f;
-    [SerializeField] private float vfxDuration = 1.0f;
+//    [SerializeField] private float vfxDuration = 1.0f;
     [SerializeField] [RangeAttribute(1.0f,5.0f)] private float interactDist = 1.0f;
-    [SerializeField] private Material passive;
-    [SerializeField] private Material active;
+//    [SerializeField] private Material passive;
+//    [SerializeField] private Material active;
     [SerializeField] private Timekeeper timekeeper;
     [SerializeField] private Color crystalColor;
     [SerializeField][ColorUsageAttribute(true,true)] private Color emissionColor;
@@ -27,8 +27,8 @@ public class SoundObject : MonoBehaviour
     private GameObject player;
     private bool reActivateSnapPoint = false;
     private float beat;
-    private float vfxTimer;
-    private bool vfxTimerActive = false;
+    //private float vfxTimer;
+    //private bool vfxTimerActive = false;
     private float beatTimer = 0.0f;// use to determine when one beat has passed
     private float nextTimer = 0.0f;// use to determine when to play next beat
     private AudioSource[] audioSources;
@@ -63,9 +63,9 @@ public class SoundObject : MonoBehaviour
 //        light = gameObject.GetComponent<Light>();
         origin = transform.position;
         //timekeeper = GameObject.Find("Timekeeper").GetComponent<Timekeeper>();
-        if(passive == null || active == null){
+        /*if(passive == null || active == null){
             throw new System.ArgumentException("Place materials in SoundObject script");
-        }
+        }*/
         if(player == null)print("Null player!!!");
         beatIndex = 0;
     }
@@ -144,7 +144,7 @@ public class SoundObject : MonoBehaviour
             audioSources[stg.pitches[beatIndex]].volume = 1.0f;
             audioSources[stg.pitches[beatIndex]].Play();
             played = true;
-            vfxTimerActive = true;
+            //vfxTimerActive = true;
         }
 
         // Below, light up crystal for current beat. Assume it has the same index as beatIndex
@@ -162,7 +162,7 @@ public class SoundObject : MonoBehaviour
         }
 
 
-        if(vfxTimerActive){
+/*        if(vfxTimerActive){
             // print("light on");
             vfxTimer += Time.deltaTime;
             rendered.GetComponent<MeshRenderer>().material = active;
@@ -176,6 +176,6 @@ public class SoundObject : MonoBehaviour
             vfxTimer = 0.0f;
             vfxTimerActive = false;
         }
-
+*/
     }
 }
