@@ -10,11 +10,12 @@ public class SoundObject : MonoBehaviour
 {
     [SerializeField] private float offsetRange = 0.05f;
     [SerializeField] private float vfxDuration = 1.0f;
+    [SerializeField] [RangeAttribute(1.0f,5.0f)] private float interactDist = 1.0f;
     [SerializeField] private Material passive;
     [SerializeField] private Material active;
     [SerializeField] private Timekeeper timekeeper;
     [SerializeField] private Color crystalColor;
-    [SerializeField] private Color emissionColor;
+    [SerializeField][ColorUsageAttribute(true,true)] private Color emissionColor;
     [HideInInspector] public bool onStage = false;
     [HideInInspector] public Vector3 origin;
 
@@ -31,7 +32,6 @@ public class SoundObject : MonoBehaviour
     private float beatTimer = 0.0f;// use to determine when one beat has passed
     private float nextTimer = 0.0f;// use to determine when to play next beat
     private AudioSource[] audioSources;
-    private float interactDist = 1.0f;
     private string suffix;
     private AudioSource[] bgs;
     private bool resetNext = false;
@@ -111,10 +111,7 @@ public class SoundObject : MonoBehaviour
         if(Physics.Raycast(stageRay, out hit, interactDist)){
             if(hit.transform.tag == "StageObj"){
                 stg = hit.transform.gameObject.GetComponent<Stage>();
-                crystals = new GameObject[stg.halfBeats.Length];
-                for(int i = 0; i < crystals.Length; ++i){
-                    crystals[i] = stg.transform.parent.GetChild(0).GetChild(0).GetChild(i).gameObject;
-                }
+                crystals = stg.crystals;
                 onStage = true;
             }
             else{
