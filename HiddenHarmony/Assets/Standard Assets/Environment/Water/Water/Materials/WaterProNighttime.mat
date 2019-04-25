@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ColorControl:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8403d3349d112ba4d000be1be39e7c39, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Fresnel:
@@ -91,7 +91,7 @@ Material:
     - _RefractionTex_ST: {r: 1, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 0.72, g: 0.72, b: 0.72, a: 1}
     - _WorldLightDir: {r: 0, g: 0.1, b: -0.5, a: 0}
-    - _horizonColor: {r: 0.172, g: 0.463, b: 0.435, a: 0}
+    - _horizonColor: {r: 0.1448469, g: 0.8351356, b: 0.990566, a: 0}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6
