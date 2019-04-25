@@ -131,12 +131,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yVelocity: 0
-  speed: 6
-  gravity: 9
-  glideGravity: 1
-  jump: 20
-  jumpSpeed: 0.5
-  canJump: 0.15
+  speed: 8
+  glideBoost: 4
+  gravity: 14
+  glideGravity: 2.5
+  jump: 27
+  jumpAcceleration: 0.6
+  canJump: 1
 --- !u!114 &328569968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,10 +152,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   axes: 1
-  minVertical: -45
-  maxVertical: 45
-  sensHorizontal: 3
-  sensVertical: 3
+  minVertical: 0
+  maxVertical: 0
+  sensHorizontal: 1.5
+  sensVertical: 0
   rotationX: 0
 --- !u!114 &7010431191524726844
 MonoBehaviour:
@@ -289,10 +290,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   axes: 2
-  minVertical: -45
-  maxVertical: 45
-  sensHorizontal: 3
-  sensVertical: 3
+  minVertical: -60
+  maxVertical: 60
+  sensHorizontal: 0
+  sensVertical: 1.5
   rotationX: 0
 --- !u!81 &1341699122
 AudioListener:
