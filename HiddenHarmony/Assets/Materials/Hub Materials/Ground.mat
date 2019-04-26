@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Ground
   m_Shader: {fileID: 4800000, guid: 33359e5382d1933469d609277de88d1f, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800002, guid: 99ce1624ba809456aa0b18e9f463be33, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -44,15 +44,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800004, guid: 99ce1624ba809456aa0b18e9f463be33, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800008, guid: 99ce1624ba809456aa0b18e9f463be33, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800006, guid: 99ce1624ba809456aa0b18e9f463be33, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RampTex:
@@ -64,7 +64,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _GlossMapScale: 1
+    - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _Metallic: 0.115
@@ -77,6 +77,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.17254902, g: 0.64705884, b: 0.42352945, a: 1}
+    - _Color: {r: 0.37821138, g: 0.4433962, b: 0.14431292, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowTint: {r: 0, g: 0, b: 0, a: 0}
