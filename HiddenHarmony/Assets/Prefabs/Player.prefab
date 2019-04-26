@@ -133,10 +133,10 @@ MonoBehaviour:
   yVelocity: 0
   speed: 8
   glideBoost: 4
-  gravity: 14
-  glideGravity: 2.5
-  jump: 27
-  jumpAcceleration: 0.6
+  terminalVelocity: 5.5
+  glideGravity: 3
+  jump: 7
+  gravity: 6
   canJump: 1
 --- !u!114 &328569968
 MonoBehaviour:
@@ -291,7 +291,7 @@ MonoBehaviour:
   isActive: 1
   axes: 2
   minVertical: -60
-  maxVertical: 60
+  maxVertical: 85
   sensHorizontal: 0
   sensVertical: 1.5
   rotationX: 0

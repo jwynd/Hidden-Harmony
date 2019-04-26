@@ -12,22 +12,23 @@ public class PlayerMovement : MonoBehaviour {
     
     public float speed = 6f; //sets speed multiplier
     //speed suggested value 6f
-    [SerializeField] float glideBoost = 2f;
-    public float gravity = 9f; //the value subtracted from the y axis to calculate gravity
-    //gravity suggested value 9f. Actual value 9.8f
-    public float glideGravity = 1f;//the value subtracted from the y axis to calculate gravity
-    //gravity suggested value 9f. Actual value 9.8f
-    public float jump = 17f; //the maximun value of the jump
-    //jump suggested value 17f;
-    public float jumpAcceleration = 0.5f; //the ammount the jump accelerates per frame
-    //jumpAcceleration suggested value 0.5f
-    public float canJump = 0.15f; //the distance between the player and the ground at which the player can jump
-    //canJump suggested value for capsulecast 0.15. I don't know why this works, but it does.
+    [SerializeField] private float glideBoost = 2f; //the value added to speed during gliding
+    //glideBoost suggested value 2f
+    public float terminalVelocity = 5.5f; //value multiplied by 10 - the value subtracted from the y axis to calculate terminalVelocity
+    //terminalVelocity suggested value 5.5f
+    public float glideGravity = 3f; //the rate at which the player falls while gliding (calculated much differently than the standard gravity)
+    //glideGravity suggested value 3f
+    public float jump = 7f; //value multiplied by 10 - the maximun value of the jump. value must be larger than terminalVelocity
+    //jump suggested value 7f
+    public float gravity = 6f; //value divided by 10 - the rate at which yVelocity decreases during a jump unitl terminal velocity is reached
+    //gravity suggested value 6f
+    public float canJump = 1f; //the distance between the player and the ground at which the player can jump
+    //canJump suggested value for capsulecast 1f. I don't know why this works, but it does.
     //canJump suggested value for raycast 1.25f. Assumes player is of height 2 and takes half, which is 1. The 0.25 is added for wiggle room.
 
     // Use this for initialization
     void Start () {
-        yVelocity = gravity;
+        yVelocity = (terminalVelocity * 10);
         character = GetComponent<CharacterController> (); //gets the character controller from the GameObject
     }    
 
@@ -42,24 +43,24 @@ public class PlayerMovement : MonoBehaviour {
         if (Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump)){ //capsule cast checks if capsule is touching the ground 
             if(Input.GetKeyDown(KeyCode.Space)) {         
                 jumping = true;
-                yVelocity = jump;
+                yVelocity = jump * 10;
             }
             else if(!Input.GetKey(KeyCode.Space)) {        
-                yVelocity = gravity;
+                yVelocity = (terminalVelocity * 10);
             }
         }
 
         if(Input.GetKeyUp(KeyCode.Space))
         {
             jumping = false;
-            if(yVelocity > gravity){
-                yVelocity = gravity;
+            if(yVelocity > (terminalVelocity * 10f) + (terminalVelocity * 15f * 0.1f)){
+                yVelocity = (terminalVelocity * 10f) + (terminalVelocity * 15f * 0.1f);
             }
         }
 
         if(yVelocity > 0){
             if(!Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump)){
-                yVelocity -= jumpAcceleration; //increases jump velocity when jumping and before jump total is reached
+                yVelocity -= gravity / 10; //increases jump velocity when jumping and before jump total is reached
             }
         }
         else{
@@ -83,7 +84,7 @@ public class PlayerMovement : MonoBehaviour {
            movement.y = movement.y + Glide().y;
         }
         else {
-           movement.y = movement.y - gravity + yVelocity;
+           movement.y = movement.y - (terminalVelocity * 10) + yVelocity;
         }
         movement *= Time.fixedDeltaTime; //Ensures the speed the player moves does not change based on frame rate
         movement = transform.TransformDirection(movement);
@@ -97,11 +98,11 @@ public class PlayerMovement : MonoBehaviour {
         if(Input.GetKey(KeyCode.Space) && !jumping && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && !Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump)){
             returnVector.x = glideBoost;
             returnVector.y = -glideGravity;
-            yVelocity = gravity;
+            yVelocity = (terminalVelocity * 10);
         }
         else{
             returnVector.x = 0;
-            returnVector.y = -gravity + yVelocity;
+            returnVector.y = -(terminalVelocity * 10) + yVelocity;
         }
         return returnVector;
     }
