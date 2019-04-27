@@ -6,7 +6,9 @@ public class Stage : MonoBehaviour
 {
     public int[] halfBeats;
     public int[] pitches;
-    public GameObject[] crystals;
+    [SerializeField][Tooltip("Places an offset on when the crystal lights up. Must be between 0 and the number of notes - 1")]
+    private int crystalOffset;
+    [HideInInspector] public GameObject[] crystals;
 
     void Start(){
         if(halfBeats.Length != pitches.Length) throw new System.ArgumentException("Beats and pitches must be of equal length");
@@ -15,6 +17,13 @@ public class Stage : MonoBehaviour
         }
         foreach(int pitch in pitches){
             if(pitch > 7 || pitch < 0) throw new System.ArgumentException("All pitches must be between 0 and 7 inclusive");
+        }
+        int index;
+        crystals = new GameObject[halfBeats.Length];
+        for(int i = 0; i < halfBeats.Length; ++i){
+            index = i + crystalOffset;
+            index = index % halfBeats.Length;
+            crystals[index] = this.transform.parent.GetChild(0).GetChild(0).GetChild(i).gameObject;
         }
     }
 }
