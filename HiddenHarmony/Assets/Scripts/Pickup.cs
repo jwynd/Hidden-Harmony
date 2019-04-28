@@ -6,6 +6,10 @@ public class Pickup : MonoBehaviour
 {
     [HideInInspector] public bool held = false;
     public float interactDistance = 5.0f;
+    [Tooltip("This script will allow the player to pick up any object with this tag")]
+    [SerializeField] private string tag;
+    [Tooltip("This message will be displayed on the screen when the player can pick up tagged objects")]
+    [SerializeField] private string message;
 
     private GameObject intMsg;
     private GameObject currentObject;
@@ -14,10 +18,11 @@ public class Pickup : MonoBehaviour
     private Transform holdPosition;
     private Rigidbody rigi;
     private float dist;
-    /*void OnDrawGizmos(){
+    void OnDrawGizmos(){
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(camera.position, camera.forward*interactDistance);
-    }*/
+    }
+
 
     public bool IsHeld(){
         return held;
@@ -41,7 +46,7 @@ public class Pickup : MonoBehaviour
         Ray pickRay = new Ray(camera.position, camera.forward);
         if(!held && Input.GetKeyDown(KeyCode.E)){
             if(Physics.Raycast(pickRay, out hit, interactDistance)){
-                if(hit.collider.tag == "SoundObj"){
+                if(hit.collider.tag == tag){
                     //print("Raycast hit SoundObj");
                     currentObject = hit.collider.gameObject;
                     rigi = currentObject.GetComponent<Rigidbody>();
@@ -55,11 +60,12 @@ public class Pickup : MonoBehaviour
             }
             //print("!held && key press on E");
         }
+
         else if(!held){
             intMsg.GetComponent<InteractMessage>().HideInteractMessage();
             if(Physics.Raycast(pickRay, out hit, interactDistance)){
-                if(hit.collider.tag == "SoundObj"){
-                    intMsg.GetComponent<InteractMessage>().ShowInteractMessage("Press 'E' to pick up");
+                if(hit.collider.tag == tag){
+                    intMsg.GetComponent<InteractMessage>().ShowInteractMessage(message);
                 }
             }
         }

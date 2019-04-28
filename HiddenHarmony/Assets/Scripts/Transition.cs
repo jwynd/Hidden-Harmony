@@ -1,23 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Transition : MonoBehaviour
 {
     public AudioClip source;
     public float transitionTime;
     public Material skybox;
+    [Tooltip("Post Processing Profile")]
+    [SerializeField] private PostProcessProfile newPPP;
 
     private AudioSource[] bg;
     private float timer = 0.0f;
     private bool fading = false;
     private AudioSource newBG;
     private AudioSource oldBG;
+    private PostProcessProfile p;
 
     // Start is called before the first frame update
     void Start(){
         bg = GameObject.Find("BackgroundMusic").GetComponents<AudioSource>();
         print(source.ToString());
+        p = GameObject.Find("MainCamera").GetComponent<PostProcessProfile>();
 //        samples = new float[source.samples * source.channels];
 //        source.GetData(samples, 0);
     }
@@ -37,6 +42,7 @@ public class Transition : MonoBehaviour
                 oldBG.volume = 0.0f;
                 newBG.volume = 1.0f;
                 RenderSettings.skybox = skybox;
+                p = newPPP;
                 fading = false;
             }
         }

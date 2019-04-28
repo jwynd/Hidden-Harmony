@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
     private GameObject menuCamera; // use this to determine if while loop should be running
     private GameObject inventory;
     private GameObject reticle;
+    private ComposeModeTransition cmt;
 
     void Awake(){
         player = GameObject.Find("Player");
@@ -24,6 +25,7 @@ public class PauseMenu : MonoBehaviour
         reticle = GameObject.Find("Reticle");
         mainMenuScene = SceneManager.GetActiveScene().name;
         if(pauseMenuUI == null) throw new System.ArgumentException("PauseMenuMain not found");
+        cmt = GameObject.Find("GameplayObjects/CameraChange").GetComponent<ComposeModeTransition>();
         DeactivateMenu();
         inventory.SetActive(false);
         isPaused = false;
@@ -61,7 +63,7 @@ public class PauseMenu : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<FirstPersonControl>().enabled = true;
         player.GetComponent<InventoryAdd>().enabled = true;
-        camera.GetComponent<FirstPersonControl>().enabled = true;
+        camera.GetComponent<FirstPersonControl>().enabled = !cmt.Compose();
         pauseMenuUI.SetActive(false);
         inventory.SetActive(true);
         Cursor.visible = false;
