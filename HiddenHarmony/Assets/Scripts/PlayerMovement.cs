@@ -8,12 +8,14 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float yVelocity; //the counter to determine at which point in the jump the player is at.
     private bool jumping = false; //checks if the player is jumping
     private bool canGlide = true; //can the player glide
+    private bool canSprint = true; //can the player sprint
     private CharacterController character; //creates a game object for storage
     
     public float speed = 6f; //sets speed multiplier
     //speed suggested value 6f
-    [SerializeField] private float glideBoost = 2f; //the value added to speed during gliding
-    //glideBoost suggested value 2f
+    [SerializeField] private float glideBoost = 4f; //the value added to speed during gliding
+    //glideBoost suggested value 4f
+    [SerializeField] private float sprintBoost = 4f;
     public float terminalVelocity = 5.5f; //value multiplied by 10 - the value subtracted from the y axis to calculate terminalVelocity
     //terminalVelocity suggested value 5.5f
     public float glideGravity = 3f; //the rate at which the player falls while gliding (calculated much differently than the standard gravity)
@@ -25,6 +27,7 @@ public class PlayerMovement : MonoBehaviour {
     public float canJump = 1f; //the distance between the player and the ground at which the player can jump
     //canJump suggested value for capsulecast 1f. I don't know why this works, but it does.
     //canJump suggested value for raycast 1.25f. Assumes player is of height 2 and takes half, which is 1. The 0.25 is added for wiggle room.
+    [SerializeField] private bool shiftToGlide = false;
 
     // Use this for initialization
     void Start () {
@@ -50,6 +53,10 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
 
+        if(yVelocity <= terminalVelocity * 10){
+        	jumping = false;
+        }
+
         if(Input.GetKeyUp(KeyCode.Space))
         {
             jumping = false;
@@ -69,18 +76,13 @@ public class PlayerMovement : MonoBehaviour {
 
         float moveX;
         float moveZ;
-        if(canGlide){
-            moveX = Input.GetAxis ("Horizontal") * (speed + Glide().x);
-            moveZ = Input.GetAxis ("Vertical") * (speed + Glide().x);
-        }
-        else{
-            moveX = Input.GetAxis ("Horizontal") * speed;
-            moveZ = Input.GetAxis ("Vertical") * speed;
-        }
-        Vector3 movement = new Vector3 (moveX, 0, moveZ);
-
-       // movement = Vector3.ClampMagnitude (movement, speed); //Limits the max speed of the player
-        if(canGlide){
+        Vector3 movement;
+            moveX = Input.GetAxis ("Horizontal") * (speed + Glide().x + Sprint());
+            moveZ = Input.GetAxis ("Vertical") * (speed + Glide().x + Sprint());
+            movement = new Vector3 (moveX, 0, moveZ);
+            movement = Vector3.ClampMagnitude (movement, speed + Glide().x + Sprint()); //Limits the max speed of the player
+        
+       	if(canGlide){
            movement.y = movement.y + Glide().y;
         }
         else {
@@ -95,7 +97,9 @@ public class PlayerMovement : MonoBehaviour {
         Vector2 returnVector = new Vector2();
         Vector3 p1 = transform.position + new Vector3(character.center.x, character.center.y + 0.5f, character.center.z) + Vector3.up * -character.height * 0.5f;
         Vector3 p2 = p1 + Vector3.up * character.height;
-        if(Input.GetKey(KeyCode.Space) && !jumping && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && !Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump)){
+        if((shiftToGlide ? Input.GetKey(KeyCode.LeftShift) : Input.GetKey(KeyCode.Space)) && !jumping && !Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump)){
+        	//if we want to hold forward use below code in the if statement
+        	//(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             returnVector.x = glideBoost;
             returnVector.y = -glideGravity;
             yVelocity = (terminalVelocity * 10);
@@ -105,5 +109,17 @@ public class PlayerMovement : MonoBehaviour {
             returnVector.y = -(terminalVelocity * 10) + yVelocity;
         }
         return returnVector;
+    }
+
+    public float Sprint(){
+    	Vector2 returnVector = new Vector2();
+        Vector3 p1 = transform.position + new Vector3(character.center.x, character.center.y + 0.5f, character.center.z) + Vector3.up * -character.height * 0.5f;
+        Vector3 p2 = p1 + Vector3.up * character.height;
+        if(Input.GetKey(KeyCode.LeftShift) && !jumping && Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump + 0.5f)){
+        	return sprintBoost;
+        }
+        else{
+        	return 0;
+        }
     }
 }
