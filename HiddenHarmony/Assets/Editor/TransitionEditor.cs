@@ -10,11 +10,13 @@ public class TransitionEditor : Editor {
     SerializedProperty sourceProp;
     SerializedProperty transitionTimeProp;
     SerializedProperty skyboxProp;
+    SerializedProperty ppProp;
 
     void OnEnable(){
         sourceProp = serializedObject.FindProperty("source");
         transitionTimeProp = serializedObject.FindProperty("transitionTime");
         skyboxProp = serializedObject.FindProperty("skybox");
+        ppProp = serializedObject.FindProperty("newPPP");
     }
 
     public override void OnInspectorGUI(){
@@ -24,7 +26,7 @@ public class TransitionEditor : Editor {
 
         EditorGUILayout.PropertyField(sourceProp, new GUIContent("Audio Clip"), GUILayout.MaxWidth(300));
         EditorGUILayout.PropertyField(skyboxProp, new GUIContent("Skybox"), GUILayout.MaxWidth(300));
-
+        EditorGUILayout.PropertyField(ppProp, new GUIContent("Post Processing Profile"), GUILayout.MaxWidth(300));
   //      GUILayout.EndHorizontal();
 
 /*        GUILayout.Label("Side 2\n");
