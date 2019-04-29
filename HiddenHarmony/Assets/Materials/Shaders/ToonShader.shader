@@ -1,6 +1,4 @@
-﻿// BAD SHADER MUST LEARN 2 CODE
-
-Shader "Custom/ToonShader"{
+﻿Shader "Custom/ToonShader"{
 	Properties	// can be viewed in inspector
 	{
 		_MainTex("Texture", 2D) = "white" {}

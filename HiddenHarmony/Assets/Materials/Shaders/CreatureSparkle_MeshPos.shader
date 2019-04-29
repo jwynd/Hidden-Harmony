@@ -1,24 +1,25 @@
-﻿Shader "Custom/CreatureSparkle"
+﻿Shader "Custom/CreatureSparkle_MeshPos"
 {
     Properties
     {
         _Tint ("Tint", Color) = (1,1,1,1)
         _MainTex ("Texture", 2D) = "white" {}
         _Smoothness ("Smoothness", Range(0,1)) = 0.2
-        // Effect 0
-        _EffectSpeed0 ("Effect 0 - Speed 0", float) = 1
+        _Overlay ("Overlay Blend Mode", float) = 1
+        // Effect 0: circular movement
+        _EffectSpeed0 ("Effect 0 - Circle - Speed", float) = 1
         _EffectTint0 ("Effect 0 - Tint", Color) = (1,1,1,1)
         _EffectTex0 ("Effect 0 - Texture", 2D) = "black" {}
-        // Effect 1
-        _EffectSpeed1 ("Effect 1 - Speed", float) = 1
+        // Effect 1: diagonal movement
+        _EffectSpeed1 ("Effect 1 - Diagonal - Speed", float) = 1
         _EffectTint1 ("Effect 1 - Tint", Color) = (1,1,1,1)
         _EffectTex1 ("Effect 1 - Texture", 2D) = "black" {}
-        // Effect 2
-        _EffectSpeed2 ("Effect 2 - Speed", float) = 1
+        // Effect 2: horizontal movement
+        _EffectSpeed2 ("Effect 2 - Horizontal - Speed", float) = 1
         _EffectTint2 ("Effect 2 - Tint", Color) = (1,1,1,1)
         _EffectTex2 ("Effect 2 - Texture", 2D) = "black" {}
-        // Effect 3
-        _EffectSpeed3 ("Effect 3 - Speed", float) = 1
+        // Effect 3: vertical movement
+        _EffectSpeed3 ("Effect 3 - Vertical - Speed", float) = 1
         _EffectTint3 ("Effect 3 - Tint", Color) = (1,1,1,1)
         _EffectTex3 ("Effect 3 - Texture", 2D) = "black" {}
     }
@@ -56,6 +57,7 @@
         uniform fixed4 _EffectTint3;
         // etc.
         uniform half _Smoothness;
+        uniform float4 _Overlay;
 
 
         struct Input
@@ -74,10 +76,8 @@
             fixed4 col = tex2D(_MainTex, i.uv_MainTex);
             col.rgb *= _Tint.rgb;
 
-            // get UV parameters from the screen
-            float2 txtCoordBase = i.screenPos.xy / i.screenPos.w;
-            float aspect = _ScreenParams.x / _ScreenParams.y;
-            txtCoordBase.x = txtCoordBase.x * aspect;
+            // reuse mesh UV parameters
+            float2 txtCoordBase = i.uv_MainTex;
 
             // animate over time
             float2 textureCoordinate0 = TRANSFORM_TEX(txtCoordBase, _EffectTex0);
@@ -87,15 +87,15 @@
             
             // ANIMATE TEXTURES OVER TIME
             // Circular Movement
-            textureCoordinate0.x += _CosTime.y * unity_DeltaTime * _EffectSpeed0;
-            textureCoordinate0.y += _SinTime.y * unity_DeltaTime * _EffectSpeed0;
+            textureCoordinate0.x += cos(_Time.y) * _EffectSpeed0;
+            textureCoordinate0.y += sin(_Time.y) * _EffectSpeed0;
             // Diagonal Movement
-            textureCoordinate1.x += _Time.x * unity_DeltaTime * _EffectSpeed1;
-            textureCoordinate1.y += _Time.x * unity_DeltaTime * _EffectSpeed1;
+            textureCoordinate1.x += _Time.x * _EffectSpeed1;
+            textureCoordinate1.y += _Time.x * _EffectSpeed1;
             // Horizontal Movement
-            textureCoordinate2.x += _Time.x * unity_DeltaTime * _EffectSpeed2;
+            textureCoordinate2.x += _Time.x * _EffectSpeed2;
             // Vertical Movement
-            textureCoordinate3.y += _Time.x * unity_DeltaTime * _EffectSpeed3;
+            textureCoordinate3.y += _Time.x * _EffectSpeed3;
 
             // EFFECT COLORATION
             // Get base color from texture
@@ -112,13 +112,14 @@
             effectCol1 *= _EffectTint1;
             effectCol2 *= _EffectTint2;
             effectCol3 *= _EffectTint3;
+
             // Multiply the effect's color by its alpha so as to dilute
             //      the color appropirately without affecting the total
             //      alpha of the material
-            sumEffect.rgb += effectCol0.rgb * effectCol0.a;
-            sumEffect.rgb += effectCol1.rgb * effectCol1.a;
-            sumEffect.rgb += effectCol2.rgb * effectCol2.a;
-            sumEffect.rgb += effectCol3.rgb * effectCol3.a;
+                sumEffect.rgb += effectCol0.rgb * effectCol0.a;
+                sumEffect.rgb += effectCol1.rgb * effectCol1.a;
+                sumEffect.rgb += effectCol2.rgb * effectCol2.a;
+                sumEffect.rgb += effectCol3.rgb * effectCol3.a;
             
             // SET FINAL VALUES FOR THE MATERIAL
             col.rgb += sumEffect.rgb;
