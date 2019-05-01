@@ -22,7 +22,7 @@ public class Transition : MonoBehaviour
     void Start(){
         bg = GameObject.Find("BackgroundMusic").GetComponents<AudioSource>();
         print(source.ToString());
-        p = GameObject.Find("MainCamera").GetComponent<PostProcessProfile>();
+        p = GameObject.Find("MainCamera").GetComponent<PostProcessVolume>().profile;
 //        samples = new float[source.samples * source.channels];
 //        source.GetData(samples, 0);
     }
