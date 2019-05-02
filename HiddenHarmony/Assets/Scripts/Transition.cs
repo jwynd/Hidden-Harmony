@@ -19,7 +19,7 @@ public class Transition : MonoBehaviour
     private PostProcessProfile p;
 
     // Start is called before the first frame update
-    void Start(){
+    void Awake(){
         bg = GameObject.Find("BackgroundMusic").GetComponents<AudioSource>();
         print(source.ToString());
         p = GameObject.Find("MainCamera").GetComponent<PostProcessVolume>().profile;
