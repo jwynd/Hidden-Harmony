@@ -42,6 +42,9 @@ public class SoundObject : MonoBehaviour
     private int playOnBeat;
     private bool played = true;
 
+    private Material notGlowing;
+    private Material glowing;
+
     public bool OnStage(){
         return onStage;
     }
@@ -68,6 +71,13 @@ public class SoundObject : MonoBehaviour
         }*/
         if(player == null)print("Null player!!!");
         beatIndex = 0;
+
+        notGlowing = new Material(shader);
+        notGlowing.SetColor("_Color", crystalColor);
+        glowing = new Material(shader);
+        glowing.SetFloat("_UseEmission", 1.0f);
+        glowing.SetColor("_EmissionColor", emissionColor);
+
     }
 
     // Update is called once per frame
@@ -80,32 +90,7 @@ public class SoundObject : MonoBehaviour
             if(beatIndex >= stg.halfBeats.Length) beatIndex = 0;
             played = false;
         }
-//        timekeeper.SetBPM(100);
-//        beat = timekeeper.GetBeat();
-        // print(beat);
-        /*nextTimer += Time.deltaTime;
-        beatTimer += Time.deltaTime;
-        if(beatTimer > beat){
-            beatIndex++;
-            if(stg != null && beatIndex > stg.halfBeats.Length - 1){
-                beatIndex = 0;
-            }
-            if(resetNext) nextTimer = 0.0f;
-            if(resetNext) resetNext = false;
-            beatTimer = 0.0f;
-        }
-        print("beatTimer");
-        print(beatTimer);
-        print("nextTimer");
-        print(nextTimer);
-        print("beatIndex");
-        print(beatIndex);
-        print("stg");
-        print(stg);*/
-        //if(stg != null) print("current beatIndex ="+beatIndex);
-//        if(stg != null && nextTimer/beat > stg.halfBeats[beatIndex]) resetNext = true;
-//        else if(stg !=null && nextTimer/beat > stg.halfBeats[beatIndex] - offsetRange) audioSources[stg.pitches[beatIndex]].volume -= Time.deltaTime/offsetRange;
-        // determine stage by checking a ray cast, then use expression matching to determine the offset by the tag.
+
         RaycastHit hit;
         Ray stageRay = new Ray(this.transform.position, Vector3.down);
         if(Physics.Raycast(stageRay, out hit, interactDist)){
@@ -149,15 +134,10 @@ public class SoundObject : MonoBehaviour
 
         // Below, light up crystal for current beat. Assume it has the same index as beatIndex
         for(int i = 0; onStage && i < crystals.Length; ++i){
-            Material m = new Material(shader);
-            crystals[i].GetComponent<Renderer>().material = m;
-            crystals[i].GetComponent<Renderer>().material.shader = shader;
-            crystals[i].GetComponent<Renderer>().material.SetColor("_Color", crystalColor);
             if(i == beatIndex){
-                crystals[i].GetComponent<Renderer>().material.SetFloat("_UseEmission", 1.0f);
-                crystals[i].GetComponent<Renderer>().material.SetColor("_EmissionColor", emissionColor);
+                crystals[i].GetComponent<Renderer>().material = glowing;
             } else {
-                crystals[i].GetComponent<Renderer>().material.SetFloat("_UseEmission", 0.0f);
+                crystals[i].GetComponent<Renderer>().material = notGlowing;
             }
         }
 
