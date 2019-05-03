@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour {
     	Vector2 returnVector = new Vector2();
         Vector3 p1 = transform.position + new Vector3(character.center.x, character.center.y + 0.5f, character.center.z) + Vector3.up * -character.height * 0.5f;
         Vector3 p2 = p1 + Vector3.up * character.height;
-        if(Input.GetKey(KeyCode.LeftShift) && !jumping && Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump + 0.5f)){
+        if(Input.GetKey(KeyCode.LeftShift) && !jumping && Glide().x == 0){//Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump + 0.5f)
         	return sprintBoost;
         }
         else{
