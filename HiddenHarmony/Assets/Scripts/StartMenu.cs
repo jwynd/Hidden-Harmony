@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class StartMenu : MonoBehaviour
 {
     [SerializeField] private float fadeTime = 2.0f;
     [SerializeField] private float movementSpeed = 10.0f;
+    [SerializeField] private PostProcessProfile playerPostProcessingProfile;
 
     private GameObject player;
     private GameObject startMenuUI;
@@ -44,6 +46,8 @@ public class StartMenu : MonoBehaviour
                 mainCamera.GetComponent<Camera>().enabled = true;
                 mainCamera.GetComponent<FirstPersonControl>().enabled = true;
                 mainCamera.GetComponent<AudioListener>().enabled = true;
+                mainCamera.GetComponent<PostProcessVolume>().enabled = true;
+                mainCamera.GetComponent<PostProcessVolume>().profile = playerPostProcessingProfile;
                 Destroy(fade);
                 Destroy(menuCamera);
                 player.SetActive(true);

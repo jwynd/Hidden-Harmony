@@ -16,13 +16,13 @@ public class Transition : MonoBehaviour
     private bool fading = false;
     private AudioSource newBG;
     private AudioSource oldBG;
-    private PostProcessProfile p;
+//    private PostProcessProfile p;
 
     // Start is called before the first frame update
     void Awake(){
         bg = GameObject.Find("BackgroundMusic").GetComponents<AudioSource>();
         print(source.ToString());
-        p = GameObject.Find("MainCamera").GetComponent<PostProcessVolume>().profile;
+//        p = GameObject.Find("MainCamera").GetComponent<PostProcessVolume>().profile;
 //        samples = new float[source.samples * source.channels];
 //        source.GetData(samples, 0);
     }
@@ -42,7 +42,7 @@ public class Transition : MonoBehaviour
                 oldBG.volume = 0.0f;
                 newBG.volume = 1.0f;
                 RenderSettings.skybox = skybox;
-                p = newPPP;
+                GameObject.Find("MainCamera").GetComponent<PostProcessVolume>().profile = newPPP;
                 fading = false;
             }
         }
