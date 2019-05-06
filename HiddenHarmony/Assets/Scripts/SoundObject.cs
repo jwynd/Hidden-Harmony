@@ -45,6 +45,9 @@ public class SoundObject : MonoBehaviour
     private Material notGlowing;
     private Material glowing;
 
+    private int mod;
+    private int[] cutoffs;
+
     public bool OnStage(){
         return onStage;
     }
@@ -85,9 +88,19 @@ public class SoundObject : MonoBehaviour
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
         cbeat = timekeeper.CurrentHalfBeat();
         if(stg != null && played){
+            mod = 0;
+            cutoffs = new int[stg.halfBeats.Length];
+            for(int i; i < stg.halfBeats.Length; i++){
+                mod += stg.halfBeats[i];
+                cutoffs[i] = mod;
+            }
+            for (int i = 0; i < cutoffs.Length; i++){
+                if(cbeat % mod < cutoffs[i]){
+                    beatIndex = i;
+                    break;
+                }
+            }
             playOnBeat = cbeat + stg.halfBeats[beatIndex];
-            beatIndex++;
-            if(beatIndex >= stg.halfBeats.Length) beatIndex = 0;
             played = false;
         }
 
