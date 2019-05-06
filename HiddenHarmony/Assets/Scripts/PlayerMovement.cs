@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float boostedFOV = 75f; //the field of vision angle for the player while gliding or sprinting (hence, boosted)
     [SerializeField] private float changeSpeedFOV = 0.25f; //the rate at which the field of view changes during glide
     [SerializeField] private float glideMusicVolume = 50f; //value divided by 100 in code - the max volume at which the glide music will play
-    [SerializeField] private float glideMusicChange = 0.25f; //the rate at which music volume changes during glide
+    [SerializeField] private float glideMusicChange = 0.005f; //the rate at which music volume changes during glide
     public float terminalVelocity = 5.5f; //value multiplied by 10 - the value subtracted from the y axis to calculate terminalVelocity
     //terminalVelocity suggested value 5.5f
     public float glideGravity = 3f; //the rate at which the player falls while gliding (calculated much differently than the standard gravity)
@@ -29,8 +29,8 @@ public class PlayerMovement : MonoBehaviour {
     //jump suggested value 7f
     public float gravity = 6f; //value divided by 10 - the rate at which yVelocity decreases during a jump unitl terminal velocity is reached
     //gravity suggested value 6f
-    public float canJump = 1f; //the distance between the player and the ground at which the player can jump
-    //canJump suggested value for capsulecast 1f. I don't know why this works, but it does.
+    public float canJump = 1.25f; //the distance between the player and the ground at which the player can jump
+    //canJump suggested value for capsulecast 1.25f. I don't know why this works, but it does.
     //canJump suggested value for raycast 1.25f. Assumes player is of height 2 and takes half, which is 1. The 0.25 is added for wiggle room.
     [SerializeField] private bool shiftToGlide = false;
     private ParticleSystem particles; //the particle system of the player object
