@@ -133,11 +133,18 @@ MonoBehaviour:
   yVelocity: 0
   speed: 8
   glideBoost: 4
+  sprintBoost: 4
+  baseFOV: 60
+  boostedFOV: 75
+  changeSpeedFOV: 0.25
+  glideMusicVolume: 50
+  glideMusicChange: 0.25
   terminalVelocity: 5.5
   glideGravity: 3
   jump: 7
   gravity: 6
-  canJump: 1
+  canJump: 1.25
+  shiftToGlide: 0
 --- !u!114 &328569968
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,6 +16,11 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float glideBoost = 4f; //the value added to speed during gliding
     //glideBoost suggested value 4f
     [SerializeField] private float sprintBoost = 4f;
+    [SerializeField] private float baseFOV = 60f; //the original field of vision angle for the player
+    [SerializeField] private float boostedFOV = 75f; //the field of vision angle for the player while gliding or sprinting (hence, boosted)
+    [SerializeField] private float changeSpeedFOV = 0.25f; //the rate at which the field of view changes during glide
+    [SerializeField] private float glideMusicVolume = 50f; //value divided by 100 in code - the max volume at which the glide music will play
+    [SerializeField] private float glideMusicChange = 0.25f; //the rate at which music volume changes during glide
     public float terminalVelocity = 5.5f; //value multiplied by 10 - the value subtracted from the y axis to calculate terminalVelocity
     //terminalVelocity suggested value 5.5f
     public float glideGravity = 3f; //the rate at which the player falls while gliding (calculated much differently than the standard gravity)
@@ -28,11 +33,17 @@ public class PlayerMovement : MonoBehaviour {
     //canJump suggested value for capsulecast 1f. I don't know why this works, but it does.
     //canJump suggested value for raycast 1.25f. Assumes player is of height 2 and takes half, which is 1. The 0.25 is added for wiggle room.
     [SerializeField] private bool shiftToGlide = false;
+    private ParticleSystem particles; //the particle system of the player object
+    private Camera camera; //the main camera on the player object
+    private AudioSource audio; //the audio source on the player object
 
     // Use this for initialization
     void Start () {
         yVelocity = (terminalVelocity * 10);
         character = GetComponent<CharacterController> (); //gets the character controller from the GameObject
+        particles = this.transform.Find("GlideParticles").gameObject.GetComponent<ParticleSystem>();
+        camera = this.transform.Find("MainCamera").gameObject.GetComponent<Camera>();
+        audio = this.transform.Find("AudioSource").gameObject.GetComponent<AudioSource>();
     }    
 
     // Update is called once per frame
@@ -51,10 +62,16 @@ public class PlayerMovement : MonoBehaviour {
             else if(!Input.GetKey(KeyCode.Space)) {        
                 yVelocity = (terminalVelocity * 10);
             }
+            if(particles.isPlaying){
+                particles.Stop();
+            }
+            if(audio.isPlaying){
+                fadeToMute();
+            }
         }
 
         if(yVelocity <= terminalVelocity * 10){
-        	jumping = false;
+            jumping = false;
         }
 
         if(Input.GetKeyUp(KeyCode.Space))
@@ -62,6 +79,12 @@ public class PlayerMovement : MonoBehaviour {
             jumping = false;
             if(yVelocity > (terminalVelocity * 10f) + (terminalVelocity * 15f * 0.1f)){
                 yVelocity = (terminalVelocity * 10f) + (terminalVelocity * 15f * 0.1f);
+            }
+            if(particles.isPlaying){
+                particles.Stop();
+            }
+            if(audio.isPlaying){
+                fadeToMute();
             }
         }
 
@@ -77,15 +100,18 @@ public class PlayerMovement : MonoBehaviour {
         float moveX;
         float moveZ;
         Vector3 movement;
-            moveX = Input.GetAxis ("Horizontal") * (speed + Glide().x + Sprint());
-            moveZ = Input.GetAxis ("Vertical") * (speed + Glide().x + Sprint());
-            movement = new Vector3 (moveX, 0, moveZ);
-            movement = Vector3.ClampMagnitude (movement, speed + Glide().x + Sprint()); //Limits the max speed of the player
-        
-       	if(canGlide){
+        moveX = Input.GetAxis ("Horizontal") * (speed + Glide().x + Sprint());
+        moveZ = Input.GetAxis ("Vertical") * (speed + Glide().x + Sprint());
+        movement = new Vector3 (moveX, 0, moveZ);
+        movement = Vector3.ClampMagnitude (movement, speed + Glide().x + Sprint()); //Limits the max speed of the player
+        if(Glide().x + Sprint() == 0){
+            toBaseFOV();
+        }
+
+        if(canGlide){
            movement.y = movement.y + Glide().y;
         }
-        else {
+        else{
            movement.y = movement.y - (terminalVelocity * 10) + yVelocity;
         }
         movement *= Time.fixedDeltaTime; //Ensures the speed the player moves does not change based on frame rate
@@ -98,11 +124,22 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 p1 = transform.position + new Vector3(character.center.x, character.center.y + 0.5f, character.center.z) + Vector3.up * -character.height * 0.5f;
         Vector3 p2 = p1 + Vector3.up * character.height;
         if((shiftToGlide ? Input.GetKey(KeyCode.LeftShift) : Input.GetKey(KeyCode.Space)) && !jumping && !Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump)){
-        	//if we want to hold forward use below code in the if statement
-        	//(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            //if we want to hold forward use below code in the if statement
+            //(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             returnVector.x = glideBoost;
             returnVector.y = -glideGravity;
             yVelocity = (terminalVelocity * 10);
+            if(isMoving()){
+                toBoostFOV();
+                toGlideVolume();
+            }
+            if(!particles.isPlaying){
+                particles.Play();
+            }
+            if(!audio.isPlaying){
+                audio.Play();
+            }
+
         }
         else{
             returnVector.x = 0;
@@ -112,14 +149,63 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public float Sprint(){
-    	Vector2 returnVector = new Vector2();
-        Vector3 p1 = transform.position + new Vector3(character.center.x, character.center.y + 0.5f, character.center.z) + Vector3.up * -character.height * 0.5f;
-        Vector3 p2 = p1 + Vector3.up * character.height;
-        if(Input.GetKey(KeyCode.LeftShift) && !jumping && Glide().x == 0){//Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump + 0.5f)
-        	return sprintBoost;
+    if(Input.GetKey(KeyCode.LeftShift) && Glide().x == 0){
+            if(isMoving()){
+                toBoostFOV();
+            }
+            return sprintBoost;
         }
         else{
-        	return 0;
+            return 0;
+        }
+    }
+
+    public bool isMoving(){
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)
+        || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void toBoostFOV(){
+        if(camera.fieldOfView < boostedFOV){
+            camera.fieldOfView = Mathf.MoveTowards(camera.fieldOfView, boostedFOV, changeSpeedFOV);
+        }
+        else if(camera.fieldOfView > boostedFOV){
+            camera.fieldOfView = boostedFOV;
+        }
+    }
+
+    public void toBaseFOV(){
+        if(camera.fieldOfView > baseFOV){
+                camera.fieldOfView = Mathf.MoveTowards(camera.fieldOfView, baseFOV, changeSpeedFOV);
+            }
+            else if(camera.fieldOfView < baseFOV){
+                camera.fieldOfView = baseFOV;
+            }
+    }
+
+    public void toGlideVolume(){
+        if(audio.volume < glideMusicVolume/100f){
+            audio.volume = Mathf.MoveTowards(audio.volume, glideMusicVolume/100f, glideMusicChange);
+        }
+        else if(audio.volume > glideMusicVolume/100f){
+            audio.volume = glideMusicVolume/100f;
+        }
+    }
+
+    public void fadeToMute(){
+        if(audio.volume > 0){
+            audio.volume = Mathf.MoveTowards(audio.volume, 0, glideMusicChange);
+        }
+        else if(audio.volume < 0){
+            audio.volume = 0;
+        }
+        else if(audio.volume == 0){
+            audio.Stop();
         }
     }
 }
