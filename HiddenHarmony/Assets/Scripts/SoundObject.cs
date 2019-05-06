@@ -90,7 +90,7 @@ public class SoundObject : MonoBehaviour
         if(stg != null && played){
             mod = 0;
             cutoffs = new int[stg.halfBeats.Length];
-            for(int i; i < stg.halfBeats.Length; i++){
+            for(int i = 0; i < stg.halfBeats.Length; i++){
                 mod += stg.halfBeats[i];
                 cutoffs[i] = mod;
             }
