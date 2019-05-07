@@ -47,7 +47,7 @@ public class SoundObject : MonoBehaviour
 
     private int mod;
     private int[] cutoffs;
-    private int elapsed;
+    private int nextCutoff;
 
     public bool OnStage(){
         return onStage;
@@ -91,15 +91,15 @@ public class SoundObject : MonoBehaviour
                 mod += stg.halfBeats[i];
                 cutoffs[i] = mod;
             }
-            elapsed = 0;
+            nextCutoff = 0;
             for (int i = 0; i < cutoffs.Length; i++){
                 if(cbeat % mod < cutoffs[i]){
                     beatIndex = i;
-                    elapsed = abs((i==0 ? stg.halfBeats[stg.halfBeats.Length - 1] : cutoffs[i - 1]) - cbeat % mod);
+                    nextCutoff = cutoff[beatIndex] - (cbeat % mod);
                     break;
                 }
             }
-            playOnBeat =  cbeat + stg.halfBeats[beatIndex] - elapsed;
+            playOnBeat = cbeat + nextCutoff;
             played = false;
         }
 
