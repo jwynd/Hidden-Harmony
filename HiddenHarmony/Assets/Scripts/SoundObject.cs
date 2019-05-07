@@ -95,7 +95,7 @@ public class SoundObject : MonoBehaviour
             for (int i = 0; i < cutoffs.Length; i++){
                 if(cbeat % mod < cutoffs[i]){
                     beatIndex = i;
-                    elapsed = (i==0 ? stg.halfBeats[stg.halfBeats.Length - 1] - (cbeat % mod) : (cbeat % mod) - cutoffs[i - 1]);
+                    elapsed = abs((i==0 ? stg.halfBeats[stg.halfBeats.Length - 1] : cutoffs[i - 1]) - cbeat % mod);
                     break;
                 }
             }
@@ -153,7 +153,6 @@ public class SoundObject : MonoBehaviour
             }
         }
 
-
 /*        if(vfxTimerActive){
             // print("light on");
             vfxTimer += Time.deltaTime;
@@ -170,4 +169,9 @@ public class SoundObject : MonoBehaviour
         }
 */
     }
+}
+
+private int abs(int x){
+    if(x < 0) return x * -1;
+    else return x;
 }
