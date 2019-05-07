@@ -91,8 +91,9 @@ public class SoundObject : MonoBehaviour
                 cutoffs[i] = mod;
             }
             for (int i = 0; i < cutoffs.Length; i++){
-                if(cbeat % mod <= cutoffs[i]){
-                    beatIndex = i;
+                if(cbeat % mod < cutoffs[i]){
+                    beatIndex = i - 1;
+                    if(beatIndex < 0) beatIndex = cutoffs.Length - 1;
                     break;
                 }
             }
