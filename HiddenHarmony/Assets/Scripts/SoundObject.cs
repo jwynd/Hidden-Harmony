@@ -65,13 +65,9 @@ public class SoundObject : MonoBehaviour
         rendered = this.transform.GetChild(0).GetChild(0).gameObject;
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
         audioSources = this.GetComponents<AudioSource>();
-        foreach(AudioSource aS in audioSources)print(aS);
-//        light = gameObject.GetComponent<Light>();
+
         origin = transform.position;
-        //timekeeper = GameObject.Find("Timekeeper").GetComponent<Timekeeper>();
-        /*if(passive == null || active == null){
-            throw new System.ArgumentException("Place materials in SoundObject script");
-        }*/
+
         if(player == null)print("Null player!!!");
         beatIndex = 0;
 
@@ -95,7 +91,7 @@ public class SoundObject : MonoBehaviour
                 cutoffs[i] = mod;
             }
             for (int i = 0; i < cutoffs.Length; i++){
-                if(cbeat % mod < cutoffs[i]){
+                if(cbeat % mod <= cutoffs[i]){
                     beatIndex = i;
                     break;
                 }
