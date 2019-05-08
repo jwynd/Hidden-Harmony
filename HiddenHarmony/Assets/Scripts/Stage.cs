@@ -15,7 +15,7 @@ public class Stage : MonoBehaviour
         foreach(float halfBeat in halfBeats){
             if (halfBeat <= 0) throw new System.ArgumentException("All beats must be greater than zero");
         }
-        int temp[] = new int[pitches.Length];
+        int[] temp = new int[pitches.Length];
         for(int i = 0; i < pitches.Length; i++){
             temp[i] = pitches[i];
         }
