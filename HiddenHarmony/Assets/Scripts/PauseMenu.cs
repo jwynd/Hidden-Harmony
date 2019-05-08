@@ -50,6 +50,8 @@ public class PauseMenu : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = false;
         player.GetComponent<FirstPersonControl>().enabled = false;
         player.GetComponent<InventoryAdd>().enabled = false;
+        player.transform.Find("GlideParticles").GetComponent<ParticleSystem>().Pause();
+        player.transform.Find("AudioSource").GetComponent<AudioSource>().Pause();
         camera.GetComponent<FirstPersonControl>().enabled = false;
         Cursor.visible = true;
         pauseMenuUI.SetActive(true);
@@ -63,6 +65,8 @@ public class PauseMenu : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<FirstPersonControl>().enabled = true;
         player.GetComponent<InventoryAdd>().enabled = true;
+        player.transform.Find("GlideParticles").GetComponent<ParticleSystem>().Play();
+        player.transform.Find("AudioSource").GetComponent<AudioSource>().Play();
         camera.GetComponent<FirstPersonControl>().enabled = !cmt.Compose();
         pauseMenuUI.SetActive(false);
         inventory.SetActive(true);

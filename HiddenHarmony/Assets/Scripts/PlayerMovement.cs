@@ -65,9 +65,6 @@ public class PlayerMovement : MonoBehaviour {
             if(particles.isPlaying){
                 particles.Stop();
             }
-            if(audio.isPlaying){
-                fadeToMute();
-            }
         }
 
         if(yVelocity <= terminalVelocity * 10){
@@ -82,9 +79,6 @@ public class PlayerMovement : MonoBehaviour {
             }
             if(particles.isPlaying){
                 particles.Stop();
-            }
-            if(audio.isPlaying){
-                fadeToMute();
             }
         }
 
@@ -130,29 +124,29 @@ public class PlayerMovement : MonoBehaviour {
             returnVector.y = -glideGravity;
             yVelocity = (terminalVelocity * 10);
             if(isMoving()){
+                if(!particles.isPlaying){
+                    particles.Play();
+                }
+                if(!audio.isPlaying){
+                    audio.Play();
+                }
                 toBoostFOV();
                 toGlideVolume();
             }
-            if(!particles.isPlaying){
-                particles.Play();
-            }
-            if(!audio.isPlaying){
-                audio.Play();
-            }
-
         }
         else{
             returnVector.x = 0;
             returnVector.y = -(terminalVelocity * 10) + yVelocity;
+            if(audio.isPlaying){
+                fadeToMute();
+            }
         }
         return returnVector;
     }
 
     public float Sprint(){
-    if(Input.GetKey(KeyCode.LeftShift) && Glide().x == 0){
-            if(isMoving()){
-                toBoostFOV();
-            }
+    if(Input.GetKey(KeyCode.LeftShift) && isMoving() && Glide().x == 0){
+            toBoostFOV();
             return sprintBoost;
         }
         else{
