@@ -5,34 +5,54 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
     // Based on code from Stephen Barr
 
-    [SerializeField] private float yVelocity; //the counter to determine at which point in the jump the player is at.
     private bool jumping = false; //checks if the player is jumping
     private bool canGlide = true; //can the player glide
     private bool canSprint = true; //can the player sprint
     private CharacterController character; //creates a game object for storage
     
+    [Header("Movement")]
+    [Tooltip("The speed at which the player moves horizontally")]
     public float speed = 6f; //sets speed multiplier
     //speed suggested value 6f
-    [SerializeField] private float glideBoost = 4f; //the value added to speed during gliding
-    //glideBoost suggested value 4f
-    [SerializeField] private float sprintBoost = 4f;
-    [SerializeField] private float baseFOV = 60f; //the original field of vision angle for the player
-    [SerializeField] private float boostedFOV = 75f; //the field of vision angle for the player while gliding or sprinting (hence, boosted)
-    [SerializeField] private float changeSpeedFOV = 0.25f; //the rate at which the field of view changes during glide
-    [SerializeField] private float glideMusicVolume = 50f; //value divided by 100 in code - the max volume at which the glide music will play
-    [SerializeField] private float glideMusicChange = 0.005f; //the rate at which music volume changes during glide
-    public float terminalVelocity = 5.5f; //value multiplied by 10 - the value subtracted from the y axis to calculate terminalVelocity
-    //terminalVelocity suggested value 5.5f
-    public float glideGravity = 3f; //the rate at which the player falls while gliding (calculated much differently than the standard gravity)
-    //glideGravity suggested value 3f
+    [Tooltip("How high the player jumps (Must be greater than terminalVelocity)\n(Multiplied by 10 in code)")]
     public float jump = 7f; //value multiplied by 10 - the maximun value of the jump. value must be larger than terminalVelocity
     //jump suggested value 7f
+    [Tooltip("The rate at which the player approaches terminal velocity\n(Divided by 10 in code)")]
     public float gravity = 6f; //value divided by 10 - the rate at which yVelocity decreases during a jump unitl terminal velocity is reached
     //gravity suggested value 6f
+    [Tooltip("The maximum speed at which the player falls\n(Multiplied by 10 in code)")]
+    public float terminalVelocity = 5.5f; //value multiplied by 10 - the value subtracted from the y axis to calculate terminalVelocity
+    //terminalVelocity suggested value 5.5f
+    [Tooltip("The distance from the ground at which the player can jump")]
     public float canJump = 1.25f; //the distance between the player and the ground at which the player can jump
     //canJump suggested value for capsulecast 1.25f. I don't know why this works, but it does.
     //canJump suggested value for raycast 1.25f. Assumes player is of height 2 and takes half, which is 1. The 0.25 is added for wiggle room.
-    [SerializeField] private bool shiftToGlide = false;
+    [Header("Glide")]
+    [Tooltip("The rate at which the player falls during glide (value does not relate to gravity variable)")]
+    public float glideGravity = 3f; //the rate at which the player falls while gliding (calculated much differently than the standard gravity)
+    //glideGravity suggested value 3f
+    [SerializeField][Tooltip("The speed added to the players movement while gliding")]
+    private float glideBoost = 4f; //the value added to speed during gliding
+    //glideBoost suggested value 4f
+    [SerializeField][Tooltip("(0-100) The volume at which the glide music plays")]
+    private float glideMusicVolume = 50f; //value divided by 100 in code - the max volume at which the glide music will play
+    [SerializeField][Tooltip("The rate at which the glide music fades in and out")]
+    private float glideMusicChange = 0.005f; //the rate at which music volume changes during glide
+    [Header("Sprint")]
+    [SerializeField][Tooltip("Speed added when sprinting")]
+    private float sprintBoost = 4f;
+    [Header("Field of View")]
+    [SerializeField][Tooltip("The original angle for the camera's field of vision")]
+    private float baseFOV = 60f; //the original field of vision angle for the player
+    [SerializeField][Tooltip("The angle for the camera's field of vision when sprinting or gliding")]
+    private float boostedFOV = 75f; //the field of vision angle for the player while gliding or sprinting (hence, boosted)
+    [SerializeField][Tooltip("The rate at which the camera changes between fields of view")]
+    private float changeSpeedFOV = 0.25f; //the rate at which the field of view changes during glide
+    [Header("Miscellaneous")]
+    [SerializeField][Tooltip("Hold shift to glide instead of holding spacebar")]
+    private bool shiftToGlide = false;
+    [SerializeField][Tooltip("(Not for changing) Tracks the velocity of the player")]
+    private float yVelocity; //the counter to determine at which point in the jump the player is at.
     private ParticleSystem particles; //the particle system of the player object
     private Camera camera; //the main camera on the player object
     private AudioSource audio; //the audio source on the player object
