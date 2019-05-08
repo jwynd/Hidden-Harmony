@@ -15,9 +15,17 @@ public class Stage : MonoBehaviour
         foreach(float halfBeat in halfBeats){
             if (halfBeat <= 0) throw new System.ArgumentException("All beats must be greater than zero");
         }
-        foreach(int pitch in pitches){
-            if(pitch > 7 || pitch < 0) throw new System.ArgumentException("All pitches must be between 0 and 7 inclusive");
+        int[] temp = new int[pitches.Length];
+        for(int i = 0; i < pitches.Length; i++){
+            temp[i] = pitches[i];
         }
+        for(int i = 0; i < pitches.Length; i++){
+            if(i == pitches.Length-1){pitches[i]=temp[0];}
+            else{pitches[i] = temp[i+1];}
+        }
+        /*foreach(int pitch in pitches){
+            if(pitch > 7 || pitch < 0) throw new System.ArgumentException("All pitches must be between 0 and 7 inclusive");
+        }*/
         int index;
         crystals = new GameObject[halfBeats.Length];
         for(int i = 0; i < halfBeats.Length; ++i){
