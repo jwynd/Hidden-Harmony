@@ -150,8 +150,8 @@ public class PlayerMovement : MonoBehaviour {
                 if(!audio.isPlaying){
                     audio.Play();
                 }
-                toBoostFOV();
                 toGlideVolume();
+                toBoostFOV();
             }
         }
         else{

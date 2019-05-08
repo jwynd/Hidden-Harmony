@@ -57,6 +57,8 @@ public class ComposeModeTransition : MonoBehaviour
                 playerCamera.GetComponent<FirstPersonControl>().enabled = false;
                 playerCamera.transform.SetParent(null);
                 interactMessage.transform.gameObject.SetActive(false);
+                player.transform.Find("GlideParticles").GetComponent<ParticleSystem>().Stop();
+                player.transform.Find("AudioSource").GetComponent<AudioSource>().Stop();
                 cameraOrigin = cameraReturn.position;
                 //composeCamera.transform.position = cameraOrigin;
                 compose = true;

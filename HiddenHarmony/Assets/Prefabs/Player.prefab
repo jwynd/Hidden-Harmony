@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7010431191524726844}
   - component: {fileID: 7286081261364781401}
   - component: {fileID: 328569967}
+  - component: {fileID: 9010589685797006840}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -132,21 +133,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174d57a14b6e6e240a7810f483b88083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yVelocity: 0
   speed: 8
+  jump: 7
+  gravity: 6
+  terminalVelocity: 5.5
+  canJump: 1.25
+  glideGravity: 3
   glideBoost: 4
+  glideMusicVolume: 50
+  glideMusicChange: 0.002
   sprintBoost: 4
   baseFOV: 60
   boostedFOV: 75
   changeSpeedFOV: 0.25
-  glideMusicVolume: 50
-  glideMusicChange: 0.002
-  terminalVelocity: 5.5
-  glideGravity: 3
-  jump: 7
-  gravity: 6
-  canJump: 1.25
   shiftToGlide: 0
+  yVelocity: 0
 --- !u!114 &328569968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +210,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9010589685797006840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328569965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfa4dc7deccb62f42a9fcbbfe2fb1129, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactDistance: 10
 --- !u!1 &1341699120
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +369,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f0944029d5f1a064482b2237fb73e199, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
