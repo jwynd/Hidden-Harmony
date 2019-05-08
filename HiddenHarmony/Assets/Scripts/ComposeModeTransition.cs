@@ -9,6 +9,7 @@ public class ComposeModeTransition : MonoBehaviour
     [SerializeField] private float transitionSpeed = 20.0f;
     private Vector3 cameraOrigin;
     private Vector3 playerOrigin;
+    private GameObject interactMessage;
     private float startTime;
     private float distCovered;
     private float fracJourney;
@@ -32,11 +33,12 @@ public class ComposeModeTransition : MonoBehaviour
         playerCamera = GameObject.Find("Player/MainCamera");
 //        composeCamera = new GameObject("composeCamera");
         cameraReturn = GameObject.Find("Player/CameraReturn").transform;
-/*      composeCamera.tag = "MainCamera";
-        composeCamera.transform.SetAsLastSibling();
-        composeCamera.AddComponent<Camera>();
-        composeCamera.SetActive(false);
-*/
+        interactMessage = GameObject.Find("Canvas/InteractMessage");
+        /*      composeCamera.tag = "MainCamera";
+                composeCamera.transform.SetAsLastSibling();
+                composeCamera.AddComponent<Camera>();
+                composeCamera.SetActive(false);
+        */
     }
 
     // Update is called once per frame
@@ -51,8 +53,10 @@ public class ComposeModeTransition : MonoBehaviour
                 player.GetComponent<PlayerMovement>().enabled = false;
                 player.GetComponent<FirstPersonControl>().enabled = false;
                 player.GetComponent<InventoryAdd>().enabled = false;
+                player.GetComponent<InteractScript>().enabled = false;
                 playerCamera.GetComponent<FirstPersonControl>().enabled = false;
                 playerCamera.transform.SetParent(null);
+                interactMessage.transform.gameObject.SetActive(false);
                 cameraOrigin = cameraReturn.position;
                 //composeCamera.transform.position = cameraOrigin;
                 compose = true;
@@ -69,9 +73,11 @@ public class ComposeModeTransition : MonoBehaviour
                 player.GetComponent<PlayerMovement>().enabled = true;
                 player.GetComponent<FirstPersonControl>().enabled = true;
                 player.GetComponent<InventoryAdd>().enabled = true;
+                player.GetComponent<InteractScript>().enabled = true;
                 playerCamera.GetComponent<FirstPersonControl>().enabled = true;
+                interactMessage.transform.gameObject.SetActive(true);
                 //composeCamera.transform.SetAsLastSibling();
-                
+
                 compose = false;
                 transitioning = true;
                 startTime = Time.time;
