@@ -32,8 +32,15 @@ public class InteractScript : MonoBehaviour
                 if (hit.collider.tag == "Interactable")
                 {
                     currentInteractable = hit.collider.gameObject;
-                    currentInteractable.GetComponent<Animator>().SetBool("interacting", true);
-                    currentInteractable.GetComponent<AudioSource>().Play();
+                    if (currentInteractable.GetComponent<Animator>() != null)
+                    {
+                        currentInteractable.GetComponent<Animator>().SetBool("interacting", true);
+                        currentInteractable.GetComponent<AudioSource>().Play();
+                    }
+                    else
+                    {
+                        currentInteractable.GetComponent<AudioSource>().Play();
+                    }
                 }
             }
         }
