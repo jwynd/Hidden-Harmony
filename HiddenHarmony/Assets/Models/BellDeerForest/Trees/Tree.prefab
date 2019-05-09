@@ -96,7 +96,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Optimized Bark Material
-  m_Shader: {fileID: 10604, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 33359e5382d1933469d609277de88d1f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -115,6 +115,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: dcb82b2f83fd5bb4599c0f7028ca9672, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RampTex:
+        m_Texture: {fileID: 2800000, guid: c3a816e4e5b9d3a44b4e03a19ef8b2b4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _TranslucencyMap:
         m_Texture: {fileID: 2800000, guid: 3977969d9c94b434e8dcc037e5f8b987, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -123,7 +127,8 @@ Material:
     - _Cutoff: 0.3
     - _SquashAmount: 1
     m_Colors:
-    - _Color: {r: 0.6509434, g: 0.51187146, b: 0.43293878, a: 1}
+    - _Color: {r: 0.6509804, g: 0.44413093, b: 0.43137255, a: 1}
+    - _ShadowTint: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}
