@@ -1,38 +1,18 @@
 fileFormatVersion: 2
-guid: 5f6c83cc2115a5f40935a4db2d519181
+guid: e8c518fb00b2a714f8a455c73bade682
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Armature
-    100004: Bone
-    100006: Bone_002
-    100008: Bone_003
-    100010: Bone_004
-    100012: Bone_005
-    100014: Cylinder
     400000: //RootNode
-    400002: Armature
-    400004: Bone
-    400006: Bone_002
-    400008: Bone_003
-    400010: Bone_004
-    400012: Bone_005
-    400014: Cylinder
-    2100000: ReefMat__Kelp_png
+    2100000: Material
+    2100002: Material_001
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cylinder
+    4300000: Cube
     7400000: Default Take
-    7400002: ArmatureAction
     9500000: //RootNode
-    13700000: Cylinder
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ReefMat__Kelp_png
-    second: {fileID: 2100000, guid: 397fc7785a329b346b45ad362112b2fc, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
