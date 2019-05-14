@@ -10,7 +10,6 @@ Properties {
 	[NoScaleOffset] _BumpMap ("Normalmap ", 2D) = "bump" {}
 	WaveSpeed ("Wave speed (map1 x,y; map2 x,y)", Vector) = (19,9,-16,-7)
 	[NoScaleOffset] _ReflectiveColor ("Reflective color (RGB) fresnel (A) ", 2D) = "" {}
-	_HorizonColor ("Simple water horizon color", COLOR)  = ( .172, .463, .435, 1)
 	[HideInInspector] _ReflectionTex ("Internal Reflection", 2D) = "" {}
 	[HideInInspector] _RefractionTex ("Internal Refraction", 2D) = "" {}
 }
@@ -27,7 +26,7 @@ CGPROGRAM
 #pragma vertex vert
 #pragma fragment frag
 #pragma multi_compile_fog
-#pragma multi_compile WATER_REFRACTIVE WATER_REFLECTIVE WATER_SIMPLE
+#pragma multi_compile WATER_REFRACTIVE WATER_REFLECTIVE
 
 #if defined (WATER_REFLECTIVE) || defined (WATER_REFRACTIVE)
 #define HAS_REFLECTION 1
@@ -96,16 +95,13 @@ v2f vert(appdata v)
 #if defined (WATER_REFLECTIVE) || defined (WATER_REFRACTIVE)
 sampler2D _ReflectionTex;
 #endif
-#if defined (WATER_REFLECTIVE) || defined (WATER_SIMPLE)
+#if defined (WATER_REFLECTIVE)
 sampler2D _ReflectiveColor;
 #endif
 #if defined (WATER_REFRACTIVE)
 sampler2D _Fresnel;
 sampler2D _RefractionTex;
 uniform float4 _RefrColor;
-#endif
-#if defined (WATER_SIMPLE)
-uniform float4 _HorizonColor;
 #endif
 sampler2D _BumpMap;
 
@@ -144,12 +140,6 @@ half4 frag( v2f i ) : SV_Target
 	half4 water = tex2D( _ReflectiveColor, float2(fresnelFac,fresnelFac) );
 	color.rgb = lerp( water.rgb, refl.rgb, water.a );
 	color.a = refl.a * water.a;
-	#endif
-	
-	#if defined(WATER_SIMPLE)
-	half4 water = tex2D( _ReflectiveColor, float2(fresnelFac,fresnelFac) );
-	color.rgb = lerp( water.rgb, _HorizonColor.rgb, water.a );
-	color.a = _HorizonColor.a;
 	#endif
 
 	UNITY_APPLY_FOG(i.fogCoord, color);
