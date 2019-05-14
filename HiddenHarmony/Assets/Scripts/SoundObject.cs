@@ -151,12 +151,17 @@ public class SoundObject : MonoBehaviour
             reActivateSnapPoint = false;
         }
 
+        if(Time.time > timekeper.FadeOutStartTime(playOnBeat) && Time.time < timekeeper.FadeOutEndTime(playOnBeat)){
+                audioSource.volume -= Time.deltaTime/0.01;
+        }
+        
         if(onStage && cbeat == playOnBeat && !played){
             // print("Playing sound at time "+nextTimer);
             // print("stg.pitches[beatIndex] = "+stg.pitches[beatIndex]);
             // audioSources[stg.pitches[beatIndex]].volume = 1.0f;
             // audioSources[stg.pitches[beatIndex]].Play();
             audioSource.clip = audioClips[stg.pitches[beatIndex]];
+            audioSource.volume = 1.0f;
             audioSource.Play();
             played = true;
             //vfxTimerActive = true;
@@ -171,21 +176,6 @@ public class SoundObject : MonoBehaviour
             }
         }
 
-/*        if(vfxTimerActive){
-            // print("light on");
-            vfxTimer += Time.deltaTime;
-            rendered.GetComponent<MeshRenderer>().material = active;
-        }
-        else{
-            // print("light off");
-            rendered.GetComponent<MeshRenderer>().material = passive;
-        }
-
-        if(vfxTimer > vfxDuration*beat){
-            vfxTimer = 0.0f;
-            vfxTimerActive = false;
-        }
-*/
     }
     private int abs(int x){
         if(x < 0) return x * -1;

@@ -22,6 +22,18 @@ public class Timekeeper : MonoBehaviour
         }
     }
 
+    public float FadeOutStartTime(int beatIndex){
+        int beatsToIndex = beatIndex - currentHalfBeat;
+        float time = Time.time + (beat*beatsToIndex) - timer -0.01;
+        return time;
+    }
+
+    public float FadeOutEndTime(int beatIndex){
+        int beatsToIndex = beatIndex - currentHalfBeat;
+        float time = Time.time + (beat*beatsToIndex) - timer;
+        return time;
+    }
+
     public int CurrentHalfBeat(){
         return currentHalfBeat;
     }
