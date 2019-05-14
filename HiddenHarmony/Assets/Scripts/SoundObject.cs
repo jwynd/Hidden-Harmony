@@ -5,14 +5,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+[RequireComponent (typeof(AudioSource))]
 public class SoundObject : MonoBehaviour
 {
+    [Header("Audio Clips")]
+    [Tooltip("Old style soundobjects will still work. Feel free to leave this blank")]
+    [SerializeField] private AudioClip[] audioClips;
+    [Header("Other settings")]
     [SerializeField] private float offsetRange = 0.05f;
-//    [SerializeField] private float vfxDuration = 1.0f;
     [SerializeField] [RangeAttribute(1.0f,5.0f)] private float interactDist = 1.0f;
-//    [SerializeField] private Material passive;
-//    [SerializeField] private Material active;
     [SerializeField] private Timekeeper timekeeper;
     [SerializeField] private Color crystalColor;
     [SerializeField][ColorUsageAttribute(true,true)] private Color emissionColor;
@@ -32,6 +33,7 @@ public class SoundObject : MonoBehaviour
     private float beatTimer = 0.0f;// use to determine when one beat has passed
     private float nextTimer = 0.0f;// use to determine when to play next beat
     private AudioSource[] audioSources;
+    private AudioSource audioSource;
     private string suffix;
     private AudioSource[] bgs;
     private bool resetNext = false;
@@ -49,6 +51,20 @@ public class SoundObject : MonoBehaviour
     private int[] cutoffs;
     private int nextCutoff;
 
+    private void FormatSoundObject(){
+        // This function is called in awake and ensures that the sound object takes the proper form
+        audioSources = this.GetComponents<AudioSource>();
+        audioSource = audioSources[0];
+        if(audioClips.Length == 0){
+            audioClips = new AudioClip[audioSources.Length];
+            for(int i = 0; i < audioClips.Length; ++i){
+                audioClips[i] = audioSources[i].clip;
+                if(i > 0) Destroy(audioSources[i]);
+            }
+        }
+        audioSources = null;
+    }
+
     public bool OnStage(){
         return onStage;
     }
@@ -59,13 +75,13 @@ public class SoundObject : MonoBehaviour
     }
     void Awake(){
         player = GameObject.Find("Player");
+        FormatSoundObject();
     }
     // Start is called before the first frame update
     void Start(){
         shader = Shader.Find("Custom/ToonOutlineEmission");
         rendered = this.transform.GetChild(0).GetChild(0).gameObject;
         if(timekeeper == null) throw new System.ArgumentException("Timekeeper null");
-        audioSources = this.GetComponents<AudioSource>();
 
         origin = transform.position;
 
@@ -138,8 +154,10 @@ public class SoundObject : MonoBehaviour
         if(onStage && cbeat == playOnBeat && !played){
             // print("Playing sound at time "+nextTimer);
             // print("stg.pitches[beatIndex] = "+stg.pitches[beatIndex]);
-            audioSources[stg.pitches[beatIndex]].volume = 1.0f;
-            audioSources[stg.pitches[beatIndex]].Play();
+            // audioSources[stg.pitches[beatIndex]].volume = 1.0f;
+            // audioSources[stg.pitches[beatIndex]].Play();
+            audioSource.clip = audioClips[stg.pitches[beatIndex]];
+            audioSource.Play();
             played = true;
             //vfxTimerActive = true;
         }
