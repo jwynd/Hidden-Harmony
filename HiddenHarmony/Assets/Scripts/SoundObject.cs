@@ -15,8 +15,8 @@ public class SoundObject : MonoBehaviour
     [SerializeField] private float offsetRange = 0.05f;
     [SerializeField] [RangeAttribute(1.0f,5.0f)] private float interactDist = 1.0f;
     [SerializeField] private Timekeeper timekeeper;
-    [SerializeField] private Color crystalColor;
-    [SerializeField][ColorUsageAttribute(true,true)] private Color emissionColor;
+    public Color crystalColor;
+    [ColorUsageAttribute(true,true)] public Color emissionColor;
     [HideInInspector] public bool onStage = false;
     [HideInInspector] public Vector3 origin;
 
