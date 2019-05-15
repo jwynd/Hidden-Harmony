@@ -90,7 +90,7 @@ public class SoundObjectCompose : MonoBehaviour {
 
                     //stageObjectTransform.position = Input.mousePosition;
 
-
+                    hit.collider.gameObject.GetComponent<SoundObject>().blankStage();
                     Destroy(hit.collider.gameObject);
 
                     
