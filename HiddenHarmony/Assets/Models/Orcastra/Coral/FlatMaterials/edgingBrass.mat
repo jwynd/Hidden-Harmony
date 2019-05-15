@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: tallKelpPurple 1
-  m_Shader: {fileID: 4800000, guid: 10b609adbe35d6040af715b7c41cba08, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_Name: edgingBlue 1
+  m_Shader: {fileID: 4800000, guid: 33359e5382d1933469d609277de88d1f, type: 3}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b093254032337ee4cbc96b0b8641d463, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -55,14 +55,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RampTex:
+        m_Texture: {fileID: 2800000, guid: c3a816e4e5b9d3a44b4e03a19ef8b2b4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amplitude: 0.22
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Dist: 100
     - _DstBlend: 0
-    - _Frequency: 0.121
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
@@ -72,10 +73,10 @@ Material:
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 1.5
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.10034709, g: 0.35343933, b: 0.5188679, a: 1}
+    - _EmissionColor: {r: 0.2264151, g: 0.20825917, b: 0.20825917, a: 0}
+    - _ShadowTint: {r: 0.0102349585, g: 0.074259214, b: 0.4339623, a: 0}
