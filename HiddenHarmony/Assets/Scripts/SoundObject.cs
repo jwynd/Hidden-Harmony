@@ -51,7 +51,30 @@ public class SoundObject : MonoBehaviour
     private int[] cutoffs;
     private int nextCutoff;
 
-    private void FormatSoundObject(){
+    private void FormatSoundObjectOld(){
+        audioSources = this.GetComponents<AudioSource>();
+        if(audioClips.Length > 0){
+            foreach(AudioSource aud in audioSources){
+                Destroy(aud);
+            }
+            audioSources = new AudioSource[audioClips.Length];
+            for(int i = 0; i < audioClips.Length; i++){
+                audioSources[i] = this.gameObject.AddComponent<AudioSource>() as AudioSource;
+                // Ensure application exits on error
+                if(audioSources[i] == null){
+                    throw new System.ArgumentException("FormatSoundObjectOld Failed to create AudioSource"+i);
+                    #if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+                    #else
+                    Application.Quit();
+                    #endif
+                }
+                audioSources[i].clip = audioClips[i];
+            }
+        }
+    }
+
+    private void FormatSoundObjectNew(){
         // This function is called in awake and ensures that the sound object takes the proper form
         audioSources = this.GetComponents<AudioSource>();
         audioSource = audioSources[0];
@@ -75,7 +98,7 @@ public class SoundObject : MonoBehaviour
     }
     void Awake(){
         player = GameObject.Find("Player");
-        FormatSoundObject();
+        FormatSoundObjectOld();
     }
     // Start is called before the first frame update
     void Start(){
@@ -151,18 +174,18 @@ public class SoundObject : MonoBehaviour
             reActivateSnapPoint = false;
         }
 
-        if(Time.time > timekeeper.FadeOutStartTime(playOnBeat) && Time.time < timekeeper.FadeOutEndTime(playOnBeat)){
-                audioSource.volume -= (float)(Time.deltaTime/0.01);
-        }
+//        if(Time.time > timekeeper.FadeOutStartTime(playOnBeat) && Time.time < timekeeper.FadeOutEndTime(playOnBeat)){
+//                audioSource.volume -= (float)(Time.deltaTime/0.01);
+//        }
         
         if(onStage && cbeat == playOnBeat && !played){
             // print("Playing sound at time "+nextTimer);
             // print("stg.pitches[beatIndex] = "+stg.pitches[beatIndex]);
-            // audioSources[stg.pitches[beatIndex]].volume = 1.0f;
-            // audioSources[stg.pitches[beatIndex]].Play();
-            audioSource.clip = audioClips[stg.pitches[beatIndex]];
-            audioSource.volume = 1.0f;
-            audioSource.Play();
+            audioSources[stg.pitches[beatIndex]].volume = 1.0f;
+            audioSources[stg.pitches[beatIndex]].Play();
+//            audioSource.clip = audioClips[stg.pitches[beatIndex]];
+//            audioSource.volume = 1.0f;
+//            audioSource.Play();
             played = true;
             //vfxTimerActive = true;
         }
