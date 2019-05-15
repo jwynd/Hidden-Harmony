@@ -151,8 +151,8 @@ public class SoundObject : MonoBehaviour
             reActivateSnapPoint = false;
         }
 
-        if(Time.time > timekeper.FadeOutStartTime(playOnBeat) && Time.time < timekeeper.FadeOutEndTime(playOnBeat)){
-                audioSource.volume -= Time.deltaTime/0.01;
+        if(Time.time > timekeeper.FadeOutStartTime(playOnBeat) && Time.time < timekeeper.FadeOutEndTime(playOnBeat)){
+                audioSource.volume -= (float)(Time.deltaTime/0.01);
         }
         
         if(onStage && cbeat == playOnBeat && !played){
