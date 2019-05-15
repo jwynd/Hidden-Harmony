@@ -70,7 +70,7 @@ public class PauseMenu : MonoBehaviour
         camera.GetComponent<FirstPersonControl>().enabled = !cmt.Compose();
         pauseMenuUI.SetActive(false);
         inventory.SetActive(true);
-        Cursor.visible = false;
+        Cursor.visible = cmt.Compose();
         isPaused = false;
         reticle.SetActive(true);
     }
@@ -85,6 +85,10 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Quit(){
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
         Application.Quit();
+        #endif
     }
 }
