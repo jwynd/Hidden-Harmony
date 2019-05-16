@@ -23,7 +23,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: c509ef186b61e724aba0cbf449b6d309, type: 3}
       propertyPath: m_Name
-      value: TutRock1 (6)
+      value: TutRock1 (6) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c509ef186b61e724aba0cbf449b6d309, type: 3}
       propertyPath: m_LocalRotation.x
@@ -85,6 +85,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0c89db1e59f954d41844aea66361e52c, type: 2}
+    - target: {fileID: 3300000, guid: c509ef186b61e724aba0cbf449b6d309, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: c509ef186b61e724aba0cbf449b6d309, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c509ef186b61e724aba0cbf449b6d309, type: 3}
 --- !u!1 &1290834197422440923 stripped

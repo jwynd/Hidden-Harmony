@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1080643401604880614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5665096091147308315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fbb6f8450748ea4f8d4d46b6eace909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5665096091147406265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9,7 +21,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100002, guid: 1d95b68e484b1b242b814511762739eb, type: 3}
       propertyPath: m_Name
-      value: malimali
+      value: malimali Variant
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1d95b68e484b1b242b814511762739eb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -57,3 +69,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d95b68e484b1b242b814511762739eb, type: 3}
+--- !u!1 &5665096091147308315 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: 1d95b68e484b1b242b814511762739eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 5665096091147406265}
+  m_PrefabAsset: {fileID: 0}
