@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1588040649910329865}
   - component: {fileID: 7158193031496683769}
   - component: {fileID: 3786465554994732974}
+  - component: {fileID: 7560400119270284691}
   m_Layer: 0
   m_Name: yCoralBlue
   m_TagString: Untagged
@@ -98,3 +99,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!64 &7560400119270284691
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8990548125698131648}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 116989bf0d4d77d4b8e3f29e81e82126, type: 3}

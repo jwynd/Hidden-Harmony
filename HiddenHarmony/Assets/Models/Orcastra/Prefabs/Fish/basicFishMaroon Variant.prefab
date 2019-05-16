@@ -9,8 +9,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 1c28c5c22629a2d4fbb2924331533187, type: 3}
       propertyPath: m_Name
-      value: basicFishMaroon
+      value: basicFishMaroon Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 1c28c5c22629a2d4fbb2924331533187, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e7508b9f7dd44334497bace7b4edb86a, type: 2}
     - target: {fileID: 400000, guid: 1c28c5c22629a2d4fbb2924331533187, type: 3}
       propertyPath: m_LocalPosition.x
       value: 29.736
@@ -55,9 +59,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 1c28c5c22629a2d4fbb2924331533187, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: e7508b9f7dd44334497bace7b4edb86a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c28c5c22629a2d4fbb2924331533187, type: 3}

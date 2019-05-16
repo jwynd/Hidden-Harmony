@@ -9,8 +9,13 @@ namespace PathCreation.Examples
         public PathCreator pathCreator;
         public EndOfPathInstruction endOfPathInstruction;
         public float speed = 5;
-        public float distanceTravelled;
+        public float distanceTravelled = 0;
 
+        void Start ()
+        {
+            distanceTravelled = ((Random.Range(0, 50) * 25) + Random.Range(0, 25)); 
+        }
+ 
         void Update()
         {
             if (pathCreator != null)
