@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PathCreation;
+
 
 public class Cutscene : MonoBehaviour
 {
     [Tooltip("These are the points that the camera will look at, it will switch to the next point after the time in delay has pased")]
     [SerializeField] private Transform[] lookAt;
     [Tooltip("The camera will wait this long before looking at the next target as specified by \"Look At\"")]
-    [SerializeField] private floats[] delays;
+    [SerializeField] private float[] delays;
     [Tooltip("These will be created at the delay minus the \"Appearance Offset\"")]
     [SerializeField] private GameObject[] toEnable;
     [Tooltip("Game Objects are enabled at delay minus this")]
