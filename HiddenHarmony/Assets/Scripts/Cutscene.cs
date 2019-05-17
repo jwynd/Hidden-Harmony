@@ -39,6 +39,7 @@ public class Cutscene : MonoBehaviour
 
     void Start(){
         mainCamera = GameObject.Find("MainCamera");
+        mainCamera.GetComponent<PathFollower>().enabled = true;
         Fadeout(Color.black); //Fadeout camera
         // Camera will snap to position when the pathCreator is enabled
         pathCreator.enabled = true;
