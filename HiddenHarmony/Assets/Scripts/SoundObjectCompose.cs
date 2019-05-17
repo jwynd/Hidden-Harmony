@@ -18,7 +18,8 @@ public class SoundObjectCompose : MonoBehaviour {
     private Transform itemFrame;
     private GameObject itemImage;
     private EventSystem es;
-    private GameObject destroyedObject; 
+    private GameObject destroyedObject;
+    private Match matchHitObj;
 
     // Start is called before the first frame update
     void Start(){
@@ -46,12 +47,7 @@ public class SoundObjectCompose : MonoBehaviour {
             Match matchSound = Regex.Match(hit.collider.tag, soundPattern);
             if (matchSound.Success)
             {
-                if(Input.GetMouseButtonDown(0)){
-                    //GameObject itemImage = itemDrop.
-                    //GameObject itemImage = Instantiate(hit.collider.gameObject);
-
-                   
-
+                if(Input.GetMouseButtonDown(0)){              
                     for (int i = 0; i < panelAccess.transform.childCount; i++)
                     {
                         itemFrame = panelAccess.transform.GetChild(i);
@@ -61,39 +57,19 @@ public class SoundObjectCompose : MonoBehaviour {
                         print("This stuff" + itemImage.GetComponent<Image>().sprite.name);
                         print("GameObject name is " + hit.collider.gameObject.name);
 
-                        Match matchHitObj = Regex.Match(hit.collider.gameObject.name, itemImage.GetComponent<Image>().sprite.name);
+                        matchHitObj = Regex.Match(hit.collider.gameObject.name, itemImage.GetComponent<Image>().sprite.name);
                         if (matchHitObj.Success)
                         {
-                            isDragging = true;
-                            print("Name is" + itemImage.GetComponent<Image>().sprite.name);
-                            //setSoundObject(GameObject.Find(itemImage.GetComponent<Image>().sprite.name));
-                            print("item Drop is " + itemDrop.name);
-
-                            print("hit collider is + " + hit.collider.gameObject.name);
-                            itemFrame.GetComponent<Button>().onClick.Invoke();
-
-
-                            //EventSystem es = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-                            //itemFrame.GetComponent<Drag>().OnDrag(new PointerEventData(es));
-                            //itemImage.GetComponent<Image>().sprite = Resources.Load<Sprite>(itemDrop.name);
-                            
+                            break;
                         }
+                        
+                        
                     }
 
-                    //panelAccess.transform.getChildCount
-                    //GameObject itemImage = panelAccess.Find(itemDrop.name).GetComponent<Image>();
-
-                    //can I access the button that was pressed based on the gameObject's image/tag?
-
-                    //itemImage.GetComponent<Image>().sprite = Resources.Load<Sprite>(hit.collider.gameObject.name);
-                    //Transform stageObjectTransform = hit.collider.gameObject.transform;
-
-                    //stageObjectTransform.position = Input.mousePosition;
-
+                    isDragging = true;
+                    itemFrame.GetComponent<Button>().onClick.Invoke();
                     hit.collider.gameObject.GetComponent<SoundObject>().blankStage();
                     Destroy(hit.collider.gameObject);
-
-                    
                 }
             }
 
