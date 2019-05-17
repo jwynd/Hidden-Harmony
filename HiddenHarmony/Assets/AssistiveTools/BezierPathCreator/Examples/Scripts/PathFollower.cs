@@ -10,10 +10,11 @@ namespace PathCreation.Examples
         public EndOfPathInstruction endOfPathInstruction;
         public float speed = 5;
         public float distanceTravelled = 0;
+        public bool camera = false;
 
         void Start ()
         {
-            distanceTravelled = ((Random.Range(0, 50) * 25) + Random.Range(0, 25)); 
+            if (!camera) distanceTravelled = ((Random.Range(0, 50) * 25) + Random.Range(0, 25)); 
         }
  
         void Update()
@@ -22,7 +23,7 @@ namespace PathCreation.Examples
             {
                 distanceTravelled += speed * Time.deltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-                transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                if(!camera) transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
             }
         }
     }
