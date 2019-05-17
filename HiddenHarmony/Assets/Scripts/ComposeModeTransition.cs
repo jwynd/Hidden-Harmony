@@ -121,4 +121,22 @@ public class ComposeModeTransition : MonoBehaviour
             Cursor.visible = false;
         }
     }
+    
+    public void composeImmediate(){
+        player.GetComponent<CharacterController>().enabled = false;
+        player.GetComponent<PlayerMovement>().enabled = false;
+        player.GetComponent<FirstPersonControl>().enabled = false;
+        player.GetComponent<InventoryAdd>().enabled = false;
+        player.GetComponent<InteractScript>().enabled = false;
+        playerCamera.GetComponent<FirstPersonControl>().enabled = false;
+        playerCamera.transform.SetParent(null);
+        interactMessage.transform.gameObject.SetActive(false);
+        player.transform.Find("GlideParticles").GetComponent<ParticleSystem>().Stop();
+        player.transform.Find("AudioSource").GetComponent<AudioSource>().Stop();
+        cameraOrigin = cameraReturn.position;
+        compose = true;
+        playerCamera.transform.position = composeCameraPosition.position;
+        playerCamera.transform.LookAt(cameraTarget);
+        transitioning = false;
+    }
 }

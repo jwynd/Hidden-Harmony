@@ -54,8 +54,8 @@ public class Cutscene : MonoBehaviour
             
             if(index < lookAt.Length){
                 //Main Portion
-                mainCamera.LookAt(lookAt[index]);
-                if(timer > delay[index] - appearanceOffset){
+                mainCamera.transform.LookAt(lookAt[index]);
+                if(timer > delays[index] - appearanceOffset){
                     Fadeout(Color.white); // this should happen a certain number of seconds before the object appears and only once
                     toEnable[index].SetActive(true);
                 }
@@ -65,7 +65,7 @@ public class Cutscene : MonoBehaviour
                 GameObject.Find("CameraChange").GetComponent<ComposeModeTransition>().composeImmediate();
             }
             timer += Time.deltaTime;// Increment the time
-            if(timer > delay[index]) index++;
+            if(timer > delays[index]) index++;
         }
         // Destroy(pathCreator); //This runs at the end of the script
     }
