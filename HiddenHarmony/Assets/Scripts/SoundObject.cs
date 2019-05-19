@@ -70,6 +70,12 @@ public class SoundObject : MonoBehaviour
                     #endif
                 }
                 audioSources[i].clip = audioClips[i];
+                audioSources[i].spatialize = true;
+                audioSources[i].spatialBlend = 1.0f;
+                audioSources[i].reverbZoneMix = 1.0f;
+                audioSources[i].dopplerLevel = 0.0f;
+                audioSources[i].spread = 0.0f;
+                audioSources[i].rolloffMode = AudioRolloffMode.Custom;
             }
         }
     }
