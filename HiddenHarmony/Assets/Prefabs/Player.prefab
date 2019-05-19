@@ -4883,10 +4883,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  jump: 7
-  gravity: 6
-  terminalVelocity: 5.5
-  canJump: 1
+  jump: 70
+  gravity: 0.6
+  terminalVelocity: 55
+  canJump: 1.25
   glideGravity: 3
   glideBoost: 4
   glideMusicVolume: 50
@@ -5200,7 +5200,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
