@@ -8,6 +8,7 @@ public class Transition : MonoBehaviour
     public AudioClip source;
     public float transitionTime;
     public Material skybox;
+    [SerializeField] private bool toUnderwater = false;
     [Tooltip("Post Processing Profile")]
     [SerializeField] private PostProcessProfile newPPP;
 
@@ -16,6 +17,7 @@ public class Transition : MonoBehaviour
     private bool fading = false;
     private AudioSource newBG;
     private AudioSource oldBG;
+    private bool switchOnce;
 //    private PostProcessProfile p;
 
     // Start is called before the first frame update
@@ -38,11 +40,22 @@ public class Transition : MonoBehaviour
             oldBG.volume -= Time.deltaTime/transitionTime;
             newBG.volume += Time.deltaTime/transitionTime;
 
+            if(switchOnce && newBG.volume > 0.5f){
+                RenderSettings.skybox = skybox;
+                GameObject.Find("MainCamera").GetComponent<PostProcessVolume>().profile = newPPP;
+                if(toUnderwater){
+                    GameObject.Find("Underwater").GetComponent<UnderwaterEffect>().enabled = true;
+                    RenderSettings.fog = true;
+                } else {
+                    GameObject.Find("Underwater").GetComponent<UnderwaterEffect>().enabled = false;
+                    RenderSettings.fog = false;
+                }
+                switchOnce = false;
+            }
+
             if(oldBG.volume < 0.05f){
                 oldBG.volume = 0.0f;
                 newBG.volume = 1.0f;
-                RenderSettings.skybox = skybox;
-                GameObject.Find("MainCamera").GetComponent<PostProcessVolume>().profile = newPPP;
                 fading = false;
             }
         }
@@ -62,6 +75,7 @@ public class Transition : MonoBehaviour
         newBG.clip = source;
         newBG.Play();
         fading = true;
+        switchOnce = true;
         timer = 0.0f;
 
     }
