@@ -76,6 +76,7 @@ public class SoundObject : MonoBehaviour
                 audioSources[i].dopplerLevel = 0.0f;
                 audioSources[i].spread = 0.0f;
                 audioSources[i].rolloffMode = AudioRolloffMode.Custom;
+                audioSources[i].maxDistance = 50;
             }
         }
     }
