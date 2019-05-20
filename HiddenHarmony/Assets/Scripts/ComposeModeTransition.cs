@@ -21,6 +21,21 @@ public class ComposeModeTransition : MonoBehaviour
     private GameObject player;
     private Transform cameraReturn;
 
+    private bool inHub = true;
+
+    public void AllowCompose(){
+        inHub = true;
+    }
+
+    public void ForbidCompose(){
+        inHub = false;
+    }
+
+    public bool CanCompose(){
+        return inHub;
+    }
+
+
     public bool Compose(){
         return compose;
     }
@@ -43,7 +58,7 @@ public class ComposeModeTransition : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        if(Input.GetKeyDown(KeyCode.Tab)){
+        if(inHub && Input.GetKeyDown(KeyCode.Tab)){
             //print("Tab key pressed");
             //print(compose?"compose":"!compose");
             //print(transitioning?"transitioning":"!transitioning");
