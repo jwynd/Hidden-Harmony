@@ -51,6 +51,8 @@ public class SoundObject : MonoBehaviour
     private int[] cutoffs;
     private int nextCutoff;
 
+    private Count count;
+
     private void FormatSoundObjectOld(){
         audioSources = this.GetComponents<AudioSource>();
         if(audioClips.Length > 0){
@@ -124,6 +126,8 @@ public class SoundObject : MonoBehaviour
         glowing.SetFloat("_UseEmission", 1.0f);
         glowing.SetColor("_EmissionColor", emissionColor);
 
+        count = GameObject.Find("GameplayObjects/Count").GetComponent<Count>();
+
     }
 
     // Update is called once per frame
@@ -156,6 +160,8 @@ public class SoundObject : MonoBehaviour
                 stg = hit.transform.gameObject.GetComponent<Stage>();
                 crystals = stg.crystals;
                 onStage = true;
+                count.IncrementCount(this.gameObject.name);
+
             }
             else{
                 onStage = false;

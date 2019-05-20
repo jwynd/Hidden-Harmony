@@ -12,6 +12,7 @@ public class TransitionEditor : Editor {
     SerializedProperty skyboxProp;
     SerializedProperty ppProp;
     SerializedProperty uProp;
+    SerializedProperty cProp;
 
     void OnEnable(){
         sourceProp = serializedObject.FindProperty("source");
@@ -19,10 +20,13 @@ public class TransitionEditor : Editor {
         skyboxProp = serializedObject.FindProperty("skybox");
         ppProp = serializedObject.FindProperty("newPPP");
         uProp = serializedObject.FindProperty("toUnderwater");
+        cProp = serializedObject.FindProperty("canCompose");
     }
 
     public override void OnInspectorGUI(){
+        GUILayout.Label("Define Trigger Type:");
         EditorGUILayout.PropertyField(uProp, new GUIContent("To Orcastra"));
+        EditorGUILayout.PropertyField(cProp, new GUIContent("Allow Compose"));
 
         GUILayout.Label("\nTarget Values\n");
 //        GUILayout.BeginHorizontal();

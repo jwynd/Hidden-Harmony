@@ -11,6 +11,7 @@ public class Transition : MonoBehaviour
     [SerializeField] private bool toUnderwater = false;
     [Tooltip("Post Processing Profile")]
     [SerializeField] private PostProcessProfile newPPP;
+    [SerializeField] private bool canCompose = false;
 
     private AudioSource[] bg;
     private float timer = 0.0f;
@@ -18,12 +19,14 @@ public class Transition : MonoBehaviour
     private AudioSource newBG;
     private AudioSource oldBG;
     private bool switchOnce;
+    private ComposeModeTransition cmt;
 //    private PostProcessProfile p;
 
     // Start is called before the first frame update
     void Awake(){
         bg = GameObject.Find("BackgroundMusic").GetComponents<AudioSource>();
-        print(source.ToString());
+        cmt = GameObject.Find("GameplayObjects/CameraChange").GetComponent<ComposeModeTransition>();
+        //print(source.ToString());
 //        p = GameObject.Find("MainCamera").GetComponent<PostProcessVolume>().profile;
 //        samples = new float[source.samples * source.channels];
 //        source.GetData(samples, 0);
@@ -69,6 +72,11 @@ public class Transition : MonoBehaviour
         } else {
             oldBG = bg[1];
             newBG = bg[0];
+        }
+        if(canCompose){
+            cmt.AllowCompose();
+        } else {
+            cmt.ForbidCompose();
         }
         if(oldBG.clip == source){print("Same Clip");return;}
         newBG.volume = 0.0f;
