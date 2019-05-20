@@ -11,17 +11,20 @@ public class TransitionEditor : Editor {
     SerializedProperty transitionTimeProp;
     SerializedProperty skyboxProp;
     SerializedProperty ppProp;
+    SerializedProperty uProp;
 
     void OnEnable(){
         sourceProp = serializedObject.FindProperty("source");
         transitionTimeProp = serializedObject.FindProperty("transitionTime");
         skyboxProp = serializedObject.FindProperty("skybox");
         ppProp = serializedObject.FindProperty("newPPP");
+        uProp = serializedObject.FindProperty("toUnderwater");
     }
 
     public override void OnInspectorGUI(){
+        EditorGUILayout.PropertyField(uProp, new GUIContent("To Orcastra"));
 
-        GUILayout.Label("Target Values\n");
+        GUILayout.Label("\nTarget Values\n");
 //        GUILayout.BeginHorizontal();
 
         EditorGUILayout.PropertyField(sourceProp, new GUIContent("Audio Clip"), GUILayout.MaxWidth(300));
