@@ -44,10 +44,10 @@ public class Transition : MonoBehaviour
                 RenderSettings.skybox = skybox;
                 GameObject.Find("MainCamera").GetComponent<PostProcessVolume>().profile = newPPP;
                 if(toUnderwater){
-                    GameObject.Find("Underwater").GetComponent<UnderwaterEffect>().enabled = true;
+                    GameObject.Find("MainCamera").GetComponent<UnderwaterEffect>().enabled = true;
                     RenderSettings.fog = true;
                 } else {
-                    GameObject.Find("Underwater").GetComponent<UnderwaterEffect>().enabled = false;
+                    GameObject.Find("MainCamera").GetComponent<UnderwaterEffect>().enabled = false;
                     RenderSettings.fog = false;
                 }
                 switchOnce = false;
