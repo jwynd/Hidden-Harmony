@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class RandomIdle : StateMachineBehaviour
 {
+
+    public int min = 0;
+    public int max = 0;
+
+    private int num;
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -37,7 +42,9 @@ public class RandomIdle : StateMachineBehaviour
     // OnStateMachineEnter is called when entering a state machine via its Entry Node
     override public void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
     {
-        animator.SetInteger("idleAnimID", Random.Range(0, 4));
+        num = Random.Range(min, max);
+        Debug.Log(num);
+        animator.SetInteger("idleAnimID", Random.Range(min, max));
     }
 
     // OnStateMachineExit is called when exiting a state machine via its Exit Node
