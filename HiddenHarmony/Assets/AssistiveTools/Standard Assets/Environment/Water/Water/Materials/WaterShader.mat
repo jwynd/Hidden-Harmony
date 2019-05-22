@@ -37,11 +37,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EffectTex0:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 40, y: 40}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EffectTex1:
         m_Texture: {fileID: 2800000, guid: c4ca742834fb64940bd8430675b70daf, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _EffectTex2:
         m_Texture: {fileID: 2800000, guid: c4ca742834fb64940bd8430675b70daf, type: 3}
@@ -49,14 +49,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EffectTex3:
         m_Texture: {fileID: 2800000, guid: c4ca742834fb64940bd8430675b70daf, type: 3}
-        m_Scale: {x: 2, y: 2}
+        m_Scale: {x: 1.5, y: 1.5}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: c4ca742834fb64940bd8430675b70daf, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 10, y: 20}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -77,9 +77,9 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EffectSpeed0: 1
-    - _EffectSpeed1: 0.006
-    - _EffectSpeed2: -1
-    - _EffectSpeed3: -1
+    - _EffectSpeed1: -2.3
+    - _EffectSpeed2: -1.7
+    - _EffectSpeed3: -1.5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -97,8 +97,8 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EffectTint0: {r: 1, g: 1, b: 1, a: 1}
-    - _EffectTint1: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
-    - _EffectTint2: {r: 0.11503203, g: 0.1674542, b: 0.5188679, a: 1}
-    - _EffectTint3: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+    - _EffectTint1: {r: 0.16945532, g: 0.29225543, b: 0.3018868, a: 1}
+    - _EffectTint2: {r: 0.4773941, g: 0.61354464, b: 0.6792453, a: 1}
+    - _EffectTint3: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Tint: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
+    - _Tint: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
