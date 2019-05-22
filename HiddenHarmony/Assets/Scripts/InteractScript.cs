@@ -35,11 +35,14 @@ public class InteractScript : MonoBehaviour
                     if (currentInteractable.GetComponent<Animator>() != null)
                     {
                         currentInteractable.GetComponent<Animator>().SetBool("interacting", true);
-                        currentInteractable.GetComponent<AudioSource>().Play();
+                        if (currentInteractable.GetComponent<AudioSource>() != null) currentInteractable.GetComponent<AudioSource>().Play();
                     }
                     else
                     {
+                        if (currentInteractable.GetComponent<AudioSource>() != null)
+                        {
                         currentInteractable.GetComponent<AudioSource>().Play();
+                        }
                     }
                 }
             }
