@@ -91,4 +91,12 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
         #endif
     }
+
+    public void PlayHover(){
+        GetComponents<AudioSource>()[0].Play();
+    }
+
+    public void PlayClick(){
+        GetComponents<AudioSource>()[1].Play();
+    }
 }
