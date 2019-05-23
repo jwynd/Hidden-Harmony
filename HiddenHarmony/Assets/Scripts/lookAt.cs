@@ -2,32 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class lookAt : MonoBehaviour
+namespace PathCreation.Examples
 {
-    public Transform[] target;
-    public int count = 0;
-
-    void Update()
+    public class lookAt : MonoBehaviour
     {
-        // Rotate the camera every frame so it keeps looking at the target
-        transform.LookAt(target[count]);
-    }
+        public Transform[] target;
+        public int count = 0;
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Switch"))
+        public PathCreator[] pathCreator;
+        public EndOfPathInstruction endOfPathInstruction;
+        public float speed = 5;
+        public float distanceTravelled = 0;
+        public bool camera = false;
+
+        void Update()
         {
+            // Rotate the camera every frame so it keeps looking at the target
+            if (pathCreator != null)
+            {
+                distanceTravelled += speed * Time.deltaTime;
+                transform.position = pathCreator[count].path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+                if (!camera) transform.rotation = pathCreator[count].path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+            }
+            transform.LookAt(target[count]);
+        }
 
-            Debug.Log(other.tag);
-            if (count == target.Length)
+        void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.CompareTag("Switch"))
             {
-                count = 0;
+                distanceTravelled = 0;
+                Debug.Log(other.tag);
+                if (count == target.Length - 1)
+                {
+                    count = 0;
+                }
+                else
+                {
+                    count++;
+                }
             }
-            else
-            {
-                count++;
-            }
+            Debug.Log(count);
         }
     }
 }
