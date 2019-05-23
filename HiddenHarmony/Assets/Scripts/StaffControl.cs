@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/*
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -220,9 +221,9 @@ public class StaffControl : MonoBehaviour
             }
 */
             
-        }
-    }
-
+        //}
+    //}
+    /*
     // helper function to create notes.
     // takes argument index (i), and the desired local position on the z axis
     private void createNote(int i){
@@ -337,3 +338,4 @@ public class StaffControl : MonoBehaviour
         else return x;
     }
 }
+*/
