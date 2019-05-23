@@ -6,6 +6,7 @@ public class InteractScript : MonoBehaviour
 {
     public float interactDistance = 5.0f;
 
+    private AudioSource[] getAudio;
     private GameObject intMsg;
     private Transform camera;
     private Transform player;
@@ -35,13 +36,22 @@ public class InteractScript : MonoBehaviour
                     if (currentInteractable.GetComponent<Animator>() != null)
                     {
                         currentInteractable.GetComponent<Animator>().SetBool("interacting", true);
-                        if (currentInteractable.GetComponent<AudioSource>() != null) currentInteractable.GetComponent<AudioSource>().Play();
+                        if (currentInteractable.GetComponent<AudioSource>() != null)
+                        {
+                            getAudio = currentInteractable.GetComponents<AudioSource>();
+                            int clipPick = Random.Range(0, getAudio.Length);
+                            getAudio[clipPick].Play();
+
+
+                        }
                     }
                     else
                     {
                         if (currentInteractable.GetComponent<AudioSource>() != null)
                         {
-                        currentInteractable.GetComponent<AudioSource>().Play();
+                            getAudio = currentInteractable.GetComponents<AudioSource>();
+                            int clipPick = Random.Range(0, getAudio.Length);
+                            getAudio[clipPick].Play();
                         }
                     }
                 }
