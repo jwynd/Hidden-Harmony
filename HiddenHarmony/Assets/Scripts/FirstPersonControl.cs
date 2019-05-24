@@ -53,7 +53,7 @@ public class FirstPersonControl : MonoBehaviour {
 
     public float sensHorizontal = 10.0f;
     public float sensVertical = 10.0f;
-    public float smooth = 3.0f;
+    public float smooth = 2.3f;
 
     public float rotationX = 0;
 
