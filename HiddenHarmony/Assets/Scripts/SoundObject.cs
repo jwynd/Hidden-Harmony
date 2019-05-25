@@ -16,6 +16,7 @@ public class SoundObject : MonoBehaviour
     [SerializeField] [RangeAttribute(1.0f,5.0f)] private float interactDist = 1.0f;
     [SerializeField] private Timekeeper timekeeper;
     [SerializeField] private Color crystalColor;
+    [SerializeField] private float xRotation, yRotation, zRotation;
     [ColorUsageAttribute(true,true)] [SerializeField] private Color emissionColor;
     [HideInInspector] public bool onStage = false;
     [HideInInspector] public Vector3 origin;
@@ -211,6 +212,9 @@ public class SoundObject : MonoBehaviour
                 crystals[i].GetComponent<Renderer>().material = notGlowing;
             }
         }
+
+        //Rotate the sound object
+        rendered.transform.Rotate(xRotation, yRotation, zRotation);
 
     }
     private int abs(int x){
