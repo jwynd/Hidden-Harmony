@@ -63,7 +63,6 @@ public class InteractScript : MonoBehaviour
             {
                 if (hit.collider.tag == "Interactable")
                 {
-                    Debug.Log("interacting");
                     intMsg.GetComponent<InteractMessage>().ShowInteractMessage("Press 'E' to interact");
                 }
                 else if (hit.collider.tag == "SoundObj")

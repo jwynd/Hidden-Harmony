@@ -11,16 +11,13 @@ public class OrcaTransTemp : MonoBehaviour
     {
         if (other.gameObject.name == "OrcaTrans")
         {
-            Debug.Log("Colliding!");
             if (other.gameObject.CompareTag("Switch"))
             {
                 orcastra.SetActive(true);
-                Debug.Log("True!");
             }
             else
             {
                 orcastra.SetActive(false);
-                Debug.Log("False!");
             }
         }
     }

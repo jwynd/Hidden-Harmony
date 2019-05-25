@@ -43,7 +43,6 @@ public class RandomIdle : StateMachineBehaviour
     override public void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
     {
         num = Random.Range(min, max);
-        Debug.Log(num);
         animator.SetInteger("idleAnimID", Random.Range(min, max));
     }
 
