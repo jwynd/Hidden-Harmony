@@ -10,17 +10,19 @@
         [HDR] _EmissionColor ("Emission Color for Cracks", Color) = (0,0,0,0)
 
         // Crack stage controller -- range 0 - 3
-        _CrackStage("Crack Stage", Int) = 0
         // stage 0 = normal stone
         // stage 1 = cracks
-        _CrackS1Tn1("Crack Stage 1 - Tint 1", Color) = (1,1,1,1)
-        _CrackS1Tx1("Crack Stage 1 - Texture 1", 2D) = "black" {}
-        _CrackS1Tn2("Crack Stage 1 - Tint 2", Color) = (1,1,1,1)
-        _CrackS1Tx2("Crack Stage 1 - Texture 2", 2D) = "black" {}
         // stage 2 = wider cracks with light
-        _CrackS2Tn1("Crack Stage 2 - Tint 1", Color) = (1,1,1,1)
-        _CrackS2Tx1("Crack Stage 2 - Texture 1", 2D) = "black" {}
         // stage 3 = all light
+        _CrackStage("Crack Stage", Int) = 0
+
+        // the most solid texture -- will create cracks
+        _CrkOverlayTint("Crack Overlay Tint", Color) = (1,1,1,1)
+        _CrkOverlayTexture("Crack Overlay Texture", 2D) = "black" {}
+        // the more basic texture -- will light up in stage 2
+        _CrkBaseTint("Crack Base Tint", Color) = (1,1,1,1)
+        _CrkBaseTexture("Crack Base Texture", 2D) = "black" {}
+        
         
     }
     SubShader
@@ -37,10 +39,10 @@
         // Properties for Cracks
         uniform float _CrackStage;
         // Stage 1
-        uniform sampler2D _CrackS1Tx1;
-        uniform fixed4 _CrackS1Tn1;
-        uniform sampler2D _CrackS1Tx2;
-        uniform fixed4 _CrackS1Tn2;
+        uniform sampler2D _CrkOverlayTexture;
+        uniform fixed4 _CrkOverlayTint;
+        uniform sampler2D _CrkBaseTexture;
+        uniform fixed4 _CrkBaseTint;
         // Stage 2
         uniform sampler2D _CrackS2Tx1;
         uniform fixed4 _CrackS2Tn1;
@@ -48,8 +50,8 @@
         // input for surface function
         struct Input {
             float2 uv_MainTex;
-            float2 uv_CrackS1Tx1;
-            float2 uv_CrackS1Tx2;
+            float2 uv_CrkOverlayTexture;
+            float2 uv_CrkBaseTexture;
             float2 uv_CrackS2Tx1;
         };
 
@@ -65,9 +67,8 @@
                 return;
 
             // calculate texture colors
-            fixed4 s1col1 = tex2D(_CrackS1Tx1, IN.uv_CrackS1Tx1) * _CrackS1Tn1;
-            fixed4 s1col2 = tex2D(_CrackS1Tx2, IN.uv_CrackS1Tx2) * _CrackS1Tn2;
-
+            fixed4 colOverlay = tex2D(_CrkOverlayTexture, IN.uv_CrkOverlayTexture) * _CrkOverlayTint;
+            fixed4 colBase = tex2D(_CrkBaseTexture, IN.uv_CrkBaseTexture) * _CrkBaseTint;
             // get emission color
             fixed4 emission = _EmissionColor;
             
@@ -75,10 +76,10 @@
             // if second sage, add cracks, make first cracks glow
             if(_CrackStage == 1){
                 // if not transparent, subtract to darken Albedo
-                if(s1col1.a > 0)
-                    o.Albedo -= (s1col1.rgb * s1col1.a);
-                if(s1col2.a > 0)
-                    o.Albedo -= (s1col2.rgb * s1col2.a);
+                if(colOverlay.a > 0)
+                    o.Albedo -= (colOverlay.rgb * colOverlay.a);
+                if(colBase.a > 0)
+                    o.Albedo -= (colBase.rgb * colBase.a);
 
                 // add some slight glowing wherever the Albedo is black
                 if((o.Albedo.r + o.Albedo.g + o.Albedo.b) <= 0)
@@ -87,14 +88,10 @@
             }
 
             if(_CrackStage == 2) {
-                // get color
-                fixed4 s2col1 = tex2D(_CrackS2Tx1, IN.uv_CrackS2Tx1) * _CrackS2Tn1;
-                // if not transparent, subtract to darken Albedo
-                if(s2col1.a > 0)
-                    o.Albedo -= (s2col1.rgb * s2col1.a);
-
-                // make first cracks emit light completely
-                if(s1col1.a > 0 || s1col2.a > 0)
+                // get combined color
+                fixed combinedAlpha = colOverlay.a + colBase.a;
+                // if not transparent, emit light
+                if(combinedAlpha > 0)
                     o.Albedo += emission.rgb;
                 return;
             }
