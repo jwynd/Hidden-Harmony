@@ -12,7 +12,14 @@ public class PauseMenu : MonoBehaviour
     private GameObject camera;
     private bool isPaused;
     private GameObject menuCamera; // use this to determine if while loop should be running
-    private GameObject inventory;
+    private GameObject hTab;
+    private GameObject sTab;
+    private GameObject bdTab;
+    private GameObject oTab;
+    private GameObject hInventory;
+    private GameObject sInventory;
+    private GameObject bdInventory;
+    private GameObject oInventory; 
     private GameObject reticle;
     private ComposeModeTransition cmt;
 
@@ -21,13 +28,21 @@ public class PauseMenu : MonoBehaviour
         camera = GameObject.Find("Player/MainCamera");
         pauseMenuUI = GameObject.Find("Canvas/PauseMenuMain");
         menuCamera = GameObject.Find("MenuCamera");
-        inventory = GameObject.Find("ItemsHeld");
+        hInventory = GameObject.Find("Canvas/CTabs/HTabs/HItemsHeld");
+        sInventory = GameObject.Find("Canvas/CTabs/STabs/SItemsHeld");
+        bdInventory = GameObject.Find("Canvas/CTabs/BDTabs/BDItemsHeld");
+        oInventory = GameObject.Find("Canvas/CTabs/OTabs/OItemsHeld");
+
+        hTab = GameObject.Find("Canvas/CTabs/HTabs/HTab");
+        sTab = GameObject.Find("Canvas/CTabs/STabs/STab");
+        bdTab = GameObject.Find("Canvas/CTabs/BDTabs/BDTab");
+        oTab = GameObject.Find("Canvas/CTabs/OTabs/OTab");
         reticle = GameObject.Find("Reticle");
         mainMenuScene = SceneManager.GetActiveScene().name;
         if(pauseMenuUI == null) throw new System.ArgumentException("PauseMenuMain not found");
         cmt = GameObject.Find("GameplayObjects/CameraChange").GetComponent<ComposeModeTransition>();
         DeactivateMenu();
-        inventory.SetActive(false);
+        hInventory.SetActive(false);
         isPaused = false;
     }
 
@@ -55,7 +70,15 @@ public class PauseMenu : MonoBehaviour
         camera.GetComponent<FirstPersonControl>().enabled = false;
         Cursor.visible = true;
         pauseMenuUI.SetActive(true);
-        inventory.SetActive(false);
+
+        hTab.SetActive(false);
+        sTab.SetActive(false);
+        bdTab.SetActive(false);
+        oTab.SetActive(false);
+        hInventory.SetActive(false);
+        sInventory.SetActive(false);
+        bdInventory.SetActive(false);
+        oInventory.SetActive(false);
         reticle.SetActive(false);
     }
 
@@ -69,7 +92,15 @@ public class PauseMenu : MonoBehaviour
         player.transform.Find("AudioSource").GetComponent<AudioSource>().Play();
         camera.GetComponent<FirstPersonControl>().enabled = !cmt.Compose();
         pauseMenuUI.SetActive(false);
-        inventory.SetActive(true);
+
+        hTab.SetActive(false);
+        sTab.SetActive(false);
+        bdTab.SetActive(false);
+        oTab.SetActive(false);
+        hInventory.SetActive(false);
+        sInventory.SetActive(false);
+        bdInventory.SetActive(false);
+        oInventory.SetActive(false);
         Cursor.visible = cmt.Compose();
         isPaused = false;
         reticle.SetActive(true);

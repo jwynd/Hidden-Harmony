@@ -17,6 +17,17 @@ public class InventoryAdd : MonoBehaviour
     private GameObject itemPanel;
     private GameObject newButton;
     private GameObject itemSprite;
+    private GameObject hTab;
+    private GameObject sTab;
+    private GameObject bdTab;
+    private GameObject oTab;
+    private GameObject hItemPanel;
+    private GameObject sItemPanel;
+    private GameObject bdItemPanel;
+    private GameObject oItemPanel;
+    private GameObject currentItem;
+    private string parentName;
+    private GameObject controller; 
     [SerializeField] private GameObject itemButton;
 
     void Awake(){
@@ -30,7 +41,30 @@ public class InventoryAdd : MonoBehaviour
         player = GameObject.Find("Player").transform;
         camera = GameObject.Find("Player/MainCamera").transform;
         holdPosition = GameObject.Find("Player/MainCamera/HoldPosition").transform;
+        controller = GameObject.Find("Canvas/Controllers/ComposeObjectController");
+        hTab = GameObject.Find("Canvas/CTabs/HTabs/HTab");
+        sTab = GameObject.Find("Canvas/CTabs/STabs/STab");
+        bdTab = GameObject.Find("Canvas/CTabs/BDTabs/BDTab");
+        oTab = GameObject.Find("Canvas/CTabs/OTabs/OTab");
+        hItemPanel = GameObject.Find("Canvas/CTabs/HTabs/HItemsHeld");
+        bdItemPanel = GameObject.Find("Canvas/CTabs/BDTabs/BDItemsHeld");
+        sItemPanel = GameObject.Find("Canvas/CTabs/STabs/SItemsHeld");
+        oItemPanel = GameObject.Find("Canvas/CTabs/OTabs/OItemsHeld");
     }
+
+    void createButtonInTab(GameObject tab, GameObject hitItem)
+    {
+        newButton = Instantiate(itemButton, tab.transform);
+        print("hitItem" + hitItem);
+        newButton.GetComponent<Button>().onClick.AddListener(() => controller.GetComponent<SoundObjectCompose>().setSoundObject(hitItem));
+        itemSprite = newButton.transform.Find("ItemSprite").gameObject;
+        print("\n\n\n!!!hit.collider.gameObject.name = " + hitItem.name + "\n\n\n");
+        itemSprite.GetComponent<Image>().sprite = Resources.Load<Sprite>(hitItem.name);
+        print("itemSprite" + itemSprite);
+        hitItem.SetActive(false);
+        soundSFX.Play();
+    }
+
 
     // Update is called once per frame
     void Update(){
@@ -40,15 +74,35 @@ public class InventoryAdd : MonoBehaviour
             if(Physics.Raycast(pickRay, out hit, interactDistance)){
                 if(hit.collider.tag == "SoundObj"){
                     if(!hit.collider.gameObject.GetComponent<SoundObject>().OnStage()){
-                        itemPanel = GameObject.Find("Canvas/ItemsHeld");
-                        newButton = Instantiate(itemButton, itemPanel.transform);
-                        newButton.GetComponent<Button>().onClick.AddListener(() => itemPanel.GetComponent<SoundObjectCompose>().setSoundObject(hit.collider.gameObject));
-                        itemSprite = newButton.transform.Find("ItemSprite").gameObject;
-                        print("\n\n\n!!!hit.collider.gameObject.name = "+hit.collider.gameObject.name+"\n\n\n");
-                        itemSprite.GetComponent<Image>().sprite = Resources.Load<Sprite>(hit.collider.gameObject.name);
-                        print("itemSprite"+itemSprite);
-                        hit.collider.gameObject.SetActive(false);
-                        soundSFX.Play();
+                        //itemPanel = GameObject.Find("Canvas/ItemsHeld");
+                        
+
+                        parentName = hit.collider.transform.parent.name;
+                        if(parentName == "HubSoundObjs")
+                        {
+                            hTab.SetActive(true);
+                            hItemPanel.SetActive(true);
+                            currentItem = hit.collider.gameObject;
+                            createButtonInTab(hItemPanel, currentItem);
+                        }
+                        else if(parentName == "DenSoundObjs")
+                        {
+                            sTab.SetActive(true);
+                            currentItem = hit.collider.gameObject;
+                            createButtonInTab(sItemPanel, currentItem);
+        
+                        } else if(parentName == "ForestSoundObjs")
+                        {
+                            bdTab.SetActive(true);
+                            currentItem = hit.collider.gameObject;
+                            createButtonInTab(bdItemPanel, currentItem);
+                        } else if(parentName == "CavernSoundObjs")
+                        {
+                            oTab.SetActive(true);
+                            currentItem = hit.collider.gameObject;
+                            createButtonInTab(oItemPanel, currentItem);
+                        }
+                        
                     }
                 }
             }
