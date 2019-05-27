@@ -87,18 +87,27 @@ public class InventoryAdd : MonoBehaviour
                         }
                         else if(parentName == "DenSoundObjs")
                         {
-                            sTab.SetActive(true);
+                            if(hItemPanel.activeSelf == true)
+                            {
+                                sTab.SetActive(true);
+                            }
                             currentItem = hit.collider.gameObject;
                             createButtonInTab(sItemPanel, currentItem);
         
                         } else if(parentName == "ForestSoundObjs")
                         {
-                            bdTab.SetActive(true);
+                            if (hItemPanel.activeSelf == true)
+                            {
+                                bdTab.SetActive(true);
+                            }
                             currentItem = hit.collider.gameObject;
                             createButtonInTab(bdItemPanel, currentItem);
                         } else if(parentName == "CavernSoundObjs")
                         {
-                            oTab.SetActive(true);
+                            if (hItemPanel.activeSelf == true)
+                            {
+                                oTab.SetActive(true);
+                            }
                             currentItem = hit.collider.gameObject;
                             createButtonInTab(oItemPanel, currentItem);
                         }

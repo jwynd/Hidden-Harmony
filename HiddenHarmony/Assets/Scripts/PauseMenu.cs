@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -16,6 +17,10 @@ public class PauseMenu : MonoBehaviour
     private GameObject sTab;
     private GameObject bdTab;
     private GameObject oTab;
+    private bool hState = false;
+    private bool bdState = false;
+    private bool sState = false;
+    private bool oState = false;
     private GameObject hInventory;
     private GameObject sInventory;
     private GameObject bdInventory;
@@ -43,19 +48,40 @@ public class PauseMenu : MonoBehaviour
         cmt = GameObject.Find("GameplayObjects/CameraChange").GetComponent<ComposeModeTransition>();
         DeactivateMenu();
         hInventory.SetActive(false);
+        hTab.SetActive(false);
+        sTab.SetActive(false);
+        bdTab.SetActive(false);
+        oTab.SetActive(false);
         isPaused = false;
     }
 
     void Update(){
         if(menuCamera == null){
             if(Input.GetKeyDown(KeyCode.Escape)){
+                
                 isPaused = !isPaused;
                 if(isPaused){
+                    checkTabs();
                     ActivateMenu();
                 }
-                else{
+                else{        
                     DeactivateMenu();
+                    activateTabs();
                 }
+            }
+            if (hTab.activeSelf == true && !isPaused && Input.GetKeyDown(KeyCode.Alpha1)){
+                hTab.GetComponent<Button>().onClick.Invoke();
+            }
+            if(bdTab.activeSelf == true && !isPaused && Input.GetKeyDown(KeyCode.Alpha2)){
+                bdTab.GetComponent<Button>().onClick.Invoke();
+            }
+            if (sTab.activeSelf == true && !isPaused && Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                sTab.GetComponent<Button>().onClick.Invoke();
+            }
+            if (oTab.activeSelf == true && !isPaused && Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                oTab.GetComponent<Button>().onClick.Invoke();
             }
         }
     }
@@ -74,7 +100,7 @@ public class PauseMenu : MonoBehaviour
         hTab.SetActive(false);
         sTab.SetActive(false);
         bdTab.SetActive(false);
-        oTab.SetActive(false);
+        oTab.SetActive(false); 
         hInventory.SetActive(false);
         sInventory.SetActive(false);
         bdInventory.SetActive(false);
@@ -92,18 +118,50 @@ public class PauseMenu : MonoBehaviour
         player.transform.Find("AudioSource").GetComponent<AudioSource>().Play();
         camera.GetComponent<FirstPersonControl>().enabled = !cmt.Compose();
         pauseMenuUI.SetActive(false);
-
-        hTab.SetActive(false);
-        sTab.SetActive(false);
-        bdTab.SetActive(false);
-        oTab.SetActive(false);
-        hInventory.SetActive(false);
+        
+        hInventory.SetActive(true);
         sInventory.SetActive(false);
         bdInventory.SetActive(false);
         oInventory.SetActive(false);
         Cursor.visible = cmt.Compose();
         isPaused = false;
         reticle.SetActive(true);
+    }
+
+    public void checkTabs()
+    {
+         hState = hTab.activeSelf;
+         print("hState" + hState);
+         bdState = bdTab.activeSelf;
+         print("bdState " + bdState);
+         sState = sTab.activeSelf;
+         oState = oTab.activeSelf;
+    }
+    
+    public void activateTabs()
+    {
+        if(hState == true){
+            hTab.SetActive(true);
+        }
+        else{
+            hTab.SetActive(false);
+        }
+        if(bdState == true){
+            bdTab.SetActive(true);
+        }
+        else{
+            bdTab.SetActive(false);
+        }
+        if(sState == true){
+            sTab.SetActive(true);
+        } else{
+            sTab.SetActive(false);
+        }
+        if(oState == true){
+            oTab.SetActive(true);
+        } else{
+            oTab.SetActive(false);
+        }
     }
 
     public void Resume(){
