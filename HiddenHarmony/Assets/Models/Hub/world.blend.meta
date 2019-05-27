@@ -930,6 +930,7 @@ ModelImporter:
     2100088: unnamed
     2100090: cave
     2100092: other
+    2100094: OtherBrown
     2300000: Island
     2300002: mountain
     2300004: mountain_001
@@ -2082,6 +2083,11 @@ ModelImporter:
     13700000: Doggo
     2186277476908879412: ImportLogs
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cave
+    second: {fileID: 2100000, guid: 3384a970c7a8bc347856e81db4f6b30c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
