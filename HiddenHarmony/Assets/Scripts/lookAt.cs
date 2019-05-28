@@ -14,6 +14,7 @@ namespace PathCreation.Examples
         public float speed = 5;
         public float distanceTravelled = 0;
         public bool camera = false;
+        public bool moving = true;
 
         void Update()
         {
@@ -21,7 +22,7 @@ namespace PathCreation.Examples
             if (pathCreator != null)
             {
                 distanceTravelled += speed * Time.deltaTime;
-                transform.position = pathCreator[count].path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+                if (moving) transform.position = pathCreator[count].path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
                 if (!camera) transform.rotation = pathCreator[count].path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
             }
             transform.LookAt(target[count]);
