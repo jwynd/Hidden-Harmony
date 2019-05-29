@@ -13,6 +13,7 @@ public class Statue : MonoBehaviour
     [SerializeField] private Statues statue = Statues.Subwoofer;
     [SerializeField] private GameObject living;
     [SerializeField] private Material statueMaterial;
+    [SerializeField][ColorUsageAttribute(true,true)] private Color emissionColor;
     private int itemCount = 0;
 
     private Material stoneMat;
@@ -21,6 +22,7 @@ public class Statue : MonoBehaviour
     void Start()
     {
         stoneMat = new Material(statueMaterial);
+        stoneMat.SetColor("_EmissionColor", emissionColor);
         foreach(Renderer rend in GetComponentsInChildren<Renderer>()){
             rend.material = stoneMat;
         }
