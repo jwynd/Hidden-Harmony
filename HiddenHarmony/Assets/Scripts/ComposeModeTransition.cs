@@ -20,6 +20,7 @@ public class ComposeModeTransition : MonoBehaviour
 //    private GameObject composeCamera;
     private GameObject player;
     private Transform cameraReturn;
+    private AudioSource[] sources;
 
     private bool inHub = true;
 
@@ -49,6 +50,7 @@ public class ComposeModeTransition : MonoBehaviour
 //        composeCamera = new GameObject("composeCamera");
         cameraReturn = GameObject.Find("Player/CameraReturn").transform;
         interactMessage = GameObject.Find("Canvas/InteractMessage");
+        sources = this.GetComponents<AudioSource>();
         /*      composeCamera.tag = "MainCamera";
                 composeCamera.transform.SetAsLastSibling();
                 composeCamera.AddComponent<Camera>();
@@ -75,6 +77,7 @@ public class ComposeModeTransition : MonoBehaviour
                 player.transform.Find("GlideParticles").GetComponent<ParticleSystem>().Stop();
                 player.transform.Find("AudioSource").GetComponent<AudioSource>().Stop();
                 cameraOrigin = cameraReturn.position;
+                sources[0].Play();
                 //composeCamera.transform.position = cameraOrigin;
                 compose = true;
                 transitioning = true;
@@ -93,6 +96,7 @@ public class ComposeModeTransition : MonoBehaviour
                 player.GetComponent<InteractScript>().enabled = true;
                 playerCamera.GetComponent<FirstPersonControl>().enabled = true;
                 interactMessage.transform.gameObject.SetActive(true);
+                sources[1].Play();
                 //composeCamera.transform.SetAsLastSibling();
 
                 compose = false;
