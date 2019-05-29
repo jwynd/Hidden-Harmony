@@ -51,8 +51,9 @@ public class Cutscene : MonoBehaviour
                     player.GetComponent<InventoryAdd>().enabled = false;
                     player.GetComponent<InteractScript>().enabled = false;
                     camera.GetComponent<FirstPersonControl>().enabled = false;
-                    canvas.SetActive(false);
+                    AudioListener.volume = 0.0f;
                     camera.GetComponent<Camera>().far = 0.31f;
+                    canvas.SetActive(false);
                     vp = camera.AddComponent<VideoPlayer>();
                     vp.clip = cutscene;
                     vp.renderMode = VideoRenderMode.CameraNearPlane;
@@ -75,8 +76,9 @@ public class Cutscene : MonoBehaviour
             player.GetComponent<InventoryAdd>().enabled = true;
             player.GetComponent<InteractScript>().enabled = true;
             camera.GetComponent<FirstPersonControl>().enabled = true;
-            canvas.SetActive(true);
+            AudioListener.volume = 1.0f;
             camera.GetComponent<Camera>().far = 1000.0f;
+            canvas.SetActive(true);
             foreach(GameObject o in toDestroy){
                 Destroy(o);
             }
