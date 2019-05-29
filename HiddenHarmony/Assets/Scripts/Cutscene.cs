@@ -53,7 +53,6 @@ public class Cutscene : MonoBehaviour
                     player.GetComponent<InteractScript>().enabled = false;
                     camera.GetComponent<FirstPersonControl>().enabled = false;
                     AudioListener.volume = 0.0f;
-                    camera.GetComponent<Camera>().far = 0.31f;
                     canvas.SetActive(false);
                     vp = camera.AddComponent<VideoPlayer>();
                     vp.clip = cutscene;
@@ -68,7 +67,8 @@ public class Cutscene : MonoBehaviour
                     }
                 }
             }
-        } 
+        }
+        if(vp.isPlaying) camera.GetComponent<Camera>().far = 0.31f;
         if(!prepared && vp != null) prepared = vp.isPrepared;
         if(played && prepared && !vp.isPlaying){
             player.GetComponent<CharacterController>().enabled = true;
