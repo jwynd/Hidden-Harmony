@@ -80,6 +80,12 @@ public class Cutscene : MonoBehaviour
             camera.GetComponent<Camera>().far = 1000.0f;
             canvas.SetActive(true);
             foreach(GameObject o in toDestroy){
+                #if UNITY_EDITOR
+                if(o == this.gameObject){
+                    throw new System.ArgumentException("Don't put the cutscene object in the to destroy list, it will destroy itself automatically");
+                    UnityEditor.EditorApplication.isPlaying = false;
+                }
+                #endif
                 Destroy(o);
             }
             Destroy(vp);
