@@ -37,6 +37,7 @@ public class Cutscene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        camera = GameObject.Find("MainCamera");
         RaycastHit hit;
         Ray cutRay = new Ray(camera.transform.position, camera.transform.forward);
         if (Input.GetKeyDown(KeyCode.E) && !played)
