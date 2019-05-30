@@ -14,9 +14,10 @@ public class Cutscene : MonoBehaviour
     [SerializeField] private GameObject[] toEnable;
     [Tooltip("Do not put this game object in this list")]
     [SerializeField] private GameObject[] toDestroy;
+    [Tooltip("Put main camera here")]
+    [SerializeField]private GameObject camera;
 
     private GameObject player;
-    private GameObject camera;
     private GameObject intMsg;
     private GameObject canvas;
     private VideoPlayer vp;
@@ -25,7 +26,6 @@ public class Cutscene : MonoBehaviour
 
     void Awake(){
         player = GameObject.Find("Player");
-        camera = GameObject.Find("Player/MainCamera");
         intMsg = GameObject.Find("InteractMessageController");
         canvas = GameObject.Find("Canvas");
     }
@@ -38,7 +38,6 @@ public class Cutscene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        camera = GameObject.Find("MainCamera");
         RaycastHit hit;
         Ray cutRay = new Ray(camera.transform.position, camera.transform.forward);
         if (Input.GetKeyDown(KeyCode.E) && !played)
