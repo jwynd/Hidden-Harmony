@@ -80,34 +80,47 @@ public class InventoryAdd : MonoBehaviour
                         parentName = hit.collider.transform.parent.name;
                         if(parentName == "HubSoundObjs")
                         {
-                            hTab.SetActive(true);
+                            //hTab.SetActive(true);
                             hItemPanel.SetActive(true);
+                            sItemPanel.SetActive(false);
+                            bdItemPanel.SetActive(false);
+                            oItemPanel.SetActive(false);
                             currentItem = hit.collider.gameObject;
                             createButtonInTab(hItemPanel, currentItem);
                         }
                         else if(parentName == "DenSoundObjs")
                         {
-                            if(hItemPanel.activeSelf == true)
-                            {
-                                sTab.SetActive(true);
-                            }
+
+                            //sTab.SetActive(true);
+                            hItemPanel.SetActive(false);
+                            sItemPanel.SetActive(true);
+                            bdItemPanel.SetActive(false);
+                            oItemPanel.SetActive(false);
+
                             currentItem = hit.collider.gameObject;
                             createButtonInTab(sItemPanel, currentItem);
         
                         } else if(parentName == "ForestSoundObjs")
                         {
-                            if (hItemPanel.activeSelf == true)
-                            {
-                                bdTab.SetActive(true);
-                            }
+
+                            //bdTab.SetActive(true);
+                            hItemPanel.SetActive(false);
+                            sItemPanel.SetActive(false);
+                            bdItemPanel.SetActive(true);
+                            oItemPanel.SetActive(false);
+
                             currentItem = hit.collider.gameObject;
                             createButtonInTab(bdItemPanel, currentItem);
                         } else if(parentName == "CavernSoundObjs")
                         {
-                            if (hItemPanel.activeSelf == true)
-                            {
-                                oTab.SetActive(true);
-                            }
+
+                            //oTab.SetActive(true);
+
+                            hItemPanel.SetActive(false);
+                            sItemPanel.SetActive(false);
+                            bdItemPanel.SetActive(false);
+                            oItemPanel.SetActive(true);
+
                             currentItem = hit.collider.gameObject;
                             createButtonInTab(oItemPanel, currentItem);
                         }

@@ -69,20 +69,6 @@ public class PauseMenu : MonoBehaviour
                     activateTabs();
                 }
             }
-            if (hTab.activeSelf == true && !isPaused && Input.GetKeyDown(KeyCode.Alpha1)){
-                hTab.GetComponent<Button>().onClick.Invoke();
-            }
-            if(bdTab.activeSelf == true && !isPaused && Input.GetKeyDown(KeyCode.Alpha2)){
-                bdTab.GetComponent<Button>().onClick.Invoke();
-            }
-            if (sTab.activeSelf == true && !isPaused && Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                sTab.GetComponent<Button>().onClick.Invoke();
-            }
-            if (oTab.activeSelf == true && !isPaused && Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                oTab.GetComponent<Button>().onClick.Invoke();
-            }
         }
     }
 
@@ -118,7 +104,11 @@ public class PauseMenu : MonoBehaviour
         player.transform.Find("AudioSource").GetComponent<AudioSource>().Play();
         camera.GetComponent<FirstPersonControl>().enabled = !cmt.Compose();
         pauseMenuUI.SetActive(false);
-        
+
+        hTab.SetActive(true);
+        bdTab.SetActive(true);
+        sTab.SetActive(true);
+        oTab.SetActive(true);
         hInventory.SetActive(true);
         sInventory.SetActive(false);
         bdInventory.SetActive(false);
@@ -140,7 +130,7 @@ public class PauseMenu : MonoBehaviour
     
     public void activateTabs()
     {
-        if(hState == true){
+        /*if(hState == true){
             hTab.SetActive(true);
         }
         else{
@@ -161,7 +151,12 @@ public class PauseMenu : MonoBehaviour
             oTab.SetActive(true);
         } else{
             oTab.SetActive(false);
-        }
+        }*/
+
+        hTab.SetActive(true);
+        bdTab.SetActive(true);
+        sTab.SetActive(true);
+        oTab.SetActive(true);
     }
 
     public void Resume(){
