@@ -68,7 +68,7 @@ public class Cutscene : MonoBehaviour
                 }
             }
         }
-        if(vp.isPlaying) camera.GetComponent<Camera>().far = 0.31f;
+        if(vp.isPlaying) camera.GetComponent<Camera>().farClipPlane = 0.31f;
         if(!prepared && vp != null) prepared = vp.isPrepared;
         if(played && prepared && !vp.isPlaying){
             player.GetComponent<CharacterController>().enabled = true;
@@ -78,12 +78,12 @@ public class Cutscene : MonoBehaviour
             player.GetComponent<InteractScript>().enabled = true;
             camera.GetComponent<FirstPersonControl>().enabled = true;
             AudioListener.volume = 1.0f;
-            camera.GetComponent<Camera>().far = 1000.0f;
+            camera.GetComponent<Camera>().farClipPlane = 1000.0f;
             canvas.SetActive(true);
             foreach(GameObject o in toDestroy){
                 #if UNITY_EDITOR
                 if(o == this.gameObject){
-                    throw new System.ArgumentException("Don't put the cutscene object in the to destroy list, it will destroy itself automatically");
+                    Debug.Log("Don't put the cutscene object in the to destroy list, it will destroy itself automatically");
                     UnityEditor.EditorApplication.isPlaying = false;
                 }
                 #endif
