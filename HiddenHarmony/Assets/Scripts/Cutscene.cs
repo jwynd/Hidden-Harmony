@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Cutscene : MonoBehaviour
 {
@@ -52,6 +53,7 @@ public class Cutscene : MonoBehaviour
                     player.GetComponent<InventoryAdd>().enabled = false;
                     player.GetComponent<InteractScript>().enabled = false;
                     camera.GetComponent<FirstPersonControl>().enabled = false;
+                    camera.GetComponent<PostProcessVolume>().enabled = false;
                     AudioListener.volume = 0.0f;
                     canvas.SetActive(false);
                     vp = camera.AddComponent<VideoPlayer>();
@@ -77,6 +79,7 @@ public class Cutscene : MonoBehaviour
             player.GetComponent<InventoryAdd>().enabled = true;
             player.GetComponent<InteractScript>().enabled = true;
             camera.GetComponent<FirstPersonControl>().enabled = true;
+            camera.GetComponent<PostProcessVolume>().enabled = true;
             AudioListener.volume = 1.0f;
             camera.GetComponent<Camera>().farClipPlane = 1000.0f;
             canvas.SetActive(true);
