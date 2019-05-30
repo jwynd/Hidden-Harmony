@@ -85,7 +85,7 @@ public class Cutscene : MonoBehaviour
             foreach(GameObject o in toDestroy){
                 #if UNITY_EDITOR
                 if(o == this.gameObject){
-                    Debug.Log("Don't put the cutscene object in the to destroy list, it will destroy itself automatically");
+                    Debug.LogError("Don't put the cutscene object in the to destroy list, it will destroy itself automatically");
                     UnityEditor.EditorApplication.isPlaying = false;
                 }
                 #endif
