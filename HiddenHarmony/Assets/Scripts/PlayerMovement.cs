@@ -35,9 +35,13 @@ public class PlayerMovement : MonoBehaviour {
     private float glideBoost = 4f; //the value added to speed during gliding
     //glideBoost suggested value 4f
     [SerializeField][Tooltip("(0-100) The volume at which the glide music plays")]
-    private float glideMusicVolume = 50f; //value divided by 100 in code - the max volume at which the glide music will play
+    private float glideMusicVolume = 0.5f; //value divided by 100 in code - the max volume at which the glide music will play
     [SerializeField][Tooltip("The rate at which the glide music fades in and out")]
-    private float glideMusicChange = 0.005f; //the rate at which music volume changes during glide
+    private float glideMusicChange = 0.002f; //the rate at which music volume changes during glide
+    [SerializeField][Tooltip("(0-100) The volume at which the glide music plays")]
+    private float sprintMusicVolume = 0.5f; //value divided by 100 in code - the max volume at which the glide music will play
+    [SerializeField][Tooltip("The rate at which the glide music fades in and out")]
+    private float sprintMusicChange = 0.002f; //the rate at which music volume changes during glide
     [Header("Sprint")]
     [SerializeField][Tooltip("Speed added when sprinting")]
     private float sprintBoost = 4f;
@@ -55,7 +59,8 @@ public class PlayerMovement : MonoBehaviour {
     public float yVelocity; //the counter to determine at which point in the jump the player is at.
     private ParticleSystem particles; //the particle system of the player object
     private Camera camera; //the main camera on the player object
-    private AudioSource audio; //the audio source on the player object
+    private AudioSource glideAudio; //the glideAudio source on the player object
+    private AudioSource glideStartAudio; //the glideStartAudio source on the player object
 
     // Use this for initialization
     void Start () {
@@ -63,7 +68,8 @@ public class PlayerMovement : MonoBehaviour {
         character = GetComponent<CharacterController> (); //gets the character controller from the GameObject
         particles = this.transform.Find("GlideParticles").gameObject.GetComponent<ParticleSystem>();
         camera = this.transform.Find("MainCamera").gameObject.GetComponent<Camera>();
-        audio = this.transform.Find("AudioSource").gameObject.GetComponent<AudioSource>();
+        glideAudio = this.transform.Find("Audio/GlideAudio").gameObject.GetComponent<AudioSource>();
+        glideStartAudio = this.transform.Find("Audio/GlideStartAudio").gameObject.GetComponent<AudioSource>();
     }    
 
     // Update is called once per frame
@@ -147,18 +153,19 @@ public class PlayerMovement : MonoBehaviour {
                 if(!particles.isPlaying){
                     particles.Play();
                 }
-                if(!audio.isPlaying){
-                    audio.Play();
+                if(!glideAudio.isPlaying){
+                    glideStartAudio.Play();
+                    glideAudio.Play();
                 }
-                toGlideVolume();
+                toSetVolume(glideAudio, glideMusicVolume, glideMusicChange);
                 toBoostFOV();
             }
         }
         else{
             returnVector.x = 0;
             returnVector.y = -terminalVelocity + yVelocity;
-            if(audio.isPlaying){
-                fadeToMute();
+            if(glideAudio.isPlaying){
+                fadeToMute(glideAudio, glideMusicChange);
             }
         }
         return returnVector;
@@ -202,23 +209,23 @@ public class PlayerMovement : MonoBehaviour {
             }
     }
 
-    public void toGlideVolume(){
-        if(audio.volume < glideMusicVolume/100f){
-            audio.volume = Mathf.MoveTowards(audio.volume, glideMusicVolume/100f, glideMusicChange);
+    public void toSetVolume(AudioSource audio, float toVolume, float rateOfChange){
+        if(audio.volume < toVolume){
+            audio.volume = Mathf.MoveTowards(audio.volume, toVolume, rateOfChange);
         }
-        else if(audio.volume > glideMusicVolume/100f){
-            audio.volume = glideMusicVolume/100f;
+        else if(audio.volume > toVolume){
+            audio.volume = toVolume;
         }
     }
 
-    public void fadeToMute(){
+    public void fadeToMute(AudioSource audio, float rateOfChange){
         if(audio.volume > 0){
-            audio.volume = Mathf.MoveTowards(audio.volume, 0, glideMusicChange);
+            audio.volume = Mathf.MoveTowards(audio.volume, 0, rateOfChange);
         }
-        else if(audio.volume < 0){
+        else if(glideAudio.volume < 0){
             audio.volume = 0;
         }
-        else if(audio.volume == 0){
+        else if(glideAudio.volume == 0){
             audio.Stop();
         }
     }

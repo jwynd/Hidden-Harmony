@@ -75,7 +75,7 @@ public class ComposeModeTransition : MonoBehaviour
                 playerCamera.transform.SetParent(null);
                 interactMessage.transform.gameObject.SetActive(false);
                 player.transform.Find("GlideParticles").GetComponent<ParticleSystem>().Stop();
-                player.transform.Find("AudioSource").GetComponent<AudioSource>().Stop();
+                player.transform.Find("Audio/GlideAudio").GetComponent<AudioSource>().Stop();
                 cameraOrigin = cameraReturn.position;
                 sources[0].Play();
                 //composeCamera.transform.position = cameraOrigin;
@@ -151,7 +151,7 @@ public class ComposeModeTransition : MonoBehaviour
         playerCamera.transform.SetParent(null);
         interactMessage.transform.gameObject.SetActive(false);
         player.transform.Find("GlideParticles").GetComponent<ParticleSystem>().Stop();
-        player.transform.Find("AudioSource").GetComponent<AudioSource>().Stop();
+        player.transform.Find("Audio/GlideAudio").GetComponent<AudioSource>().Stop();
         cameraOrigin = cameraReturn.position;
         compose = true;
         playerCamera.transform.position = composeCameraPosition.position;
