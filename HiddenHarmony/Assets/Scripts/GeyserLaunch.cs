@@ -31,6 +31,12 @@ public class GeyserLaunch : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider collide){
+        if(!geyserSplash.isPlaying){
+            geyserSplash.Play();
+        }
+    }
+
     void OnTriggerStay(Collider collide){
         TravelUp(speed, collide);
         if(!geyserAudio.isPlaying){
