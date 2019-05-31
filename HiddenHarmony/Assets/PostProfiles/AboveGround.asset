@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb84e30e02715445aeb9959894e3b4d, type: 3}
   m_Name: ColorGrading
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
@@ -125,7 +125,7 @@ MonoBehaviour:
     value: 0
   colorFilter:
     overrideState: 1
-    value: {r: 0.1764706, g: 0.1764706, b: 0.1764706, a: 1}
+    value: {r: 0.11320752, g: 0.11320752, b: 0.11320752, a: 1}
   hueShift:
     overrideState: 0
     value: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
     value: 0
   postExposure:
     overrideState: 1
-    value: 0.65
+    value: 1.9
   contrast:
     overrideState: 1
     value: 15
@@ -1395,10 +1395,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 1.5
+    value: 2.23
   threshold:
     overrideState: 1
-    value: 0.74
+    value: 0.7
   softKnee:
     overrideState: 1
     value: 0.109
