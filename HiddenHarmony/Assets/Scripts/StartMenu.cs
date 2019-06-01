@@ -14,8 +14,9 @@ public class StartMenu : MonoBehaviour
     private GameObject startMenuUI;
     private GameObject menuCamera;
     private GameObject mainCamera;
-    private GameObject fade;
+    private Transform moveTo;
     private float timer = 0.0f;
+    private Fade fade;
     private bool fading = false;
 
     // Start is called before the first frame update
@@ -23,8 +24,9 @@ public class StartMenu : MonoBehaviour
         player = GameObject.Find("Player");
         startMenuUI = GameObject.Find("Canvas/StartMenuMain");
         menuCamera = GameObject.Find("MenuCamera");
+        moveTo = menuCamera.transform.GetChild(0);
         mainCamera = GameObject.Find("Player/MainCamera");
-        fade = GameObject.Find("MenuCamera/Fade");
+        fade = GameObject.Find("Canvas/Fade").GetComponent<Fade>();
         Cursor.visible = true;
         player.SetActive(false);
         
@@ -32,14 +34,10 @@ public class StartMenu : MonoBehaviour
 
     void Update() {
         if(fading){
-            
 
-            fade.GetComponent<MeshRenderer>().material.color = 
-                Color.Lerp(fade.GetComponent<MeshRenderer>().material.color,
-                           Color.black, fadeTime * Time.deltaTime);
             timer += Time.deltaTime;
             menuCamera.transform.position = 
-                Vector3.MoveTowards(menuCamera.transform.position, fade.transform.position, movementSpeed*Time.deltaTime);
+                Vector3.MoveTowards(menuCamera.transform.position, moveTo.position, movementSpeed*Time.deltaTime);
 
             if(timer > fadeTime){
                 // do this after everything has fade
@@ -48,7 +46,6 @@ public class StartMenu : MonoBehaviour
                 mainCamera.GetComponent<AudioListener>().enabled = true;
                 mainCamera.GetComponent<PostProcessVolume>().enabled = true;
                 mainCamera.GetComponent<PostProcessVolume>().profile = playerPostProcessingProfile;
-                Destroy(fade);
                 Destroy(menuCamera);
                 player.SetActive(true);
                 GameObject.Find("PauseMenuController").GetComponent<PauseMenu>().DeactivateMenu();
@@ -63,6 +60,7 @@ public class StartMenu : MonoBehaviour
         startMenuUI.SetActive(false);
         Cursor.visible = false;
         fading = true;
+        fade.FadeOut(2.0f);
     }
 
 }
