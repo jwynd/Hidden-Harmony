@@ -52,6 +52,7 @@ public class Cutscene : MonoBehaviour
                     // initiate a fadeout
                     fade.FadeOut(fadeTime);
                     fadeInitiated = true;
+                    this.tag = "Untagged";
                 }
             }
         }
@@ -83,16 +84,6 @@ public class Cutscene : MonoBehaviour
             foreach(GameObject o in toEnable){
                 o.SetActive(true);
             }
-            foreach(GameObject o in toDestroy){
-                #if UNITY_EDITOR
-                if(o == this.gameObject){
-                    Debug.LogError("Don't put the cutscene object in the to destroy list, it will destroy itself automatically");
-                    UnityEditor.EditorApplication.isPlaying = false;
-                }
-                #endif
-                Debug.Log("Destroying "+o.name);
-                Destroy(o);
-            }
             fadeInitiated = false;
         }
         // if the video is playing move the far clip plane close to avoid wierd artifacts
@@ -106,6 +97,18 @@ public class Cutscene : MonoBehaviour
             camera.GetComponent<Camera>().farClipPlane = 1000.0f;
             canvas.SetActive(true);
             vp.clip = null;
+            Renderer[] rends = GetComponentsInChildren<Renderer>();
+            foreach(Renderer r in rends) r.enabled = false;
+            foreach(GameObject o in toDestroy){
+                #if UNITY_EDITOR
+                if(o == this.gameObject){
+                    Debug.LogError("Don't put the cutscene object in the to destroy list, it will destroy itself automatically");
+                    UnityEditor.EditorApplication.isPlaying = false;
+                }
+                #endif
+                Debug.Log("Destroying "+o.name);
+                Destroy(o);
+            }
             fade.FadeIn(fadeTime);
             fadeInitiated = true;
         }
