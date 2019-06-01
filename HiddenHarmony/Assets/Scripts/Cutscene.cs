@@ -96,6 +96,7 @@ public class Cutscene : MonoBehaviour
             //Debug.Log("Initiating fade");
             camera.GetComponent<Camera>().farClipPlane = 1000.0f;
             canvas.SetActive(true);
+            camera.GetComponent<PostProcessVolume>().enabled = true;
             vp.clip = null;
             Renderer[] rends = GetComponentsInChildren<Renderer>();
             foreach(Renderer r in rends) r.enabled = false;
@@ -120,7 +121,6 @@ public class Cutscene : MonoBehaviour
             player.GetComponent<InventoryAdd>().enabled = true;
             player.GetComponent<InteractScript>().enabled = true;
             camera.GetComponent<FirstPersonControl>().enabled = true;
-            camera.GetComponent<PostProcessVolume>().enabled = true;
             AudioListener.volume = 1.0f;
             Destroy(this.gameObject);
         }
