@@ -43,7 +43,7 @@ public class Fade : MonoBehaviour
             interpolationVal += Time.deltaTime/fTime;
             image.color = new Color(color.r, color.g, color.b, Mathf.Lerp(1.0f, 0.0f, Mathf.Clamp(interpolationVal, 0.0f, 1.0f)));
             if(image.color.a <= 0.01f) fadingIn = false;
-        } else if(!fadeSet) {
+        }else if(!fadeSet) {
             image.color = new Color(color.r, color.g, color.b, 0.0f);
         }
         if(image.color.a == 0.0f){
