@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Hover : MonoBehaviour
 {
-    [SerializeField][Range(0.0f, 10.0f)] private float bobDegree = 1.0f;
-    [SerializeField][Range(0.0f, 10.0f)] private float bobSpeed = 1.0f;
+    [SerializeField][Range(0.0f, 1.0f)] private float bobDegree = 0.1f;
+    [SerializeField][Range(0.0f, 5.0f)] private float bobSpeed = 3.0f;
     [SerializeField] private bool startPositionCenter = false;
 
     private float x;
