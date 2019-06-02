@@ -26,6 +26,7 @@ public class Cutscene : MonoBehaviour
     private bool prepared;
     private bool played = false;
     private bool fadeInitiated = false;
+    private bool fadeSet = false;
 
     void Awake(){
         player = GameObject.Find("Player");
@@ -72,7 +73,6 @@ public class Cutscene : MonoBehaviour
             camera.GetComponent<FirstPersonControl>().enabled = false;
             camera.GetComponent<PostProcessVolume>().enabled = false;
             AudioListener.volume = 0.0f;
-            canvas.SetActive(false);
             vp = camera.AddComponent<VideoPlayer>();
             vp.clip = cutscene;
             vp.renderMode = VideoRenderMode.CameraNearPlane;
@@ -85,9 +85,14 @@ public class Cutscene : MonoBehaviour
                 o.SetActive(true);
             }
             fadeInitiated = false;
+            fade.SetFade(1.0f);
         }
         // if the video is playing move the far clip plane close to avoid wierd artifacts
-        if(vp != null && vp.isPlaying) camera.GetComponent<Camera>().farClipPlane = 0.31f;
+        if(vp != null && vp.isPlaying){
+            camera.GetComponent<Camera>().farClipPlane = 0.31f;
+            fade.UnsetFade();
+            canvas.SetActive(false);
+        }
         // set the prepared variable so that the cutscene isn't registered as played before it starts
         if(!prepared && vp != null) prepared = vp.isPrepared;
 
