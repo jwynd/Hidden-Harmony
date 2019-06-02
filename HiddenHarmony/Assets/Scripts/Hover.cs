@@ -9,7 +9,7 @@ public class Hover : MonoBehaviour
     [SerializeField] private bool randomizeSpeed = false;
     [Tooltip("This field is only used if the above is checked")]
     [SerializeField][Range(0.0f, 1.0f)] private float speedRange = 0.5f;
-    [SerializeField] private bool randomizeSinPosition = false;
+    [SerializeField] private bool randomizeSin = false;
     [Tooltip("This field is only used if the above is checked")]
     [SerializeField][Range(0.0f, 3.14f)] private float sinOffsetRange = 1.0f;
     [SerializeField] private bool startPositionCenter = false;
@@ -29,7 +29,7 @@ public class Hover : MonoBehaviour
         if(randomizeSpeed){
             speedOffset = Random.Range(-speedRange, speedRange);
         }
-        if(randomizeSinPosition){
+        if(randomizeSin){
             sinOffset = Random.Range(-sinOffsetRange, sinOffsetRange);
         }
     }
