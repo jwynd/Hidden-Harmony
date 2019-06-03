@@ -4716,6 +4716,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4715483265901870437}
+  - component: {fileID: 892326816271615009}
+  - component: {fileID: 3443376347703262170}
   m_Layer: 0
   m_Name: AddModelAsChild
   m_TagString: Untagged
@@ -4737,6 +4739,38 @@ Transform:
   m_Father: {fileID: 7939041500233886793}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &892326816271615009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5069693873524164712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e992323d9b71394ab7c8df8bee43fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bobDegree: 0.1
+  bobSpeed: 2.64
+  randomizeSpeed: 0
+  speedRange: 0.5
+  randomizeSin: 0
+  sinOffsetRange: 1
+  startPositionCenter: 0
+--- !u!114 &3443376347703262170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5069693873524164712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d73928425d66eb4cbec109a07636c1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 68.9
 --- !u!1 &7939041498500702562
 GameObject:
   m_ObjectHideFlags: 0
@@ -9506,10 +9540,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297de8b145955ae47a803adcb0c62b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClips: []
   offsetRange: 0.05
   interactDist: 2.28
   timekeeper: {fileID: 0}
   crystalColor: {r: 0.2494215, g: 0.4133975, b: 0.5566038, a: 0}
+  xRotation: 0
+  yRotation: 0
+  zRotation: 0
   emissionColor: {r: 0.9898261, g: 1, b: 0.7688679, a: 0}
   onStage: 0
   origin: {x: 0, y: 0, z: 0}
