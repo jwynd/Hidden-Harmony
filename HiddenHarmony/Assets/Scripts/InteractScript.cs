@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractScript : MonoBehaviour
 {
@@ -11,13 +12,23 @@ public class InteractScript : MonoBehaviour
     private Transform camera;
     private Transform player;
     private GameObject currentInteractable;
+    private GameObject reticle;
+    private Vector3 reticleTransformOrigin;
+    private Vector3 reticleTransformGrow;
+    private float reticleSizeGrow;
+    private float reticleChangeRate;
+    private Color tempColor;
 
     void Start()
     {
         intMsg = GameObject.Find("InteractMessageController");
         player = GameObject.Find("Player").transform;
         camera = GameObject.Find("Player/MainCamera").transform;
-
+        reticle = GameObject.Find("GameplayObjects/Canvas/Reticle");
+        reticleSizeGrow = 2f;
+        reticleTransformOrigin = reticle.transform.localScale;
+        reticleTransformGrow = reticleTransformOrigin * reticleSizeGrow;
+        reticleChangeRate = 0.5f;
     }
 
     // Update is called once per frame
@@ -26,7 +37,7 @@ public class InteractScript : MonoBehaviour
         RaycastHit hit;
         Ray pickRay = new Ray(camera.position, camera.forward);
       
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
         {
             if (Physics.Raycast(pickRay, out hit, interactDistance))
             {
@@ -63,12 +74,28 @@ public class InteractScript : MonoBehaviour
             {
                 if (hit.collider.tag == "Interactable")
                 {
-                    intMsg.GetComponent<InteractMessage>().ShowInteractMessage("Press 'E' to interact");
+                    tempColor = reticle.GetComponent<Image>().color;
+                    reticle.transform.localScale = Vector3.MoveTowards(reticle.transform.localScale, reticleTransformGrow, reticleChangeRate);
+                    tempColor.a = Mathf.MoveTowards(tempColor.a, 1f, reticleChangeRate);
+                    reticle.GetComponent<Image>().color = tempColor;
+                    //intMsg.GetComponent<InteractMessage>().ShowInteractMessage("Press 'E' to interact");
                 }
                 else if (hit.collider.tag == "SoundObj")
                 {
 
                 }
+                else{
+                    tempColor = reticle.GetComponent<Image>().color;
+                    reticle.transform.localScale = Vector3.MoveTowards(reticle.transform.localScale, reticleTransformOrigin, reticleChangeRate);
+                    tempColor.a = Mathf.MoveTowards(tempColor.a, 0.5f, reticleChangeRate);
+                    reticle.GetComponent<Image>().color = tempColor;
+                }
+            }
+            else{
+                tempColor = reticle.GetComponent<Image>().color;
+                reticle.transform.localScale = Vector3.MoveTowards(reticle.transform.localScale, reticleTransformOrigin, reticleChangeRate);
+                tempColor.a = Mathf.MoveTowards(tempColor.a, 0.5f, reticleChangeRate);
+                reticle.GetComponent<Image>().color = tempColor;
             }
         }
     }
