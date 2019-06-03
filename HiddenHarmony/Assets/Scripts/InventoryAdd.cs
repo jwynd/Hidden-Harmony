@@ -29,6 +29,7 @@ public class InventoryAdd : MonoBehaviour
     private string parentName;
     private GameObject controller; 
     [SerializeField] private GameObject itemButton;
+    [SerializeField] private GameObject errorSprite;
 
     void Awake(){
         //itemPanel = GameObject.Find("Canvas/ItemsHeld");
@@ -54,6 +55,8 @@ public class InventoryAdd : MonoBehaviour
 
     void createButtonInTab(GameObject tab, GameObject hitItem)
     {
+        errorSprite = itemButton.transform.GetChild(1).gameObject;
+        errorSprite.SetActive(false);
         newButton = Instantiate(itemButton, tab.transform);
         print("hitItem" + hitItem);
         newButton.GetComponent<Button>().onClick.AddListener(() => controller.GetComponent<SoundObjectCompose>().setSoundObject(hitItem));
@@ -86,6 +89,7 @@ public class InventoryAdd : MonoBehaviour
                             bdItemPanel.SetActive(false);
                             oItemPanel.SetActive(false);
                             currentItem = hit.collider.gameObject;
+                            itemButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("hub_slot");
                             createButtonInTab(hItemPanel, currentItem);
                         }
                         else if(parentName == "DenSoundObjs")
@@ -96,7 +100,7 @@ public class InventoryAdd : MonoBehaviour
                             sItemPanel.SetActive(true);
                             bdItemPanel.SetActive(false);
                             oItemPanel.SetActive(false);
-
+                            itemButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("cave_slot");
                             currentItem = hit.collider.gameObject;
                             createButtonInTab(sItemPanel, currentItem);
         
@@ -108,7 +112,7 @@ public class InventoryAdd : MonoBehaviour
                             sItemPanel.SetActive(false);
                             bdItemPanel.SetActive(true);
                             oItemPanel.SetActive(false);
-
+                            itemButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("forest_slot");
                             currentItem = hit.collider.gameObject;
                             createButtonInTab(bdItemPanel, currentItem);
                         } else if(parentName == "CavernSoundObjs")
@@ -120,7 +124,7 @@ public class InventoryAdd : MonoBehaviour
                             sItemPanel.SetActive(false);
                             bdItemPanel.SetActive(false);
                             oItemPanel.SetActive(true);
-
+                            itemButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("ocean_slot");
                             currentItem = hit.collider.gameObject;
                             createButtonInTab(oItemPanel, currentItem);
                         }
