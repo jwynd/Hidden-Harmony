@@ -44,7 +44,7 @@ public class Cutscene : MonoBehaviour
     {
         RaycastHit hit;
         Ray cutRay = new Ray(camera.transform.position, camera.transform.forward);
-        if (Input.GetKeyDown(KeyCode.E) && !played)
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0) && !played)
         {
             if (Physics.Raycast(cutRay, out hit, interactDistance))
             {

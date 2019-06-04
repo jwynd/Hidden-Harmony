@@ -15,8 +15,17 @@ public class InteractScript : MonoBehaviour
     private GameObject reticle;
     private Vector3 reticleTransformOrigin;
     private Vector3 reticleTransformGrow;
+    [Header("Reticle")]
+    [SerializeField][Tooltip("The size of the reticle when selecting")]
     private float reticleSizeGrow;
     private float reticleChangeRate;
+    [SerializeField][Tooltip("The Red value of the reticle when selecting")] [Range (0,1)]
+    private float reticleSelectR;
+    [SerializeField][Tooltip("The Green value of the reticle when selecting")] [Range (0,1)]
+    private float reticleSelectG;
+    [SerializeField][Tooltip("The Blue value of the reticle when selecting")] [Range (0,1)]
+    private float reticleSelectB;
+    private Color reticleStartColor;
     private Color tempColor;
 
     void Start()
@@ -25,10 +34,10 @@ public class InteractScript : MonoBehaviour
         player = GameObject.Find("Player").transform;
         camera = GameObject.Find("Player/MainCamera").transform;
         reticle = GameObject.Find("GameplayObjects/Canvas/Reticle");
-        reticleSizeGrow = 2f;
         reticleTransformOrigin = reticle.transform.localScale;
         reticleTransformGrow = reticleTransformOrigin * reticleSizeGrow;
         reticleChangeRate = 0.5f;
+        reticleStartColor = reticle.GetComponent<Image>().color;
     }
 
     // Update is called once per frame
@@ -72,31 +81,42 @@ public class InteractScript : MonoBehaviour
         {
             if (Physics.Raycast(pickRay, out hit, interactDistance))
             {
-                if (hit.collider.tag == "Interactable")
-                {
-                    tempColor = reticle.GetComponent<Image>().color;
-                    reticle.transform.localScale = Vector3.MoveTowards(reticle.transform.localScale, reticleTransformGrow, reticleChangeRate);
-                    tempColor.a = Mathf.MoveTowards(tempColor.a, 1f, reticleChangeRate);
-                    reticle.GetComponent<Image>().color = tempColor;
+                if (hit.collider.tag == "Interactable"){
+                    InteractableReticle();
                     //intMsg.GetComponent<InteractMessage>().ShowInteractMessage("Press 'E' to interact");
                 }
-                else if (hit.collider.tag == "SoundObj")
-                {
-
+                else if(hit.collider.tag == "SoundObj" && Physics.Raycast(pickRay, out hit, player.GetComponent<InventoryAdd>().interactDistance)){
+                    if(!hit.collider.gameObject.GetComponent<SoundObject>().OnStage()){
+                        InteractableReticle();
+                    }
                 }
                 else{
-                    tempColor = reticle.GetComponent<Image>().color;
-                    reticle.transform.localScale = Vector3.MoveTowards(reticle.transform.localScale, reticleTransformOrigin, reticleChangeRate);
-                    tempColor.a = Mathf.MoveTowards(tempColor.a, 0.5f, reticleChangeRate);
-                    reticle.GetComponent<Image>().color = tempColor;
+                    StopInteractableReticle();
                 }
             }
             else{
-                tempColor = reticle.GetComponent<Image>().color;
-                reticle.transform.localScale = Vector3.MoveTowards(reticle.transform.localScale, reticleTransformOrigin, reticleChangeRate);
-                tempColor.a = Mathf.MoveTowards(tempColor.a, 0.5f, reticleChangeRate);
-                reticle.GetComponent<Image>().color = tempColor;
+                StopInteractableReticle();
             }
         }
+    }
+
+    private void InteractableReticle(){
+        tempColor = reticle.GetComponent<Image>().color;
+        reticle.transform.localScale = Vector3.MoveTowards(reticle.transform.localScale, reticleTransformGrow, reticleChangeRate);
+        tempColor.a = Mathf.MoveTowards(tempColor.a, 1f, reticleChangeRate);
+        tempColor.r = Mathf.MoveTowards(tempColor.a, reticleSelectR, reticleChangeRate);
+        tempColor.g = Mathf.MoveTowards(tempColor.g, reticleSelectG, reticleChangeRate);
+        tempColor.b = Mathf.MoveTowards(tempColor.b, reticleSelectB, reticleChangeRate);
+        reticle.GetComponent<Image>().color = tempColor;
+    }
+
+    private void StopInteractableReticle(){
+        tempColor = reticle.GetComponent<Image>().color;
+        reticle.transform.localScale = Vector3.MoveTowards(reticle.transform.localScale, reticleTransformOrigin, reticleChangeRate);
+        tempColor.a = Mathf.MoveTowards(tempColor.a, reticleStartColor.a, reticleChangeRate);
+        tempColor.r = Mathf.MoveTowards(tempColor.a, reticleStartColor.r, reticleChangeRate);
+        tempColor.g = Mathf.MoveTowards(tempColor.g, reticleStartColor.g, reticleChangeRate);
+        tempColor.b = Mathf.MoveTowards(tempColor.b, reticleStartColor.b, reticleChangeRate);
+        reticle.GetComponent<Image>().color = tempColor;
     }
 }

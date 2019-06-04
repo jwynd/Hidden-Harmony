@@ -13,7 +13,10 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private GameObject sItems;
     private GameObject bdItems;
     private GameObject oItems; 
-    private GameObject controller; 
+    private GameObject controller;
+    private Transform draggedItem;
+    private Transform errorSprite;
+    private Transform indicator;
 
     // Start is called before the first frame update
     void Start(){
@@ -23,29 +26,49 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     sItems = GameObject.Find("Canvas/CTabs/STabs/SItemsHeld");
     bdItems = GameObject.Find("Canvas/CTabs/BDTabs/BDItemsHeld");
     oItems = GameObject.Find("Canvas/CTabs/OTabs/OItemsHeld");
-
+    
+    
     controller = GameObject.Find("Canvas/Controllers/ComposeObjectController");
     }
 
-  
 
     public void OnBeginDrag(PointerEventData evenData)
     {
+        draggedItem = transform.Find("ItemSprite");
+        errorSprite = transform.Find("ErrorSprite");
+        indicator = transform.Find("NewIndicator");
+        errorSprite.gameObject.SetActive(true);
         //dragObjSound.GetComponents<AudioSource>()[1].Play();
         //transform.Find("ItemSprite").position = Input.mousePosition;
 
     }
 
     public void OnDrag(PointerEventData evenData){
-        transform.Find("ItemSprite").position = Input.mousePosition;
-        isDragging = true;
+        
+        
+        errorSprite.position = Input.mousePosition;
+        draggedItem.position = Input.mousePosition;
+        isDragging = controller.GetComponent<SoundObjectCompose>().checkError();
+        if(isDragging == true && errorSprite.gameObject.activeSelf==true)
+        {
+            errorSprite.gameObject.SetActive(false);
+        }
+        else if(isDragging == false && errorSprite.gameObject.activeSelf == false)
+        {
+            errorSprite.gameObject.SetActive(true);
+        }
+
+
 
     }
     public void OnEndDrag(PointerEventData evenData){
         isDragging = false;
-        transform.Find("ItemSprite").localPosition = origin;
+        errorSprite.gameObject.SetActive(false);
+        draggedItem.localPosition = origin;
 
-        if(hItems.activeSelf == true)
+        indicator.gameObject.SetActive(false);
+
+        if (hItems.activeSelf == true)
         {
             controller.GetComponent<SoundObjectCompose>().checkStage();
         }
@@ -63,5 +86,14 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         {
             controller.GetComponent<SoundObjectCompose>().checkStage();
         }
+    }
+
+    public void DisableNew()
+    {
+        if(indicator.gameObject.activeSelf == true)
+        {
+            indicator.gameObject.SetActive(false);
+        }
+        
     }
 }

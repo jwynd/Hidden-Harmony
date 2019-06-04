@@ -11,6 +11,7 @@ public class Statue : MonoBehaviour
         Orcastra = 2
     }
     [SerializeField] private Statues statue = Statues.Subwoofer;
+    [SerializeField] private AudioClip[] ac = new AudioClip[3];
     [SerializeField] private GameObject living;
     [SerializeField] private Material statueMaterial;
     [SerializeField][ColorUsageAttribute(true,true)] private Color emissionColor;
@@ -18,9 +19,13 @@ public class Statue : MonoBehaviour
 
     private Material stoneMat;
     private Count counter;
+    private AudioSource source;
+    private int lastItemCount;
     // Start is called before the first frame update
     void Start()
     {
+        source = gameObject.AddComponent<AudioSource>();
+        source.playOnAwake = false;
         stoneMat = new Material(statueMaterial);
         stoneMat.SetColor("_EmissionColor", emissionColor);
         foreach(Renderer rend in GetComponentsInChildren<Renderer>()){
@@ -32,6 +37,7 @@ public class Statue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        lastItemCount = itemCount;
         if(statue == Statues.Subwoofer){
             itemCount = counter.DenCount();
         } else if (statue == Statues.Belldeer){
@@ -40,6 +46,10 @@ public class Statue : MonoBehaviour
             itemCount = counter.CavernCount();
         } else {
             print("Enum Error");
+        }
+        if(lastItemCount != itemCount){
+            source.clip = ac[lastItemCount];
+            source.Play();
         }
         if(itemCount < 3){
             stoneMat.SetInt("_CrackStage", itemCount);

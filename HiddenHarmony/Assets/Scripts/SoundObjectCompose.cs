@@ -211,7 +211,7 @@ void Update(){
             itemFrame.GetComponent<Drag>().OnDrag(new PointerEventData(es));
             if (Input.GetMouseButtonUp(0))
             {
-                isDragging = false;
+                isDragging = false; 
                 itemFrame.GetComponent<Drag>().OnEndDrag(new PointerEventData(es));
                 //dropObjSound.GetComponents<AudioSource>()[0].Play();
 
@@ -403,6 +403,7 @@ void Update(){
                         GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
                         placedObject.SetActive(true);
                         dropObjSound.GetComponents<AudioSource>()[0].Play();
+                        
 
 
                 }
@@ -420,6 +421,7 @@ void Update(){
                             GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
                             placedObject.SetActive(true);
                             dropObjSound.GetComponents<AudioSource>()[0].Play();
+                            
 
                     }
 
@@ -428,4 +430,53 @@ void Update(){
         }
     }
 
+    public bool checkError()
+    {
+        RaycastHit hit;
+        Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(mouseRay, out hit, stageDistance))
+        {
+            Match matchStage = Regex.Match(hit.collider.tag, stagePattern);
+            Match matchSound = Regex.Match(hit.collider.tag, soundPattern);
+            if (matchStage.Success)
+            {
+                    Transform stageObjectTransform = hit.collider.gameObject.transform;
+                    Ray stageRay = new Ray(stageObjectTransform.position, Vector3.up);
+                    if (Physics.Raycast(stageRay, out hit, soundDistance))
+                    {
+                        matchSound = Regex.Match(hit.collider.tag, soundPattern);
+                        //if (matchSound.Success) Destroy(hit.collider.gameObject);
+                    }
+
+
+                    /*GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
+                    placedObject.SetActive(true);
+                    dropObjSound.GetComponents<AudioSource>()[0].Play();*/
+                    return true;
+
+
+                
+            }
+            else if (matchSound.Success)
+            {
+                    GameObject hitSoundObject = hit.collider.gameObject;
+                    Ray stageRay = new Ray(hitSoundObject.transform.position, Vector3.down);
+                    if (Physics.Raycast(stageRay, out hit, soundDistance))
+                    {
+                        matchSound = Regex.Match(hit.collider.tag, stagePattern);
+                        //if (matchSound.Success) Destroy(hitSoundObject);
+                        Transform stageObjectTransform = hit.collider.gameObject.transform;
+
+                        /*GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
+                        placedObject.SetActive(true);
+                        dropObjSound.GetComponents<AudioSource>()[0].Play();*/
+                        return true;
+
+                    }
+
+                
+            }
+        }
+        return false;
+    }
 }
