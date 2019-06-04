@@ -73,7 +73,7 @@ public class InventoryAdd : MonoBehaviour
     void Update(){
         RaycastHit hit;
         Ray pickRay = new Ray(camera.position, camera.forward);
-        if(Input.GetKeyDown(KeyCode.E)){
+        if(Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)){
             if(Physics.Raycast(pickRay, out hit, interactDistance)){
                 if(hit.collider.tag == "SoundObj"){
                     if(!hit.collider.gameObject.GetComponent<SoundObject>().OnStage()){
@@ -138,7 +138,7 @@ public class InventoryAdd : MonoBehaviour
             if(Physics.Raycast(pickRay, out hit, interactDistance)){
                 if(hit.collider.tag == "SoundObj"){
                     if(!hit.collider.gameObject.GetComponent<SoundObject>().OnStage()){
-                        intMsg.GetComponent<InteractMessage>().ShowInteractMessage("Press 'E' to pick up");
+                        //intMsg.GetComponent<InteractMessage>().ShowInteractMessage("Press 'E' to pick up");
                     }
                 }
             }
