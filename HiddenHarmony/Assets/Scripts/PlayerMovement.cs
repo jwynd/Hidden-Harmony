@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool jumping = false; //checks if the player is jumping
     private bool canGlide = true; //can the player glide
     private bool canSprint = true; //can the player sprint
+    public bool onGround = true;
     private CharacterController character; //creates a game object for storage
     
     [Header("Movement")]
@@ -17,6 +18,9 @@ public class PlayerMovement : MonoBehaviour {
     [Tooltip("How high the player jumps (Must be greater than terminalVelocity)")]
     public float jump = 70f; //0the maximun value of the jump. value must be larger than terminalVelocity
     //jump suggested value 70f
+    [Tooltip("The minimum height the player must jump")]
+    public float minJump = 0.15f; //0the maximun value of the jump. value must be larger than terminalVelocity
+    //minJump suggested value 0.15f
     [Tooltip("The rate at which the player approaches terminal velocity")]
     public float gravity = 0.6f; //the rate at which yVelocity decreases during a jump unitl terminal velocity is reached
     //gravity suggested value 0.6f
@@ -53,6 +57,8 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField][Tooltip("The rate at which the camera changes between fields of view")]
     private float changeSpeedFOV = 0.25f; //the rate at which the field of view changes during glide
     [Header("Miscellaneous")]
+    [Tooltip("The seconds between playing the next step noise in a sprint")]
+    public float sprintStepRate = 0.25f;
     [SerializeField][Tooltip("Hold shift to glide instead of holding spacebar")]
     private bool shiftToGlide = false;
     [Tooltip("(Not for changing) Tracks the velocity of the player")]
@@ -61,6 +67,12 @@ public class PlayerMovement : MonoBehaviour {
     private Camera camera; //the main camera on the player object
     private AudioSource glideAudio; //the glideAudio source on the player object
     private AudioSource glideStartAudio; //the glideStartAudio source on the player object
+    private AudioSource sprintAudioLeft;
+    private AudioSource sprintAudioRight;
+    private AudioSource sprintAudioWind;
+    private float timestamp;
+    private List<string> audioFiles;
+    private bool sprintAlternator = true;
 
     // Use this for initialization
     void Start () {
@@ -70,6 +82,16 @@ public class PlayerMovement : MonoBehaviour {
         camera = this.transform.Find("MainCamera").gameObject.GetComponent<Camera>();
         glideAudio = this.transform.Find("Audio/GlideAudio").gameObject.GetComponent<AudioSource>();
         glideStartAudio = this.transform.Find("Audio/GlideStartAudio").gameObject.GetComponent<AudioSource>();
+        sprintAudioLeft = this.transform.Find("Audio/SprintAudioLeft").gameObject.GetComponent<AudioSource>();
+        sprintAudioRight = this.transform.Find("Audio/SprintAudioRight").gameObject.GetComponent<AudioSource>();
+        sprintAudioWind = this.transform.Find("Audio/SprintAudioWind").gameObject.GetComponent<AudioSource>();
+        audioFiles = new List<string>();
+        audioFiles.Add("PM_B");
+        audioFiles.Add("PM_Csharp");
+        audioFiles.Add("PM_E");
+        audioFiles.Add("PM_Fsharp");
+        audioFiles.Add("PM_Gsharp");
+        audioFiles.Add("PM_highE");
     }    
 
     // Update is called once per frame
@@ -77,20 +99,24 @@ public class PlayerMovement : MonoBehaviour {
         //Unity p1 and p2 calculation
         Vector3 p1 = transform.position + new Vector3(character.center.x, character.center.y + 0.5f, character.center.z) + Vector3.up * -character.height * 0.5f;
         Vector3 p2 = p1 + Vector3.up * character.height;
-
+        RaycastHit hit;
         //Jump check
         //Raycast alternative Physics.Raycast (transform.position, Vector3.down, canJump)
-        if (Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump)){ //capsule cast checks if capsule is touching the ground 
+        if (Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, out hit, canJump)){ //capsule cast checks if capsule is touching the ground 
             if(Input.GetKeyDown(KeyCode.Space)) {         
                 jumping = true;
                 yVelocity = jump;
             }
-            else if(!Input.GetKey(KeyCode.Space)) {        
+            else if(!Input.GetKey(KeyCode.Space) && !hit.collider.isTrigger && yVelocity < terminalVelocity) {        
                 yVelocity = terminalVelocity;
             }
             if(particles.isPlaying){
                 particles.Stop();
             }
+            onGround = true;
+        }
+        else{
+            onGround = false;
         }
 
         if(yVelocity <= terminalVelocity){
@@ -100,8 +126,8 @@ public class PlayerMovement : MonoBehaviour {
         if(Input.GetKeyUp(KeyCode.Space))
         {
             jumping = false;
-            if(yVelocity > terminalVelocity + (terminalVelocity * 0.15f)){
-                yVelocity = terminalVelocity + (terminalVelocity * 0.15f);
+            if(yVelocity > terminalVelocity + (jump * minJump)){
+                yVelocity = terminalVelocity + (jump * minJump);
             }
             if(particles.isPlaying){
                 particles.Stop();
@@ -147,14 +173,21 @@ public class PlayerMovement : MonoBehaviour {
             //if we want to hold forward use below code in the if statement
             //(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             returnVector.x = glideBoost;
-            returnVector.y = -glideGravity;
-            yVelocity = terminalVelocity;
+            if(yVelocity < terminalVelocity){
+                yVelocity = terminalVelocity;
+                returnVector.y = -glideGravity;
+            }
+            else{
+                returnVector.y = -glideGravity + (yVelocity - terminalVelocity);
+            }
             if(isMoving()){
                 if(!particles.isPlaying){
                     particles.Play();
                 }
                 if(!glideAudio.isPlaying){
-                    glideStartAudio.Play();
+                    if(!glideStartAudio.isPlaying && !Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, (jump - terminalVelocity) /character.height)){
+                        glideStartAudio.Play();
+                    }
                     glideAudio.Play();
                 }
                 toSetVolume(glideAudio, glideMusicVolume, glideMusicChange);
@@ -174,9 +207,35 @@ public class PlayerMovement : MonoBehaviour {
     public float Sprint(){
     if(Input.GetKey(KeyCode.LeftShift) && isMoving() && Glide().x == 0){
             toBoostFOV();
+            if(!sprintAudioWind.isPlaying){
+                sprintAudioWind.Play();
+            }
+            toSetVolume(sprintAudioWind, glideMusicVolume, glideMusicChange);
+            if(Time.time - timestamp >= sprintStepRate){
+                timestamp = Time.time;
+                if(sprintAlternator){
+                    int randomAudioIndex = (int)Mathf.Floor(Random.Range(0, audioFiles.Count));
+                    print("length: " + audioFiles.Count);
+                    print("index: " + randomAudioIndex);
+                    //sprintAudioLeft.clip = Resources.Load<AudioClip>("PMAudio/" + audioFiles[randomAudioIndex]);
+                    sprintAudioLeft.PlayOneShot(Resources.Load<AudioClip>("PMAudio/" + audioFiles[randomAudioIndex]));
+                    sprintAlternator = !sprintAlternator;
+                }
+                else{
+                    int randomAudioIndex = (int)Mathf.Floor(Random.Range(0, audioFiles.Count));
+                    print("length: " + audioFiles.Count);
+                    print("index: " + randomAudioIndex);
+                    //sprintAudioRight.clip = Resources.Load<AudioClip>("PMAudio/" + audioFiles[randomAudioIndex]);
+                    sprintAudioRight.PlayOneShot(Resources.Load<AudioClip>("PMAudio/" + audioFiles[randomAudioIndex]));
+                    sprintAlternator = !sprintAlternator;
+                }
+            }
             return sprintBoost;
         }
         else{
+            if(sprintAudioWind.isPlaying){
+                fadeToMute(sprintAudioWind, glideMusicChange);
+            }
             return 0;
         }
     }
@@ -229,4 +288,6 @@ public class PlayerMovement : MonoBehaviour {
             audio.Stop();
         }
     }
+
+
 }
