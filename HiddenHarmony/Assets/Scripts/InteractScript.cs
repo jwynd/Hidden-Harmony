@@ -77,7 +77,9 @@ public class InteractScript : MonoBehaviour
                     //intMsg.GetComponent<InteractMessage>().ShowInteractMessage("Press 'E' to interact");
                 }
                 else if(hit.collider.tag == "SoundObj" && Physics.Raycast(pickRay, out hit, player.GetComponent<InventoryAdd>().interactDistance)){
-                    InteractableReticle();
+                    if(!hit.collider.gameObject.GetComponent<SoundObject>().OnStage()){
+                        InteractableReticle();
+                    }
                 }
                 else{
                     StopInteractableReticle();
