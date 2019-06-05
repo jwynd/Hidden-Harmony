@@ -20,11 +20,13 @@ public class Statue : MonoBehaviour
     private Material stoneMat;
     private Count counter;
     private AudioSource source;
+    private GameObject s;
     private int lastItemCount;
     // Start is called before the first frame update
     void Start()
     {
-        source = gameObject.AddComponent<AudioSource>();
+        s = new GameObject("StatueAudio");
+        source = s.AddComponent<AudioSource>();
         source.playOnAwake = false;
         stoneMat = new Material(statueMaterial);
         stoneMat.SetColor("_EmissionColor", emissionColor);
@@ -45,7 +47,7 @@ public class Statue : MonoBehaviour
         } else if (statue == Statues.Orcastra){
             itemCount = counter.CavernCount();
         } else {
-            print("Enum Error");
+            Debug.LogError("Enum Error");
         }
         if(lastItemCount != itemCount){
             source.clip = ac[lastItemCount];
