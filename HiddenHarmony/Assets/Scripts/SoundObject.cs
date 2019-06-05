@@ -18,6 +18,8 @@ public class SoundObject : MonoBehaviour
     [SerializeField] private Color crystalColor;
     [SerializeField] private float xRotation, yRotation, zRotation;
     [ColorUsageAttribute(true,true)] [SerializeField] private Color emissionColor;
+    [SerializeField][Range(1.0f, 1.5f)] private float crystalScale = 1.2f;
+    [SerializeField][Range(1.0f, 10.0f)] private float scaleSpeed = 3.0f;
     [HideInInspector] public bool onStage = false;
     [HideInInspector] public Vector3 origin;
 
@@ -27,12 +29,15 @@ public class SoundObject : MonoBehaviour
     private GameObject snapPoint;
     private GameObject rendered;
     private GameObject player;
+    private GameObject crystalUp;
+    private GameObject crystalDown;
     private bool reActivateSnapPoint = false;
     private float beat;
     //private float vfxTimer;
     //private bool vfxTimerActive = false;
     private float beatTimer = 0.0f;// use to determine when one beat has passed
     private float nextTimer = 0.0f;// use to determine when to play next beat
+    private float crystalScaleTimer = 0.0f;
     private AudioSource[] audioSources;
     private AudioSource audioSource;
     private string suffix;
@@ -40,6 +45,11 @@ public class SoundObject : MonoBehaviour
     private bool resetNext = false;
     private GameObject[] crystals;
     private Shader shader;
+
+    private Vector3 oScale; // for crystalUp
+    private Vector3 originalScale; // for crystalDown
+    private Vector3 upScale; // for crystalUp
+    private Vector3 uScale; // for crystalDown
 
     private int cbeat;
     private int playOnBeat;
@@ -208,9 +218,29 @@ public class SoundObject : MonoBehaviour
         for(int i = 0; onStage && i < crystals.Length; ++i){
             if(i == beatIndex){
                 crystals[i].GetComponent<Renderer>().material = glowing;
+                if(crystals[i] != crystalUp){
+                    crystalDown = crystalUp;
+                    crystalUp = crystals[i];
+                    crystalScaleTimer = 0.0f;
+                    oScale = new Vector3(crystalUp.transform.localScale.x, crystalUp.transform.localScale.y, crystalUp.transform.localScale.z);
+                    upScale = new Vector3(crystalUp.transform.localScale.x * crystalScale, crystalUp.transform.localScale.y * crystalScale, crystalUp.transform.localScale.z * crystalScale);
+                    if(crystalDown != null){
+                        originalScale = new Vector3(crystalDown.transform.localScale.x * (1.0f/crystalScale), crystalDown.transform.localScale.y * (1.0f/crystalScale), crystalDown.transform.localScale.z * (1.0f/crystalScale));
+                        uScale = new Vector3(crystalDown.transform.localScale.x, crystalDown.transform.localScale.y, crystalDown.transform.localScale.z);
+                    }
+                }
             } else {
                 crystals[i].GetComponent<Renderer>().material = notGlowing;
             }
+        }
+
+        if(crystalUp != null && crystalScaleTimer < 1.0f){
+            crystalUp.transform.localScale = Vector3.Lerp(oScale, upScale, crystalScaleTimer);
+            if(crystalDown != null) crystalDown.transform.localScale = Vector3.Lerp(uScale, originalScale, crystalScaleTimer);
+            crystalScaleTimer += Time.deltaTime * scaleSpeed;
+        } else if(crystalUp != null){
+            crystalUp.transform.localScale = upScale;
+            if(crystalDown != null) crystalDown.transform.localScale = originalScale;
         }
 
         //Rotate the sound object
