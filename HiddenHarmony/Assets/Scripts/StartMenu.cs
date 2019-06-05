@@ -11,6 +11,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private PostProcessProfile playerPostProcessingProfile;
 
     private GameObject player;
+    private GameObject geysers;
     private GameObject startMenuUI;
     private GameObject menuCamera;
     private GameObject mainCamera;
@@ -22,6 +23,7 @@ public class StartMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         player = GameObject.Find("Player");
+        geysers = GameObject.Find("Geysers");
         startMenuUI = GameObject.Find("Canvas/StartMenuMain");
         menuCamera = GameObject.Find("MenuCamera");
         moveTo = menuCamera.transform.GetChild(0);
@@ -29,6 +31,7 @@ public class StartMenu : MonoBehaviour
         fade = GameObject.Find("Canvas/Fade").GetComponent<Fade>();
         Cursor.visible = true;
         player.SetActive(false);
+        geysers.SetActive(false);
         
     }
 
@@ -48,6 +51,7 @@ public class StartMenu : MonoBehaviour
                 mainCamera.GetComponent<PostProcessVolume>().profile = playerPostProcessingProfile;
                 Destroy(menuCamera);
                 player.SetActive(true);
+                geysers.SetActive(true);
                 GameObject.Find("PauseMenuController").GetComponent<PauseMenu>().DeactivateMenu();
                 fading = false;
             }
