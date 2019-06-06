@@ -261,8 +261,10 @@ public class SoundObject : MonoBehaviour
     }
 
     public void SnapReturn(){
-        snapPoint.transform.SetParent(stage.transform);
-        snapPoint.transform.SetAsFirstSibling();
+        if(SnapCheckController.check){
+            snapPoint.transform.SetParent(stage.transform);
+            snapPoint.transform.SetAsFirstSibling();
+        }
     }
 
     public void blankCrystals(){
@@ -270,5 +272,6 @@ public class SoundObject : MonoBehaviour
             crystals[i].transform.localScale = crystalScales[i];
         }
     }
+
 }
 

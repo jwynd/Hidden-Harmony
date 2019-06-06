@@ -23,6 +23,7 @@ public class TutorialStageEnd : MonoBehaviour
         {
             if(stageScript.IsOccupied() == false)
             {
+                SnapCheckController.done();
                 foreach (GameObject g in destroy)
                 {
                     g.SetActive(false);
