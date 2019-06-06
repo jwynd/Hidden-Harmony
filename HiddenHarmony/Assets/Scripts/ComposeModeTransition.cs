@@ -16,6 +16,7 @@ public class ComposeModeTransition : MonoBehaviour
     private float journeyLength;
     private bool transitioning = false;
     private bool compose = false;
+    private bool firstPress = true; // Enables/handles the tutorial shit
     private GameObject playerCamera;
 //    private GameObject composeCamera;
     private GameObject player;
@@ -23,6 +24,8 @@ public class ComposeModeTransition : MonoBehaviour
     private AudioSource[] sources;
 
     private bool inHub = true;
+
+    public GameObject tutorialArrow;
 
     public void AllowCompose(){
         inHub = true;
@@ -64,6 +67,12 @@ public class ComposeModeTransition : MonoBehaviour
             //print("Tab key pressed");
             //print(compose?"compose":"!compose");
             //print(transitioning?"transitioning":"!transitioning");
+            if(firstPress)
+            {
+                // Enable the arrow thing on the UI and set firstPress to false
+                firstPress = false;
+                tutorialArrow.SetActive(true);
+            }
             if(!compose && !transitioning){
                 //print("Transitioning to compose");
                 player.GetComponent<CharacterController>().enabled = false;
