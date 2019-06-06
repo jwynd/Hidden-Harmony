@@ -23,6 +23,9 @@ public class Statue : MonoBehaviour
     private AudioSource source;
     private GameObject s;
     private int lastItemCount;
+    private ParticleSystem breakout;
+    private ParticleSystem cracked1;
+    private ParticleSystem cracked2;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,9 @@ public class Statue : MonoBehaviour
             rend.material = stoneMat;
         }
         counter = GameObject.Find("GameplayObjects/Count").GetComponent<Count>();
+        //cracked1 = transform.Find("Cracked1").GetComponent<ParticleSystem>();
+        //cracked2 = transform.Find("Cracked2").GetComponent<ParticleSystem>();
+        //breakout = transform.Find("Breakout").gameObject.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -54,6 +60,7 @@ public class Statue : MonoBehaviour
         if(lastItemCount != itemCount){
             source.clip = ac[lastItemCount];
             source.Play();
+            breakout.Play();
         }
         if(itemCount < 3){
             stoneMat.SetInt("_CrackStage", itemCount);

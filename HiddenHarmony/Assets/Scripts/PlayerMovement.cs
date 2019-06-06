@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour {
     public float canJump = 1.25f; //the distance between the player and the ground at which the player can jump
     //canJump suggested value for capsulecast 1.25f. I don't know why this works, but it does.
     //canJump suggested value for raycast 1.25f. Assumes player is of height 2 and takes half, which is 1. The 0.25 is added for wiggle room.
+    private float canJumpRay;
     [Header("Glide")]
     [Tooltip("The rate at which the player falls during glide (value does not relate to gravity variable)")]
     public float glideGravity = 3f; //the rate at which the player falls while gliding (calculated much differently than the standard gravity)
@@ -85,6 +86,9 @@ public class PlayerMovement : MonoBehaviour {
         sprintAudioLeft = this.transform.Find("Audio/SprintAudioLeft").gameObject.GetComponent<AudioSource>();
         sprintAudioRight = this.transform.Find("Audio/SprintAudioRight").gameObject.GetComponent<AudioSource>();
         sprintAudioWind = this.transform.Find("Audio/SprintAudioWind").gameObject.GetComponent<AudioSource>();
+        canJumpRay = character.height + character.height * 0.25f;
+        print(canJumpRay);
+        canJumpRay = 3f;
         audioFiles = new List<string>();
         audioFiles.Add("PM_B");
         audioFiles.Add("PM_Csharp");
@@ -102,12 +106,17 @@ public class PlayerMovement : MonoBehaviour {
         RaycastHit hit;
         //Jump check
         //Raycast alternative Physics.Raycast (transform.position, Vector3.down, canJump)
-        if (Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, out hit, canJump)){ //capsule cast checks if capsule is touching the ground 
+        if (Physics.Raycast(transform.position, Vector3.down, canJumpRay)){
+            print("raycast");
+        }
+        if (Physics.CapsuleCast(p1, p2, character.radius, Vector3.down, out hit, canJump) || Physics.Raycast(transform.position, Vector3.down, out hit, canJumpRay))
+        { //capsule cast checks if capsule is touching the ground 
             if(Input.GetKeyDown(KeyCode.Space)) {         
                 jumping = true;
                 yVelocity = jump;
             }
-            else if(!Input.GetKey(KeyCode.Space) && !hit.collider.isTrigger && yVelocity < terminalVelocity) {        
+            else if (!Input.GetKey(KeyCode.Space) && yVelocity < terminalVelocity && !hit.collider.isTrigger)
+            {        
                 yVelocity = terminalVelocity;
             }
             if(particles.isPlaying){
@@ -135,7 +144,8 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         if(yVelocity > 0){
-            if(!Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump)){
+            if (!Physics.CapsuleCast(p1, p2, character.radius, Vector3.down, canJump) || !Physics.Raycast(transform.position, Vector3.down, canJumpRay))
+            {
                 yVelocity -= gravity; //increases jump velocity when jumping and before jump total is reached
             }
         }
@@ -169,7 +179,8 @@ public class PlayerMovement : MonoBehaviour {
         Vector2 returnVector = new Vector2();
         Vector3 p1 = transform.position + new Vector3(character.center.x, character.center.y + 0.5f, character.center.z) + Vector3.up * -character.height * 0.5f;
         Vector3 p2 = p1 + Vector3.up * character.height;
-        if((shiftToGlide ? Input.GetKey(KeyCode.LeftShift) : Input.GetKey(KeyCode.Space)) && !jumping && !Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, canJump)){
+        if ((shiftToGlide ? Input.GetKey(KeyCode.LeftShift) : Input.GetKey(KeyCode.Space)) && !jumping && (!Physics.CapsuleCast(p1, p2, character.radius, Vector3.down, canJump) || !Physics.Raycast(transform.position, Vector3.down, canJumpRay)))
+        {
             //if we want to hold forward use below code in the if statement
             //(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             returnVector.x = glideBoost;
@@ -185,7 +196,8 @@ public class PlayerMovement : MonoBehaviour {
                     particles.Play();
                 }
                 if(!glideAudio.isPlaying){
-                    if(!glideStartAudio.isPlaying && !Physics.CapsuleCast (p1, p2, character.radius, Vector3.down, (jump - terminalVelocity) /character.height)){
+                    if (!glideStartAudio.isPlaying && (!Physics.CapsuleCast(p1, p2, character.radius, Vector3.down, (jump - terminalVelocity) / character.height) || !Physics.Raycast(transform.position, Vector3.down, (jump - terminalVelocity) / character.height)))
+                    {
                         glideStartAudio.Play();
                     }
                     glideAudio.Play();
@@ -211,7 +223,8 @@ public class PlayerMovement : MonoBehaviour {
                 sprintAudioWind.Play();
             }
             toSetVolume(sprintAudioWind, glideMusicVolume, glideMusicChange);
-            if(Time.time - timestamp >= sprintStepRate){
+            if (Time.time - timestamp >= sprintStepRate && Physics.Raycast(transform.position, Vector3.down, canJumpRay))
+            {
                 timestamp = Time.time;
                 if(sprintAlternator){
                     int randomAudioIndex = (int)Mathf.Floor(Random.Range(0, audioFiles.Count));
