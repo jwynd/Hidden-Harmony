@@ -72,7 +72,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c6d58da1cbd656641830ad806f602965, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -93,7 +93,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _CrackStage: 2
+    - _CrackStage: 1
     - _CrackStage1: 1
     - _CrackStage2: 0
     - _Cutoff: 0.5
@@ -112,7 +112,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.509434, g: 0.4781951, b: 0.4781951, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CrackS1Tn1: {r: 1, g: 1, b: 1, a: 0.88235295}
     - _CrackS1Tn2: {r: 1, g: 1, b: 1, a: 0.49803922}
     - _CrackS2Tn1: {r: 1, g: 1, b: 1, a: 0.38431373}
