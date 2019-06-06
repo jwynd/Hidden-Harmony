@@ -106,6 +106,7 @@ void Update(){
                 itemFrame.GetComponent<Drag>().OnBeginDrag(new PointerEventData(es));
                 itemFrame.GetComponent<Button>().onClick.Invoke();
                 currentObj.GetComponent<SoundObject>().blankStage();
+                currentObj.GetComponent<SoundObject>().SnapReturn();
                 Destroy(currentObj);
                 isDragging = true;
                 break;
@@ -139,6 +140,7 @@ void Update(){
                 
                 itemFrame.GetComponent<Button>().onClick.Invoke();
                 currentObj.GetComponent<SoundObject>().blankStage();
+                currentObj.GetComponent<SoundObject>().SnapReturn();
                 Destroy(currentObj);
                 break;
             }
@@ -167,6 +169,7 @@ void Update(){
 
                 itemFrame.GetComponent<Button>().onClick.Invoke();
                 currentObj.GetComponent<SoundObject>().blankStage();
+                currentObj.GetComponent<SoundObject>().SnapReturn();
                 Destroy(currentObj);
                 break;
             }
@@ -195,6 +198,7 @@ void Update(){
 
                 itemFrame.GetComponent<Button>().onClick.Invoke();
                 currentObj.GetComponent<SoundObject>().blankStage();
+                currentObj.GetComponent<SoundObject>().SnapReturn();
                 Destroy(currentObj);
                 break;
             }
