@@ -39,11 +39,27 @@ public class Statue : MonoBehaviour
             rend.material = stoneMat;
         }
         counter = GameObject.Find("GameplayObjects/Count").GetComponent<Count>();
-        if (this.gameObject.name != "coralDead"){
+       /* if (this.gameObject.name != "coralDead"){
+            if (statue == Statues.Subwoofer)
+            {
+                itemCount = counter.DenCount();
+            }
+            else if (statue == Statues.Belldeer)
+            {
+                itemCount = counter.ForestCount();
+            }
+            else if (statue == Statues.Orcastra)
+            {
+                itemCount = counter.CavernCount();
+            }
+            else
+            {
+                Debug.LogError("Enum Error");
+            }
             cracked1 = transform.Find("Cracked1").GetComponent<ParticleSystem>();
             cracked2 = transform.Find("Cracked2").GetComponent<ParticleSystem>();
             breakout = transform.Find("Breakout").gameObject.GetComponent<ParticleSystem>();
-        }
+        }*/
     }
 
     // Update is called once per frame
@@ -63,7 +79,7 @@ public class Statue : MonoBehaviour
             source.clip = ac[lastItemCount];
             source.Play();
             if (this.gameObject.name != "coralDead"){
-                breakout.Play();
+                //breakout.Play();
             }
         }
         if(itemCount < 3){
