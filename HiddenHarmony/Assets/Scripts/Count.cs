@@ -103,14 +103,29 @@ public class Count : MonoBehaviour
     public int DenCount(){
         return denCount;
     }
+    public bool AllDen(){
+        return denCount == denChildren.Length;
+    }
     public int ForestCount(){
         return forestCount;
+    }
+    public bool AllForest(){
+        return forestCount == forestChildren.Length;
     }
     public int CavernCount(){
         return cavernCount;
     }
+    public bool AllCavern(){
+        return cavernCount == cavernChildren.Length;
+    }
     public int HubCount(){
         return hubCount;
+    }
+    public bool AllHub(){
+        return hubCount == hubChildren.Length;
+    }
+    public bool AllCounted(){
+        return AllDen() && AllForest() && AllCavern() && AllHub();
     }
 
 }

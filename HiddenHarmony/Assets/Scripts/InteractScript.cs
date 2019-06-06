@@ -56,9 +56,10 @@ public class InteractScript : MonoBehaviour
                     if (currentInteractable.GetComponent<Animator>() != null)
                     {
                         currentInteractable.GetComponent<Animator>().SetBool("interacting", true);
-                        if (currentInteractable.GetComponent<AudioSource>() != null)
+                        if (currentInteractable.GetComponent<AudioSource>() != null && currentInteractable.GetComponent<ParticleSystem>() != null)
                         {
                             getAudio = currentInteractable.GetComponents<AudioSource>();
+                            currentInteractable.GetComponent<ParticleSystem>().Play();
                             int clipPick = Random.Range(0, getAudio.Length);
                             getAudio[clipPick].Play();
 
@@ -67,9 +68,10 @@ public class InteractScript : MonoBehaviour
                     }
                     else
                     {
-                        if (currentInteractable.GetComponent<AudioSource>() != null)
+                        if (currentInteractable.GetComponent<AudioSource>() != null && currentInteractable.GetComponent<ParticleSystem>() != null)
                         {
                             getAudio = currentInteractable.GetComponents<AudioSource>();
+                            currentInteractable.GetComponent<ParticleSystem>().Play();
                             int clipPick = Random.Range(0, getAudio.Length);
                             getAudio[clipPick].Play();
                         }
