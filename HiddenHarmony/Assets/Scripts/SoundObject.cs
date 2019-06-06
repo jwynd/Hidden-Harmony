@@ -192,12 +192,6 @@ public class SoundObject : MonoBehaviour
             }
         }
 
-        if(reActivateSnapPoint && !onStage){
-            snapPoint.transform.SetParent(stage.transform);
-            snapPoint.transform.SetAsFirstSibling();
-            reActivateSnapPoint = false;
-        }
-
 //        if(Time.time > timekeeper.FadeOutStartTime(playOnBeat) && Time.time < timekeeper.FadeOutEndTime(playOnBeat)){
 //                audioSource.volume -= (float)(Time.deltaTime/0.01);
 //        }
@@ -255,6 +249,11 @@ public class SoundObject : MonoBehaviour
         foreach(GameObject crystal in crystals){
             crystal.GetComponent<Renderer>().material = notGlowing;
         }
+    }
+
+    public void SnapReturn(){
+        snapPoint.transform.SetParent(stage.transform);
+        snapPoint.transform.SetAsFirstSibling();
     }
 }
 
