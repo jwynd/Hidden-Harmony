@@ -99,7 +99,9 @@ public class Count : MonoBehaviour
         }
         throw new System.ArgumentException("incrementCount failed to return");
     }
-
+    public int CountAll(){
+        return denCount+forestCount+hubCount+cavernCount;
+    }
     public int DenCount(){
         return denCount;
     }
