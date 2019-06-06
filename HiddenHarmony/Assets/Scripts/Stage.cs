@@ -34,4 +34,8 @@ public class Stage : MonoBehaviour
             crystals[index] = this.transform.parent.GetChild(0).GetChild(0).GetChild(i).gameObject;
         }
     }
+
+    public bool IsOccupied(){
+        return this.transform.childCount == 0;
+    }
 }
