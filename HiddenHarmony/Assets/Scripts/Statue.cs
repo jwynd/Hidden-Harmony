@@ -60,7 +60,7 @@ public class Statue : MonoBehaviour
         if(lastItemCount != itemCount){
             source.clip = ac[lastItemCount];
             source.Play();
-            breakout.Play();
+            //breakout.Play();
         }
         if(itemCount < 3){
             stoneMat.SetInt("_CrackStage", itemCount);
