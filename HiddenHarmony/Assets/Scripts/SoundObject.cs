@@ -44,6 +44,7 @@ public class SoundObject : MonoBehaviour
     private AudioSource[] bgs;
     private bool resetNext = false;
     private GameObject[] crystals;
+    private Vector3[] crystalScales;
     private Shader shader;
 
     private Vector3 oScale; // for crystalUp
@@ -170,6 +171,7 @@ public class SoundObject : MonoBehaviour
             if(hit.transform.tag == "StageObj"){
                 stg = hit.transform.gameObject.GetComponent<Stage>();
                 crystals = stg.crystals;
+                crystalScales = stg.crystalScales;
                 onStage = true;
                 count.IncrementCount(this.gameObject.name);
 
@@ -237,6 +239,13 @@ public class SoundObject : MonoBehaviour
             if(crystalDown != null) crystalDown.transform.localScale = originalScale;
         }
 
+        if(crystals != null){
+            for(int i = 0; i < crystals.Length; ++i){
+                if(crystals[i]==crystalDown || crystals[i]==crystalUp) continue;
+                crystals[i].transform.localScale = crystalScales[i];
+            }
+        }
+
         //Rotate the sound object
         rendered.transform.Rotate(xRotation, yRotation, zRotation);
 
@@ -254,6 +263,12 @@ public class SoundObject : MonoBehaviour
     public void SnapReturn(){
         snapPoint.transform.SetParent(stage.transform);
         snapPoint.transform.SetAsFirstSibling();
+    }
+
+    public void blankCrystals(){
+        for(int i = 0; i < crystals.Length; i++){
+            crystals[i].transform.localScale = crystalScales[i];
+        }
     }
 }
 

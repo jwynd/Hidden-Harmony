@@ -107,6 +107,7 @@ void Update(){
                 itemFrame.GetComponent<Button>().onClick.Invoke();
                 currentObj.GetComponent<SoundObject>().blankStage();
                 currentObj.GetComponent<SoundObject>().SnapReturn();
+                currentObj.GetComponent<SoundObject>().blankCrystals();
                 Destroy(currentObj);
                 isDragging = true;
                 break;
@@ -141,6 +142,7 @@ void Update(){
                 itemFrame.GetComponent<Button>().onClick.Invoke();
                 currentObj.GetComponent<SoundObject>().blankStage();
                 currentObj.GetComponent<SoundObject>().SnapReturn();
+                currentObj.GetComponent<SoundObject>().blankCrystals();
                 Destroy(currentObj);
                 break;
             }
@@ -170,6 +172,7 @@ void Update(){
                 itemFrame.GetComponent<Button>().onClick.Invoke();
                 currentObj.GetComponent<SoundObject>().blankStage();
                 currentObj.GetComponent<SoundObject>().SnapReturn();
+                currentObj.GetComponent<SoundObject>().blankCrystals();
                 Destroy(currentObj);
                 break;
             }
@@ -199,6 +202,7 @@ void Update(){
                 itemFrame.GetComponent<Button>().onClick.Invoke();
                 currentObj.GetComponent<SoundObject>().blankStage();
                 currentObj.GetComponent<SoundObject>().SnapReturn();
+                currentObj.GetComponent<SoundObject>().blankCrystals();
                 Destroy(currentObj);
                 break;
             }

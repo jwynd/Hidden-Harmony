@@ -12,6 +12,7 @@ public class Statue : MonoBehaviour
     }
     [SerializeField] private Statues statue = Statues.Subwoofer;
     [SerializeField] private AudioClip[] ac = new AudioClip[3];
+    [SerializeField][Range(0.0f,1.0f)] private float volume = 0.75f;
     [SerializeField] private GameObject living;
     [SerializeField] private Material statueMaterial;
     [SerializeField][ColorUsageAttribute(true,true)] private Color emissionColor;
@@ -28,6 +29,7 @@ public class Statue : MonoBehaviour
         s = new GameObject("StatueAudio");
         source = s.AddComponent<AudioSource>();
         source.playOnAwake = false;
+        source.volume = volume;
         stoneMat = new Material(statueMaterial);
         stoneMat.SetColor("_EmissionColor", emissionColor);
         foreach(Renderer rend in GetComponentsInChildren<Renderer>()){

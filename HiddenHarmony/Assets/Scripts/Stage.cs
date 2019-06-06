@@ -9,6 +9,7 @@ public class Stage : MonoBehaviour
     [SerializeField][Tooltip("Places an offset on when the crystal lights up. Must be between 0 and the number of notes - 1")]
     private int crystalOffset;
     [HideInInspector] public GameObject[] crystals;
+    [HideInInspector] public Vector3[] crystalScales;
 
     void Start(){
         if(halfBeats.Length != pitches.Length) throw new System.ArgumentException("Beats and pitches must be of equal length");
@@ -28,10 +29,12 @@ public class Stage : MonoBehaviour
         }*/
         int index;
         crystals = new GameObject[halfBeats.Length];
+        crystalScales = new Vector3[crystals.Length];
         for(int i = 0; i < halfBeats.Length; ++i){
             index = i + crystalOffset;
             index = index % halfBeats.Length;
             crystals[index] = this.transform.parent.GetChild(0).GetChild(0).GetChild(i).gameObject;
+            crystalScales[index] = new Vector3(crystals[index].transform.localScale.x, crystals[index].transform.localScale.y, crystals[index].transform.localScale.z);
         }
     }
 
