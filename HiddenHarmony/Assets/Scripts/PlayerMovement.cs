@@ -223,7 +223,7 @@ public class PlayerMovement : MonoBehaviour {
                 sprintAudioWind.Play();
             }
             toSetVolume(sprintAudioWind, glideMusicVolume, glideMusicChange);
-            if (Time.time - timestamp >= sprintStepRate && Physics.Raycast(transform.position, Vector3.down, canJumpRay))
+            if (Time.time - timestamp >= sprintStepRate)
             {
                 timestamp = Time.time;
                 if(sprintAlternator){
