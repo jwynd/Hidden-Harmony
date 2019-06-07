@@ -23,7 +23,7 @@ public class ComposeModeTransition : MonoBehaviour
     private Transform cameraReturn;
     private AudioSource[] sources;
 
-    private bool inHub = true;
+    private bool inHub = false;
 
     public GameObject tutorialArrow;
 
