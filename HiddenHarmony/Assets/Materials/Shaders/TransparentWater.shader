@@ -3,6 +3,7 @@
     Properties
     {
         _Color ("Base River Color", Color) = (1,1,1,1)
+        //_ShadowTint("Shadow Tinting", Color) = (0,0,0,1)
 
         [Header(Spec Layer 1)]
         _Specs1 ("Specs", 2D) = "black" {}
@@ -22,20 +23,28 @@
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" "ForceNoShadowCasting"="True"}
+        Tags 
+        { 
+            "RenderType"="Transparent"
+            "Queue"="Transparent"
+            "ForceNoShadowCasting"="True"
+        }
         LOD 200
+        Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite Off
 
         CGPROGRAM
         // surface shader declation
         // alpha attribute added for a transparent shader
         // add custom vertex shader to get depth
-        #pragma surface surf Standard vertex:vert fullforwardshadows alpha
+        #pragma surface surf DiffuseShadow vertex:vert fullforwardshadows alpha
         // Use 4.0 target to use more interpolators
         #pragma target 4.0
 
         // variables
         // Base
         uniform fixed4 _Color;
+        //uniform fixed4 _ShadowTint;
         // Spec layer 1
         uniform sampler2D _Specs1;
         uniform fixed4 _SpecColor1;
@@ -67,7 +76,7 @@
             COMPUTE_EYEDEPTH(o.eyeDepth);
         }
 
-        void surf (Input IN, inout SurfaceOutputStandard o)
+        void surf (Input IN, inout SurfaceOutput o)
         {
             // Base water
             float4 col = _Color;
@@ -111,6 +120,37 @@
             o.Albedo = col.rgb;
             o.Alpha = col.a;
         }
+
+
+        // gonna add some CUSTOM LIGHTING and see if that fixes anything
+        fixed4 LightingDiffuseShadow(SurfaceOutput s, fixed3 lightDir, fixed atten) {
+            // atten = light/shadow attentuation -- not sure if
+            // < 1 means in shadow, or < 0.5 means less than
+            // originally 1 means lit, and then you multiply by 2 to make things look better, but this has changed
+            // normally diff (diffuse) = max(0, dot(s.Normal, lightDir)
+            // get value from -1 to 1 for the dot product of surface normal and light
+            // if < 0, just do 0
+            half NdotL = max(0, dot(s.Normal, lightDir));
+            fixed4 c;
+            // atten is the shadow value, which, interestingly, applies to itelf
+            // even if diffuse also calculates shadow
+            // Tinting the Shadow
+            c.rgb = s.Albedo * _LightColor0.rgb * NdotL * atten;
+
+            //c.rgb += _ShadowTint.rgb * max(0.0, (1.0 - (NdotL * atten)));
+
+            c.a = s.Alpha;
+
+            return c;
+        }
+
+
+
+
+
+
+
+
         ENDCG
     }
     FallBack "Diffuse"

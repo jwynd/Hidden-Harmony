@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: OrcastraTattoos
+  m_Shader: {fileID: 4800000, guid: 88fe24852a5731d4db322800be1e7559, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EffectTex0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EffectTex1:
+        m_Texture: {fileID: 2800000, guid: 8aa089ea8a33d584f9c9f84053d3e169, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EffectTex2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 20}
+        m_Offset: {x: 0, y: 0}
+    - _EffectTex3:
+        m_Texture: {fileID: 2800000, guid: 41078cc00cd58214abd5f4378c08f4e4, type: 3}
+        m_Scale: {x: 5, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionTex:
+        m_Texture: {fileID: 2800000, guid: 3dc0d9fa93d8ee94b97bcc13884bc75d, type: 3}
+        m_Scale: {x: 5, y: 20}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 0d94e33383324c34bb131e87bdaab730, type: 3}
+        m_Scale: {x: 10, y: 10}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Perlin:
+        m_Texture: {fileID: 2800000, guid: 274d44fa36aae5e40ad9f021785f1f24, type: 3}
+        m_Scale: {x: 0.01, y: 0.01}
+        m_Offset: {x: 0, y: 0}
+    - _PulseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RampTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _CycleOffset: 0
+    - _CycleSpeed: 1
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EffectSpeed0: 0.1
+    - _EffectSpeed1: 1
+    - _EffectSpeed2: 1
+    - _EffectSpeed3: 1
+    - _EmissionIntensity: 4
+    - _EmissionSpeed: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Overlay: 1
+    - _Parallax: 0.02
+    - _PulseSpeed: 1
+    - _Smoothness: 0
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0.033018887, g: 0.21936159, b: 1, a: 1}
+    - _EffectTint0: {r: 0, g: 1, b: 0.9534545, a: 1}
+    - _EffectTint1: {r: 1, g: 0.10849059, b: 0.20582429, a: 1}
+    - _EffectTint2: {r: 1, g: 1, b: 1, a: 1}
+    - _EffectTint3: {r: 1, g: 0.6334349, b: 0, a: 1}
+    - _EmissionColor: {r: 0, g: 0.7911868, b: 1, a: 1}
+    - _EmissionDirection: {r: 0.3, g: 0, b: 0.1, a: 0.1}
+    - _MainTexDirection: {r: 0, g: 0.1, b: 0, a: 0}
+    - _PerlinDirection: {r: 0, g: 0.1, b: 0, a: 0.1}
+    - _Tint: {r: 0.2735849, g: 0.06581523, b: 0.22237463, a: 1}

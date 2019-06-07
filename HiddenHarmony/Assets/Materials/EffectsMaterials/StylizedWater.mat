@@ -60,19 +60,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Specs1:
-        m_Texture: {fileID: 2800000, guid: 81fd12fc38e96cc41943d217408b75b3, type: 3}
-        m_Scale: {x: 0.2, y: 4}
+        m_Texture: {fileID: 2800000, guid: 8aa089ea8a33d584f9c9f84053d3e169, type: 3}
+        m_Scale: {x: 5, y: 10}
         m_Offset: {x: 0, y: 0}
     - _Specs2:
         m_Texture: {fileID: 2800000, guid: 3dc0d9fa93d8ee94b97bcc13884bc75d, type: 3}
-        m_Scale: {x: 4, y: 10}
+        m_Scale: {x: 10, y: 15}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FoamAmount: 1.93
+    - _FoamAmount: 2
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -86,12 +86,13 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.026032407, g: 0.4245283, b: 0.38220727, a: 0.67058825}
+    - _Color: {r: 0.43621373, g: 0.12941176, b: 0.6431373, a: 0.6431373}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FoamColor: {r: 0.9103774, g: 1, b: 0.99816984, a: 1}
+    - _FoamColor: {r: 0.75, g: 0.9591995, b: 1, a: 1}
     - _FoamDirection: {r: 0, g: 0.1, b: 0, a: 0}
-    - _SpecColor1: {r: 0.8627451, g: 1, b: 0.9855685, a: 0.72156864}
-    - _SpecColor2: {r: 1, g: 0.7783019, b: 0.9344274, a: 0.14117648}
+    - _ShadowTint: {r: 0.01441794, g: 0.0173523, b: 0.11320752, a: 0}
+    - _SpecColor1: {r: 0.31007475, g: 0.76333904, b: 0.9811321, a: 0}
+    - _SpecColor2: {r: 1, g: 0.7783019, b: 0.9344274, a: 0}
     - _SpecDirection: {r: 1, g: 0, b: 0.5, a: 1}
-    - _SpecDirection1: {r: 0.2, g: 0, b: 0.1, a: 0}
-    - _SpecDirection2: {r: 0.2, g: 0, b: 0, a: 0}
+    - _SpecDirection1: {r: 0, g: 0, b: 0.1, a: 0.2}
+    - _SpecDirection2: {r: 0.01, g: 0, b: 0.05, a: 0}
