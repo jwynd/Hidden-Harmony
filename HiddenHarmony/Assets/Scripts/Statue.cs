@@ -26,6 +26,7 @@ public class Statue : MonoBehaviour
     private ParticleSystem breakout;
     private ParticleSystem cracked1;
     private ParticleSystem cracked2;
+    private GameObject pedestal;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,27 +40,27 @@ public class Statue : MonoBehaviour
             rend.material = stoneMat;
         }
         counter = GameObject.Find("GameplayObjects/Count").GetComponent<Count>();
-       /* if (this.gameObject.name != "coralDead"){
+       if (this.gameObject.name != "coralDead"){
             if (statue == Statues.Subwoofer)
             {
-                itemCount = counter.DenCount();
+                pedestal = GameObject.FindGameObjectsWithTag("SubwooferPedestal")[0];
             }
             else if (statue == Statues.Belldeer)
             {
-                itemCount = counter.ForestCount();
+                pedestal = GameObject.FindGameObjectsWithTag("BelldeerPedestal")[0];
             }
             else if (statue == Statues.Orcastra)
             {
-                itemCount = counter.CavernCount();
+                pedestal = GameObject.FindGameObjectsWithTag("OrcastraPedestal")[0];
             }
             else
             {
                 Debug.LogError("Enum Error");
             }
-            cracked1 = transform.Find("Cracked1").GetComponent<ParticleSystem>();
-            cracked2 = transform.Find("Cracked2").GetComponent<ParticleSystem>();
-            breakout = transform.Find("Breakout").gameObject.GetComponent<ParticleSystem>();
-        }*/
+            cracked1 = pedestal.transform.Find("Cracked1").gameObject.GetComponent<ParticleSystem>();
+            cracked2 = pedestal.transform.Find("Cracked2").gameObject.GetComponent<ParticleSystem>();
+            breakout = pedestal.transform.Find("Breakout").gameObject.GetComponent<ParticleSystem>();
+        }
     }
 
     // Update is called once per frame
@@ -79,13 +80,36 @@ public class Statue : MonoBehaviour
             source.clip = ac[lastItemCount];
             source.Play();
             if (this.gameObject.name != "coralDead"){
-                //breakout.Play();
+                breakout.Play();
+            }
+        }
+        if (itemCount == 1 && this.gameObject.name != "coralDead" && !cracked1.isPlaying)
+        {
+            cracked1.Stop();
+            cracked1.Play();
+        }
+        else if (itemCount == 2 && this.gameObject.name != "coralDead" && !cracked2.isPlaying)
+        {
+            if (cracked1.isPlaying){
+                cracked1.Stop();
+            }
+            if (!cracked2.isPlaying)
+            {
+                cracked2.Play();
             }
         }
         if(itemCount < 3){
             stoneMat.SetInt("_CrackStage", itemCount);
         } else {
             living.SetActive(true);
+            if (this.gameObject.name != "coralDead" && cracked1.isPlaying)
+            {
+                cracked1.Stop();
+            }
+            if (this.gameObject.name != "coralDead" && cracked2.isPlaying)
+            {
+                cracked2.Stop();
+            }
             Destroy(this.gameObject);
         }
 
