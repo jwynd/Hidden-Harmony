@@ -31,6 +31,7 @@ public class InventoryAdd : MonoBehaviour
     [SerializeField] private GameObject itemButton;
     [SerializeField] private GameObject errorSprite;
 
+
     void Awake(){
         //itemPanel = GameObject.Find("Canvas/ItemsHeld");
 
@@ -79,7 +80,9 @@ public class InventoryAdd : MonoBehaviour
                     if(!hit.collider.gameObject.GetComponent<SoundObject>().OnStage()){
                         //itemPanel = GameObject.Find("Canvas/ItemsHeld");
                         
-
+                        if(hit.collider.gameObject.GetComponent<SoundObject>().toDestroyOnPickup != null){
+                            Destroy(hit.collider.gameObject.GetComponent<SoundObject>().toDestroyOnPickup);
+                        }
                         parentName = hit.collider.transform.parent.name;
                         if(parentName == "HubSoundObjs")
                         {
