@@ -105,9 +105,9 @@ public class Statue : MonoBehaviour
             if (this.gameObject.name != "coralDead" && cracked2.isPlaying){
                 cracked2.Stop();
             }
-            if (this.gameObject.name != "coralDead" && !animalAwaits.isPlaying){
+            /*if (this.gameObject.name != "coralDead" && !animalAwaits.isPlaying){
                 animalAwaits.Play();
-            }
+            }*/
             Destroy(this.gameObject);
         }
 
