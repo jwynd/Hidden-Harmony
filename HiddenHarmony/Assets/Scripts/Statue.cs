@@ -26,6 +26,7 @@ public class Statue : MonoBehaviour
     private ParticleSystem breakout;
     private ParticleSystem cracked1;
     private ParticleSystem cracked2;
+    private ParticleSystem animalAwaits;
     private GameObject pedestal;
     // Start is called before the first frame update
     void Start()
@@ -41,16 +42,13 @@ public class Statue : MonoBehaviour
         }
         counter = GameObject.Find("GameplayObjects/Count").GetComponent<Count>();
        if (this.gameObject.name != "coralDead"){
-            if (statue == Statues.Subwoofer)
-            {
+            if (statue == Statues.Subwoofer){
                 pedestal = GameObject.FindGameObjectsWithTag("SubwooferPedestal")[0];
             }
-            else if (statue == Statues.Belldeer)
-            {
+            else if (statue == Statues.Belldeer){
                 pedestal = GameObject.FindGameObjectsWithTag("BelldeerPedestal")[0];
             }
-            else if (statue == Statues.Orcastra)
-            {
+            else if (statue == Statues.Orcastra){
                 pedestal = GameObject.FindGameObjectsWithTag("OrcastraPedestal")[0];
             }
             else
@@ -60,6 +58,7 @@ public class Statue : MonoBehaviour
             cracked1 = pedestal.transform.Find("Cracked1").gameObject.GetComponent<ParticleSystem>();
             cracked2 = pedestal.transform.Find("Cracked2").gameObject.GetComponent<ParticleSystem>();
             breakout = pedestal.transform.Find("Breakout").gameObject.GetComponent<ParticleSystem>();
+            animalAwaits = pedestal.transform.Find("AnimalAwaits").gameObject.GetComponent<ParticleSystem>();
         }
     }
 
@@ -83,13 +82,11 @@ public class Statue : MonoBehaviour
                 breakout.Play();
             }
         }
-        if (itemCount == 1 && this.gameObject.name != "coralDead" && !cracked1.isPlaying)
-        {
+        if (itemCount == 1 && this.gameObject.name != "coralDead" && !cracked1.isPlaying){
             cracked1.Stop();
             cracked1.Play();
         }
-        else if (itemCount == 2 && this.gameObject.name != "coralDead" && !cracked2.isPlaying)
-        {
+        else if (itemCount == 2 && this.gameObject.name != "coralDead" && !cracked2.isPlaying){
             if (cracked1.isPlaying){
                 cracked1.Stop();
             }
@@ -102,13 +99,14 @@ public class Statue : MonoBehaviour
             stoneMat.SetInt("_CrackStage", itemCount);
         } else {
             living.SetActive(true);
-            if (this.gameObject.name != "coralDead" && cracked1.isPlaying)
-            {
+            if (this.gameObject.name != "coralDead" && cracked1.isPlaying){
                 cracked1.Stop();
             }
-            if (this.gameObject.name != "coralDead" && cracked2.isPlaying)
-            {
+            if (this.gameObject.name != "coralDead" && cracked2.isPlaying){
                 cracked2.Stop();
+            }
+            if (this.gameObject.name != "coralDead" && !animalAwaits.isPlaying){
+                animalAwaits.Play();
             }
             Destroy(this.gameObject);
         }
