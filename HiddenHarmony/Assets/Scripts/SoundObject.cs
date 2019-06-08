@@ -20,6 +20,8 @@ public class SoundObject : MonoBehaviour
     [ColorUsageAttribute(true,true)] [SerializeField] private Color emissionColor;
     [SerializeField][Range(1.0f, 1.5f)] private float crystalScale = 1.2f;
     [SerializeField][Range(1.0f, 10.0f)] private float scaleSpeed = 3.0f;
+    [Tooltip("Any object placed here will be destroyed when this sound object is first picked up")]
+    public GameObject toDestroyOnPickup;
     [HideInInspector] public bool onStage = false;
     [HideInInspector] public Vector3 origin;
 
