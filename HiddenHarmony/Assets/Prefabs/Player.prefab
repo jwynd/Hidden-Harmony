@@ -5590,8 +5590,8 @@ MonoBehaviour:
   axes: 1
   minVertical: 0
   maxVertical: 0
-  sensHorizontal: 0.75
-  sensVertical: 0
+  sensHorizontal: 0.4
+  sensVertical: 0.4
   smooth: 2.3
   rotationX: 0
 --- !u!114 &1653183650980442972
@@ -5636,6 +5636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactDistance: 10
+  shake: {fileID: 0}
   reticleSizeGrow: 3
   reticleSelectR: 0.9
   reticleSelectG: 0.3
@@ -5751,8 +5752,8 @@ MonoBehaviour:
   axes: 2
   minVertical: -60
   maxVertical: 85
-  sensHorizontal: 0
-  sensVertical: 0.75
+  sensHorizontal: 0.4
+  sensVertical: 0.4
   smooth: 2.3
   rotationX: 0
 --- !u!81 &8627568415545155410
