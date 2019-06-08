@@ -51,9 +51,7 @@
             instance.Shake();
         }
 
-        /// <summary>
         /// Do the shake
-        /// </summary>
         public void Shake()
         {
             ResetCam();

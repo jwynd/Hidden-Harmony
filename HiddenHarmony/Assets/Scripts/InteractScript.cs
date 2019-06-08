@@ -15,6 +15,8 @@ public class InteractScript : MonoBehaviour
     private GameObject reticle;
     private Vector3 reticleTransformOrigin;
     private Vector3 reticleTransformGrow;
+    [SerializeField] GameObject shake;
+
     [Header("Reticle")]
     [SerializeField][Tooltip("The size of the reticle when selecting")]
     private float reticleSizeGrow;
@@ -56,7 +58,18 @@ public class InteractScript : MonoBehaviour
                     if (currentInteractable.GetComponent<Animator>() != null)
                     {
                         currentInteractable.GetComponent<Animator>().SetBool("interacting", true);
-                        if (currentInteractable.GetComponent<AudioSource>() != null)
+
+                        if (currentInteractable.GetComponent<AudioSource>() != null && hit.collider.name == "Orcastra")
+                        {
+                            getAudio = currentInteractable.GetComponents<AudioSource>();
+                            //currentInteractable.GetComponent<ParticleSystem>().Play();
+                            int clipPick = Random.Range(0, getAudio.Length);
+                            getAudio[clipPick].Play();
+                            Camera C_Shake = shake.GetComponent<Camera>();
+                            shake.GetComponent<CameraShake>().ShakeOnce(3, 14, new Vector3(2, 2, 2), C_Shake);
+                        }
+                        else
+                            if (currentInteractable.GetComponent<AudioSource>() != null)
                         {
                             getAudio = currentInteractable.GetComponents<AudioSource>();
                             //currentInteractable.GetComponent<ParticleSystem>().Play();
