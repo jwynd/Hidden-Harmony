@@ -8,6 +8,8 @@ public class Cutscene : MonoBehaviour
 {
     [Tooltip("Place the mp4 file for the cutscene here")]
     [SerializeField] private VideoClip cutscene;
+    [Tooltip("Video clip volume")]
+    [SerializeField][Range(0.0f, 1.0f)] private float vol = 0.1f;
     [Tooltip("The distance at which the cutscene can be started")]
     [SerializeField] private float interactDistance = 10.0f;
     [Tooltip("All game objects in the array will be enabled during the cutscene")]
@@ -79,6 +81,7 @@ public class Cutscene : MonoBehaviour
             vp.playOnAwake = false;
             vp.targetCameraAlpha = 1.0f;
             vp.isLooping = false;
+            vp.SetDirectAudioVolume(0, vol);
             vp.Play();
             played = true;
             foreach(GameObject o in toEnable){
