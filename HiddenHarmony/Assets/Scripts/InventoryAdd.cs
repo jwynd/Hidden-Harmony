@@ -59,12 +59,9 @@ public class InventoryAdd : MonoBehaviour
         errorSprite = itemButton.transform.GetChild(1).gameObject;
         errorSprite.SetActive(false);
         newButton = Instantiate(itemButton, tab.transform);
-        print("hitItem" + hitItem);
         newButton.GetComponent<Button>().onClick.AddListener(() => controller.GetComponent<SoundObjectCompose>().setSoundObject(hitItem));
         itemSprite = newButton.transform.Find("ItemSprite").gameObject;
-        print("\n\n\n!!!hit.collider.gameObject.name = " + hitItem.name + "\n\n\n");
         itemSprite.GetComponent<Image>().sprite = Resources.Load<Sprite>(hitItem.name);
-        print("itemSprite" + itemSprite);
         hitItem.SetActive(false);
         soundSFX.Play();
     }

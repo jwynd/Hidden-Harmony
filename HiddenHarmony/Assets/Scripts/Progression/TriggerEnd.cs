@@ -12,7 +12,7 @@ public class TriggerEnd : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         c = GameObject.Find("Count").GetComponent<Count>();
-        print(c);
+        //print(c);
     }
 
     // Update is called once per frame

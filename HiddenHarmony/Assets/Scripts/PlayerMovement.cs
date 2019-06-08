@@ -87,7 +87,6 @@ public class PlayerMovement : MonoBehaviour {
         sprintAudioRight = this.transform.Find("Audio/SprintAudioRight").gameObject.GetComponent<AudioSource>();
         sprintAudioWind = this.transform.Find("Audio/SprintAudioWind").gameObject.GetComponent<AudioSource>();
         canJumpRay = character.height + character.height * 0.25f;
-        print(canJumpRay);
         canJumpRay = 3f;
         audioFiles = new List<string>();
         audioFiles.Add("PM_B");
@@ -106,9 +105,6 @@ public class PlayerMovement : MonoBehaviour {
         RaycastHit hit;
         //Jump check
         //Raycast alternative Physics.Raycast (transform.position, Vector3.down, canJump)
-        if (Physics.Raycast(transform.position, Vector3.down, canJumpRay)){
-            print("raycast");
-        }
         if (Physics.CapsuleCast(p1, p2, character.radius, Vector3.down, out hit, canJump) || Physics.Raycast(transform.position, Vector3.down, out hit, canJumpRay))
         { //capsule cast checks if capsule is touching the ground 
             if(Input.GetKeyDown(KeyCode.Space)) {         
@@ -228,16 +224,12 @@ public class PlayerMovement : MonoBehaviour {
                 timestamp = Time.time;
                 if(sprintAlternator){
                     int randomAudioIndex = (int)Mathf.Floor(Random.Range(0, audioFiles.Count));
-                    print("length: " + audioFiles.Count);
-                    print("index: " + randomAudioIndex);
                     //sprintAudioLeft.clip = Resources.Load<AudioClip>("PMAudio/" + audioFiles[randomAudioIndex]);
                     sprintAudioLeft.PlayOneShot(Resources.Load<AudioClip>("PMAudio/" + audioFiles[randomAudioIndex]));
                     sprintAlternator = !sprintAlternator;
                 }
                 else{
                     int randomAudioIndex = (int)Mathf.Floor(Random.Range(0, audioFiles.Count));
-                    print("length: " + audioFiles.Count);
-                    print("index: " + randomAudioIndex);
                     //sprintAudioRight.clip = Resources.Load<AudioClip>("PMAudio/" + audioFiles[randomAudioIndex]);
                     sprintAudioRight.PlayOneShot(Resources.Load<AudioClip>("PMAudio/" + audioFiles[randomAudioIndex]));
                     sprintAlternator = !sprintAlternator;

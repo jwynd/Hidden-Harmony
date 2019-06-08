@@ -18,7 +18,7 @@ public class MouseOver : MonoBehaviour
 
     public void OnMouseOver()
     {
-        print("working");
+        //print("working");
         //this.GetComponent<RectTransform>().localScale = new Vector3(2f, 2f, 1f);
     }
 

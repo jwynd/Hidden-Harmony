@@ -92,8 +92,8 @@ void Update(){
             itemImage = itemFrame.Find("ItemSprite").gameObject;
 
 
-            print("This stuff" + itemImage.GetComponent<Image>().sprite.name);
-            print("GameObject name is " + currentObj.name);
+            //print("This stuff" + itemImage.GetComponent<Image>().sprite.name);
+            //print("GameObject name is " + currentObj.name);
 
             matchHitObj = Regex.Match(currentObj.name, itemImage.GetComponent<Image>().sprite.name);
        
@@ -128,8 +128,8 @@ void Update(){
             itemImage = itemFrame.Find("ItemSprite").gameObject;
 
 
-            print("This stuff" + itemImage.GetComponent<Image>().sprite.name);
-            print("GameObject name is " + currentObj.name);
+            //print("This stuff" + itemImage.GetComponent<Image>().sprite.name);
+            //print("GameObject name is " + currentObj.name);
 
             matchHitObj = Regex.Match(currentObj.name, itemImage.GetComponent<Image>().sprite.name);
 
@@ -158,8 +158,8 @@ void Update(){
             itemImage = itemFrame.Find("ItemSprite").gameObject;
 
 
-            print("This stuff" + itemImage.GetComponent<Image>().sprite.name);
-            print("GameObject name is " + currentObj.name);
+            //print("This stuff" + itemImage.GetComponent<Image>().sprite.name);
+            //print("GameObject name is " + currentObj.name);
 
             matchHitObj = Regex.Match(currentObj.name, itemImage.GetComponent<Image>().sprite.name);
 
@@ -188,8 +188,8 @@ void Update(){
             itemImage = itemFrame.Find("ItemSprite").gameObject;
 
 
-            print("This stuff" + itemImage.GetComponent<Image>().sprite.name);
-            print("GameObject name is " + currentObj.name);
+            //print("This stuff" + itemImage.GetComponent<Image>().sprite.name);
+            //print("GameObject name is " + currentObj.name);
 
             matchHitObj = Regex.Match(currentObj.name, itemImage.GetComponent<Image>().sprite.name);
 
@@ -247,14 +247,14 @@ void Update(){
                     for(int i = 0; i < hubObjs.transform.childCount && !foundObj; i++){
                         parentObj = hubObjs.transform.GetChild(i);
                         parentWithHitObj = Regex.Match(hitObjName, parentObj.name);
-                        print("found obj loop " + foundObj);
+                        //print("found obj loop " + foundObj);
                         if (parentWithHitObj.Success){
                             foundObj = true;
                             searchHub(hit.collider.gameObject);
 
                         }
                     }
-                    print("FOUND OBJ IS " + foundObj);
+                    //print("FOUND OBJ IS " + foundObj);
                     //Checks if hit object name matches any Forest Object names
                     for(int j = 0; j < forestObjs.transform.childCount; j++)
                     {
@@ -308,7 +308,7 @@ void Update(){
         for(int i =0; i< cTabs.transform.childCount; i++){
             for(int j= 0; j< cTabs.transform.GetChild(i).childCount; j++){
                 currentPanel = cTabs.transform.GetChild(i).GetChild(j);
-                print("currentPanel " + currentPanel);
+                //print("currentPanel " + currentPanel);
                 itemsHeld = Regex.Match(currentPanel.name, "ItemsHeld");
 
                 if (itemsHeld.Success){
@@ -332,7 +332,7 @@ void Update(){
             for (int j = 0; j < cTabs.transform.GetChild(i).childCount; j++)
             {
                 currentPanel = cTabs.transform.GetChild(i).GetChild(j);
-                print("currentPanel " + currentPanel);
+                //print("currentPanel " + currentPanel);
                 itemsHeld = Regex.Match(currentPanel.name, "ItemsHeld");
 
                 if (itemsHeld.Success)
@@ -355,7 +355,7 @@ void Update(){
             for (int j = 0; j < cTabs.transform.GetChild(i).childCount; j++)
             {
                 currentPanel = cTabs.transform.GetChild(i).GetChild(j);
-                print("currentPanel " + currentPanel);
+                //print("currentPanel " + currentPanel);
                 itemsHeld = Regex.Match(currentPanel.name, "ItemsHeld");
 
                 if (itemsHeld.Success)
@@ -378,7 +378,7 @@ void Update(){
             for (int j = 0; j < cTabs.transform.GetChild(i).childCount; j++)
             {
                 currentPanel = cTabs.transform.GetChild(i).GetChild(j);
-                print("currentPanel " + currentPanel);
+                //print("currentPanel " + currentPanel);
                 itemsHeld = Regex.Match(currentPanel.name, "ItemsHeld");
 
                 if (itemsHeld.Success)

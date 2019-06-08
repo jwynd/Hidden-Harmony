@@ -121,9 +121,9 @@ public class PauseMenu : MonoBehaviour
     public void checkTabs()
     {
          hState = hTab.activeSelf;
-         print("hState" + hState);
+         //print("hState" + hState);
          bdState = bdTab.activeSelf;
-         print("bdState " + bdState);
+         //print("bdState " + bdState);
          sState = sTab.activeSelf;
          oState = oTab.activeSelf;
     }
