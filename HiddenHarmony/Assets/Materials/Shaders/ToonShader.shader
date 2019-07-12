@@ -11,6 +11,7 @@
 	{
 
 		Tags{"RenderType" = "Opaque"}
+		Cull off
 		CGPROGRAM
 		#pragma surface surf Toon
 		struct Input {
