@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ComposeModeTransition : MonoBehaviour
 {
+    [Header("Requires 3 audio Sources. In, Out, and Invalid")]
     [SerializeField] private Transform composeCameraPosition;
     [SerializeField] private Transform cameraTarget;
     [SerializeField] private float transitionSpeed = 20.0f;
@@ -113,6 +114,9 @@ public class ComposeModeTransition : MonoBehaviour
                 startTime = Time.time;
                 journeyLength = Vector3.Distance(composeCameraPosition.position, cameraReturn.position);
             }
+        }
+        else if(!inHub && Input.GetKeyDown(KeyCode.Tab)){
+            sources[2].Play();
         }
         if(compose && transitioning){
             playerCamera.transform.LookAt(cameraTarget);
