@@ -26,6 +26,7 @@ public class PauseMenu : MonoBehaviour
     private GameObject bdInventory;
     private GameObject oInventory; 
     private GameObject reticle;
+    private AudioSource cmtAudio;
     private ComposeModeTransition cmt;
 
     void Awake(){
@@ -46,6 +47,8 @@ public class PauseMenu : MonoBehaviour
         mainMenuScene = SceneManager.GetActiveScene().name;
         if(pauseMenuUI == null) throw new System.ArgumentException("PauseMenuMain not found");
         cmt = GameObject.Find("GameplayObjects/CameraChange").GetComponent<ComposeModeTransition>();
+        cmtAudio = GameObject.Find("GameplayObjects/CameraChange").GetComponents<AudioSource>()[2];
+        cmtAudio.enabled = false;
         DeactivateMenu();
         hInventory.SetActive(false);
         hTab.SetActive(false);
@@ -82,7 +85,7 @@ public class PauseMenu : MonoBehaviour
         camera.GetComponent<FirstPersonControl>().enabled = false;
         Cursor.visible = true;
         pauseMenuUI.SetActive(true);
-
+        cmtAudio.enabled = false;
         hTab.SetActive(false);
         sTab.SetActive(false);
         bdTab.SetActive(false);
@@ -105,6 +108,7 @@ public class PauseMenu : MonoBehaviour
         camera.GetComponent<FirstPersonControl>().enabled = !cmt.Compose();
         pauseMenuUI.SetActive(false);
 
+        cmtAudio.enabled = true;
         hTab.SetActive(true);
         bdTab.SetActive(true);
         sTab.SetActive(true);
