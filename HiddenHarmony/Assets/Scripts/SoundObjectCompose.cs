@@ -36,6 +36,7 @@ public class SoundObjectCompose : MonoBehaviour {
     private Transform parentObj;
     private Match parentWithHitObj;
     private AudioSource dropObjSound;
+    private AudioSource tabSwitchSound;
     private bool foundObj = false;
 
     private GameObject cTabs;
@@ -61,6 +62,7 @@ public class SoundObjectCompose : MonoBehaviour {
         
 
         dropObjSound = GameObject.Find("SoundObjSFX/PlaceSound").GetComponent<AudioSource>();
+        tabSwitchSound = GameObject.Find("SoundObjSFX/TabSwitchSound").GetComponent<AudioSource>();
         cTabs = GameObject.Find("Canvas/CTabs");
         hTab = GameObject.Find("Canvas/CTabs/HTabs/HTab");
         sTab = GameObject.Find("Canvas/CTabs/STabs/STab");
@@ -318,7 +320,8 @@ void Update(){
             
 
         }
-        hPanelAccess.SetActive(true); 
+        hPanelAccess.SetActive(true);
+        tabSwitchSound.GetComponents<AudioSource>()[0].Play();
 
 
     }
@@ -344,6 +347,7 @@ void Update(){
 
         }
         sPanelAccess.SetActive(true);
+        tabSwitchSound.GetComponents<AudioSource>()[0].Play();
     }
 
     public void setupBDPanel()
@@ -367,6 +371,7 @@ void Update(){
 
         }
         bdPanelAccess.SetActive(true);
+        tabSwitchSound.GetComponents<AudioSource>()[0].Play();
     }
 
     public void setupOPanel()
@@ -390,6 +395,7 @@ void Update(){
 
         }
         oPanelAccess.SetActive(true);
+        tabSwitchSound.GetComponents<AudioSource>()[0].Play();
     }
 
     public void checkStage(){
