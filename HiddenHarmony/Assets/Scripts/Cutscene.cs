@@ -21,6 +21,7 @@ public class Cutscene : MonoBehaviour
     [Tooltip("Put main camera here")]
     [SerializeField]private GameObject camera;
 
+    private Count count;
     private GameObject player;
     private GameObject canvas;
     private VideoPlayer vp;
@@ -38,7 +39,7 @@ public class Cutscene : MonoBehaviour
 
     void Start()
     {
-        
+        count = GameObject.Find("GameplayObjects/Count").GetComponent<Count>();
     }
 
     // Update is called once per frame
@@ -95,6 +96,7 @@ public class Cutscene : MonoBehaviour
             camera.GetComponent<Camera>().farClipPlane = 0.31f;
             fade.UnsetFade();
             canvas.SetActive(false);
+            count.statuesUsed++;
         }
         // set the prepared variable so that the cutscene isn't registered as played before it starts
         if(!prepared && vp != null) prepared = vp.isPrepared;
