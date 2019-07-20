@@ -16,12 +16,13 @@ public class MusicVisController : MonoBehaviour
     [SerializeField] private Color[] bdColors = new Color[3];
     [SerializeField] private Color[] ocColors = new Color[3];
     private float[] buckets;
-    private Color[] activeColors = new Color[3];
+    private Color[] activeColors;
+    private List<Color[]> areaColors = new List<Color[]>();
 
     // throw and error if the number of cutoffs and materials are not equal
     void OnValidate(){
         if(cutoffs.Length != mvMaterials.Length){
-            Debug.LogError("The number of cutoffs and MV_Materials must be equal.");
+            Debug.LogError("The number of cutoffs and Mv Materials must be equal.");
         }
     }
 
@@ -35,14 +36,21 @@ public class MusicVisController : MonoBehaviour
 
         // default to Hub Colors
         // clone vs CopyTo?  ????
-        activeColors = (Color[])hbColors.Clone();
+        //activeColors = (Color[])hbColors.Clone();
+        activeColors = new Color[3]{Color.white, Color.white, Color.white};
+
+        // put the area color arrays into the list
+        areaColors.Add(hbColors);
+        areaColors.Add(swColors);
+        areaColors.Add(bdColors);
+        areaColors.Add(ocColors);
+
     }
 
     void Update()
     {
         // FOR TESTING -- WILL REPLACE LATER
         if(Input.GetKeyDown("m")){
-            Debug.Log("Checking colors ...");
             UpdateActiveColors();
         }
 
@@ -73,8 +81,8 @@ public class MusicVisController : MonoBehaviour
         }
 
         for(int i = 0; i < mvMaterials.Length; i++){
-            Color lerpCol = Color.Lerp(Color.black, activeColors[i], buckets[i]);
-            mvMaterials[i].SetColor("_Color", lerpCol);
+            activeColors[i].a = buckets[i];
+            mvMaterials[i].SetColor("_Color", activeColors[i]);
         }
     }
 
@@ -115,60 +123,32 @@ public class MusicVisController : MonoBehaviour
             }
         }
 
-        // make color decisions based on which areas are in play and are dominant
-        // dominant objects gets lower frequencies
-        int[] colorTags = new int[] {0,0,0};
-
+        
+        // DETERMINE COLORS
+        // 1.
         // check to see if only objs from one area are in play
         if(objsPerArea[tag[0]] == sumObjs){
-            colorTags[0] = tag[0];
-            colorTags[1] = tag[0];
-            colorTags[2] = tag[0];
-
+            //activeColors = areaColors[tag[0]];
+            activeColors = (Color[])(areaColors[tag[0]]).Clone();
             Debug.Log("only one dominant");
-            SetColors(colorTags);
             return;
         }
 
+        // 2.
         // check to see if only two are dominant
-        // check to see if only objs from one area are in play
         if(objsPerArea[tag[0]] + objsPerArea[tag[1]] == sumObjs){
-            colorTags[0] = tag[0];
-            colorTags[1] = tag[0];
-            colorTags[2] = tag[1];
-
+            activeColors[0] = (areaColors[tag[0]])[0];
+            activeColors[1] = (areaColors[tag[0]])[1];
+            activeColors[2] = (areaColors[tag[1]])[0];
             Debug.Log("two dominant");
-            SetColors(colorTags);
             return;
         }
-
+        
+        // 3.
         // else, display top 3 colors
-        colorTags[0] = tag[0];
-        colorTags[1] = tag[1];
-        colorTags[2] = tag[2];
-        Debug.Log("two dominant");
-        SetColors(colorTags);
+        activeColors[0] = (areaColors[tag[0]])[0];
+        activeColors[1] = (areaColors[tag[1]])[0];
+        activeColors[2] = (areaColors[tag[2]])[0];
     }
 
-    // sets the colors in active colors based on tags
-    // 0 = hub, 1 = subwoofer, 2 = belldeer, 3 = orcastra
-    // if i could figure out...how to put...shit in a list or 2D array...
-    // .......i will not have this problem
-    void SetColors(int[] colorTags)
-    {
-        for(int i = 0; i<colorTags.Length; i++){
-            if(colorTags[i]==0){
-                activeColors[i] = hbColors[i];
-            }
-            else if (colorTags[i]==1){
-                activeColors[i] = swColors[i];
-            }
-            else if (colorTags[i]==2){
-                activeColors[i] = bdColors[i];
-            }
-            else {
-                activeColors[i] = ocColors[i];
-            }
-        }
-    }
 }
