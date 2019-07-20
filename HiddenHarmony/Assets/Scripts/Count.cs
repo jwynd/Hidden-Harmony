@@ -48,16 +48,20 @@ public class Count : MonoBehaviour
         hubNames = new string[hubChildren.Length];
     }
 
-    #if UNITY_ENGINE
+    //#if UNITY_ENGINE
     void Update(){
         if(Input.GetKeyDown(KeyCode.C)){
             print("Den Count: "+denCount);
             print("Forest Count: "+forestCount);
             print("Cavern Count: "+cavernCount);
             print("Hub Count: "+hubCount);
+            print("Active Den: "+ActiveDen());
+            print("Active Cavern: "+ActiveCavern());
+            print("Active Forest: "+ActiveForest());
+            print("Active Hub: "+ActiveHub());
         }
     }
-    #endif
+    //#endif
 
     public void IncrementCount(string n){
 
@@ -129,5 +133,56 @@ public class Count : MonoBehaviour
     public bool AllCounted(){
         return AllDen() && AllForest() && AllCavern() && AllHub();
     }
-
+    public int ActiveDen(){
+        GameObject[] sounds = GameObject.FindGameObjectsWithTag("SoundObj");
+        int active = 0;
+        foreach(GameObject sound in sounds){
+            foreach(string name in denNames){
+                if(sound.name == name){
+                    active++;
+                    break;
+                }
+            }
+        }
+        return active;
+    }
+    public int ActiveForest(){
+        GameObject[] sounds = GameObject.FindGameObjectsWithTag("SoundObj");
+        int active = 0;
+        foreach(GameObject sound in sounds){
+            foreach(string name in forestNames){
+                if(sound.name == name){
+                    active++;
+                    break;
+                }
+            }
+        }
+        return active;
+    }
+    public int ActiveCavern(){
+        GameObject[] sounds = GameObject.FindGameObjectsWithTag("SoundObj");
+        int active = 0;
+        foreach(GameObject sound in sounds){
+            foreach(string name in cavernNames){
+                if(sound.name == name){
+                    active++;
+                    break;
+                }
+            }
+        }
+        return active;
+    }
+    public int ActiveHub(){
+        GameObject[] sounds = GameObject.FindGameObjectsWithTag("SoundObj");
+        int active = 0;
+        foreach(GameObject sound in sounds){
+            foreach(string name in hubNames){
+                if(sound.name == name){
+                    active++;
+                    break;
+                }
+            }
+        }
+        return active;
+    }
 }
