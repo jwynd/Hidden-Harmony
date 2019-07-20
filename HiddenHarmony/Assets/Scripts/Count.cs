@@ -10,6 +10,8 @@ public class Count : MonoBehaviour
     [SerializeField] private GameObject cavern;
     [SerializeField] private GameObject hub;
 
+    [HideInInspector] public int statuesUsed = 0;
+
     private string[] denChildren;
     private string[] forestChildren;
     private string[] cavernChildren;
@@ -48,7 +50,7 @@ public class Count : MonoBehaviour
         hubNames = new string[hubChildren.Length];
     }
 
-    //#if UNITY_ENGINE
+    #if UNITY_EDITOR
     void Update(){
         if(Input.GetKeyDown(KeyCode.C)){
             print("Den Count: "+denCount);
@@ -61,7 +63,7 @@ public class Count : MonoBehaviour
             print("Active Hub: "+ActiveHub());
         }
     }
-    //#endif
+    #endif
 
     public void IncrementCount(string n){
 
@@ -131,7 +133,7 @@ public class Count : MonoBehaviour
         return hubCount == hubChildren.Length;
     }
     public bool AllCounted(){
-        return AllDen() && AllForest() && AllCavern() && AllHub();
+        return AllDen() && AllForest() && AllCavern() && AllHub() && statuesUsed == 3;
     }
     public int ActiveDen(){
         GameObject[] sounds = GameObject.FindGameObjectsWithTag("SoundObj");

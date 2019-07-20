@@ -41,7 +41,7 @@ public class Statue : MonoBehaviour
             rend.material = stoneMat;
         }
         counter = GameObject.Find("GameplayObjects/Count").GetComponent<Count>();
-       if (this.gameObject.name != "coralDead"){
+        if (this.gameObject.name != "coralDead"){
             if (statue == Statues.Subwoofer){
                 pedestal = GameObject.FindGameObjectsWithTag("SubwooferPedestal")[0];
             }
