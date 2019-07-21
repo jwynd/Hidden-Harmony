@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7438383121019846671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7438383121019846669}
+  - component: {fileID: 7438383121019846668}
+  - component: {fileID: 5353567122644011481}
+  m_Layer: 0
+  m_Name: MusicVisualizer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7438383121019846669
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7438383121019846671}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.29929924, y: 2.5126643, z: -1.2982931}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7438383121019846668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7438383121019846671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce36b373aee53fb4eb170ceb305d9802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mvMaterials:
+  - {fileID: 2100000, guid: a26f1fcb13ac34642a18448c5dfb2cec, type: 2}
+  - {fileID: 2100000, guid: 28ce76d85e5540146a1acb478d4c8a2b, type: 2}
+  - {fileID: 2100000, guid: 4bfb96ae13b36804aa8d9762c58a0e3d, type: 2}
+  cutoffs: 080000004000000000010000
+  objsPerArea: 03000000040000000000000002000000
+  hbColors:
+  - {r: 0, g: 0.6981132, b: 0.3997745, a: 0}
+  - {r: 0.14160807, g: 0.62352943, b: 0, a: 0}
+  - {r: 0.4304425, g: 0.6698113, b: 0, a: 0}
+  swColors:
+  - {r: 0.0078431275, g: 0.53771544, b: 0.6784314, a: 0}
+  - {r: 0.011764692, g: 0.13470268, b: 0.7176471, a: 0}
+  - {r: 0.34134528, g: 0, b: 0.7176471, a: 0}
+  bdColors:
+  - {r: 0.6981132, g: 0, b: 0.6059097, a: 0}
+  - {r: 0.735849, g: 0, b: 0.44239813, a: 0}
+  - {r: 0.754717, g: 0, b: 0.15289235, a: 0}
+  ocColors:
+  - {r: 0.6792453, g: 0.36051127, b: 0, a: 0}
+  - {r: 0.6784314, g: 0.5488218, b: 0, a: 0}
+  - {r: 0.66408527, g: 0.6784314, b: 0, a: 0}
+--- !u!114 &5353567122644011481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7438383121019846671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e6ffb2f52b05aa4a964c0c6a0c3935c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

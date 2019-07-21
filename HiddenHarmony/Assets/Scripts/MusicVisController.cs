@@ -18,6 +18,7 @@ public class MusicVisController : MonoBehaviour
     private float[] buckets;
     private Color[] activeColors;
     private List<Color[]> areaColors = new List<Color[]>();
+    private Count count;
 
     // throw and error if the number of cutoffs and materials are not equal
     void OnValidate(){
@@ -28,6 +29,9 @@ public class MusicVisController : MonoBehaviour
 
     void Start()
     {
+        // get a reference to count
+        count = GameObject.Find("GameplayObjects/Count").GetComponent<Count>();
+
         // assign an array to buckets
         buckets = new float[cutoffs.Length];
         for(int i = 0; i<buckets.Length; i++){
@@ -35,9 +39,8 @@ public class MusicVisController : MonoBehaviour
         }
 
         // default to Hub Colors
-        // clone vs CopyTo?  ????
         //activeColors = (Color[])hbColors.Clone();
-        activeColors = new Color[3]{Color.white, Color.white, Color.white};
+        activeColors = new Color[3]{Color.gray, Color.gray, Color.gray};
 
         // put the area color arrays into the list
         areaColors.Add(hbColors);
@@ -90,7 +93,8 @@ public class MusicVisController : MonoBehaviour
     //  area to determine which colors to display.
     void UpdateActiveColors()
     {
-
+        UpdateObjsPerArea();
+        
         // SET UP
         // get sum -- is there no default Sum() method???
         int sumObjs = 0;
@@ -100,8 +104,7 @@ public class MusicVisController : MonoBehaviour
 
         // if no objects are in play, set Hub Colors and return
         if(sumObjs <= 0){
-            activeColors = hbColors;
-            Debug.Log("No Colors");
+            activeColors = new Color[3]{Color.gray, Color.gray, Color.gray};
             return;
         }
 
@@ -130,7 +133,6 @@ public class MusicVisController : MonoBehaviour
         if(objsPerArea[tag[0]] == sumObjs){
             //activeColors = areaColors[tag[0]];
             activeColors = (Color[])(areaColors[tag[0]]).Clone();
-            Debug.Log("only one dominant");
             return;
         }
 
@@ -140,7 +142,6 @@ public class MusicVisController : MonoBehaviour
             activeColors[0] = (areaColors[tag[0]])[0];
             activeColors[1] = (areaColors[tag[0]])[1];
             activeColors[2] = (areaColors[tag[1]])[0];
-            Debug.Log("two dominant");
             return;
         }
         
@@ -150,5 +151,15 @@ public class MusicVisController : MonoBehaviour
         activeColors[1] = (areaColors[tag[1]])[0];
         activeColors[2] = (areaColors[tag[2]])[0];
     }
+
+
+    void UpdateObjsPerArea()
+    {
+        objsPerArea[0] = count.ActiveHub();
+        objsPerArea[1] = count.ActiveDen();
+        objsPerArea[2] = count.ActiveForest();
+        objsPerArea[3] = count.ActiveCavern();
+    }
+
 
 }
