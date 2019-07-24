@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MouseOver : MonoBehaviour
 {
+    private GameObject enlargedSprite;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +21,20 @@ public class MouseOver : MonoBehaviour
 
     public void OnMouseOver()
     {
-        //print("working");
-        //this.GetComponent<RectTransform>().localScale = new Vector3(2f, 2f, 1f);
+        print("working");
+        //enlargedSprite = transform.Find("EnlargedSprite");
+        //itemFrame = this.gameObject;
+        enlargedSprite = this.gameObject;
+        enlargedSprite.SetActive(true);
+        
+        //print("Hi " + enlargedSprite.gameObject);
     }
 
     public void OnMouseExit()
     {
-        transform.localScale = new Vector3(1, 1, 1);
+        enlargedSprite = this.gameObject;
+        enlargedSprite.SetActive(false);
+        
     }
 
 }

@@ -37,7 +37,9 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         draggedItem = transform.Find("ItemSprite");
         errorSprite = transform.Find("ErrorSprite");
         indicator = transform.Find("NewIndicator");
+
         errorSprite.gameObject.SetActive(true);
+        
         //dragObjSound.GetComponents<AudioSource>()[1].Play();
         //transform.Find("ItemSprite").position = Input.mousePosition;
 
