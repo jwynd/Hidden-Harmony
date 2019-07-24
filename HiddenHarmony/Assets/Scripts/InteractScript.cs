@@ -59,14 +59,14 @@ public class InteractScript : MonoBehaviour
                     {
                         currentInteractable.GetComponent<Animator>().SetBool("interacting", true);
 
-                        if (currentInteractable.GetComponent<AudioSource>() != null && hit.collider.name == "Orcastra")
+                        if (currentInteractable.GetComponent<AudioSource>() != null && hit.collider.name == "Orcastra")//Mine
                         {
                             getAudio = currentInteractable.GetComponents<AudioSource>();
                             //currentInteractable.GetComponent<ParticleSystem>().Play();
                             int clipPick = Random.Range(0, getAudio.Length);
                             getAudio[clipPick].Play();
                             Camera C_Shake = shake.GetComponent<Camera>();
-                            shake.GetComponent<CameraShake>().ShakeOnce(3, 14, new Vector3(2, 2, 2), C_Shake);
+                            shake.GetComponent<CameraShake>().ShakeOnce(3, 14, new Vector3(2, 2, 2), C_Shake);///End Mine
                         }
                         else
                             if (currentInteractable.GetComponent<AudioSource>() != null)
