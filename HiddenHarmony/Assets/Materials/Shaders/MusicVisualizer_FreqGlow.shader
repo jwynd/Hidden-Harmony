@@ -4,6 +4,8 @@
     {
         // color provided by material -- alpha used as multiplier for emission
         _Color ("Color", Color) = (1,1,1,1)
+        _EmissionMax("Maximum Emission Amount", Float) = 2
+        _RampTex("Ramp", 2D) = "white" {}
     }
     SubShader
     {
@@ -14,12 +16,14 @@
         // Physically based Standard lighting model
         #pragma surface surf Standard
 
-        fixed4 _Color;
+        uniform fixed4 _Color;
+        uniform fixed _EmissionMax;
+        uniform sampler2D _RampTex;
 
         struct Input
         {
             // unity yells at me if I dont leave this here
-            float2 uv_MainTex;
+            float2 uv_RampTex;
         };
 
         // ???????
@@ -37,7 +41,10 @@
             // get normal Albedo
             o.Albedo = _Color.rgb;
             // calculate emission intensity
-            fixed3 emission = _Color.a * 1; // might wanna try 4
+            // sample from (intensity of spectrumData, center)
+            fixed4 ramp = tex2D(_RampTex, float2(_Color.a, 0.5)).r;
+            ramp *= _EmissionMax;
+            fixed3 emission = _Color.rgb * ramp; // might wanna try 4
             o.Albedo += emission;
 
             // put all the other shit in

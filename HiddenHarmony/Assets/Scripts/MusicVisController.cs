@@ -7,17 +7,22 @@ public class MusicVisController : MonoBehaviour
     [Header("Materials and Cutoffs")]
     [SerializeField] private Material[] mvMaterials = new Material[3];
     [SerializeField] private int[] cutoffs = new int[3];
-    [Header("Information Provided by Other Code (here for testing)")]
-    // # of sound objects in play per area (hb = 0, sw = 1, bd = 2, oc = 3)
-    [SerializeField] private int[] objsPerArea = new int[4];
+
     [Header("Area Colors")]
     [SerializeField] private Color[] hbColors = new Color[3];
     [SerializeField] private Color[] swColors = new Color[3];
     [SerializeField] private Color[] bdColors = new Color[3];
     [SerializeField] private Color[] ocColors = new Color[3];
+
+    // color control
     private float[] buckets;
     private Color[] activeColors;
     private List<Color[]> areaColors = new List<Color[]>();
+
+    // Information from Count.cs
+    // # of sound objects in play per area (hb = 0, sw = 1, bd = 2, oc = 3)
+    private int[] objsPerArea = new int[4] {0,0,0,0};
+    private int[] prevObjsPerArea = new int[4] {0,0,0,0};
     private Count count;
 
     // throw and error if the number of cutoffs and materials are not equal
@@ -40,25 +45,27 @@ public class MusicVisController : MonoBehaviour
 
         // default to Hub Colors
         //activeColors = (Color[])hbColors.Clone();
-        activeColors = new Color[3]{Color.gray, Color.gray, Color.gray};
+        activeColors = new Color[3]{Color.black, Color.black, Color.black};
 
         // put the area color arrays into the list
         areaColors.Add(hbColors);
         areaColors.Add(swColors);
         areaColors.Add(bdColors);
         areaColors.Add(ocColors);
-
     }
 
     void Update()
     {
-        // FOR TESTING -- WILL REPLACE LATER
-        if(Input.GetKeyDown("m")){
+        UpdateObjsPerArea();
+
+        // Check if the number of sound objects from each area has changed
+        // If it has, update the colors.
+        if(ChangeInSoundObj()){
             UpdateActiveColors();
         }
 
-        RunVisualizer();
-        
+        // calculate buckets every frame and update emission values
+        RunVisualizer();  
     }
 
     // MUSIC VISUALIZER FUNCTIONS
@@ -89,12 +96,33 @@ public class MusicVisController : MonoBehaviour
         }
     }
 
+
+    // ChangeInSoundObj
+    bool ChangeInSoundObj()
+    {
+        bool change = true;
+        if( prevObjsPerArea[0] == objsPerArea[0] &&
+            prevObjsPerArea[1] == objsPerArea[1] &&
+            prevObjsPerArea[2] == objsPerArea[2] &&
+            prevObjsPerArea[3] == objsPerArea[3] )
+        {
+            change = false;
+        }
+        // else a change has happened ---> change returns true
+        
+        // copy elements from prev into current
+        prevObjsPerArea[0] = objsPerArea[0];
+        prevObjsPerArea[1] = objsPerArea[1];
+        prevObjsPerArea[2] = objsPerArea[2];
+        prevObjsPerArea[3] = objsPerArea[3];
+        
+        return change;
+    }
+
     // UpdateActiveColors -- Compares the # of sound objs from each
     //  area to determine which colors to display.
     void UpdateActiveColors()
-    {
-        UpdateObjsPerArea();
-        
+    {   
         // SET UP
         // get sum -- is there no default Sum() method???
         int sumObjs = 0;
@@ -104,7 +132,7 @@ public class MusicVisController : MonoBehaviour
 
         // if no objects are in play, set Hub Colors and return
         if(sumObjs <= 0){
-            activeColors = new Color[3]{Color.gray, Color.gray, Color.gray};
+            activeColors = new Color[3]{Color.black, Color.black, Color.black};
             return;
         }
 
