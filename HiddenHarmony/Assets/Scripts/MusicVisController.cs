@@ -28,7 +28,13 @@ public class MusicVisController : MonoBehaviour
     // throw and error if the number of cutoffs and materials are not equal
     void OnValidate(){
         if(cutoffs.Length != mvMaterials.Length){
-            Debug.LogError("The number of cutoffs and Mv Materials must be equal.");
+            Debug.LogError("Music Visualizer Error: The number of cutoffs and MV Materials must be equal.");
+        }
+        if(cutoffs.Length > 9 || mvMaterials.Length > 9){
+            Debug.LogError("Music Visualizer Error: You must use 9 or less materials and 9 or less cutoffs.");
+        }
+        if(cutoffs.Length < 1 || cutoffs.Length < 1){
+            Debug.LogError("Music Visualizer Error: You must have at least 1 material and 1 cutoff.");
         }
     }
 
@@ -43,9 +49,11 @@ public class MusicVisController : MonoBehaviour
             buckets[i] = 0;
         }
 
-        // default to Hub Colors
-        //activeColors = (Color[])hbColors.Clone();
-        activeColors = new Color[3]{Color.black, Color.black, Color.black};
+        // set the active color to Black
+        activeColors = new Color[mvMaterials.Length];
+        for(int i=0; i<mvMaterials.Length; i++){
+            activeColors[i] = Color.black;
+        }
 
         // put the area color arrays into the list
         areaColors.Add(hbColors);
@@ -56,6 +64,7 @@ public class MusicVisController : MonoBehaviour
 
     void Update()
     {
+        // get the current object count
         UpdateObjsPerArea();
 
         // Check if the number of sound objects from each area has changed
@@ -130,13 +139,21 @@ public class MusicVisController : MonoBehaviour
             sumObjs += objsPerArea[i];
         }
 
-        // if no objects are in play, set Hub Colors and return
+        // ------------------------------- //
+        // IF THERE ARE NO OBJECTS IN PLAY
+        // Set all active colors to black and return
         if(sumObjs <= 0){
-            activeColors = new Color[3]{Color.black, Color.black, Color.black};
+            // activeColors = new Color[3]{Color.black, Color.black, Color.black};
+            for(int i = 0; i<mvMaterials.Length; i++){
+                activeColors[i] = Color.black;
+            }
             return;
         }
 
+        // ---------------------------- //
+        // IF THERE ARE OBJECTS IN PLAY
         // TAG SORT
+
         // create an array of tags for Tag Sorting
         int[] tag = new int[4];
         for(int i = 0; i < 4; i++){
@@ -154,30 +171,33 @@ public class MusicVisController : MonoBehaviour
             }
         }
 
-        
-        // DETERMINE COLORS
-        // 1.
-        // check to see if only objs from one area are in play
-        if(objsPerArea[tag[0]] == sumObjs){
-            //activeColors = areaColors[tag[0]];
-            activeColors = (Color[])(areaColors[tag[0]]).Clone();
-            return;
-        }
+        // CHECK AREAS IN PLAY
+        // get the number of areas that have objects in play (range 1-4)
+        // assume four, then check to see if any of the slots past the first are 0
+        // (we can assume that there is at least 1 object in play)
+        int areas = 4;
+        if(objsPerArea[tag[1]] == 0)        areas = 1;  
+        else if(objsPerArea[tag[2]] == 0)   areas = 2;
+        else if (objsPerArea[tag[3]] == 0)  areas = 3;
 
-        // 2.
-        // check to see if only two are dominant
-        if(objsPerArea[tag[0]] + objsPerArea[tag[1]] == sumObjs){
-            activeColors[0] = (areaColors[tag[0]])[0];
-            activeColors[1] = (areaColors[tag[0]])[1];
-            activeColors[2] = (areaColors[tag[1]])[0];
-            return;
+        // ASSIGN COLORS
+        // cycles through the active area colors each loop 
+        int modLoop = 0;
+        // color index --> on the first loop through active areas, sample from the first
+        //  color slot in each area.  increase to the next slot on reset
+        //  (does not go past 3 colors because Jemy doesn't want to deal with that many combos)
+        int ci = 0;
+        for (int m = 0; m<mvMaterials.Length; m++){
+            activeColors[m] = areaColors[tag[modLoop]][ci];
+            ++modLoop;
+            modLoop %= areas;
+            // every time modLoop completes a cycle, increase the color index
+            // from which the material is sampled
+            if(modLoop == 0){
+                ++ci;   // increase ci when the active loop is reset
+                ci %=3; // do not let ci go beyond 3 because i don't wanna proggy
+            }
         }
-        
-        // 3.
-        // else, display top 3 colors
-        activeColors[0] = (areaColors[tag[0]])[0];
-        activeColors[1] = (areaColors[tag[1]])[0];
-        activeColors[2] = (areaColors[tag[2]])[0];
     }
 
 
@@ -188,6 +208,5 @@ public class MusicVisController : MonoBehaviour
         objsPerArea[2] = count.ActiveForest();
         objsPerArea[3] = count.ActiveCavern();
     }
-
 
 }
