@@ -14,6 +14,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: glowing
+    second: {fileID: 2100000, guid: a26f1fcb13ac34642a18448c5dfb2cec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: top
     second: {fileID: 2100000, guid: 9e8308d1f8312604d8a42ced5dfd7408, type: 2}
   materials:

@@ -49,7 +49,12 @@ ModelImporter:
     4300010: Sphere.003
     4300012: Sphere.004
     4300014: Sphere.005
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fuckstick
+    second: {fileID: 2100000, guid: 28ce76d85e5540146a1acb478d4c8a2b, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -43,6 +43,7 @@ ModelImporter:
     400036: Sphere.002
     2100000: Material.001
     2100002: glowing
+    2100004: glowing2
     2300000: Cylinder
     2300002: Cylinder.001
     2300004: Cylinder.002
@@ -107,7 +108,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: glowing
-    second: {fileID: 2100000, guid: bdee0a6f814ac9a4b9983250907747f0, type: 2}
+    second: {fileID: 2100000, guid: a26f1fcb13ac34642a18448c5dfb2cec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glowing2
+    second: {fileID: 2100000, guid: 4bfb96ae13b36804aa8d9762c58a0e3d, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -107,6 +107,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: glow
+    second: {fileID: 2100000, guid: 28ce76d85e5540146a1acb478d4c8a2b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: lily
     second: {fileID: 2100000, guid: 705afd90e94c89545a3fc564be966292, type: 2}
   materials:
