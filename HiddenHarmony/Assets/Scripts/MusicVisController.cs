@@ -14,8 +14,11 @@ public class MusicVisController : MonoBehaviour
     [SerializeField] private Color[] bdColors = new Color[3];
     [SerializeField] private Color[] ocColors = new Color[3];
 
+    // BUCKETS -- information about sound per set of frequencies
+    // Made available to use in size changing scripts
+    public static float[] mv_Buckets;
+
     // color control
-    private float[] buckets;
     private Color[] activeColors;
     private List<Color[]> areaColors = new List<Color[]>();
     private Color[] originalMaterialColors;
@@ -47,10 +50,10 @@ public class MusicVisController : MonoBehaviour
         // get a reference to count
         count = GameObject.Find("GameplayObjects/Count").GetComponent<Count>();
 
-        // assign an array to buckets
-        buckets = new float[cutoffs.Length];
-        for(int i = 0; i<buckets.Length; i++){
-            buckets[i] = 0;
+        // assign an array to mv_Buckets
+        mv_Buckets = new float[cutoffs.Length];
+        for(int i = 0; i<mv_Buckets.Length; i++){
+            mv_Buckets[i] = 0;
         }
 
         // set the active color to Black
@@ -83,7 +86,7 @@ public class MusicVisController : MonoBehaviour
             UpdateActiveColors();
         }
 
-        // calculate buckets every frame and update emission values
+        // calculate mv_Buckets every frame and update emission values
         RunVisualizer();  
     }
 
@@ -107,23 +110,23 @@ public class MusicVisController : MonoBehaviour
     //  material's color intensity based on the noise intensity
     void RunVisualizer()
     {
-        // buckets organized from low to hifreq
-        for(int i = 0; i<buckets.Length; i++){
+        // mv_Buckets organized from low to hifreq
+        for(int i = 0; i<mv_Buckets.Length; i++){
             // reset the bucket
-            buckets[i] = 0;
+            mv_Buckets[i] = 0;
 
             // go through this bucket's section of cutoff data
             //  and sum it
             for(int j = i==0?0:cutoffs[i-1]; j<cutoffs[i]; j++){
-                buckets[i] += (W_AudioPeer.spectrumData[j]);
+                mv_Buckets[i] += (W_AudioPeer.spectrumData[j]);
             }
 
             // make sure it is in range of 0-1
-            Mathf.Clamp(buckets[i], 0, 1);
+            Mathf.Clamp(mv_Buckets[i], 0, 1);
         }
 
         for(int i = 0; i < mvMaterials.Length; i++){
-            activeColors[i].a = buckets[i];
+            activeColors[i].a = mv_Buckets[i];
             mvMaterials[i].SetColor("_Color", activeColors[i]);
         }
     }
