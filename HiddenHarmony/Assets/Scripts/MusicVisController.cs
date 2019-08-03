@@ -18,6 +18,7 @@ public class MusicVisController : MonoBehaviour
     private float[] buckets;
     private Color[] activeColors;
     private List<Color[]> areaColors = new List<Color[]>();
+    private Color[] originalMaterialColors;
 
     // Information from Count.cs
     // # of sound objects in play per area (hb = 0, sw = 1, bd = 2, oc = 3)
@@ -25,7 +26,10 @@ public class MusicVisController : MonoBehaviour
     private int[] prevObjsPerArea = new int[4] {0,0,0,0};
     private Count count;
 
-    // throw and error if the number of cutoffs and materials are not equal
+    // ------------------------------------ //
+    // UNITY RUNTIME MONOBEHAVIOR FUNCTIONS //
+    // ------------------------------------ //
+
     void OnValidate(){
         if(cutoffs.Length != mvMaterials.Length){
             Debug.LogError("Music Visualizer Error: The number of cutoffs and MV Materials must be equal.");
@@ -55,6 +59,12 @@ public class MusicVisController : MonoBehaviour
             activeColors[i] = Color.black;
         }
 
+        // save the original color of the MV Materials to be used on Application Exit
+        originalMaterialColors = new Color[mvMaterials.Length];
+        for(int i=0; i<mvMaterials.Length; i++){
+            originalMaterialColors[i] = mvMaterials[i].GetColor("_Color");
+        }
+
         // put the area color arrays into the list
         areaColors.Add(hbColors);
         areaColors.Add(swColors);
@@ -77,7 +87,20 @@ public class MusicVisController : MonoBehaviour
         RunVisualizer();  
     }
 
-    // MUSIC VISUALIZER FUNCTIONS
+    void OnApplicationQuit()
+    {
+        // reset MV Materials to their original values to get github
+        //  to leave me tf alone!!!!
+        for(int i=0; i<mvMaterials.Length; i++){
+            mvMaterials[i].SetColor("_Color", originalMaterialColors[i]);
+        }
+    }
+
+
+    // -------------------------- //
+    // MUSIC VISUALIZER FUNCTIONS //
+    // -------------------------- //
+
     // RunVisualizer -- general update, runs every frame.
     //  reads audio spectrum data, computes the amount of 
     //  noise at each set of frequencies, and updates the 
