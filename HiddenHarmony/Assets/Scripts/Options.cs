@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class Options : MonoBehaviour
 {
 
     [SerializeField] private Dropdown resolutionDropdown;
+    [SerializeField] private AudioMixer[] mixers;
     private Resolution[] resolutions;
 
 
@@ -45,5 +47,29 @@ public class Options : MonoBehaviour
     public void SetResolution (int resolutionIndex){
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    public void SetMusicVolume (float volume){
+        foreach(AudioMixer mixer in mixers){
+            mixer.SetFloat("MusicVolume", volume);
+        }
+    }
+
+    public void SetSFXVolume (float volume){
+        foreach(AudioMixer mixer in mixers){
+            mixer.SetFloat("SFXVolume", volume);
+        }
+    }
+
+    public void SetAmbianceVolume (float volume){
+        foreach(AudioMixer mixer in mixers){
+            mixer.SetFloat("AmbianceVolume", volume);
+        }
+    }
+
+    public void SetMasterVolume (float volume){
+        foreach(AudioMixer mixer in mixers){
+            mixer.SetFloat("MasterVolume", volume);
+        }
     }
 }
