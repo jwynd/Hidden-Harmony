@@ -9,6 +9,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private float fadeTime = 2.0f;
     [SerializeField] private float movementSpeed = 10.0f;
     [SerializeField] private PostProcessProfile playerPostProcessingProfile;
+    [SerializeField] private GameObject optionsMenuUI;
 
     private GameObject player;
     private GameObject geysers;
@@ -19,6 +20,7 @@ public class StartMenu : MonoBehaviour
     private float timer = 0.0f;
     private Fade fade;
     private bool fading = false;
+    private bool inOptions = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -56,6 +58,9 @@ public class StartMenu : MonoBehaviour
                 fading = false;
             }
         }
+        if(inOptions && Input.GetKeyDown(KeyCode.Escape)){
+            OptionsReturn();
+        }
 
 
     }
@@ -65,6 +70,18 @@ public class StartMenu : MonoBehaviour
         Cursor.visible = false;
         fading = true;
         fade.FadeOut(2.0f);
+    }
+
+    public void Options(){
+        startMenuUI.SetActive(false);
+        optionsMenuUI.SetActive(true);
+        inOptions = true;
+    }
+
+    public void OptionsReturn(){
+        optionsMenuUI.SetActive(false);
+        startMenuUI.SetActive(true);
+        inOptions = false;
     }
 
 }

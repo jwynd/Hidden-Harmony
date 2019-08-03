@@ -9,9 +9,11 @@ public class PauseMenu : MonoBehaviour
     // below is tutorial suggestion, replace if wrong
     private string mainMenuScene;
     private GameObject pauseMenuUI;
+    private GameObject optionsMenuUI;
     private GameObject player;
     private GameObject camera;
     private bool isPaused;
+    private bool inOptions = false;
     private GameObject menuCamera; // use this to determine if while loop should be running
     private GameObject hTab;
     private GameObject sTab;
@@ -33,6 +35,7 @@ public class PauseMenu : MonoBehaviour
         player = GameObject.Find("Player");
         camera = GameObject.Find("Player/MainCamera");
         pauseMenuUI = GameObject.Find("Canvas/PauseMenuMain");
+        optionsMenuUI = GameObject.Find("Canvas/OptionsMenuMain");
         menuCamera = GameObject.Find("MenuCamera");
         hInventory = GameObject.Find("Canvas/CTabs/HTabs/HItemsHeld");
         sInventory = GameObject.Find("Canvas/CTabs/STabs/SItemsHeld");
@@ -55,21 +58,25 @@ public class PauseMenu : MonoBehaviour
         sTab.SetActive(false);
         bdTab.SetActive(false);
         oTab.SetActive(false);
+        optionsMenuUI.SetActive(false);
         isPaused = false;
     }
 
     void Update(){
         if(menuCamera == null){
             if(Input.GetKeyDown(KeyCode.Escape)){
-                
-                isPaused = !isPaused;
-                if(isPaused){
-                    checkTabs();
-                    ActivateMenu();
-                }
-                else{        
-                    DeactivateMenu();
-                    activateTabs();
+                if(inOptions){
+                    OptionsReturn();
+                } else {
+                    isPaused = !isPaused;
+                    if(isPaused){
+                        checkTabs();
+                        ActivateMenu();
+                    }
+                    else{        
+                        DeactivateMenu();
+                        activateTabs();
+                    }
                 }
             }
         }
@@ -179,6 +186,19 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
         #endif
     }
+
+    public void Options(){
+        pauseMenuUI.SetActive(false);
+        optionsMenuUI.SetActive(true);
+        inOptions = true;
+    }
+
+    public void OptionsReturn(){
+        optionsMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(true);
+        inOptions = false;
+    }
+
 
     public void PlayHover(){
         GetComponents<AudioSource>()[0].Play();
