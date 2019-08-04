@@ -71,6 +71,9 @@ public class PlayerMovement : MonoBehaviour {
     private AudioSource sprintAudioLeft;
     private AudioSource sprintAudioRight;
     private AudioSource sprintAudioWind;
+    private AudioSource landAudio;
+    [SerializeField] private AudioClip jumpStartAudio;
+    [SerializeField] private AudioClip jumpLandAudio;
     private float timestamp;
     private List<string> audioFiles;
     private bool sprintAlternator = true;
@@ -86,6 +89,8 @@ public class PlayerMovement : MonoBehaviour {
         sprintAudioLeft = this.transform.Find("Audio/SprintAudioLeft").gameObject.GetComponent<AudioSource>();
         sprintAudioRight = this.transform.Find("Audio/SprintAudioRight").gameObject.GetComponent<AudioSource>();
         sprintAudioWind = this.transform.Find("Audio/SprintAudioWind").gameObject.GetComponent<AudioSource>();
+        landAudio = this.transform.Find("Audio/LandAudio").gameObject.GetComponent<AudioSource>();
+        landAudio.clip = jumpLandAudio;
         canJumpRay = character.height + character.height * 0.25f;
         canJumpRay = 3f;
         audioFiles = new List<string>();
@@ -107,7 +112,8 @@ public class PlayerMovement : MonoBehaviour {
         //Raycast alternative Physics.Raycast (transform.position, Vector3.down, canJump)
         if (Physics.CapsuleCast(p1, p2, character.radius, Vector3.down, out hit, canJump) || Physics.Raycast(transform.position, Vector3.down, out hit, canJumpRay))
         { //capsule cast checks if capsule is touching the ground 
-            if(Input.GetKeyDown(KeyCode.Space)) {         
+            if(Input.GetKeyDown(KeyCode.Space)) {    
+                landAudio.PlayOneShot(jumpStartAudio);     
                 jumping = true;
                 yVelocity = jump;
             }
@@ -118,10 +124,17 @@ public class PlayerMovement : MonoBehaviour {
             if(particles.isPlaying){
                 particles.Stop();
             }
-            onGround = true;
+            if(!onGround){
+            	if(!landAudio.isPlaying){
+            		landAudio.Play();
+            	}
+            	onGround = true;
+        	}
         }
         else{
-            onGround = false;
+        	if(onGround){
+            	onGround = false;
+        	}
         }
 
         if(yVelocity <= terminalVelocity){
