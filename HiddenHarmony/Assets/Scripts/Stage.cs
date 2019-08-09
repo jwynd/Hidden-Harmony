@@ -10,6 +10,14 @@ public class Stage : MonoBehaviour
     private int crystalOffset;
     [HideInInspector] public GameObject[] crystals;
     [HideInInspector] public Vector3[] crystalScales;
+    [Tooltip("The outline material")]
+    [SerializeField]private Material outline;
+    [Tooltip("The not outlined material")]
+    [SerializeField]private Material noOutline;
+    [Tooltip("Game object that will be outlined")]
+    [SerializeField]private GameObject toOutline;
+    private Renderer rend;
+    
 
     void Start(){
         if(halfBeats.Length != pitches.Length) throw new System.ArgumentException("Beats and pitches must be of equal length");
@@ -36,9 +44,17 @@ public class Stage : MonoBehaviour
             crystals[index] = this.transform.parent.GetChild(0).GetChild(0).GetChild(i).gameObject;
             crystalScales[index] = new Vector3(crystals[index].transform.localScale.x, crystals[index].transform.localScale.y, crystals[index].transform.localScale.z);
         }
+        rend = toOutline.GetComponent<Renderer>();
     }
 
     public bool IsOccupied(){
         return this.transform.childCount == 0;
+    }
+    public void Outline(bool o){
+        if(o){
+            rend.material = outline;
+        } else {
+            rend.material = noOutline;
+        }
     }
 }
