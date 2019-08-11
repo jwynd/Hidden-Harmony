@@ -13,7 +13,7 @@
         // Outline Settings
         [Toggle] _UseOutline("Use outlines", Float) = 0
         _OutlineColor("Outline Color", Color) = (0,0,0,1)
-        _OutlineThickness("Outline Thickness", Range(0,0.1)) = 0.03
+        _OutlineThickness("Outline Thickness", Range(0,0.5)) = 0.03
     }
 
     Subshader
