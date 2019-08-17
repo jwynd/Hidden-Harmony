@@ -17,6 +17,7 @@ public class ComposeModeTransition : MonoBehaviour
     private float journeyLength;
     private bool transitioning = false;
     private bool compose = false;
+    private bool canTransition = true;
     private bool firstPress = true; // Enables/handles the tutorial shit
     private GameObject playerCamera;
 //    private GameObject composeCamera;
@@ -64,7 +65,7 @@ public class ComposeModeTransition : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        if(inHub && Input.GetKeyDown(KeyCode.Tab)){
+        if(inHub && Input.GetKeyDown(KeyCode.Tab) && canTransition){
             //print("Tab key pressed");
             //print(compose?"compose":"!compose");
             //print(transitioning?"transitioning":"!transitioning");
@@ -115,7 +116,7 @@ public class ComposeModeTransition : MonoBehaviour
                 journeyLength = Vector3.Distance(composeCameraPosition.position, cameraReturn.position);
             }
         }
-        else if(!inHub && Input.GetKeyDown(KeyCode.Tab)){
+        else if((!inHub || !canTransition) && Input.GetKeyDown(KeyCode.Tab)){
             sources[2].Play();
         }
         if(compose && transitioning){
@@ -170,5 +171,14 @@ public class ComposeModeTransition : MonoBehaviour
         playerCamera.transform.position = composeCameraPosition.position;
         playerCamera.transform.LookAt(cameraTarget);
         transitioning = false;
+    }
+
+    public bool getTransition(){
+        return canTransition;
+    }
+
+    public bool setTransition(bool t){
+        canTransition = t;
+        return canTransition;
     }
 }
