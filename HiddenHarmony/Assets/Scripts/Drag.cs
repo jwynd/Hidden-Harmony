@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private Vector3 origin;
-    public bool isDragging = false;
+    public bool canPlace = false;
     private AudioSource dragObjSound;
     private GameObject hItems;
     private GameObject sItems;
@@ -50,21 +50,23 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         
         errorSprite.position = Input.mousePosition;
         draggedItem.position = Input.mousePosition;
-        isDragging = controller.GetComponent<SoundObjectCompose>().checkError();
-        if(isDragging == true && errorSprite.gameObject.activeSelf==true)
+        canPlace = controller.GetComponent<SoundObjectCompose>().checkError();
+        if(canPlace == true && errorSprite.gameObject.activeSelf==true)
         {
             errorSprite.gameObject.SetActive(false);
+            controller.GetComponent<SoundObjectCompose>().makeOutline();
         }
-        else if(isDragging == false && errorSprite.gameObject.activeSelf == false)
+        else if(canPlace == false && errorSprite.gameObject.activeSelf == false)
         {
             errorSprite.gameObject.SetActive(true);
+            controller.GetComponent<SoundObjectCompose>().eraseOutline();
         }
 
 
 
     }
     public void OnEndDrag(PointerEventData evenData){
-        isDragging = false;
+        canPlace = false;
         errorSprite.gameObject.SetActive(false);
         draggedItem.localPosition = origin;
 

@@ -48,6 +48,9 @@ public class SoundObjectCompose : MonoBehaviour {
     private GameObject caveTab;
     private GameObject controller;
 
+    private Stage stg;
+    private GameObject stage;
+
     // Start is called before the first frame update
     void Start(){
         hPanelAccess = GameObject.Find("Canvas/CTabs/HTabs/HItemsHeld");
@@ -69,7 +72,6 @@ public class SoundObjectCompose : MonoBehaviour {
         oTab = GameObject.Find("Canvas/CTabs/OTabs/OTab");
         bdTab = GameObject.Find("Canvas/CTabs/BDTabs/BDTab");
         controller = GameObject.Find("Canvas/Controllers/ComposeObjectController");
-      
 
     }
 
@@ -455,6 +457,11 @@ void Update(){
             if (matchStage.Success)
             {
                     Transform stageObjectTransform = hit.collider.gameObject.transform;
+                   /* stage = stageObjectTransform.gameObject;
+                    stg = stage.GetComponent<Stage>();
+                    stg.Outline(true);
+                    print("stage is " + stg);
+                    print("this GameObj is " + stage);*/
                     Ray stageRay = new Ray(stageObjectTransform.position, Vector3.up);
                     if (Physics.Raycast(stageRay, out hit, soundDistance))
                     {
@@ -492,5 +499,35 @@ void Update(){
             }
         }
         return false;
+    }
+
+    public void makeOutline()
+    {
+        RaycastHit hit;
+        Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(mouseRay, out hit, stageDistance))
+        {
+            Match matchStage = Regex.Match(hit.collider.tag, stagePattern);
+            if (matchStage.Success)
+            {
+                Transform stageObjectTransform = hit.collider.gameObject.transform;
+                stage = stageObjectTransform.gameObject;
+                stg = stage.GetComponent<Stage>();
+                stg.Outline(true);
+                print("stage is " + stg);
+                print("this GameObj is " + stage);
+                
+            }
+        }
+    }
+
+    public void eraseOutline()
+    {
+        if(stg != null)
+        {
+            stg.Outline(false);
+            stg = null;
+        }
+        
     }
 }
