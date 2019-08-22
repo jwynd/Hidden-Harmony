@@ -29,6 +29,7 @@ public class InteractScript : MonoBehaviour
     private float reticleSelectB;
     private Color reticleStartColor;
     private Color tempColor;
+    private GameObject textBox;
 
     void Start()
     {
@@ -46,6 +47,7 @@ public class InteractScript : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
+        RaycastHit2D hit2D;
         Ray pickRay = new Ray(camera.position, camera.forward);
       
         if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
@@ -55,6 +57,15 @@ public class InteractScript : MonoBehaviour
                 if (hit.collider.tag == "Interactable")
                 {
                     currentInteractable = hit.collider.gameObject;
+                    if (currentInteractable.transform.Find("Text Box") != null){
+                        textBox = currentInteractable.transform.Find("Text Box").gameObject;
+                        if(!textBox.activeSelf){
+                            textBox.SetActive(true);
+                        }
+                        else{
+                            textBox.GetComponent<TextBox>().CycleText();
+                        }
+                    }
                     if (currentInteractable.GetComponent<Animator>() != null)
                     {
                         currentInteractable.GetComponent<Animator>().SetBool("interacting", true);
@@ -89,6 +100,14 @@ public class InteractScript : MonoBehaviour
                     }
                 }
             }
+            if(Physics2D.GetRayIntersection(pickRay, interactDistance)){
+                hit2D = Physics2D.GetRayIntersection(pickRay, interactDistance);
+                if(hit2D.collider.tag == "Interactable"){
+                    if(hit2D.collider.gameObject.name == "Text Box"){
+                        hit2D.collider.gameObject.GetComponent<TextBox>().CycleText();
+                    }
+                }
+            }
         }
         else
         {
@@ -102,6 +121,16 @@ public class InteractScript : MonoBehaviour
                     if(!hit.collider.gameObject.GetComponent<SoundObject>().OnStage()){
                         InteractableReticle();
                     }
+                }
+                else{
+                    StopInteractableReticle();
+                }
+            }
+            else if(Physics2D.GetRayIntersection(pickRay, interactDistance)){
+                hit2D = Physics2D.GetRayIntersection(pickRay, interactDistance);
+                if (hit2D.collider.tag == "Interactable"){
+                    InteractableReticle();
+                    //intMsg.GetComponent<InteractMessage>().ShowInteractMessage("Press 'E' to interact");
                 }
                 else{
                     StopInteractableReticle();
