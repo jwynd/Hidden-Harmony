@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ExpandSpriteOnAwake : MonoBehaviour
 {
-    public float speed = 1;
+    [SerializeField] private float speed = 1;
 
     [SerializeField] private AnimationCurve xCurve;
     [SerializeField] private AnimationCurve yCurve;
+
     private float cValX;
     private float cValY;
     private float startTime;
