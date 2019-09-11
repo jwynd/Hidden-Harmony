@@ -61,9 +61,16 @@ public class InteractScript : MonoBehaviour
                         textBox = currentInteractable.transform.Find("Text Box").gameObject;
                         if(!textBox.activeSelf){
                             textBox.SetActive(true);
+                            textBox.transform.parent.transform.gameObject.GetComponent<SpriteRenderer>().enabled = false;
                         }
-                        else{
-                            textBox.GetComponent<TextBox>().CycleText();
+                    }
+                    if (currentInteractable.transform.Find("Dialogue Prompt") != null){
+                        if (currentInteractable.transform.Find("Dialogue Prompt").Find("Text Box") != null){
+                            textBox = currentInteractable.transform.Find("Dialogue Prompt").Find("Text Box").gameObject;
+                            if(!textBox.activeSelf){
+                                textBox.SetActive(true);
+                                textBox.transform.parent.transform.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                            }
                         }
                     }
                     if (currentInteractable.GetComponent<Animator>() != null)
@@ -100,14 +107,6 @@ public class InteractScript : MonoBehaviour
                     }
                 }
             }
-            if(Physics2D.GetRayIntersection(pickRay, interactDistance)){
-                hit2D = Physics2D.GetRayIntersection(pickRay, interactDistance);
-                if(hit2D.collider.tag == "Interactable"){
-                    if(hit2D.collider.gameObject.name == "Text Box"){
-                        hit2D.collider.gameObject.GetComponent<TextBox>().CycleText();
-                    }
-                }
-            }
         }
         else
         {
@@ -121,16 +120,6 @@ public class InteractScript : MonoBehaviour
                     if(!hit.collider.gameObject.GetComponent<SoundObject>().OnStage()){
                         InteractableReticle();
                     }
-                }
-                else{
-                    StopInteractableReticle();
-                }
-            }
-            else if(Physics2D.GetRayIntersection(pickRay, interactDistance)){
-                hit2D = Physics2D.GetRayIntersection(pickRay, interactDistance);
-                if (hit2D.collider.tag == "Interactable"){
-                    InteractableReticle();
-                    //intMsg.GetComponent<InteractMessage>().ShowInteractMessage("Press 'E' to interact");
                 }
                 else{
                     StopInteractableReticle();

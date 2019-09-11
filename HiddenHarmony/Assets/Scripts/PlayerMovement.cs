@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour {
     public float speed = 6f; //sets speed multiplier
     //speed suggested value 6f
     [Tooltip("How high the player jumps (Must be greater than terminalVelocity)")]
-    public float jump = 70f; //0the maximun value of the jump. value must be larger than terminalVelocity
+    public float jump = 70f; //value must be larger than terminalVelocity
     //jump suggested value 70f
     [Tooltip("The minimum height the player must jump")]
     public float minJump = 0.15f; //0the maximun value of the jump. value must be larger than terminalVelocity

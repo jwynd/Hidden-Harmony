@@ -207,4 +207,7 @@ public class PauseMenu : MonoBehaviour
     public void PlayClick(){
         GetComponents<AudioSource>()[1].Play();
     }
+    public bool GetPaused(){
+        return isPaused;
+    }
 }

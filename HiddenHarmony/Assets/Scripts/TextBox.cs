@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 [System.Serializable]
 public class TextBox : MonoBehaviour{
@@ -15,6 +16,9 @@ public class TextBox : MonoBehaviour{
     private RaycastHit hit;
     private Ray pickRay;
     public List<string> textBlocks;
+    private Match matchHitObj;
+    private string matchText;
+    private PauseMenu pauseMenu;
 
     // Start is called before the first frame update
     void Start(){
@@ -26,6 +30,9 @@ public class TextBox : MonoBehaviour{
         textMesh = textObject.GetComponent<TextMesh>();
         nextIndicator = this.transform.Find("Next Text Indicator Sprite").gameObject;
         player = GameObject.Find("Player").transform;
+        matchText = "Dialogue Prompt";
+        pauseMenu = GameObject.Find("PauseMenuController").GetComponent<PauseMenu>();
+
         currentBlock = 0;
         if(textBlocks.Count < 1){
             AddText("(Block " + (textBlocks.Count + 1) + ")\nEnter Text Here:");
@@ -35,7 +42,9 @@ public class TextBox : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        this.transform.LookAt(player);//, Vector3.up);
+        if(this.gameObject.activeSelf && Input.GetMouseButtonDown(0) && !pauseMenu.GetPaused()){
+            CycleText();
+        }
     }
 
     public void CycleText(){
@@ -46,6 +55,11 @@ public class TextBox : MonoBehaviour{
         if(currentBlock >= textBlocks.Count){
             currentBlock = 0;
             nextIndicator.SetActive(true);
+
+            matchHitObj = Regex.Match(this.transform.parent.name, matchText);
+            if (matchHitObj.Success){
+                this.transform.parent.transform.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            }
             this.transform.gameObject.SetActive(false);
         }
         textMesh.text = textBlocks[(int)currentBlock];

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8235561486073240526}
   - component: {fileID: 8235561486073240527}
   - component: {fileID: 8235561486073240524}
+  - component: {fileID: 6686410125374781467}
   m_Layer: 0
   m_Name: Text Box
   m_TagString: Interactable
@@ -69,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1873701153
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 583dcd8528f9ed346be2999a01e5d014, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -96,7 +97,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentBlock: 0
   displayedText: 
-  textBlocks: []
+  textBlocks:
+  - '(Block 1)
+
+    Enter Text Here:'
+--- !u!114 &6686410125374781467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8235561486073240521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35b3bbc2dae8234c85c57a62756e04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8235561486706750954
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +271,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1873701153
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 59a3d18d436cd4147adffda115af258b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
