@@ -76,4 +76,8 @@ public class TextBox : MonoBehaviour{
         }
     }
 
+    public void ActivateTextBox(){
+        this.gameObject.SetActive(true);
+    }
+
 }
