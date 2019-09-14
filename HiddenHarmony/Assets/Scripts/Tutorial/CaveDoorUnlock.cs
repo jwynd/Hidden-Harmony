@@ -4,25 +4,22 @@ using UnityEngine;
 
 public class CaveDoorUnlock : MonoBehaviour
 {
-    public GameObject door;
+    [SerializeField] private GameObject door;
+    [SerializeField] private GameObject text;
 
-    private Count counter;
     // Start is called before the first frame update
     void Start()
     {
-        counter = GameObject.Find("GameplayObjects/Count").GetComponent<Count>();
+        text.SetActive(false); // in case it's not already
     }
 
-    // Update is called once per frame
-    void Update()
+    // Run when all necessary tutorial objects have been collected
+    public void TriggerUnlock()
     {
-        // check each frame if the player has collected all 3 sound objects
-        if(counter.HubCount() == 3)
-        {
-            // Play dialogue and destroy the door
-            Destroy(door);
+        // Play dialogue and destroy the door blocking progression
+        text.GetComponent<TextBox>().ActivateTextBox();
+        Destroy(door);
 
-            Destroy(this.gameObject);
-        }
+        Destroy(this.gameObject);
     }
 }
