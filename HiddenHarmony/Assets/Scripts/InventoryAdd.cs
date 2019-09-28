@@ -78,7 +78,7 @@ public class InventoryAdd : MonoBehaviour
                 if(hit.collider.tag == "SoundObj"){
                     if(!hit.collider.gameObject.GetComponent<SoundObject>().OnStage()){
                         //itemPanel = GameObject.Find("Canvas/ItemsHeld");
-                        
+                        GameObject.Find("DeadStageController").GetComponent<DeadStageController>().CollectedSoundObject();
                         if(hit.collider.gameObject.GetComponent<SoundObject>().toDestroyOnPickup != null){
                             Destroy(hit.collider.gameObject.GetComponent<SoundObject>().toDestroyOnPickup);
                         }
