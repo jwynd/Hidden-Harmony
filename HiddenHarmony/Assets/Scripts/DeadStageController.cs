@@ -27,7 +27,7 @@ public class DeadStageController : MonoBehaviour
     // Update is called once per frame
     void Update(){
         mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(mouseRay, out hit) && unlockableCount > 0){
+        if(Physics.Raycast(mouseRay, out hit) && unlockableCount > 0 && Input.GetMouseButtonDown(0)){
             print("We got inside the raycast");
             foreach(Transform child in deadStages.GetChild(1)){
                 print("In foreach loop");
