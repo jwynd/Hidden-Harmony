@@ -29,7 +29,7 @@ public class DeadStageController : MonoBehaviour
         mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(mouseRay, out hit) && unlockableCount > 0){
             foreach(Transform child in deadStages.GetChild(1)){
-                if(GameObjects.ReferenceEquals(hit.transform.gameObject, child.gameObject)){
+                if(GameObject.ReferenceEquals(hit.transform.gameObject, child.gameObject)){
                     hit.transform.gameObject.GetComponent<ActivateStage>().Activate();
                     removeDeadStage(hit.transform.GetSiblingIndex());
                     StageActivated();
