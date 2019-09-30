@@ -27,7 +27,7 @@ public class DeadStageController : MonoBehaviour
     // Update is called once per frame
     void Update(){
         mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(mouseRay, out hit) && unlockableCount > 0){
+        if(Physics.Raycast(mouseRay, out hit, 100.0f) && unlockableCount > 0){
             foreach(Transform child in deadStages.GetChild(1)){
                 if(hit.transform.gameObject == child.gameObject){
                     hit.transform.gameObject.GetComponent<ActivateStage>().Activate();
