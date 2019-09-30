@@ -30,7 +30,6 @@ public class DeadStageController : MonoBehaviour
         if(Physics.Raycast(mouseRay, out hit) && unlockableCount > 0 && Input.GetMouseButtonDown(0)){
             foreach(Transform child in deadStages.GetChild(1)){
                 if(GameObject.ReferenceEquals(hit.transform.parent.gameObject, child.gameObject)){
-                    print("If it doesn't work at this point the problem is in Activate stage...");
                     hit.transform.gameObject.GetComponent<ActivateStage>().Activate();
                     removeDeadStage(hit.transform.GetSiblingIndex());
                     StageActivated();
