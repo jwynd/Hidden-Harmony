@@ -32,6 +32,7 @@ public class DeadStageController : MonoBehaviour
                 if(hit.transform.gameObject == child.gameObject){
                     hit.transform.gameObject.GetComponent<ActivateStage>().Activate();
                     removeDeadStage(hit.transform.GetSiblingIndex());
+                    StageActivated();
                 }
             }
         }
