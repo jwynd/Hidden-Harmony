@@ -64,4 +64,8 @@ public class DeadStageController : MonoBehaviour
         Destroy(deadStages.GetChild(0).GetChild(i).gameObject);
         Destroy(deadStages.GetChild(1).GetChild(i).gameObject);
     }
+
+    public void AddActivatable(int i){
+        unlockableCount += i;
+    }
 }
