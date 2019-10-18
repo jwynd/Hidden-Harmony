@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class TextBox : MonoBehaviour{
@@ -19,6 +20,15 @@ public class TextBox : MonoBehaviour{
     private Match matchHitObj;
     private string matchText;
     private PauseMenu pauseMenu;
+    [Tooltip("While true, clicking anywhere will progress text (usually keep true for gameplay and false for cutscenes, etc.)")]
+    public bool progressByClick = true;
+    [Tooltip("Plays function at specified index")]
+    public bool playFunction = false;
+    [Tooltip("Plays function after text has ended")]
+    public bool playFunctionAtEnd = false;
+    [Tooltip("Must be between 0 and the index of the last dialogue box")]
+    public float functionAtIndex = 0;
+    public UnityEvent functionPlayed;
 
     // Start is called before the first frame update
     void Start(){
@@ -42,7 +52,7 @@ public class TextBox : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        if(this.gameObject.activeSelf && Input.GetMouseButtonDown(0) && !pauseMenu.GetPaused()){
+        if(this.gameObject.activeSelf && Input.GetMouseButtonDown(0) && !pauseMenu.GetPaused() && progressByClick){
             CycleText();
         }
     }
@@ -60,8 +70,27 @@ public class TextBox : MonoBehaviour{
             if (matchHitObj.Success){
                 this.transform.parent.transform.gameObject.GetComponent<SpriteRenderer>().enabled = true;
             }
+
+            if(playFunctionAtEnd){
+                if(functionPlayed == null){
+                    print("functionPlayed is empty");
+                }
+                else{
+                    functionPlayed.Invoke();
+                }
+            }
+
             this.transform.gameObject.SetActive(false);
         }
+        if(playFunction && currentBlock == functionAtIndex){
+            if(functionPlayed == null){
+                print("functionPlayed is empty");
+            }
+            else{
+                functionPlayed.Invoke();
+            }
+        }
+
         textMesh.text = textBlocks[(int)currentBlock];
         displayedText = textMesh.text;
     }
