@@ -29,6 +29,7 @@ public class TextBox : MonoBehaviour{
     [Tooltip("Must be between 0 and the index of the last dialogue box")]
     public float functionAtIndex = 0;
     public UnityEvent functionPlayed;
+    public UnityEvent functionPlayedAtEnd;
 
     // Start is called before the first frame update
     void Start(){
@@ -72,11 +73,11 @@ public class TextBox : MonoBehaviour{
             }
 
             if(playFunctionAtEnd){
-                if(functionPlayed == null){
-                    print("functionPlayed is empty");
+                if(functionPlayedAtEnd == null){
+                    print("functionPlayedAtEnd is empty");
                 }
                 else{
-                    functionPlayed.Invoke();
+                    functionPlayedAtEnd.Invoke();
                 }
             }
 
