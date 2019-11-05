@@ -110,4 +110,11 @@ public class TextBox : MonoBehaviour{
         this.gameObject.SetActive(true);
     }
 
+    public void ClickActive(){
+        this.progressByClick = !this.progressByClick;
+    }
+
+    public void ClickActive(bool canClick){
+        this.progressByClick = canClick;
+    }
 }
