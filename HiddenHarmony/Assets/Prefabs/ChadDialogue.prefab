@@ -218,6 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c5f4c6b61674ae3ac388782878c266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaTrigger: {fileID: 1970772165690951028, guid: 2333206fdde494a368f2370ec78952c1,
+    type: 3}
 --- !u!1001 &1857782362907445267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -492,7 +494,7 @@ PrefabInstance:
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
       propertyPath: functionPlayedAtEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DestroyCurrentText
+      value: EnableComposeMode
       objectReference: {fileID: 0}
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}

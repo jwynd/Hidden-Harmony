@@ -11,7 +11,7 @@ public class Transition : MonoBehaviour
     [SerializeField] private bool toUnderwater = false;
     [Tooltip("Post Processing Profile")]
     [SerializeField] private PostProcessProfile newPPP;
-    [SerializeField] private bool canCompose = false;
+    public bool canCompose = false;
 
     private AudioSource[] bg;
     private float timer = 0.0f;
