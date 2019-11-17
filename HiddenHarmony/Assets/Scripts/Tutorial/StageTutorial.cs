@@ -32,6 +32,7 @@ public class StageTutorial : MonoBehaviour
     {
         cmt = GameObject.Find("GameplayObjects/CameraChange").GetComponent<ComposeModeTransition>();
         dsc = GameObject.Find("GameplayObjects/Canvas/Controllers/DeadStageController").GetComponent<DeadStageController>();
+        print(dsc);
         for(int n = 0; n < stagesParent.transform.childCount; n++)
         {
             stages[n] = stagesParent.transform.GetChild(n);
@@ -84,8 +85,8 @@ public class StageTutorial : MonoBehaviour
                 {
                     print("second stage activated");
                     secondStage = s.gameObject;
-                    slice3.SetActive(false);
-                    slice4.SetActive(true);
+                    slice4.SetActive(false);
+                    slice5.SetActive(true);
                 }
             }
         }
