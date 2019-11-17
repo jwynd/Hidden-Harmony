@@ -17,18 +17,21 @@ public class StageTutorial : MonoBehaviour
     [SerializeField] private GameObject slice5;
 
     [SerializeField] private GameObject stagesParent;
-    [SerializeField] private ComposeModeTransition cmt;
+    private ComposeModeTransition cmt;
+    private DeadStageController dsc;
 
     private GameObject firstStage;
     private GameObject secondStage;
     private Transform[] stages = new Transform[9];
 
     private bool firstCompose = false;
+    private bool firstUse = false;
 
     // Start is called before the first frame update
     void Start()
     {
         cmt = GameObject.Find("GameplayObjects/CameraChange").GetComponent<ComposeModeTransition>();
+        dsc = GameObject.Find("GameplayObjects/Canvas/Controllers/DeadStageController").GetComponent<DeadStageController>();
         for(int n = 0; n < stagesParent.transform.childCount; n++)
         {
             stages[n] = stagesParent.transform.GetChild(n);
@@ -65,12 +68,13 @@ public class StageTutorial : MonoBehaviour
         } else if(secondStage == null)
         {
             // Check for first stage usage
-            if (firstCompose == false && firstStage.GetComponent<Stage>().IsOccupied())
+            if (firstUse == false && firstStage.GetComponentInChildren<Stage>().IsOccupied())
             {
                 print("firstStage used");
-                firstCompose = true;
-                slice3.SetActive(false);
-                slice4.SetActive(true);
+                firstUse = true;
+                dsc.AddActivatable(1);
+                slice3.SetActive(false); //AddFirstSound
+                slice4.SetActive(true); //AddSecondStage
             }
 
             // Check for new second stage
