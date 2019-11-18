@@ -221,6 +221,7 @@ MonoBehaviour:
   areaTrigger: {fileID: 1970772165690951028, guid: 2333206fdde494a368f2370ec78952c1,
     type: 3}
   highlightUI: {fileID: 0}
+  composePrompt: {fileID: 0}
 --- !u!1001 &1857782362907445267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -311,22 +312,23 @@ PrefabInstance:
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
       propertyPath: textBlocks.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
       propertyPath: functionPlayed.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
       propertyPath: functionPlayedAtEnd.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
       propertyPath: textBlocks.Array.data[0]
-      value: 'Behind me is the Shrine of Composition. '
+      value: "You must collect Artifacts from each deity\u2019s home. \nUse those
+        Artifacts to free the deities from stone."
       objectReference: {fileID: 0}
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
@@ -338,12 +340,12 @@ PrefabInstance:
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
       propertyPath: playFunction
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
       propertyPath: playFunctionAtEnd
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
@@ -508,24 +510,25 @@ PrefabInstance:
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
       propertyPath: textBlocks.Array.data[0]
-      value: You really are back!
+      value: "We had lost all hope, but it is clear we never \nshould have doubted
+        you."
       objectReference: {fileID: 0}
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
       propertyPath: textBlocks.Array.data[1]
-      value: "I\u2019ve seen so many murals depicting you, \nbut I never dreamed I\u2019d
-        get to see you in person! "
+      value: Our job is not complete, however!
       objectReference: {fileID: 0}
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
       propertyPath: textBlocks.Array.data[2]
-      value: "No time for ogling, however! \nI am stuck in this rather inconvenient
-        form. "
+      value: "These three artifacts just aren't enough to produce \nall the music
+        we need to restore the shrines."
       objectReference: {fileID: 0}
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
       propertyPath: textBlocks.Array.data[3]
-      value: "You can help me out of this with those \nArtifacts you collected."
+      value: "You must collect Artifacts from each deity\u2019s home. \nUse those
+        Artifacts to free the deities from stone."
       objectReference: {fileID: 0}
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
@@ -540,7 +543,7 @@ PrefabInstance:
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
       propertyPath: functionPlayedAtEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HighlightInventory
+      value: DestroyCurrentText
       objectReference: {fileID: 0}
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
@@ -665,7 +668,7 @@ PrefabInstance:
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
       propertyPath: textBlocks.Array.data[0]
-      value: 'God gazes grimly upon your sins. '
+      value: My full name is Chadwick McStrongpants PhD.
       objectReference: {fileID: 0}
     - target: {fileID: 8235561486073240524, guid: 16980b422eaa32349a2151f4948f31ef,
         type: 3}
