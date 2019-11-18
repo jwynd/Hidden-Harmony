@@ -67,5 +67,6 @@ public class DeadStageController : MonoBehaviour
 
     public void AddActivatable(int i){
         unlockableCount += i;
+        toggleStages();
     }
 }

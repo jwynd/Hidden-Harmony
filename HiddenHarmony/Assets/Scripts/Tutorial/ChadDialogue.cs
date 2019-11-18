@@ -9,6 +9,8 @@ public class ChadDialogue : MonoBehaviour
 
     private Transform player;
     [SerializeField] private GameObject areaTrigger;
+    [SerializeField] private GameObject highlightUI;
+    [SerializeField] private GameObject composePrompt;
 
     private void Start()
     {
@@ -21,6 +23,17 @@ public class ChadDialogue : MonoBehaviour
         Destroy(this.transform.parent.GetChild(0).gameObject);
     }
 
+    public void HighlightInventory()
+    {
+        highlightUI.SetActive(true);
+        DestroyCurrentText();
+    }
+
+    public void DisableInventory()
+    {
+        highlightUI.SetActive(false);
+    }
+
     public void EnableComposeMode()
     {
         GameObject collider;
@@ -30,6 +43,9 @@ public class ChadDialogue : MonoBehaviour
         collider = Instantiate(areaTrigger, player.position, Quaternion.identity);
         script = collider.GetComponent<Transition>();
         script.canCompose = true;
+
+        // Compose mode prompt
+        composePrompt.SetActive(true);
 
         // Set Tutorial-to-Hub collider to allow compose now
         collider = GameObject.Find("HubTransitions/TutorialToHub");
