@@ -8,7 +8,8 @@ public class Statue : MonoBehaviour
     {
         Subwoofer = 0,
         Belldeer = 1,
-        Orcastra = 2
+        Orcastra = 2,
+        Chad = 3
     }
     [SerializeField] private Statues statue = Statues.Subwoofer;
     [SerializeField] private AudioClip[] ac = new AudioClip[3];
@@ -51,6 +52,9 @@ public class Statue : MonoBehaviour
             else if (statue == Statues.Orcastra){
                 pedestal = GameObject.FindGameObjectsWithTag("OrcastraPedestal")[0];
             }
+            else if (statue == Statues.Chad){
+                pedestal = GameObject.FindGameObjectsWithTag("ChadPedestal")[0];
+            }
             else
             {
                 Debug.LogError("Enum Error");
@@ -72,6 +76,8 @@ public class Statue : MonoBehaviour
             itemCount = counter.ForestCount();
         } else if (statue == Statues.Orcastra){
             itemCount = counter.CavernCount();
+        } else if (statue == Statues.Chad){
+            itemCount = counter.HubCount();
         } else {
             Debug.LogError("Enum Error");
         }
