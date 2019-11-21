@@ -9,6 +9,7 @@ public class Bouncy : MonoBehaviour
     private Transform player;
     private RaycastHit hit;
     [SerializeField] private float bounceDetectionDistance = 3f;
+    [SerializeField] private AudioClip bounceAudio;
 
     void Start(){
         player = GameObject.Find("Player").transform;
@@ -18,6 +19,7 @@ public class Bouncy : MonoBehaviour
         if(Physics.Raycast(player.position, Vector3.down, out hit, bounceDetectionDistance)){
             if(hit.collider.gameObject == this.gameObject){
                 player.gameObject.GetComponent<PlayerMovement>().yVelocity = bounceFactor;
+                player.Find("LandAudio").GetComponent<AudioSource>().PlayOneShot(bounceAudio);
             }
         }
     }
