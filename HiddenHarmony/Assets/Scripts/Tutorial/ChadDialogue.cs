@@ -12,7 +12,7 @@ public class ChadDialogue : MonoBehaviour
     [SerializeField] private GameObject highlightUI;
     [SerializeField] private GameObject composePrompt;
 
-    private void Start()
+    private void Awake()
     {
         player = GameObject.Find("Player").transform;
     }
