@@ -24,6 +24,7 @@ public class StageTutorial : MonoBehaviour
     private DeadStageController dsc;
     private Count counter;
 
+    private GameObject stageFinder;
     private GameObject firstStage;
     private GameObject secondStage;
     private Transform[] stages = new Transform[9];
@@ -39,6 +40,10 @@ public class StageTutorial : MonoBehaviour
         cmt = GameObject.Find("GameplayObjects/CameraChange").GetComponent<ComposeModeTransition>();
         dsc = GameObject.Find("GameplayObjects/Canvas/Controllers/DeadStageController").GetComponent<DeadStageController>();
         counter = GameObject.Find("GameplayObjects/Count").GetComponent<Count>();
+
+        stageFinder = GameObject.Find("HubStages/StageFinder");
+        stageFinder.SetActive(false);
+
         for(int n = 0; n < stagesParent.transform.childCount; n++)
         {
             stages[n] = stagesParent.transform.GetChild(n);
@@ -72,6 +77,9 @@ public class StageTutorial : MonoBehaviour
 
                         slice2.SetActive(false); // ClickFirstStage
                         slice3.SetActive(true); // AddFirstSound
+
+                        stageFinder.SetActive(true); // Make a visible circle around the first stage
+                        stageFinder.transform.position = new Vector3(firstStage.transform.position.x, firstStage.transform.position.y+0.5f, firstStage.transform.position.z);
                     }
                 }
                 break;
@@ -80,7 +88,11 @@ public class StageTutorial : MonoBehaviour
                 {
                     print("entering state 3");
                     state = 3;
+
                     dsc.AddActivatable(1); // Let player activate another stage
+
+                    stageFinder.SetActive(false);
+
                     slice3.SetActive(false); // AddFirstSound
                     slice4.SetActive(true); // ClickSecondStage
                 }
@@ -92,7 +104,12 @@ public class StageTutorial : MonoBehaviour
                     {
                         print("entering state 4");
                         state = 4;
+
                         secondStage = s.gameObject;
+
+                        stageFinder.SetActive(true);
+                        stageFinder.transform.position = new Vector3(secondStage.transform.position.x, secondStage.transform.position.y+0.5f, secondStage.transform.position.z);
+
                         slice4.SetActive(false); // ClickSecondStage
                         slice5.SetActive(true); // MoveObject
                     }
@@ -103,6 +120,9 @@ public class StageTutorial : MonoBehaviour
                 {
                     print("entering state 5");
                     state = 5;
+
+                    stageFinder.SetActive(false);
+
                     slice5.SetActive(false); // MoveObject
                     slice6.SetActive(true); // AddSecondSound
                 }
