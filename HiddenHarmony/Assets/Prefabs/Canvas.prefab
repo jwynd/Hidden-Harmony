@@ -828,6 +828,7 @@ GameObject:
   - component: {fileID: 4216253019407107910}
   - component: {fileID: 8033568816040799377}
   - component: {fileID: 7348356041137170156}
+  - component: {fileID: 6035251337299996}
   m_Layer: 5
   m_Name: Stage Fog
   m_TagString: Untagged
@@ -891,6 +892,85 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &6035251337299996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042067668784683168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f9f1d17d4a0ae4baec30f90ff0bd9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  xCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49926758
+      value: 1.0021477
+      inSlope: 2.5398514
+      outSlope: 2.5398514
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.078273326
+    - serializedVersion: 3
+      time: 0.99999994
+      value: 0.99999994
+      inSlope: 1.2735628
+      outSlope: 1.2735628
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15060884
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49926758
+      value: 1.0021477
+      inSlope: 2.5398514
+      outSlope: 2.5398514
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.078273326
+    - serializedVersion: 3
+      time: 0.99999994
+      value: 0.99999994
+      inSlope: 1.2735628
+      outSlope: 1.2735628
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15060884
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1109901874814824650
 GameObject:
   m_ObjectHideFlags: 0
@@ -6144,6 +6224,7 @@ GameObject:
   - component: {fileID: 5957347145750528193}
   - component: {fileID: 985709386233550506}
   - component: {fileID: 7880933934919927050}
+  - component: {fileID: 470120800630725573}
   m_Layer: 5
   m_Name: Stage Fog (1)
   m_TagString: Untagged
@@ -6207,6 +6288,85 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &470120800630725573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5870111302762155213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f9f1d17d4a0ae4baec30f90ff0bd9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  xCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49926758
+      value: 1.0021477
+      inSlope: 2.5398514
+      outSlope: 2.5398514
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.078273326
+    - serializedVersion: 3
+      time: 0.99999994
+      value: 0.99999994
+      inSlope: 1.2735628
+      outSlope: 1.2735628
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15060884
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49926758
+      value: 1.0021477
+      inSlope: 2.5398514
+      outSlope: 2.5398514
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.078273326
+    - serializedVersion: 3
+      time: 0.99999994
+      value: 0.99999994
+      inSlope: 1.2735628
+      outSlope: 1.2735628
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15060884
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6083551863797211601
 GameObject:
   m_ObjectHideFlags: 0
@@ -6218,6 +6378,7 @@ GameObject:
   - component: {fileID: 763395316846338917}
   - component: {fileID: 5184415788524969335}
   - component: {fileID: 5213080639233838813}
+  - component: {fileID: 3751295399164517183}
   m_Layer: 5
   m_Name: Stage Fog (1)
   m_TagString: Untagged
@@ -6281,6 +6442,85 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &3751295399164517183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6083551863797211601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f9f1d17d4a0ae4baec30f90ff0bd9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  xCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49926758
+      value: 1.0021477
+      inSlope: 2.5398514
+      outSlope: 2.5398514
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.078273326
+    - serializedVersion: 3
+      time: 0.99999994
+      value: 0.99999994
+      inSlope: 1.2735628
+      outSlope: 1.2735628
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15060884
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49926758
+      value: 1.0021477
+      inSlope: 2.5398514
+      outSlope: 2.5398514
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.078273326
+    - serializedVersion: 3
+      time: 0.99999994
+      value: 0.99999994
+      inSlope: 1.2735628
+      outSlope: 1.2735628
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15060884
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6134945537619658287
 GameObject:
   m_ObjectHideFlags: 0
@@ -7511,6 +7751,7 @@ GameObject:
   - component: {fileID: 7325564369741797184}
   - component: {fileID: 5044319563867842266}
   - component: {fileID: 8208833298777863886}
+  - component: {fileID: 951347873536696005}
   m_Layer: 5
   m_Name: Stage Fog
   m_TagString: Untagged
@@ -7574,6 +7815,85 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &951347873536696005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6921598738934534368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f9f1d17d4a0ae4baec30f90ff0bd9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  xCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49926758
+      value: 1.0021477
+      inSlope: 2.5398514
+      outSlope: 2.5398514
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.078273326
+    - serializedVersion: 3
+      time: 0.99999994
+      value: 0.99999994
+      inSlope: 1.2735628
+      outSlope: 1.2735628
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15060884
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49926758
+      value: 1.0021477
+      inSlope: 2.5398514
+      outSlope: 2.5398514
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.078273326
+    - serializedVersion: 3
+      time: 0.99999994
+      value: 0.99999994
+      inSlope: 1.2735628
+      outSlope: 1.2735628
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15060884
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7095889625112204018
 GameObject:
   m_ObjectHideFlags: 0
