@@ -11,7 +11,7 @@ public class Bouncy : MonoBehaviour
     [SerializeField] private float bounceDetectionDistance = 3f;
     [SerializeField] private AudioClip bounceAudio;
 
-    void Start(){
+    void Awake(){
         player = GameObject.Find("Player").transform;
     }
 
