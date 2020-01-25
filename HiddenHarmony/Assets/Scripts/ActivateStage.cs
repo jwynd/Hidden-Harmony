@@ -5,10 +5,13 @@ using UnityEngine;
 public class ActivateStage : MonoBehaviour
 {
     [Tooltip("Put the stage that should be activated when this is clicked on")]
-    [SerializeField] private GameObject stage;
+    public GameObject activatedStage;
+    [Tooltip("The dead stage that should be destroyed, this game object will be destroyed automatically")]
+    public GameObject deadStage;
 
-    public int Activate(){
-        stage.SetActive(true);
-        return stage.transform.GetSiblingIndex();
+    public void Activate(){
+        activatedStage.SetActive(true);
+        Destroy(deadStage);
+        Destroy(this.transform.parent.gameObject);
     }
 }

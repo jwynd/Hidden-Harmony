@@ -30,8 +30,7 @@ public class DeadStageController : MonoBehaviour
         if(Physics.Raycast(mouseRay, out hit) && unlockableCount > 0 && Input.GetMouseButtonDown(0)){
             foreach(Transform child in deadStages.GetChild(1)){
                 if(GameObject.ReferenceEquals(hit.transform.parent.gameObject, child.gameObject)){
-                    removeDeadStage(hit.transform.gameObject.GetComponent<ActivateStage>().Activate());
-                    //removeDeadStage(hit.transform.GetSiblingIndex());
+                    hit.transform.gameObject.GetComponent<ActivateStage>().Activate();
                     StageActivated();
                 }
             }
@@ -59,11 +58,14 @@ public class DeadStageController : MonoBehaviour
         }
     }
 
-    private void removeDeadStage(int i){
+/*    private void removeDeadStage(int i){
         // remove the stage at index i
+        Debug.Log(i);
+        Debug.Log(deadStages.GetChild(0).GetChild(i).gameObject);
+        Debug.Log(deadStages.GetChild(1).GetChild(i).gameObject);
         Destroy(deadStages.GetChild(0).GetChild(i).gameObject);
         Destroy(deadStages.GetChild(1).GetChild(i).gameObject);
-    }
+    }*/
 
     public void AddActivatable(int i){
         unlockableCount += i;
