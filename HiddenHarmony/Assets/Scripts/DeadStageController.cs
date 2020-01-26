@@ -19,7 +19,10 @@ public class DeadStageController : MonoBehaviour
     private RaycastHit hit;
     private Ray mouseRay;
 
+    private ComposeModeTransition cmt;
+
     void Start(){
+        cmt = GameObject.Find("GameplayObjects/CameraChange").GetComponent<ComposeModeTransition>();
         deadStages.GetChild(0).gameObject.SetActive(true);
         deadStages.GetChild(1).gameObject.SetActive(false);
     }
@@ -29,7 +32,7 @@ public class DeadStageController : MonoBehaviour
         mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(mouseRay, out hit) && unlockableCount > 0 && Input.GetMouseButtonDown(0)){
             foreach(Transform child in deadStages.GetChild(1)){
-                if(GameObject.ReferenceEquals(hit.transform.parent.gameObject, child.gameObject)){
+                if(GameObject.ReferenceEquals(hit.transform.parent.gameObject, child.gameObject) && cmt.Compose()){
                     hit.transform.gameObject.GetComponent<ActivateStage>().Activate();
                     StageActivated();
                 }
