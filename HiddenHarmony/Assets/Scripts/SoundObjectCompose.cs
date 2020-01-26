@@ -51,6 +51,8 @@ public class SoundObjectCompose : MonoBehaviour {
     private Stage stg;
     private GameObject stage;
 
+    private ComposeModeTransition composeModeTransition;
+
     // Start is called before the first frame update
     void Start(){
         hPanelAccess = GameObject.Find("Canvas/CTabs/HTabs/HItemsHeld");
@@ -73,12 +75,16 @@ public class SoundObjectCompose : MonoBehaviour {
         bdTab = GameObject.Find("Canvas/CTabs/BDTabs/BDTab");
         controller = GameObject.Find("Canvas/Controllers/ComposeObjectController");
 
+        composeModeTransition = GameObject.Find("GameplayObjects/CameraChange").GetComponent<ComposeModeTransition>();
     }
 
 // Update is called once per frame
 void Update(){
-        checkSoundObj();
-        startDragging();
+        if (composeModeTransition.Compose())
+        {
+            checkSoundObj();
+            startDragging();
+        }
     }
 
  
@@ -110,8 +116,11 @@ void Update(){
                 itemFrame.GetComponent<Drag>().OnBeginDrag(new PointerEventData(es));
                 itemFrame.GetComponent<Button>().onClick.Invoke();
                 currentObj.GetComponent<SoundObject>().blankStage();
+                Debug.Log("StageBlanked");
                 currentObj.GetComponent<SoundObject>().SnapReturn();
+                Debug.Log("SnapReturned");
                 currentObj.GetComponent<SoundObject>().blankCrystals();
+                Debug.Log("CrystalsBlanked");
                 Destroy(currentObj);
                 isDragging = true;
                 break;

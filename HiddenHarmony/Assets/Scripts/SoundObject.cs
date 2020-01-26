@@ -263,6 +263,12 @@ public class SoundObject : MonoBehaviour
     }
 
     public void SnapReturn(){
+        if (snapPoint == null)
+        {
+            snapPoint = GameObject.Find("SnapPoint");
+            snapPoint.transform.position = this.transform.position;
+        }
+
         if(SnapCheckController.check){
             snapPoint.transform.SetParent(stage.transform);
             snapPoint.transform.SetAsFirstSibling();
