@@ -172,6 +172,7 @@ public class SoundObject : MonoBehaviour
         if(Physics.Raycast(stageRay, out hit, interactDist)){
             if(hit.transform.tag == "StageObj"){
                 stg = hit.transform.gameObject.GetComponent<Stage>();
+                stg.SoundObject = this.gameObject;
                 crystals = stg.crystals;
                 crystalScales = stg.crystalScales;
                 onStage = true;
@@ -279,6 +280,16 @@ public class SoundObject : MonoBehaviour
         for(int i = 0; i < crystals.Length; i++){
             crystals[i].transform.localScale = crystalScales[i];
         }
+    }
+
+    public GameObject getSnapPoint()
+    {
+        return snapPoint;
+    }
+
+    public void setSnapPoint(GameObject s)
+    {
+        snapPoint = s;
     }
 
 }

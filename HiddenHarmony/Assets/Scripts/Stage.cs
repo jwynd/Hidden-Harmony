@@ -6,6 +6,7 @@ public class Stage : MonoBehaviour
 {
     public int[] halfBeats;
     public int[] pitches;
+    [HideInInspector] public GameObject SoundObject = null;
     [SerializeField][Tooltip("Places an offset on when the crystal lights up. Must be between 0 and the number of notes - 1")]
     private int crystalOffset;
     [HideInInspector] public GameObject[] crystals;

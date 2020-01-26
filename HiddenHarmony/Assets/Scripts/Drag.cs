@@ -18,17 +18,19 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private Transform errorSprite;
     private Transform indicator;
 
+    private GameObject snapPoint = null;
+
     // Start is called before the first frame update
     void Start(){
-    origin = transform.Find("ItemSprite").localPosition;
-    dragObjSound = GameObject.Find("SoundObjSFX/PlaceSound").GetComponent<AudioSource>();
-    hItems = GameObject.Find("Canvas/CTabs/HTabs/HItemsHeld");
-    sItems = GameObject.Find("Canvas/CTabs/STabs/SItemsHeld");
-    bdItems = GameObject.Find("Canvas/CTabs/BDTabs/BDItemsHeld");
-    oItems = GameObject.Find("Canvas/CTabs/OTabs/OItemsHeld");
+        origin = transform.Find("ItemSprite").localPosition;
+        dragObjSound = GameObject.Find("SoundObjSFX/PlaceSound").GetComponent<AudioSource>();
+        hItems = GameObject.Find("Canvas/CTabs/HTabs/HItemsHeld");
+        sItems = GameObject.Find("Canvas/CTabs/STabs/SItemsHeld");
+        bdItems = GameObject.Find("Canvas/CTabs/BDTabs/BDItemsHeld");
+        oItems = GameObject.Find("Canvas/CTabs/OTabs/OItemsHeld");
     
     
-    controller = GameObject.Find("Canvas/Controllers/ComposeObjectController");
+        controller = GameObject.Find("Canvas/Controllers/ComposeObjectController");
     }
 
 
@@ -46,11 +48,10 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     }
 
     public void OnDrag(PointerEventData evenData){
-        
-        
+
         errorSprite.position = Input.mousePosition;
         draggedItem.position = Input.mousePosition;
-        canPlace = controller.GetComponent<SoundObjectCompose>().checkError();
+        canPlace = controller.GetComponent<SoundObjectCompose>().checkError(out snapPoint);
         if(canPlace == true && errorSprite.gameObject.activeSelf==true)
         {
             errorSprite.gameObject.SetActive(false);
@@ -74,21 +75,21 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
         if (hItems.activeSelf == true)
         {
-            controller.GetComponent<SoundObjectCompose>().checkStage();
+            controller.GetComponent<SoundObjectCompose>().checkStage(snapPoint);
         }
        
         if(sItems.activeSelf == true)
         {
-            controller.GetComponent<SoundObjectCompose>().checkStage();
+            controller.GetComponent<SoundObjectCompose>().checkStage(snapPoint);
         }
         
         if(bdItems.activeSelf == true)
         {
-            controller.GetComponent<SoundObjectCompose>().checkStage();
+            controller.GetComponent<SoundObjectCompose>().checkStage(snapPoint);
         }
         if(oItems.activeSelf == true)
         {
-            controller.GetComponent<SoundObjectCompose>().checkStage();
+            controller.GetComponent<SoundObjectCompose>().checkStage(snapPoint);
         }
     }
 
