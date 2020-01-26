@@ -19,7 +19,7 @@ public class Bouncy : MonoBehaviour
         if(Physics.Raycast(player.position, Vector3.down, out hit, bounceDetectionDistance)){
             if(hit.collider.gameObject == this.gameObject){
                 player.gameObject.GetComponent<PlayerMovement>().yVelocity = bounceFactor;
-                player.Find("LandAudio").GetComponent<AudioSource>().PlayOneShot(bounceAudio);
+                player.Find("Audio/LandAudio").GetComponent<AudioSource>().PlayOneShot(bounceAudio);
             }
         }
     }
