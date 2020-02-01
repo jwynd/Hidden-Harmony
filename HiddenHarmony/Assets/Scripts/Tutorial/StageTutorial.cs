@@ -62,6 +62,8 @@ public class StageTutorial : MonoBehaviour
                     state = 1;
                     slice1.SetActive(false); // PressTab
                     slice2.SetActive(true); // ClickFirstStage
+
+                    cmt.setTransition(false);
                 }
                 break;
             case 1:
@@ -143,6 +145,8 @@ public class StageTutorial : MonoBehaviour
                     state = 7;
                     slice7.SetActive(false); // AddThirdSound
                     slice8.SetActive(true); // SpeakToChad
+
+                    cmt.setTransition(true);
                 }
                 break;
             case 7:
