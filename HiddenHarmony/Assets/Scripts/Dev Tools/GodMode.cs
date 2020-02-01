@@ -6,11 +6,13 @@ public class GodMode : MonoBehaviour
 {
     private GameObject player;
     private bool active; // whether God Mode is currently active or not
+    private GameObject indicator;
 
     // Start is called before the first frame update
     void Start()
     {
         active = false;
+        indicator = GameObject.Find("GameplayObjects/Canvas/GodModeIndicator");
     }
 
     private void Awake()
@@ -30,6 +32,16 @@ public class GodMode : MonoBehaviour
         if(active)
         {
             // Enable God mode things!
+            if(indicator.active == false)
+            {
+                indicator.SetActive(true);
+            }
+        } else
+        {
+            if (indicator.active)
+            {
+                indicator.SetActive(false);
+            }
         }
     }
 }
