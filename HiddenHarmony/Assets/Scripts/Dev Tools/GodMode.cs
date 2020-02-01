@@ -36,6 +36,20 @@ public class GodMode : MonoBehaviour
             {
                 indicator.SetActive(true);
             }
+
+            if(Input.GetKeyDown(KeyCode.F1))
+            {
+                player.transform.position = GameObject.Find("PlayerSpawnTutorial").transform.position;
+            } else if(Input.GetKeyDown(KeyCode.F2))
+            {
+                player.transform.position = GameObject.Find("PlayerSpawnHub").transform.position;
+            } else if(Input.GetKeyDown(KeyCode.F3))
+            {
+                player.transform.position = GameObject.Find("PlayerSpawnForest").transform.position;
+            } else if(Input.GetKeyDown(KeyCode.F4))
+            {
+                player.transform.position = GameObject.Find("PlayerSpawnDen").transform.position;
+            }
         } else
         {
             if (indicator.active)
