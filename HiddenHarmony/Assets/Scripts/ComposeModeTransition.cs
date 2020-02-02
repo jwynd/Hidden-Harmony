@@ -8,6 +8,10 @@ public class ComposeModeTransition : MonoBehaviour
     [SerializeField] private Transform composeCameraPosition;
     [SerializeField] private Transform cameraTarget;
     [SerializeField] private float transitionSpeed = 20.0f;
+    [SerializeField] private float orthoSize = 18f;
+    [SerializeField] private float orthoClipPlane = 2f;
+    [SerializeField] private float perspectiveFOV = 60f;
+    [SerializeField] private float perspectiveClipPlane = 0.3f;
     private Vector3 cameraOrigin;
     private Vector3 playerOrigin;
     private GameObject interactMessage;
@@ -77,6 +81,10 @@ public class ComposeModeTransition : MonoBehaviour
             }
             if(!compose && !transitioning){
                 //print("Transitioning to compose");
+                playerCamera.GetComponent<Camera>().orthographic = true;
+                playerCamera.GetComponent<Camera>().orthographicSize = orthoSize;
+                playerCamera.GetComponent<Camera>().nearClipPlane = orthoClipPlane;
+
                 player.GetComponent<CharacterController>().enabled = false;
                 player.GetComponent<PlayerMovement>().enabled = false;
                 player.GetComponent<FirstPersonControl>().enabled = false;
@@ -100,6 +108,10 @@ public class ComposeModeTransition : MonoBehaviour
                 //composeCamera.SetActive(true);
             } else if (compose && !transitioning){
                 //print("Transitioning to First person");
+                playerCamera.GetComponent<Camera>().orthographic = false;
+                playerCamera.GetComponent<Camera>().fieldOfView = perspectiveFOV;
+                playerCamera.GetComponent<Camera>().nearClipPlane = perspectiveClipPlane;
+
                 player.GetComponent<CharacterController>().enabled = true;
                 player.GetComponent<PlayerMovement>().enabled = true;
                 player.GetComponent<FirstPersonControl>().enabled = true;
