@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
     public float glideGravity = 3f; //the rate at which the player falls while gliding (calculated much differently than the standard gravity)
     //glideGravity suggested value 3f
     [SerializeField][Tooltip("The speed added to the players movement while gliding")]
-    private float glideBoost = 4f; //the value added to speed during gliding
+    public float glideBoost = 4f; //the value added to speed during gliding
     //glideBoost suggested value 4f
     [SerializeField][Tooltip("(0-100) The volume at which the glide music plays")]
     private float glideMusicVolume = 0.5f; //value divided by 100 in code - the max volume at which the glide music will play
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour {
     private float sprintMusicChange = 0.002f; //the rate at which music volume changes during glide
     [Header("Sprint")]
     [SerializeField][Tooltip("Speed added when sprinting")]
-    private float sprintBoost = 4f;
+    public float sprintBoost = 4f;
     [Header("Field of View")]
     [SerializeField][Tooltip("The original angle for the camera's field of vision")]
     private float baseFOV = 60f; //the original field of vision angle for the player
