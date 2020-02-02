@@ -30,6 +30,7 @@ public class PauseMenu : MonoBehaviour
     private GameObject reticle;
     private AudioSource cmtAudio;
     private ComposeModeTransition cmt;
+    private GameObject tutorialSprites;
 
     void Awake(){
         player = GameObject.Find("Player");
@@ -41,6 +42,7 @@ public class PauseMenu : MonoBehaviour
         sInventory = GameObject.Find("Canvas/CTabs/STabs/SItemsHeld");
         bdInventory = GameObject.Find("Canvas/CTabs/BDTabs/BDItemsHeld");
         oInventory = GameObject.Find("Canvas/CTabs/OTabs/OItemsHeld");
+        tutorialSprites = GameObject.Find("Canvas/TutorialSprites");
 
         hTab = GameObject.Find("Canvas/CTabs/HTabs/HTab");
         sTab = GameObject.Find("Canvas/CTabs/STabs/STab");
@@ -102,6 +104,7 @@ public class PauseMenu : MonoBehaviour
         bdInventory.SetActive(false);
         oInventory.SetActive(false);
         reticle.SetActive(false);
+        tutorialSprites.SetActive(false);
     }
 
     public void DeactivateMenu(){
@@ -168,6 +171,7 @@ public class PauseMenu : MonoBehaviour
         bdTab.SetActive(true);
         sTab.SetActive(true);
         oTab.SetActive(true);
+        tutorialSprites.SetActive(true);
     }
 
     public void Resume(){
