@@ -25,6 +25,7 @@ public class StageTutorial : MonoBehaviour
     private Count counter;
 
     private GameObject stageFinder;
+    private GameObject stageFog;
     private GameObject firstStage;
     private GameObject secondStage;
     private Transform[] stages = new Transform[9];
@@ -43,6 +44,9 @@ public class StageTutorial : MonoBehaviour
 
         stageFinder = GameObject.Find("HubStages/StageFinder");
         stageFinder.SetActive(false);
+
+        stageFog = GameObject.Find("HubStages/StageFog");
+        stageFog.SetActive(false);
 
         for(int n = 0; n < stagesParent.transform.childCount; n++)
         {
@@ -63,6 +67,8 @@ public class StageTutorial : MonoBehaviour
                     slice1.SetActive(false); // PressTab
                     slice2.SetActive(true); // ClickFirstStage
 
+                    stageFog.SetActive(true);
+
                     cmt.setTransition(false);
                 }
                 break;
@@ -79,6 +85,8 @@ public class StageTutorial : MonoBehaviour
 
                         slice2.SetActive(false); // ClickFirstStage
                         slice3.SetActive(true); // AddFirstSound
+
+                        stageFog.SetActive(false);
 
                         stageFinder.SetActive(true); // Make a visible circle around the first stage
                         stageFinder.transform.position = new Vector3(firstStage.transform.position.x, firstStage.transform.position.y+0.5f, firstStage.transform.position.z);
@@ -97,6 +105,8 @@ public class StageTutorial : MonoBehaviour
 
                     slice3.SetActive(false); // AddFirstSound
                     slice4.SetActive(true); // ClickSecondStage
+
+                    stageFog.SetActive(true);
                 }
                 break;
             case 3:
@@ -114,6 +124,8 @@ public class StageTutorial : MonoBehaviour
 
                         slice4.SetActive(false); // ClickSecondStage
                         slice5.SetActive(true); // MoveObject
+
+                        stageFog.SetActive(false);
                     }
                 }
                 break;
