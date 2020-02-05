@@ -10,19 +10,21 @@ public class GodMode : MonoBehaviour
      * Press alt+g to activate God mode
      * 
      * While in God Mode:
-     * - press period/> to increment glide/sprint speed
-     * - press comma/< to decrement glide/sprint speed
+     * - press period to increment glide/sprint speed
+     * - press comma to decrement glide/sprint speed
      * - press f1 to teleport to the tutorial cave
      * - press f2 to teleport to the Hub 
      * - press f3 to teleport to the Forest
      * - press f4 to teleport to the Den
-     * - press =/+ to add an activatable stage
+     * - press = to add an activatable stage
+     * - press ` to toggle canvas
      */  
     private GameObject player;
     private bool active; // whether God Mode is currently active or not
     private GameObject indicator;
     private DeadStageController dsc;
-    private ComposeModeTransition cmt; 
+    private ComposeModeTransition cmt;
+    private GameObject canvas;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,7 @@ public class GodMode : MonoBehaviour
         indicator = GameObject.Find("GameplayObjects/Canvas/GodModeIndicator");
         dsc = GameObject.Find("GameplayObjects/Canvas/Controllers/DeadStageController").GetComponent<DeadStageController>();
         cmt = GameObject.Find("GameplayObjects/CameraChange").GetComponent<ComposeModeTransition>();
+        canvas = GameObject.Find("GameplayObjects/Canvas");
     }
 
     private void Awake()
@@ -103,6 +106,11 @@ public class GodMode : MonoBehaviour
 
             }
 
+            // Toggle canvas
+            if(Input.GetKeyDown(KeyCode.BackQuote))
+            {
+                canvas.SetActive(!(canvas.activeInHierarchy));
+            }
         } else
         {
             if (indicator.activeInHierarchy)
@@ -114,6 +122,9 @@ public class GodMode : MonoBehaviour
             player.GetComponent<PlayerMovement>().glideGravity = 3f;
             player.GetComponent<PlayerMovement>().glideBoost = 4f;
             player.GetComponent<PlayerMovement>().sprintBoost = 4f;
+
+            // Enable canvas
+            canvas.SetActive(true);
         }
     }
 }
