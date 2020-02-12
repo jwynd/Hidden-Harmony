@@ -1,30 +1,33 @@
 fileFormatVersion: 2
-guid: b8dcda58af860694f9d0ac4999ad3a1e
+guid: 66fc0db7631745245ad30a2b982aa928
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: Petal_001__BlossomForestAssets2_png_006
-    2100002: Base_001__BlossomForestAssets2_png_006
-    2100004: Material_001
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: pokeyFlower
-    7400000: Default Take
-    9500000: //RootNode
-    2186277476908879412: ImportLogs
+    100000: Cylinder.000
+    100002: Cylinder.002
+    100004: //RootNode
+    400000: Cylinder.000
+    400002: Cylinder.002
+    400004: //RootNode
+    2100000: stem
+    2100002: Petal
+    2300000: Cylinder.000
+    2300002: Cylinder.002
+    3300000: Cylinder.000
+    3300002: Cylinder.002
+    4300000: Cylinder.000
+    4300002: Cylinder.002
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Base_001__BlossomForestAssets2_png_006
-    second: {fileID: 2100000, guid: 885a36836af8a904faf17e3f8fa258a2, type: 2}
+      name: Petal
+    second: {fileID: 2100000, guid: e68c6fbafe377ea4588ae6b70507982a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Petal_001__BlossomForestAssets2_png_006
-    second: {fileID: 2100000, guid: 885a36836af8a904faf17e3f8fa258a2, type: 2}
+      name: stem
+    second: {fileID: 2100000, guid: c7d1d7c727fd8704fa869b4a5cac2d33, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -77,7 +80,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -104,7 +107,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
