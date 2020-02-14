@@ -34,23 +34,23 @@ public class ChadAnimationCaller : MonoBehaviour
     // === PUBLIC METHODS === //
     #region PublicMethods
     // trigger Chad's idle "Horizontal Arm Wave" animation -- animation 0
-    public void Chad_IdleWave(double speed = 0.5)
+    public void Chad_IdleWave(float speed = 0.5f)
     {
-        thisAnim.SetFloat("spd0_idle", (float)speed);
+        thisAnim.SetFloat("spd0_idle", speed);
         thisAnim.SetTrigger("tgr0_idle");
     }
 
     // trigger Chad's idle "Looking Around" animation -- animation 5
-    public void Chad_IdleLook(double speed = 0.5)
+    public void Chad_IdleLook(float speed = 0.5f)
     {
-        thisAnim.SetFloat("spd5_idle", (float)speed);
+        thisAnim.SetFloat("spd5_idle", speed);
         thisAnim.SetTrigger("tgr5_idle");
     }
 
     // Chad will sit down, then remain in his idle sit (Animation 7 -> Animation 8)
-    public void Chad_SitDown(double speed = 1.0)
+    public void Chad_SitDown(float speed = 1.0f)
     {
-        thisAnim.SetFloat("spd8_sitting", (float)speed);
+        thisAnim.SetFloat("spd8_sitting", speed);
         thisAnim.SetTrigger("tgr7_sitDown");
     }
 
@@ -61,8 +61,8 @@ public class ChadAnimationCaller : MonoBehaviour
     }
 
     // Chad will excitedly wave his arms, then go back to idle (Animation 2 -> 5)
-    public void Chad_ExcitedWave(double speed = 1.0){
-        thisAnim.SetFloat("spd2_emote", (float)speed);
+    public void Chad_ExcitedWave(float speed = 1.0f){
+        thisAnim.SetFloat("spd2_emote", speed);
         thisAnim.SetTrigger("tgr2_wave");
     }
     #endregion
