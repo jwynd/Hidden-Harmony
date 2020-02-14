@@ -21,7 +21,7 @@ public class MouseOver : MonoBehaviour
 
     public void OnMouseOver()
     {
-        print("working");
+        // print("working");
         //enlargedSprite = transform.Find("EnlargedSprite");
         //itemFrame = this.gameObject;
         enlargedSprite = this.gameObject;

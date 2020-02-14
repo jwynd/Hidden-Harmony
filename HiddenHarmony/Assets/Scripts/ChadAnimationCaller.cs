@@ -4,22 +4,35 @@ using UnityEngine;
 
 public class ChadAnimationCaller : MonoBehaviour
 {
+    public static ChadAnimationCaller Instance; // singleton construction
     private Animator thisAnim;
 
+    void Awake()
+    {
+        // this region must remain at the top of Awake
+        #region SingletonConstruction
+        if(Instance != null && Instance != this){
+            Debug.LogError("Attempting to create two instances of Singleton design pattern: ChadAnimationController");
+            Destroy(this);
+        }
+        Instance = this;
+        #endregion
+    }
     // Start is called before the first frame update
     void Start()
     {
         thisAnim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    // Uncommment if needed
+    // void Update()
+    // {
         
         
-    }
+    // }
 
     // === PUBLIC METHODS === //
+    #region PublicMethods
     // trigger Chad's idle "Horizontal Arm Wave" animation -- animation 0
     public void Chad_IdleWave(double speed = 0.5)
     {
@@ -52,6 +65,6 @@ public class ChadAnimationCaller : MonoBehaviour
         thisAnim.SetFloat("spd2_emote", (float)speed);
         thisAnim.SetTrigger("tgr2_wave");
     }
-
+    #endregion
     
 }
