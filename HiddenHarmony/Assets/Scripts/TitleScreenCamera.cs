@@ -41,7 +41,7 @@ public class TitleScreenCamera : MonoBehaviour
             gameObject.transform.LookAt(cameraTarget.position);
 
             timer = timerSpeed;
-            currentPerspective = (currentPerspective + 1) % (perspectives.Count - 1);
+            currentPerspective = (currentPerspective + 1) % perspectives.Count;
         } else
         {
             // tick down timer
