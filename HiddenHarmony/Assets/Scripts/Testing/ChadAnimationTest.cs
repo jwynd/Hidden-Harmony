@@ -43,5 +43,27 @@ public class ChadAnimationTest : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2)){
             chadAnim.Chad_ExcitedWave();
         }
+
+        // NEW
+
+        // if "3" is pressed, tips Mushroom
+        if(Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3)){
+            chadAnim.Chad_HatTip();
+        }
+
+        // if "1" is pressed
+        if(Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1)){
+            chadAnim.Chad_SadHeadShake();
+        }
+
+        // if "4" is pressed
+        if(Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.Alpha4)){
+            chadAnim.Chad_Bow();
+        }
+
+        // if "6" is pressed
+        if(Input.GetKeyDown(KeyCode.Keypad6) || Input.GetKeyDown(KeyCode.Alpha6)){
+            chadAnim.Chad_IdleFloat();
+        }
     }
 }
