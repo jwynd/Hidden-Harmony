@@ -45,7 +45,7 @@ public class ChadAnimationTest : MonoBehaviour
         }
 
         // NEW
-
+/*
         // if "3" is pressed, tips Mushroom
         if(Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3)){
             chadAnim.Chad_HatTip();
@@ -65,5 +65,6 @@ public class ChadAnimationTest : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Keypad6) || Input.GetKeyDown(KeyCode.Alpha6)){
             chadAnim.Chad_IdleFloat();
         }
+        */
     }
 }

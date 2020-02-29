@@ -10,14 +10,23 @@
     SubShader
     {
         // transparency
-        Tags{"RenderType" = "Transparent" "Queue"="Transparent"}
-        Blend SrcAlpha OneMinusSrcAlpha
-        ZWrite Off
-        // double-sided
-        //Cull off
+        // * trying the transparent cutout queue with alpha-to-coverage command
+        // * uses techniques like transparent cutout but with some blending to help
+        // * reduce aliasing
+        // * might need to adjust Quality settings for this
+        // Tags{"RenderType" = "TransparentCutout" "Queue"="AlphaTest" "IgnoreProjector"="True"}
+        // AlphaToMask On
+
+        Tags{"RenderType"="TransparentCutout" "Queue"="Transparent"}
+        Blend SrcAlpha OneMinusSrcAlpha // used for standard transparency
+        //Blend SrcAlpha One
+        // ZWrite Off // used for standard transparency
+        // basic double-sided --> should really probably use two passes
+        Cull off
 
         CGPROGRAM
-        #pragma surface surf Toon
+        // FUCK DUDE LITERALLY JUST PUTTING THE GODDAMN ALPHA THERE FIXED THINGS HUH.
+        #pragma surface surf Toon alpha
         struct Input {
             float2 uv_MainTex;
         };
@@ -33,6 +42,7 @@
             o.Alpha = c.a;
         }
 
+        // toon lighting
         sampler2D _RampTex;
         fixed4 LightingToon(SurfaceOutput s, fixed3 lightDir, fixed atten) {
             // toon lighting via texture ramp
