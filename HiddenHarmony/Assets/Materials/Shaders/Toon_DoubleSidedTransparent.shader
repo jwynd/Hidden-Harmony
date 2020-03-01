@@ -6,26 +6,21 @@
         _RampTex("Ramp", 2D) = "white" {}
         _Color("Color", Color) = (1,1,1,0)
         _ShadowTint("Shadow Tint", Color) = (0,0,0,0)
+        _Cutoff("Cutoff", Float) = 0.5
     }
     SubShader
     {
-        // transparency
-        // * trying the transparent cutout queue with alpha-to-coverage command
-        // * uses techniques like transparent cutout but with some blending to help
-        // * reduce aliasing
-        // * might need to adjust Quality settings for this
-        // Tags{"RenderType" = "TransparentCutout" "Queue"="AlphaTest" "IgnoreProjector"="True"}
-        // AlphaToMask On
-
+        // put in the transparent queue or he die
         Tags{"RenderType"="TransparentCutout" "Queue"="Transparent"}
-        Blend SrcAlpha OneMinusSrcAlpha // used for standard transparency
-        //Blend SrcAlpha One
-        // ZWrite Off // used for standard transparency
-        // basic double-sided --> should really probably use two passes
-        Cull off
+
+        // Render Pixels with at least CUTOFF's opacity, set in editor
+        AlphaTest Greater [_Cutoff]
+        // Render both front and back faces
+        // Note: the undersides are not properly lit but like...we're not reversing
+        // the leaves so.  it's fine.
+        Cull Off
 
         CGPROGRAM
-        // FUCK DUDE LITERALLY JUST PUTTING THE GODDAMN ALPHA THERE FIXED THINGS HUH.
         #pragma surface surf Toon alpha
         struct Input {
             float2 uv_MainTex;
@@ -58,6 +53,7 @@
             return c;
         }
         ENDCG
+     
     }
     FallBack "Diffuse"
 }
