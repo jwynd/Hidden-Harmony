@@ -58,7 +58,7 @@
 
 			c.rgb = s.Albedo * _LightColor0.rgb * NdotL * atten;
 
-			c.rgb += _ShadowTint.rgb * max(0.0, (1.0 - (NdotL * atten)));
+			//c.rgb += _ShadowTint.rgb * max(0.0, (1.0 - (NdotL * atten)));
 
 			c.a = s.Alpha;
 
