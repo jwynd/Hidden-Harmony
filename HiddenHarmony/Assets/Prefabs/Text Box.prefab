@@ -101,6 +101,20 @@ MonoBehaviour:
   - '(Block 1)
 
     Enter Text Here:'
+  progressByClick: 1
+  playFunction: 0
+  playFunctionAtEnd: 0
+  functionAtIndex: 0
+  functionPlayed:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  functionPlayedAtEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &6686410125374781467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8235561487183821486}
   - component: {fileID: 8235561487183821487}
+  - component: {fileID: 8093495344317821775}
   m_Layer: 0
   m_Name: Next Text Indicator Sprite
   m_TagString: Untagged
@@ -231,7 +246,7 @@ Transform:
   m_GameObject: {fileID: 8235561487183821481}
   m_LocalRotation: {x: 9.3132246e-10, y: -0, z: 2.546585e-10, w: 1}
   m_LocalPosition: {x: -9.32, y: -1.37, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.13822, y: 0.07086954, z: 0.27644}
   m_Children: []
   m_Father: {fileID: 8235561486073240526}
   m_RootOrder: 1
@@ -273,10 +288,10 @@ SpriteRenderer:
   m_SortingLayerID: 1873701153
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 59a3d18d436cd4147adffda115af258b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d229a4af51dc4dca9f6ded81849f1fd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 2.81, y: 1.32}
   m_AdaptiveModeThreshold: 0.5
@@ -284,3 +299,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8093495344317821775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8235561487183821481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e992323d9b71394ab7c8df8bee43fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bobDegree: 0.1
+  bobSpeed: 5
+  randomizeSpeed: 0
+  speedRange: 0.5
+  randomizeSin: 0
+  sinOffsetRange: 1
+  startPositionCenter: 0
