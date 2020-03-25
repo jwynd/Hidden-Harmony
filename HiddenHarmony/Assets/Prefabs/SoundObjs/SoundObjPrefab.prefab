@@ -9494,6 +9494,7 @@ GameObject:
   - component: {fileID: 7939041500233886793}
   - component: {fileID: 7939041500233886792}
   - component: {fileID: 7939041500233886795}
+  - component: {fileID: 6454228443771031274}
   - component: {fileID: 7939041500233886794}
   - component: {fileID: 6905687563815180575}
   - component: {fileID: 312337755839761411}
@@ -9549,6 +9550,9 @@ MonoBehaviour:
   yRotation: 0
   zRotation: 0
   emissionColor: {r: 0.9898261, g: 1, b: 0.7688679, a: 0}
+  crystalScale: 1.2
+  scaleSpeed: 3
+  toDestroyOnPickup: {fileID: 0}
   onStage: 0
   origin: {x: 0, y: 0, z: 0}
 --- !u!135 &7939041500233886795
@@ -9564,6 +9568,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1818360609 &6454228443771031274
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7939041500233886807}
+  m_Enabled: 1
+  m_Weight: 1
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 0
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 0
+  m_IsLocked: 0
+  m_Sources: []
 --- !u!82 &7939041500233886794
 AudioSource:
   m_ObjectHideFlags: 0
