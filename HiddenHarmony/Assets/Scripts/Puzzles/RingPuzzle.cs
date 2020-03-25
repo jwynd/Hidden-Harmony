@@ -84,6 +84,7 @@ public class RingPuzzle : MonoBehaviour
         {
             // you did it!
             reward.SetActive(true);
+            Stop();
         }
     }
 }
