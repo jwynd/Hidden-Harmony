@@ -42,4 +42,9 @@ public class Ring : MonoBehaviour
             activated = true;
         }
     }
+
+    public void Reset()
+    {
+        activated = false;
+    }
 }

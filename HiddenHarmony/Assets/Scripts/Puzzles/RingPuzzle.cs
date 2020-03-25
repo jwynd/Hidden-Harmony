@@ -53,6 +53,7 @@ public class RingPuzzle : MonoBehaviour
         for(int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(true);
+            transform.GetChild(i).gameObject.GetComponentInChildren<Ring>().Reset(); // Resets Ring's 'activated' attribute
         }
         activated = true;
     }
