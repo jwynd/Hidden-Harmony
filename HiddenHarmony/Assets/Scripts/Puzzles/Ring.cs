@@ -8,6 +8,7 @@ public class Ring : MonoBehaviour
 
     private ParticleSystem burst;
     private GameObject sprite;
+    private AudioSource sfx;
     private bool activated = false;
 
     // Start is called before the first frame update
@@ -15,6 +16,7 @@ public class Ring : MonoBehaviour
     {
         burst = gameObject.GetComponent<ParticleSystem>();
         sprite = transform.parent.Find("Sprite").gameObject;
+        sfx = transform.parent.Find("AudioSource").gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -39,6 +41,7 @@ public class Ring : MonoBehaviour
             controller.Collect(); // Send data to RingPuzzle.cs
             sprite.SetActive(false); // Disable sprite renderer
             burst.Play(); // Object will disable once particles are finished
+            sfx.Play();
             activated = true;
         }
     }
