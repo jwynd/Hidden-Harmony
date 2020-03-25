@@ -9,8 +9,11 @@ public class RingPuzzle : MonoBehaviour
 
     private bool activated = false;
     private int collected = 0;
-    private float timer;
     private int total;
+
+    private float timer;
+    private float lastTick; // The last timer value at which sfx played
+
     private AudioSource audio;
 
     // Start is called before the first frame update
@@ -27,11 +30,12 @@ public class RingPuzzle : MonoBehaviour
         if(activated)
         {
             // Play a ticking sound every second
-            if (Mathf.Approximately(timer, Mathf.RoundToInt(timer)))
+            if (timer < lastTick - 1f)
             {
                 // Timer is a whole number (integer)
                 // Play sound!
                 print("Ring Timer: " + timer);
+                lastTick = timer;
                 audio.Play();
             }
             // Count down timer. When it hits 0, reset puzzle
@@ -50,6 +54,7 @@ public class RingPuzzle : MonoBehaviour
         // Starts puzzle, enables Ring objects
         print("Ring Puzzle Initiated");
         timer = (float)timerDuration;
+        lastTick = timer;
         for(int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(true);
