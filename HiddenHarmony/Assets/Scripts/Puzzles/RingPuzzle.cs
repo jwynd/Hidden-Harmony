@@ -13,6 +13,7 @@ public class RingPuzzle : MonoBehaviour
 
     private float timer;
     private float lastTick; // The last timer value at which sfx played
+    private float tickRate; // How fast the sfx repeat
 
     private AudioSource audio;
 
@@ -29,8 +30,16 @@ public class RingPuzzle : MonoBehaviour
     {
         if(activated)
         {
-            // Play a ticking sound every second
-            if (timer < lastTick - 1f)
+            // Play a ticking sound at a rate depending on how close it is to the end
+            if(timer < 3)
+            {
+                tickRate = 0.25f;
+            } else
+            {
+                tickRate = 1f;
+            }
+
+            if (timer < lastTick - tickRate)
             {
                 // Timer is a whole number (integer)
                 // Play sound!
