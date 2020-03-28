@@ -1,0 +1,192 @@
+fileFormatVersion: 2
+guid: f43c909d38baf4af79d3c8f312b75902
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: JellyArm1
+    100002: JellyArm2
+    100004: JellyArm3
+    100006: JellyArm4
+    100008: JellyArm5
+    100010: JellyArm6
+    100012: JellyArm7
+    100014: JellyArm8
+    100016: //RootNode
+    100018: JellyTop
+    400000: JellyArm1
+    400002: JellyArm2
+    400004: JellyArm3
+    400006: JellyArm4
+    400008: JellyArm5
+    400010: JellyArm6
+    400012: JellyArm7
+    400014: JellyArm8
+    400016: //RootNode
+    400018: JellyTop
+    2100000: JellyArm1Mat
+    2100002: JellyArm2Mat
+    2100004: JellyArm3Mat
+    2100006: JellyArm4Mat
+    2100008: JellyArm5Mat
+    2100010: JellyArm6Mat
+    2100012: JellyArm7Mat
+    2100014: JellyArm8Mat
+    2100016: JellyTopMat
+    2300000: JellyArm1
+    2300002: JellyArm2
+    2300004: JellyArm3
+    2300006: JellyArm4
+    2300008: JellyArm5
+    2300010: JellyArm6
+    2300012: JellyArm7
+    2300014: JellyArm8
+    2300016: JellyTop
+    3300000: JellyArm1
+    3300002: JellyArm2
+    3300004: JellyArm3
+    3300006: JellyArm4
+    3300008: JellyArm5
+    3300010: JellyArm6
+    3300012: JellyArm7
+    3300014: JellyArm8
+    3300016: JellyTop
+    4300000: JellyArm1
+    4300002: JellyArm2
+    4300004: JellyArm3
+    4300006: JellyArm4
+    4300008: JellyArm5
+    4300010: JellyArm6
+    4300012: JellyArm7
+    4300014: JellyArm8
+    4300016: JellyTop
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: JellyArm1Mat
+    second: {fileID: 2100000, guid: 17c7b6cca53fa4300809ba2be58b5b20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: JellyArm2Mat
+    second: {fileID: 2100000, guid: 17c7b6cca53fa4300809ba2be58b5b20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: JellyArm3Mat
+    second: {fileID: 2100000, guid: 17c7b6cca53fa4300809ba2be58b5b20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: JellyArm4Mat
+    second: {fileID: 2100000, guid: 17c7b6cca53fa4300809ba2be58b5b20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: JellyArm5Mat
+    second: {fileID: 2100000, guid: 17c7b6cca53fa4300809ba2be58b5b20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: JellyArm6Mat
+    second: {fileID: 2100000, guid: 17c7b6cca53fa4300809ba2be58b5b20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: JellyArm7Mat
+    second: {fileID: 2100000, guid: 17c7b6cca53fa4300809ba2be58b5b20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: JellyArm8Mat
+    second: {fileID: 2100000, guid: 17c7b6cca53fa4300809ba2be58b5b20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: JellyTopMat
+    second: {fileID: 2100000, guid: 17c7b6cca53fa4300809ba2be58b5b20, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
