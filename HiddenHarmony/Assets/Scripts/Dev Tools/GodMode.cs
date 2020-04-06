@@ -44,12 +44,13 @@ public class GodMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #if UNITY_EDITOR
         if((Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt)) && Input.GetKeyDown(KeyCode.G))
         {  
             // Toggle God Mode
             active = !active;
         }
-
+        #endif
         if(active)
         {
             // Enable God mode things!
