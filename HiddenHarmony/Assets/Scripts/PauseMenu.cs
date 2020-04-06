@@ -92,7 +92,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     private void ActivateMenu(){
-        player.GetComponent<CharacterController>().enabled = false;
+        // player.GetComponent<CharacterController>().enabled = false;
         player.GetComponent<PlayerMovement>().enabled = false;
         player.GetComponent<FirstPersonControl>().enabled = false;
         player.GetComponent<InventoryAdd>().enabled = false;
@@ -116,7 +116,7 @@ public class PauseMenu : MonoBehaviour
 
     public void DeactivateMenu(){
         // print("DeactivateMenu");
-        player.GetComponent<CharacterController>().enabled = true;
+        // player.GetComponent<CharacterController>().enabled = true;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<FirstPersonControl>().enabled = true;
         player.GetComponent<InventoryAdd>().enabled = true;
