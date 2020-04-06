@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     // below is tutorial suggestion, replace if wrong
+    public static PauseMenu Instance;
+
     private string mainMenuScene;
     private GameObject pauseMenuUI;
     private GameObject optionsMenuUI;
@@ -33,6 +35,11 @@ public class PauseMenu : MonoBehaviour
     private GameObject tutorialSprites;
 
     void Awake(){
+        if(Instance != null && Instance != this){
+            Destroy(this);
+        } else {
+            Instance = this;
+        }
         player = GameObject.Find("Player");
         camera = GameObject.Find("Player/MainCamera");
         pauseMenuUI = GameObject.Find("Canvas/PauseMenuMain");

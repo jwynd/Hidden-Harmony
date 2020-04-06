@@ -69,7 +69,7 @@ public class ComposeModeTransition : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        if(inHub && Input.GetKeyDown(KeyCode.Tab) && canTransition){
+        if(inHub && Input.GetKeyDown(KeyCode.Tab) && canTransition && !PauseMenu.Instance.GetPaused()){
             //print("Tab key pressed");
             //print(compose?"compose":"!compose");
             //print(transitioning?"transitioning":"!transitioning");
