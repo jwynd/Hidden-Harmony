@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DisableOrEnableTag : MonoBehaviour
 {
+    public static List<DisableOrEnableTag> Instances;
     public enum Behavior
     {
         Enable = 0,
@@ -17,9 +18,11 @@ public class DisableOrEnableTag : MonoBehaviour
     
     void Awake(){
         player = GameObject.Find("Player");
-        foreach(string t in tags){
-            gameObjects.Add(PopulateList(t));
+        if(Instances == null){
+            Instances = new List<DisableOrEnableTag>();
         }
+        Instances.Add(this);
+        LocateTags();
     }
 
     void OnTriggerEnter(Collider other){
@@ -27,6 +30,13 @@ public class DisableOrEnableTag : MonoBehaviour
             foreach(GameObject g in l){
                 g.SetActive(enableOrDisable == Behavior.Enable);
             }
+        }
+    }
+
+    public void LocateTags(){
+        gameObjects.Clear();
+        foreach(string t in tags){
+            gameObjects.Add(PopulateList(t));
         }
     }
 
