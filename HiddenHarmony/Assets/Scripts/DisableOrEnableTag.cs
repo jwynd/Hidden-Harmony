@@ -28,7 +28,11 @@ public class DisableOrEnableTag : MonoBehaviour
     void OnTriggerEnter(Collider other){
         foreach(List<GameObject> l in gameObjects){
             foreach(GameObject g in l){
-                g.SetActive(enableOrDisable == Behavior.Enable);
+                try{
+                    g.SetActive(enableOrDisable == Behavior.Enable);
+                } catch (MissingReferenceException) {
+                    // Do nothing
+                }
             }
         }
     }
