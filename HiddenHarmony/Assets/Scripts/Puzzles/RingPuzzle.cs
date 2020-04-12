@@ -15,14 +15,14 @@ public class RingPuzzle : MonoBehaviour
     private float lastTick; // The last timer value at which sfx played
     private float tickRate; // How fast the sfx repeat
 
-    private AudioSource audio;
+    private AudioSource[] audios; // Timer and Victory sfx
 
     // Start is called before the first frame update
     void Start()
     {
         total = transform.childCount;
         reward.SetActive(false);
-        audio = gameObject.GetComponent<AudioSource>();
+        audios = gameObject.GetComponents<AudioSource>();
     }
 
     // Update is called once per frame
@@ -43,9 +43,8 @@ public class RingPuzzle : MonoBehaviour
             {
                 // Timer is a whole number (integer)
                 // Play sound!
-                print("Ring Timer: " + timer);
                 lastTick = timer;
-                audio.Play();
+                audios[0].Play(); // Timer sound
             }
             // Count down timer. When it hits 0, reset puzzle
             timer -= Time.deltaTime;
@@ -93,6 +92,7 @@ public class RingPuzzle : MonoBehaviour
         {
             // you did it!
             reward.SetActive(true);
+            audios[1].Play(); // Victory sound
             Stop();
         }
     }

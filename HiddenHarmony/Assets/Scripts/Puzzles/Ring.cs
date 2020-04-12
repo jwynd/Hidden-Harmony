@@ -37,7 +37,6 @@ public class Ring : MonoBehaviour
         if(activated == false)
         {
             // Collect this ring.
-            print("Colliding with Ring");
             controller.Collect(); // Send data to RingPuzzle.cs
             sprite.SetActive(false); // Disable sprite renderer
             burst.Play(); // Object will disable once particles are finished
