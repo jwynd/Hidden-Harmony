@@ -18,6 +18,7 @@ public class Stage : MonoBehaviour
     [Tooltip("Game object that will be outlined")]
     [SerializeField]private GameObject toOutline;
     private Renderer rend;
+    private Material[] mats; 
     
 
     void Start(){
@@ -45,17 +46,21 @@ public class Stage : MonoBehaviour
             crystals[index] = this.transform.parent.GetChild(0).GetChild(0).GetChild(i).gameObject;
             crystalScales[index] = new Vector3(crystals[index].transform.localScale.x, crystals[index].transform.localScale.y, crystals[index].transform.localScale.z);
         }
-        rend = toOutline.GetComponent<Renderer>();
+        rend = toOutline.GetComponent<MeshRenderer>();
     }
 
     public bool IsOccupied(){
         return this.transform.childCount == 0;
     }
     public void Outline(bool o){
-        if(o){
-            rend.material = outline;
+        mats = rend.materials;
+        if (o){
+            mats[1] = outline;
         } else {
-            rend.material = noOutline;
+            mats[1] = noOutline;
         }
+        rend.materials = mats;
+        print(rend.materials[0]);
+        print(rend.materials[1]);
     }
 }
