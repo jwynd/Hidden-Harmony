@@ -28,13 +28,19 @@ public class SimonPuzzle : MonoBehaviour
     {
         if(pattern[current] == note)
         {
+            Debug.Log("Pattern " + current + " correct");
             current++;
-            if(current >= pattern.Length-1)
+            if(current > pattern.Length-1)
             {
                 // You did it!
                 victorySFX.Play();
                 reward.SetActive(true);
+                Destroy(this);
             }
+        } else
+        {
+            Debug.Log("Pattern " + current + " incorrect");
+            current = 0;
         }
     }
 }

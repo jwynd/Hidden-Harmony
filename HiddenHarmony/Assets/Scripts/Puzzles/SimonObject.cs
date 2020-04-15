@@ -19,9 +19,15 @@ public class SimonObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (controller == null)
+        {
+            // Puzzle Completed
+            Destroy(this);
+        }
+
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if(Input.GetMouseButton(0) && Physics.Raycast(ray, out hit, 11.0f) && hit.transform == transform)
+        if(Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit, 11.0f) && hit.transform == transform)
         {
             controller.CheckNote(note);
         }
