@@ -6,6 +6,7 @@ public class RingPuzzle : MonoBehaviour
 {
     public GameObject reward;
     public int timerDuration = 10;
+    public GameObject textbox;
 
     private bool activated = false;
     private int collected = 0;
@@ -61,6 +62,8 @@ public class RingPuzzle : MonoBehaviour
     {
         // Starts puzzle, enables Ring objects
         print("Ring Puzzle Initiated");
+        textbox.SetActive(false); // Make sure the player can't double trigger puzzle
+
         timer = (float)timerDuration;
         lastTick = timer;
         for(int i = 0; i < transform.childCount; i++)
@@ -75,6 +78,7 @@ public class RingPuzzle : MonoBehaviour
     {
         // Stops puzzle, either when the player wins or the timer runs out
         print("Ring Puzzle Stopped");
+        textbox.SetActive(true); // Allow player to re-trigger puzzle
         collected = 0;
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -94,6 +98,7 @@ public class RingPuzzle : MonoBehaviour
             reward.SetActive(true);
             audios[1].Play(); // Victory sound
             Stop();
+            Destroy(textbox);
         }
     }
 }
