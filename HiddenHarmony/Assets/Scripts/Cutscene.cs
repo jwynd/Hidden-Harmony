@@ -120,9 +120,9 @@ public class Cutscene : MonoBehaviour
                 Debug.Log("Destroying "+o.name);
                 Destroy(o);
             }
-            foreach(DisableOrEnableTag Instance in DisableOrEnableTag.Instances){
-                Instance.LocateTags();
-            }
+            // foreach(DisableOrEnableTag Instance in DisableOrEnableTag.Instances){
+            //     Instance.LocateTags();
+            // }
             fade.FadeIn(fadeTime);
             fadeInitiated = true;
         }
