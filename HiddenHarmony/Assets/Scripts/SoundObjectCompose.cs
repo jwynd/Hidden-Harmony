@@ -55,6 +55,7 @@ public class SoundObjectCompose : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start(){
+        // collecting references to necessary game objects
         hPanelAccess = GameObject.Find("Canvas/CTabs/HTabs/HItemsHeld");
         sPanelAccess = GameObject.Find("Canvas/CTabs/STabs/SItemsHeld");
         bdPanelAccess = GameObject.Find("Canvas/CTabs/BDTabs/BDItemsHeld");
@@ -78,11 +79,11 @@ public class SoundObjectCompose : MonoBehaviour {
         composeModeTransition = GameObject.Find("GameplayObjects/CameraChange").GetComponent<ComposeModeTransition>();
     }
 
-// Update is called once per frame
-void Update(){
-        if (composeModeTransition.Compose())
+    // Update is called once per frame
+    void Update(){
+        if (composeModeTransition.Compose()) // if the player is composing
         {
-            checkSoundObj();
+            checkSoundObj(); // check to see if you have clicked a dragable object, and react accordingly
             startDragging();
         }
     }
@@ -247,12 +248,12 @@ void Update(){
     {
         RaycastHit hit;
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(mouseRay, out hit, stageDistance))
+        if(Physics.Raycast(mouseRay, out hit, stageDistance)) // cast a ray from the mouse
         {
-            Match matchSound = Regex.Match(hit.collider.tag, soundPattern);          
-            if (matchSound.Success)
+            Match matchSound = Regex.Match(hit.collider.tag, soundPattern);
+            if (matchSound.Success) // check if you are over a sound object
             {
-                if(Input.GetMouseButtonDown(0)){
+                if(Input.GetMouseButtonDown(0)){ // check if you have clicked on the object
                     hitObjName = hit.collider.gameObject.name;
                     //objAreaName = hit.collider.transform.parent.name;
 
@@ -424,10 +425,10 @@ void Update(){
                         if (matchSound.Success) Destroy(hit.collider.gameObject);
                     }
 
-                    
-                        GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
-                        placedObject.SetActive(true);
-                        dropObjSound.GetComponents<AudioSource>()[0].Play();
+                    preventStacking(new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z));
+                    GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
+                    placedObject.SetActive(true);
+                    dropObjSound.GetComponents<AudioSource>()[0].Play();
                         
 
 
@@ -443,9 +444,10 @@ void Update(){
                         if (matchSound.Success) Destroy(hitSoundObject);
                         Transform stageObjectTransform = hit.collider.gameObject.transform;
                         
-                            GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
-                            placedObject.SetActive(true);
-                            dropObjSound.GetComponents<AudioSource>()[0].Play();
+                        preventStacking(new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z));
+                        GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
+                        placedObject.SetActive(true);
+                        dropObjSound.GetComponents<AudioSource>()[0].Play();
                             
 
                     }
@@ -474,7 +476,7 @@ void Update(){
                         if (matchSound.Success) Destroy(hit.collider.gameObject);
                     }
 
-
+                    preventStacking(new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z));
                     GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
                     placedObject.SetActive(true);
                     placedObject.GetComponent<SoundObject>().setSnapPoint(SnapPoint);
@@ -496,6 +498,7 @@ void Update(){
                         if (matchSound.Success) Destroy(hitSoundObject);
                         Transform stageObjectTransform = hit.collider.gameObject.transform;
 
+                        preventStacking(new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z));
                         GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
                         placedObject.SetActive(true);
                         placedObject.GetComponent<SoundObject>().setSnapPoint(SnapPoint);
@@ -601,5 +604,18 @@ void Update(){
             stg = null;
         }
         
+    }
+
+    // look for any sound objects in an overlap sphere around where the sound object is going to be placed and destroy them
+    private void preventStacking(Vector3 center){
+        Collider[] colliders = Physics.OverlapSphere(center, 2.0f);
+        foreach(Collider c in colliders){
+            // check if its a sound object and if so destory it
+            Match matchSound = Regex.Match(c.tag, soundPattern);
+            if(matchSound.Success){
+                Debug.Log("A stacking issue was just averted");
+                Destroy(c.gameObject);
+            }
+        }
     }
 }
