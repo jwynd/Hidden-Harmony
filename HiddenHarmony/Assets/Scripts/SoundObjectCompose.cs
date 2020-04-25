@@ -427,9 +427,12 @@ public class SoundObjectCompose : MonoBehaviour {
 
                     preventStacking(new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z));
                     GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
-                    placedObject.SetActive(true);
-                    dropObjSound.GetComponents<AudioSource>()[0].Play();
-                        
+                    if(!(placedObject.transform.position==new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z))){
+                        Destroy(placedObject);
+                    } else {
+                        placedObject.SetActive(true);
+                        dropObjSound.GetComponents<AudioSource>()[0].Play();
+                    }
 
 
                 }
@@ -446,8 +449,12 @@ public class SoundObjectCompose : MonoBehaviour {
                         
                         preventStacking(new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z));
                         GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
-                        placedObject.SetActive(true);
-                        dropObjSound.GetComponents<AudioSource>()[0].Play();
+                        if(!(placedObject.transform.position==new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z))){
+                            Destroy(placedObject);
+                        } else {
+                            placedObject.SetActive(true);
+                            dropObjSound.GetComponents<AudioSource>()[0].Play();
+                        }
                             
 
                     }
@@ -478,9 +485,14 @@ public class SoundObjectCompose : MonoBehaviour {
 
                     preventStacking(new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z));
                     GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
-                    placedObject.SetActive(true);
-                    placedObject.GetComponent<SoundObject>().setSnapPoint(SnapPoint);
-                    dropObjSound.GetComponents<AudioSource>()[0].Play();
+                    if(!(placedObject.transform.position==new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z))){
+                        Destroy(placedObject);
+                    } else {
+                        placedObject.SetActive(true);
+                        placedObject.GetComponent<SoundObject>().setSnapPoint(SnapPoint);
+                        dropObjSound.GetComponents<AudioSource>()[0].Play();
+                    }
+                    
 
 
 
@@ -500,9 +512,13 @@ public class SoundObjectCompose : MonoBehaviour {
 
                         preventStacking(new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z));
                         GameObject placedObject = Instantiate(itemDrop, new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z), stageObjectTransform.rotation);
-                        placedObject.SetActive(true);
-                        placedObject.GetComponent<SoundObject>().setSnapPoint(SnapPoint);
-                        dropObjSound.GetComponents<AudioSource>()[0].Play();
+                        if(!(placedObject.transform.position==new Vector3(stageObjectTransform.position.x, stageObjectTransform.position.y + spawnHeight, stageObjectTransform.position.z))){
+                            Destroy(placedObject);
+                        } else {
+                            placedObject.SetActive(true);
+                            placedObject.GetComponent<SoundObject>().setSnapPoint(SnapPoint);
+                            dropObjSound.GetComponents<AudioSource>()[0].Play();
+                        }
 
 
                     }
@@ -610,10 +626,10 @@ public class SoundObjectCompose : MonoBehaviour {
     private void preventStacking(Vector3 center){
         Collider[] colliders = Physics.OverlapSphere(center, 2.0f);
         foreach(Collider c in colliders){
-            // check if its a sound object and if so destory it
+            // check if its a sound object and if so Destroy it
             Match matchSound = Regex.Match(c.tag, soundPattern);
             if(matchSound.Success){
-                Debug.Log("A stacking issue was just averted");
+                // Debug.Log("A stacking issue was just averted");
                 Destroy(c.gameObject);
             }
         }
