@@ -81,10 +81,6 @@ public class ComposeModeTransition : MonoBehaviour
             }
             if(!compose && !transitioning){
                 //print("Transitioning to compose");
-                playerCamera.GetComponent<Camera>().orthographic = true;
-                playerCamera.GetComponent<Camera>().orthographicSize = orthoSize;
-                playerCamera.GetComponent<Camera>().nearClipPlane = orthoClipPlane;
-
                 player.GetComponent<CharacterController>().enabled = false;
                 player.GetComponent<PlayerMovement>().enabled = false;
                 player.GetComponent<FirstPersonControl>().enabled = false;
@@ -140,6 +136,10 @@ public class ComposeModeTransition : MonoBehaviour
 
             playerCamera.transform.position = Vector3.Lerp(cameraOrigin, composeCameraPosition.position, fracJourney);
             if(Vector3.Distance(playerCamera.transform.position, composeCameraPosition.position) < 0.01f){
+                // Make Orthographic at the end of the transition to exploremode
+                playerCamera.GetComponent<Camera>().orthographic = true;
+                playerCamera.GetComponent<Camera>().orthographicSize = orthoSize;
+                playerCamera.GetComponent<Camera>().nearClipPlane = orthoClipPlane;
                 playerCamera.transform.position = composeCameraPosition.position;
                 playerCamera.transform.LookAt(cameraTarget);
                 transitioning = false;
@@ -153,13 +153,14 @@ public class ComposeModeTransition : MonoBehaviour
 
             playerCamera.transform.position = Vector3.Lerp(composeCameraPosition.position, cameraReturn.position, fracJourney);
             if(Vector3.Distance(playerCamera.transform.position, cameraReturn.position) < 0.01f){
-//                composeCamera.SetActive(false);
-//                playerCamera.SetActive(true);
+                //                composeCamera.SetActive(false);
+                //                playerCamera.SetActive(true);
                 playerCamera.transform.position = cameraReturn.position;
                 playerCamera.transform.LookAt(cameraTarget);
                 Vector3 playerLook = cameraTarget.position;
                 playerLook.y = player.transform.position.y;
                 player.transform.LookAt(playerLook);
+
                 transitioning = false;
                 playerCamera.transform.SetParent(player.transform);
             }
