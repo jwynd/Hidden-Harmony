@@ -53,4 +53,11 @@ public class ChadDialogue : MonoBehaviour
         script.canCompose = true;
         DestroyCurrentText();
     }
+
+    public void FreeHub()
+    {
+        GameObject barrier = GameObject.Find("HubSphere");
+        Destroy(barrier);
+        Destroy(this.transform.parent.GetChild(0).gameObject);
+    }
 }
