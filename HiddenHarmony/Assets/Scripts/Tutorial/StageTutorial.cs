@@ -157,6 +157,7 @@ public class StageTutorial : MonoBehaviour
                     state = 7;
                     slice7.SetActive(false); // AddThirdSound
                     slice8.SetActive(true); // SpeakToChad
+                    dsc.AddActivatable(1);
 
                     // Destroy Chad's Statue's arrow/dialogue prompt
                     Destroy(GameObject.Find("Hub/--AREA-PLATFORMS--/ChadStatueDialogue"));
