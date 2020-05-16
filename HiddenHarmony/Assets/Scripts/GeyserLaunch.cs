@@ -16,13 +16,16 @@ public class GeyserLaunch : MonoBehaviour
     private bool mute;
     // Start is called before the first frame update
     void Start(){
-        player = GameObject.Find("Player");
         geyserAudio = player.transform.Find("Audio/GeyserAudio").GetComponent<AudioSource>();
         geyserSplash = player.transform.Find("Audio/GeyserSplashAudio").GetComponent<AudioSource>();
         geyserSpeed = 90f;
         geyserAcceleration = 3f;
         geyserFade = 0.05f;
         mute = true;
+    }
+
+    void Awake(){
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
