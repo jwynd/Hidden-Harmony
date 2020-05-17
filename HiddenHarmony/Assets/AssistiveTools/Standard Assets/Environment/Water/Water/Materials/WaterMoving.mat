@@ -36,19 +36,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EffectTex0:
-        m_Texture: {fileID: 2800000, guid: c4ca742834fb64940bd8430675b70daf, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
     - _EffectTex1:
-        m_Texture: {fileID: 2800000, guid: c4ca742834fb64940bd8430675b70daf, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
     - _EffectTex2:
         m_Texture: {fileID: 2800000, guid: c4ca742834fb64940bd8430675b70daf, type: 3}
-        m_Scale: {x: 3, y: 3}
+        m_Scale: {x: 0.5, y: 0.5}
         m_Offset: {x: 0, y: 0}
     - _EffectTex3:
-        m_Texture: {fileID: 2800000, guid: c4ca742834fb64940bd8430675b70daf, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: c4ca742834fb64940bd8430675b70daf, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 30, y: 30}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -78,7 +78,7 @@ Material:
     - _DstBlend: 0
     - _EffectSpeed0: 0.02
     - _EffectSpeed1: 1
-    - _EffectSpeed2: 1
+    - _EffectSpeed2: -10
     - _EffectSpeed3: 0.2
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -98,7 +98,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EffectTint0: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
     - _EffectTint1: {r: 0, g: 0.3420278, b: 0.509434, a: 1}
-    - _EffectTint2: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
+    - _EffectTint2: {r: 0.5235849, g: 1, b: 0.9384489, a: 1}
     - _EffectTint3: {r: 0.33259168, g: 0.6981132, b: 0.6544618, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Tint: {r: 0.13626818, g: 0.082769655, b: 0.18867922, a: 1}
