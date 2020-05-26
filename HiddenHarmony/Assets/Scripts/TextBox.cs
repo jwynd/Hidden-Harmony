@@ -20,6 +20,10 @@ public class TextBox : MonoBehaviour{
     private Match matchHitObj;
     private string matchText;
     private PauseMenu pauseMenu;
+
+    private float wrapWidth = 4.4f;
+    private TextSize ts;
+
     [Tooltip("While true, clicking anywhere will progress text (usually keep true for gameplay and false for cutscenes, etc.)")]
     public bool progressByClick = true;
     [Tooltip("Plays function at specified index")]
@@ -44,11 +48,16 @@ public class TextBox : MonoBehaviour{
         matchText = "Dialogue Prompt";
         pauseMenu = GameObject.Find("PauseMenuController").GetComponent<PauseMenu>();
 
+        // Text wrapping initialization
+        ts = new TextSize(textMesh);
+
         currentBlock = 0;
         if(textBlocks.Count < 1){
             AddText("(Block " + (textBlocks.Count + 1) + ")\nEnter Text Here:");
         }
         textMesh.text = textBlocks[0];
+
+        ts.FitToWidth(wrapWidth); // Wrap text
     }
 
     // Update is called once per frame
@@ -92,8 +101,11 @@ public class TextBox : MonoBehaviour{
             }
         }
 
+
         textMesh.text = textBlocks[(int)currentBlock];
         displayedText = textMesh.text;
+        // Text Wrapping
+        ts.FitToWidth(wrapWidth);
     }
 
     public void AddText(string insertText){
