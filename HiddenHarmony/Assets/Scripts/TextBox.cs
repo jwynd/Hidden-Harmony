@@ -21,7 +21,7 @@ public class TextBox : MonoBehaviour{
     private string matchText;
     private PauseMenu pauseMenu;
 
-    private float wrapWidth = 4.4f;
+    private float wrapWidth = 4.2f;
     private TextSize ts;
 
     [Tooltip("While true, clicking anywhere will progress text (usually keep true for gameplay and false for cutscenes, etc.)")]
