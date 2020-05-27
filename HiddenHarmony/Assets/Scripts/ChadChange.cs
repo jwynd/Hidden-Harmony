@@ -25,28 +25,27 @@ public class ChadChange : MonoBehaviour
                 GameObject.Find("Hub/--AREA-PLATFORMS--/ChadAlive/ChadDialogue6").SetActive(true);
                 gameObject.SetActive(false);
             }
-            else if (count.statuesUsed == 3)
+            else if (chadCopy < 5 && count.statuesUsed == 3)
             {
                 // Areas returned, but more Artifacts to collect
                 GameObject.Find("Hub/--AREA-PLATFORMS--/ChadAlive/ChadDialogue5").SetActive(true);
                 gameObject.SetActive(false);
             }
-            else if (count.statuesUsed > 0)
+            else if (chadCopy < 4 && count.statuesUsed > 0)
             {
                 // At least 1 area has been returned
                 GameObject.Find("Hub/--AREA-PLATFORMS--/ChadAlive/ChadDialogue4").SetActive(true);
                 gameObject.SetActive(false);
             }
-            else if (count.DenCount() >= 3 || count.ForestCount() >= 3 || count.CavernCount() >= 3)
+            else if (chadCopy < 3 && (count.DenCount() >= 3 || count.ForestCount() >= 3 || count.CavernCount() >= 3))
             {
                 // Deity is freed but not spoken to
                 GameObject.Find("Hub/--AREA-PLATFORMS--/ChadAlive/ChadDialogue3").SetActive(true);
                 gameObject.SetActive(false);
             }
-            else if (count.DenCount() >= 1 || count.ForestCount() >= 1 || count.CavernCount() >= 1)
+            else if (chadCopy < 2 && (count.DenCount() >= 1 || count.ForestCount() >= 1 || count.CavernCount() >= 1))
             {
                 // Collected Objects, but not enough to free a deity
-                print(GameObject.Find("Hub/--AREA-PLATFORMS--/ChadAlive/ChadDialogue2"));
                 GameObject.Find("Hub/--AREA-PLATFORMS--/ChadAlive/ChadDialogue2").SetActive(true);
                 gameObject.SetActive(false);
             }
