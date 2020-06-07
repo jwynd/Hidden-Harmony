@@ -101,6 +101,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _PerlinMod: 1
     - _ReflDistort: 0.215
     - _RefrDistort: 0.306
     - _Shininess: 170
@@ -120,7 +121,8 @@ Material:
     - _BumpTiling: {r: 1, g: 1, b: -2, a: 3}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DistortParams: {r: 1, g: 1, b: 2, a: 1.15}
-    - _EffectSpeed0: {r: 0.05, g: 0, b: 1, a: 1}
+    - _EffectSpeed0: {r: -0.05, g: 0, b: -1, a: -1}
+    - _EffectTint0: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Foam: {r: 0.1, g: 0.375, b: 0, a: 0}
     - _GAmplitude: {r: 0.3, g: 0.35, b: 0.25, a: 0.25}
@@ -131,7 +133,7 @@ Material:
     - _GSteepness: {r: 1, g: 1, b: 1, a: 1}
     - _HorizonColor: {r: 0.57498217, g: 0.6886792, b: 0.6779241, a: 1}
     - _InvFadeParemeter: {r: 0.15, g: 0.15, b: 0.5, a: 1}
-    - _PerlinSpeed: {r: 0.1, g: 0, b: 0, a: 0}
+    - _PerlinSpeed: {r: -0.1, g: 0, b: 0, a: 0}
     - _ReflectionColor: {r: 0.20990565, g: 0.3981703, b: 0.5, a: 0.5}
     - _RefrColor: {r: 0.34, g: 0.85, b: 0.92, a: 1}
     - _SpecularColor: {r: 0.72, g: 0.72, b: 0.72, a: 1}
