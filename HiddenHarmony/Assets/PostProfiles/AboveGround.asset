@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 114148060684621282}
   - {fileID: 114721798362732036}
   - {fileID: 114648131206023872}
-  - {fileID: 114239427099545178}
+  - {fileID: 114755333404918492}
 --- !u!114 &114148060684621282
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -68,28 +68,6 @@ MonoBehaviour:
   quality:
     overrideState: 0
     value: 2
---- !u!114 &114239427099545178
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b94fcd11afffcb142908bfcb1e261fba, type: 3}
-  m_Name: MotionBlur
-  m_EditorClassIdentifier: 
-  active: 1
-  enabled:
-    overrideState: 1
-    value: 1
-  shutterAngle:
-    overrideState: 1
-    value: 270
-  sampleCount:
-    overrideState: 0
-    value: 10
 --- !u!114 &114648131206023872
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -187,10 +165,10 @@ MonoBehaviour:
     value: 0
   postExposure:
     overrideState: 1
-    value: 1.4
+    value: 1.3
   contrast:
     overrideState: 1
-    value: 17
+    value: 10
   mixerRedOutRedIn:
     overrideState: 0
     value: 100
@@ -1427,6 +1405,28 @@ MonoBehaviour:
       - 0.5
       - 0.5
       - 0.5
+--- !u!114 &114755333404918492
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b94fcd11afffcb142908bfcb1e261fba, type: 3}
+  m_Name: MotionBlur
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  shutterAngle:
+    overrideState: 1
+    value: 270
+  sampleCount:
+    overrideState: 1
+    value: 10
 --- !u!114 &114893628294781058
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1445,19 +1445,19 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.54
+    value: 2.3
   threshold:
     overrideState: 1
-    value: 0
+    value: 0.5
   softKnee:
     overrideState: 1
-    value: 0.109
+    value: 0.145
   clamp:
     overrideState: 1
     value: 65472
   diffusion:
     overrideState: 1
-    value: 3.62
+    value: 3.41
   anamorphicRatio:
     overrideState: 1
     value: -1
