@@ -19,7 +19,6 @@ MonoBehaviour:
   - {fileID: 114583319725742718}
   - {fileID: 114273119705710642}
   - {fileID: 114722544983262632}
-  - {fileID: 114622218800155032}
 --- !u!114 &114130158223350746
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1453,34 +1452,6 @@ MonoBehaviour:
       - 0.5
       - 0.5
       - 0.5
---- !u!114 &114622218800155032
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d65e486e4de6e5448a8fbb43dc8756a0, type: 3}
-  m_Name: Grain
-  m_EditorClassIdentifier: 
-  active: 1
-  enabled:
-    overrideState: 1
-    value: 1
-  colored:
-    overrideState: 0
-    value: 1
-  intensity:
-    overrideState: 1
-    value: 0.26
-  size:
-    overrideState: 1
-    value: 0.3
-  lumContrib:
-    overrideState: 0
-    value: 0.8
 --- !u!114 &114722544983262632
 MonoBehaviour:
   m_ObjectHideFlags: 3
