@@ -24,7 +24,7 @@ public class Ring : MonoBehaviour
     {
         if(activated)
         {
-            if(burst.isStopped)
+            if(burst.isStopped && sfx.isPlaying == false)
             {
                 transform.parent.gameObject.SetActive(false);
                 sprite.SetActive(true); // Reenable sprite renderer (even though the parent is disabled)
