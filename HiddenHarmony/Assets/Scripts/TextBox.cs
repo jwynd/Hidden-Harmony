@@ -52,7 +52,7 @@ public class TextBox : MonoBehaviour{
         // Text wrapping initialization
         ts = new TextSize(textMesh);
         sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        wrapWidth = sprite.bounds.size.x  - 0.7f;
+        wrapWidth = sprite.bounds.size.x  - (sprite.bounds.size.x * 0.2f);
 
         currentBlock = 0;
         if(textBlocks.Count < 1){
