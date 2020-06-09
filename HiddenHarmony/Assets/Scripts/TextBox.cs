@@ -23,6 +23,7 @@ public class TextBox : MonoBehaviour{
 
     private float wrapWidth = 4.2f;
     private TextSize ts;
+    private SpriteRenderer sprite;
 
     [Tooltip("While true, clicking anywhere will progress text (usually keep true for gameplay and false for cutscenes, etc.)")]
     public bool progressByClick = true;
@@ -36,7 +37,7 @@ public class TextBox : MonoBehaviour{
     public UnityEvent functionPlayedAtEnd;
 
     // Start is called before the first frame update
-    void Start(){
+    void Awake(){
         if(textBlocks == null){
             textBlocks = new List<string>();
         }
@@ -50,6 +51,8 @@ public class TextBox : MonoBehaviour{
 
         // Text wrapping initialization
         ts = new TextSize(textMesh);
+        sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        wrapWidth = sprite.bounds.size.x  - 0.7f;
 
         currentBlock = 0;
         if(textBlocks.Count < 1){
