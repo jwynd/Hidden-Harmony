@@ -34,3 +34,35 @@ public class TextEditor : Editor
 
     }
 }
+
+[CustomEditor(typeof(TextBoxUI))]
+public class TextEditorUI : Editor
+{
+    TextBoxUI textBox;
+
+    public List<string> textBlocks;
+    public override void OnInspectorGUI(){
+        textBox = (TextBoxUI) target;
+        base.OnInspectorGUI();
+
+        EditorUtility.SetDirty(target);
+        if(textBox.textBlocks.Count < 1){
+            textBox.AddText("(Block " + (textBox.textBlocks.Count + 1) + ")\nEnter Text Here:");
+        }
+
+        GUILayout.BeginHorizontal();
+
+        if(GUILayout.Button("Add Text Block")){
+            textBox.AddText("(Block " + (textBox.textBlocks.Count + 1) + ")\nEnter Text Here:");
+        }
+        if(GUILayout.Button("Remove Text Block")){
+            textBox.RemoveText();
+        }
+        GUILayout.EndHorizontal();
+
+        for(int i = 0; i < textBox.textBlocks.Count; i++){
+            textBox.textBlocks[i] = GUILayout.TextArea(textBox.textBlocks[i]);
+        }
+
+    }
+}
