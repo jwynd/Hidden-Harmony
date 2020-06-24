@@ -134,4 +134,25 @@ public class TextBoxUI : MonoBehaviour{
     public void ClickActive(bool canClick){
         this.progressByClick = canClick;
     }
+
+    public void ClearText(){
+        while(textBlocks.Count > 1){
+            this.RemoveText();
+        }
+    }
+
+    public void EditTextAtIndex(string text, int index){
+        textBlocks[index] = text;
+    }
+
+    public void EditDisplayText(string text){
+        textMesh.text = text;
+        displayedText = textMesh.text;
+    }
+
+    public void EditFirstText(string text){
+        EditTextAtIndex(text, 0);
+        EditDisplayText(text);
+    }
+
 }
