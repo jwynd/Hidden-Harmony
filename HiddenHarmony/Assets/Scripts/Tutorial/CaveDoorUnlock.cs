@@ -17,7 +17,7 @@ public class CaveDoorUnlock : MonoBehaviour
     public void TriggerUnlock()
     {
         // Play dialogue and destroy the door blocking progression
-        //text.GetComponent<TextBox>().ActivateTextBox();
+        text.GetComponent<TextBoxUI>().ActivateTextBox();
         Destroy(door);
 
         Destroy(this.gameObject);
