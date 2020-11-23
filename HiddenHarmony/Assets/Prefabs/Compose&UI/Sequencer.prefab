@@ -1829,6 +1829,93 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &4656830938298089130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1811596493198229259}
+  - component: {fileID: 5663053697737799939}
+  - component: {fileID: 4911567389580320557}
+  - component: {fileID: 3953176437736730489}
+  m_Layer: 5
+  m_Name: CurrentMeasureGraphic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1811596493198229259
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656830938298089130}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.3059952, y: 1.4897833, z: 1.1024}
+  m_Children: []
+  m_Father: {fileID: 916927265586148340}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 50, y: 0}
+  m_SizeDelta: {x: 25, y: 146}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5663053697737799939
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656830938298089130}
+  m_CullTransparentMesh: 0
+--- !u!114 &4911567389580320557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656830938298089130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.8105302, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!114 &3953176437736730489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656830938298089130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e3ea30447d61e4e8d5d1fc5cd79ebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4811793307222966026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,6 +2044,7 @@ GameObject:
   - component: {fileID: 1607227170069449040}
   - component: {fileID: 5499924140858670091}
   - component: {fileID: 2699145159817446863}
+  - component: {fileID: 7969745709126068549}
   m_Layer: 5
   m_Name: Bar4
   m_TagString: Untagged
@@ -2027,6 +2115,19 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &7969745709126068549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5260354855773191995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f864d19c5deff214db5f29f3873a30c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnSprite: {fileID: 21300000, guid: d59eb59dcd88f3e4f810e6bded2cf77b, type: 3}
 --- !u!1 &5263327721823189535
 GameObject:
   m_ObjectHideFlags: 0
@@ -2974,6 +3075,7 @@ GameObject:
   - component: {fileID: 7930000688790801235}
   - component: {fileID: 8263270963648374603}
   - component: {fileID: 2425302559541936294}
+  - component: {fileID: 7219068512377939362}
   m_Layer: 5
   m_Name: Bar1
   m_TagString: Untagged
@@ -3044,6 +3146,19 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &7219068512377939362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7116670067941066736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f864d19c5deff214db5f29f3873a30c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnSprite: {fileID: 21300000, guid: d59eb59dcd88f3e4f810e6bded2cf77b, type: 3}
 --- !u!1 &7217434036481211445
 GameObject:
   m_ObjectHideFlags: 0
@@ -3158,7 +3273,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8265397261401559600}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: ButtonClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7529653822633494935}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &7939431158725354627
@@ -3287,6 +3413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 916927265586148340}
+  - component: {fileID: 3359281173776897963}
   m_Layer: 5
   m_Name: Sequencer
   m_TagString: Untagged
@@ -3306,6 +3433,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5858783591723524908}
+  - {fileID: 1811596493198229259}
   - {fileID: 2313483419790244111}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -3315,6 +3443,19 @@ RectTransform:
   m_AnchoredPosition: {x: 166.8, y: -143.8}
   m_SizeDelta: {x: 300, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3359281173776897963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8170884999046009805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f2c57f4e9affa4cbbae9aa36b3fa19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numOfBars: 0
 --- !u!1 &8508821948983726076
 GameObject:
   m_ObjectHideFlags: 0
@@ -3464,7 +3605,7 @@ RectTransform:
   - {fileID: 2805952902583552245}
   - {fileID: 1607227170069449040}
   m_Father: {fileID: 916927265586148340}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3482,6 +3623,7 @@ GameObject:
   - component: {fileID: 2713437235131633516}
   - component: {fileID: 6227665681687684120}
   - component: {fileID: 5019779195317411043}
+  - component: {fileID: 2273916198927765015}
   m_Layer: 5
   m_Name: Bar2
   m_TagString: Untagged
@@ -3552,6 +3694,19 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &2273916198927765015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8636542676887548783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f864d19c5deff214db5f29f3873a30c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnSprite: {fileID: 21300000, guid: d59eb59dcd88f3e4f810e6bded2cf77b, type: 3}
 --- !u!1 &8699830678945201895
 GameObject:
   m_ObjectHideFlags: 0
@@ -3680,6 +3835,7 @@ GameObject:
   - component: {fileID: 2805952902583552245}
   - component: {fileID: 7740260213592656025}
   - component: {fileID: 3994217339981612602}
+  - component: {fileID: 9146447907155120315}
   m_Layer: 5
   m_Name: Bar3
   m_TagString: Untagged
@@ -3750,3 +3906,16 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &9146447907155120315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9144956812381254377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f864d19c5deff214db5f29f3873a30c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnSprite: {fileID: 21300000, guid: d59eb59dcd88f3e4f810e6bded2cf77b, type: 3}

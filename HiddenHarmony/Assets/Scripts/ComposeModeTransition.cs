@@ -28,7 +28,7 @@ public class ComposeModeTransition : MonoBehaviour
     private GameObject player;
     private Transform cameraReturn;
     private AudioSource[] sources;
-
+    private CanvasGroup SequencerCG;
     private bool inHub = false;
 
     public GameObject tutorialArrow;
@@ -65,6 +65,11 @@ public class ComposeModeTransition : MonoBehaviour
                 composeCamera.AddComponent<Camera>();
                 composeCamera.SetActive(false);
         */
+        SequencerCG = Sequencer.Instance.gameObject.GetComponent<CanvasGroup>();
+        SequencerCG.alpha = 0.0f;
+        SequencerCG.interactable = false;
+        SequencerCG.blocksRaycasts = false;
+
     }
 
     // Update is called once per frame
@@ -91,6 +96,9 @@ public class ComposeModeTransition : MonoBehaviour
                 interactMessage.transform.gameObject.SetActive(false);
                 player.transform.Find("GlideParticles").GetComponent<ParticleSystem>().Stop();
                 player.transform.Find("Audio/GlideAudio").GetComponent<AudioSource>().Stop();
+                SequencerCG.alpha = 1.0f;
+                SequencerCG.interactable = true;
+                SequencerCG.blocksRaycasts = true;
                 cameraOrigin = cameraReturn.position;
                 sources[0].Play();
                 //composeCamera.transform.position = cameraOrigin;
@@ -115,6 +123,9 @@ public class ComposeModeTransition : MonoBehaviour
                 player.GetComponent<InteractScript>().enabled = true;
                 playerCamera.GetComponent<FirstPersonControl>().enabled = true;
                 interactMessage.transform.gameObject.SetActive(true);
+                SequencerCG.alpha = 0.0f;
+                SequencerCG.interactable = false;
+                SequencerCG.blocksRaycasts = false;
                 sources[1].Play();
                 //composeCamera.transform.SetAsLastSibling();
 

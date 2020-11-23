@@ -141,7 +141,6 @@ public class SoundObject : MonoBehaviour
         glowing.SetColor("_EmissionColor", emissionColor);
 
         count = GameObject.Find("GameplayObjects/Count").GetComponent<Count>();
-
     }
 
     // Update is called once per frame
@@ -202,6 +201,19 @@ public class SoundObject : MonoBehaviour
 //        }
         
         if(onStage && cbeat == playOnBeat && !played){
+            int note;
+            if (Sequencer.Instance.CurrentOffset + stg.pitches[beatIndex] >= 8)
+            {
+                 note = (Sequencer.Instance.CurrentOffset + stg.pitches[beatIndex]) % 7;
+            }
+            else {
+                 note = Sequencer.Instance.CurrentOffset + stg.pitches[beatIndex];
+            }
+            //Debug.Log("Current note is " + note);
+            audioSources[note].volume = 1.0f;
+            audioSources[note].Play();
+            played = true;
+            /* OLD WAY
             // print("Playing sound at time "+nextTimer);
             // print("stg.pitches[beatIndex] = "+stg.pitches[beatIndex]);
             audioSources[stg.pitches[beatIndex]].volume = 1.0f;
@@ -211,10 +223,11 @@ public class SoundObject : MonoBehaviour
 //            audioSource.Play();
             played = true;
             //vfxTimerActive = true;
+            */
         }
 
         // Below, light up crystal for current beat. Assume it has the same index as beatIndex
-        for(int i = 0; onStage && i < crystals.Length; ++i){
+        for (int i = 0; onStage && i < crystals.Length; ++i){
             if(i == beatIndex){
                 crystals[i].GetComponent<Renderer>().material = glowing;
                 if(crystals[i] != crystalUp){

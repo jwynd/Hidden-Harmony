@@ -20,6 +20,7 @@ public class Timekeeper : MonoBehaviour
             timer = 0.0f;
             currentHalfBeat++;
         }
+        
     }
 
     public float FadeOutStartTime(int beatIndex){
@@ -58,6 +59,10 @@ public class Timekeeper : MonoBehaviour
         beatsPerMinute = b;
         return beatsPerMinute;
     }
+    
+
+        
+    
     /*
     Given BPM
     USER STORY: Kiefling the Tiefling

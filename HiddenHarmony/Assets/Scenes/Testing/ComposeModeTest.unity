@@ -164,6 +164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   held: 0
   interactDistance: 5
+  tag: 
+  message: 
 --- !u!1 &224642556
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,16 +613,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e0391741047004893b4a6f15b3a35c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beats:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
+  halfBeats: 
   pitches: 0000000001000000020000000300000004000000050000000600000007000000
+  SoundObject: {fileID: 0}
+  crystalOffset: 0
+  crystals: []
+  crystalScales: []
+  outline: {fileID: 0}
+  noOutline: {fileID: 0}
+  toOutline: {fileID: 0}
 --- !u!1001 &475247651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -628,6 +629,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9142219447417013249, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas
+      objectReference: {fileID: 0}
     - target: {fileID: 6351881102670389350, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -647,11 +653,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9142219447417013249, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
-        type: 3}
-      propertyPath: m_Name
-      value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 9142219447417013253, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
         type: 3}
@@ -821,6 +822,106 @@ PrefabInstance:
     - target: {fileID: 918898198, guid: 6c92fba7e57bf4cbaafc59b560ce30ae, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 79.84961
+      objectReference: {fileID: 0}
+    - target: {fileID: 1462245733488392484, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1462245733488392484, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1462245733488392484, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5545489118040727376, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5545489118040727376, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5545489118040727376, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309635227720741662, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309635227720741662, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6245086689089884188, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6245086689089884188, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111285257733401030, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111285257733401030, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111285257733401030, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127294119759805644, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127294119759805644, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4400397617250482368, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4400397617250482368, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811217213332764671, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811217213332764671, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811217213332764671, guid: 6c92fba7e57bf4cbaafc59b560ce30ae,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c92fba7e57bf4cbaafc59b560ce30ae, type: 3}
@@ -1674,11 +1775,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297de8b145955ae47a803adcb0c62b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClips: []
   offsetRange: 0.05
-  vfxDuration: 1
-  passive: {fileID: 2100000, guid: fb9b2571f95734841af86e0c4320c3a1, type: 2}
-  active: {fileID: 2100000, guid: c64d01b066d63cf44abd950bb90ad85d, type: 2}
+  interactDist: 1
   timekeeper: {fileID: 793211251}
+  crystalColor: {r: 0, g: 0, b: 0, a: 0}
+  xRotation: 0
+  yRotation: 0
+  zRotation: 0
+  emissionColor: {r: 0, g: 0, b: 0, a: 0}
+  crystalScale: 1.2
+  scaleSpeed: 3
+  toDestroyOnPickup: {fileID: 0}
   onStage: 0
   origin: {x: 0, y: 0, z: 0}
 --- !u!4 &1026054411
@@ -7542,6 +7650,11 @@ MonoBehaviour:
   composeCameraPosition: {fileID: 2025036277}
   cameraTarget: {fileID: 1529685439}
   transitionSpeed: 20
+  orthoSize: 18
+  orthoClipPlane: 2
+  perspectiveFOV: 60
+  perspectiveClipPlane: 0.3
+  tutorialArrow: {fileID: 0}
 --- !u!1 &1679574283
 GameObject:
   m_ObjectHideFlags: 0
